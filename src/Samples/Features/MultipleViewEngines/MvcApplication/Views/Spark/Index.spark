@@ -1,0 +1,12 @@
+<content name="MainContent">
+  <h2>This view is brought to you by the Spark ViewEngine!</h2>
+  <p>
+    To learn more about MVC Turbine visit <a href="http://mvcturbine.codeplex.com" title="MVC Turbine">http://mvcturbine.codeplex.com</a>.
+  </p>
+  <p>
+    To learn more about Spark ViewEngine visit <a href="http://dev.dejardin.org/" title="Spark ViewEngine">http://dev.dejardin.org/</a>.
+  </p>
+  <p>
+    To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
+  </p>
+</content>

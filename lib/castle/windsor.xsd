@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- http://www.castleproject.org/container/documentation/v1rc3/manual/windsorconfigref.html -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vs="http://schemas.microsoft.com/Visual-Studio-Intellisense" targetNamespace="CCWindowsSchema" xmlns="CCWindowsSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" vs:friendlyname="Spring.NET Configuration" vs:ishtmlschema="false" vs:iscasesensitive="true" vs:requireattributequotes="true" vs:defaultnamespacequalifier="" vs:defaultnsprefix="">
+	<xsd:element name="configuration">
+		<xsd:complexType>
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="include">
+					<xsd:complexType>
+						<xsd:attribute name="uri" type="xsd:string" />
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="properties">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="connection_string" type="xsd:string" minOccurs="0" />
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="facilities">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="facility" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:attribute name="id" type="xsd:string" />
+									<xsd:attribute name="type" type="xsd:string" />
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="components">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="component" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="parameters" minOccurs="0" maxOccurs="unbounded">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:any namespace="##any" minOccurs="0" />
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="interceptors" minOccurs="0" maxOccurs="unbounded">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="interceptor" type="xsd:string" minOccurs="0" />
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+									<xsd:attribute name="id" type="xsd:string" use="required" />
+									<xsd:attribute name="service" type="xsd:string" />
+									<xsd:attribute name="type" type="xsd:string" />
+									<xsd:attribute name="inspectionBehavior" type="InspectionBehaviorTypes" />
+									<xsd:attribute name="lifestyle" type="LifestyleTypes" />
+									<xsd:attribute name="customLifestyleType" type="xsd:string" />
+									<xsd:attribute name="initialPoolSize" type="xsd:positiveInteger" />
+									<xsd:attribute name="maxPoolSize" type="xsd:positiveInteger" />
+									<xsd:attribute name="factoryId" type="xsd:string" />
+									<xsd:attribute name="factoryCreate" type="xsd:string" />
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="LifestyleTypes">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="singleton" />
+			<xsd:enumeration value="thread" />
+			<xsd:enumeration value="transient" />
+			<xsd:enumeration value="pooled" />
+			<xsd:enumeration value="custom" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="InspectionBehaviorTypes">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="all" />
+			<xsd:enumeration value="declaredonly" />
+			<xsd:enumeration value="none" />
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

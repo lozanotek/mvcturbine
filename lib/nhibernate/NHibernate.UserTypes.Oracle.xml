@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NHibernate.UserTypes.Oracle</name>
+    </assembly>
+    <members>
+        <member name="T:NHibernate.UserTypes.Oracle.BFileType">
+            <summary>
+            NHibernate data type for Oracle-specific <c>BFILE</c>.
+            </summary>
+            <remarks>
+            The property of BFileType in hbm.xml file must have a pseudo "ROWID" column following
+            the real column for NHibernate limit, for example:
+            <code>
+            	&lt;property type="NHibernate.UserTypes.Oracle.BFileType, NHibernate.UserTypes.Oracle" name="Image"&gt;
+            		&lt;column name="IMAGE" /&gt;
+            		&lt;column name="ROWID" /&gt;
+            	&lt;/property&gt;
+            </code>
+            </remarks>
+        </member>
+    </members>
+</doc>

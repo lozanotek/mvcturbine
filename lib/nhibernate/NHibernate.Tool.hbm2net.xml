@@ -1,0 +1,1058 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NHibernate.Tool.hbm2net</name>
+    </assembly>
+    <members>
+        <member name="T:NHibernate.Tool.hbm2net.AbstractRenderer">
+            <author>  max
+            </author>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.Renderer.configure(System.IO.DirectoryInfo,System.Collections.Specialized.NameValueCollection)">
+            <summary>Called with the optional list of properties from config.xml </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.Renderer.render(System.String,System.String,NHibernate.Tool.hbm2net.ClassMapping,System.Collections.IDictionary,System.IO.StreamWriter)">
+            <summary> </summary>
+            <param name="savedToPackage">what package is this class placed in
+            </param>
+            <param name="savedToClass">what classname does it really get
+            </param>
+            <param name="classMapping">what classmapping is this for
+            </param>
+            <param name="class2classmap">A complete map from classname to the classmapping
+            </param>
+            <param name="writer">where we want the output
+            @throws Exception
+            </param>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.Renderer.getSaveToPackage(NHibernate.Tool.hbm2net.ClassMapping)">
+            <summary> Called by the generator to determine the package name of the rendered class.
+            
+            </summary>
+            <param name="classMapping">The class mapping of the generated class
+            </param>
+            <returns> the package name the class should be saved to
+            </returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.Renderer.getSaveToClassName(NHibernate.Tool.hbm2net.ClassMapping)">
+            <summary> Called by the generator to determine the class name of the rendered class.
+            
+            </summary>
+            <param name="classMapping">The class mapping of the generated class
+            </param>
+            <returns> the class name the class should be saved to
+            </returns>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.Renderer.WorkingDirectory">
+            <summary>
+             <para>Gets the working directory for the renderer.</para>
+            </summary>
+            <returns>The working directory for the renderer.</returns>
+            <remarks>
+             <para>Some renderers require or allow additional supporting files to be specified. When relative
+             file paths are provide they will be evaluated realtive to the working directory.</para>
+            </remarks>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.BasicRenderer.doSupportMethods(System.Int32,System.String,System.String,System.IO.StringWriter)">
+            <summary> Method doSupportMethods.</summary>
+            <param name="changeSupport"></param>
+            <param name="fieldTypes"></param>
+            <param name="vetoSupport"></param>
+            <param name="writer"></param>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.BasicRenderer.doSupports(System.Int32,NHibernate.Tool.hbm2net.ClassMapping,System.String,System.String,System.IO.StringWriter)">
+            <summary> Method doSupports.</summary>
+            <param name="vetoSupport">
+            </param>
+            <param name="changeSupport">
+            </param>
+            <param name="writer">
+            </param>
+        </member>
+        <member name="T:NHibernate.Tool.hbm2net.MappingElement">
+            <author>  MAX
+            
+            To change the template for this generated type comment go to Window -
+            Preferences - Java - Code Generation - Code and Comments
+            </author>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.MappingElement.hasMeta(System.String)">
+            <summary>Returns true if this element has the meta attribute </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.MappingElement.getMetaAsString(System.String)">
+            <summary> Returns all meta items as one large string.
+            
+            </summary>
+            <returns> String
+            </returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.ClassMapping.getFieldType(System.String,System.Boolean,System.Boolean)">
+            <summary> Return a ClassName for a hibernatetype.
+            
+            </summary>
+            <param name="hibernateType">Name of the hibernatetype (e.g. "binary")
+            </param>
+            <param name="isArray">if the type should be postfixed with array brackes ("[]")
+            </param>
+            <param name="mustBeNullable"></param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.ClassMapping.GetTypeForJavaType(System.String)">
+            <summary>
+            Substitute basic Hibernate types for the .net ones
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.ClassMapping.getTypeForUserType(System.String)">
+            <summary>Returns name of returnedclass if type is an UserType *</summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.ClassMapping.shouldBeAbstract">
+            <summary> Method shouldBeAbstract.</summary>
+            <returns> boolean
+            </returns>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.ClassMapping.FullyQualifiedName">
+            <summary>shorthand method for getClassName().getFullyQualifiedName() </summary>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.ClassMapping.Name">
+            <summary>shorthand method for getClassName().getName() </summary>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.ClassMapping.PackageName">
+            <summary>shorthand method for getClassName().getPackageName() </summary>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.ClassMapping.SuperClassMapping">
+            <summary> Returns the superClassMapping.</summary>
+            <returns> ClassMapping
+            </returns>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.ClassMapping.Scope">
+            <returns>
+            </returns>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.ClassMapping.DeclarationType">
+            <returns>
+            </returns>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.ClassMapping.Modifiers">
+            <summary> Return the modifers for this class.
+            Adds "abstract" if class should be abstract (but not if scope contains abstract)
+            TODO: deprecate/remove scope-class and introduce class-modifier instead
+            </summary>
+            <returns>
+            </returns>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.ClassMapping.SuperInterface">
+            <returns>
+            </returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.ClassName.Equals(System.Object)">
+            <summary>Two ClassName are equals if their fullyQualifiedName are the same/equals! </summary>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.ClassName.Name">
+            <summary>returns the atomar name for a class. 
+            
+            java.util.Set -> "Set" 
+            </summary>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.ClassName.PackageName">
+            <summary>returns the package name for a class/type. 
+            
+            java.util.Set -> "java.util" and Foo -> ""
+            </summary>
+            <returns>
+            </returns>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.ClassName.Array">
+            <summary>return true if this type is an array. Check is done by checking if the type ends with []. </summary>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.ClassName.Primitive">
+            <summary> Type is primitive if the basename (fqn without []) is in the PRIMITIVE set.</summary>
+            <returns> boolean
+            </returns>
+        </member>
+        <member name="T:NHibernate.Tool.hbm2net.CodeGenerator">
+            <summary> </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.CodeGenerator.ProcessChildren(System.Collections.Hashtable)">
+            <summary>
+            Try to locate superclasses for any orphans we have
+            </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.CodeGenerator.FindParents(System.Collections.Hashtable)">
+            <summary>
+            Find parents for any orphans
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:NHibernate.Tool.hbm2net.DOMRenderer">
+            <summary>
+            Summary description for DOMRenderer.
+            </summary>
+        </member>
+        <member name="F:NHibernate.Tool.hbm2net.FieldProperty.fieldName">
+            <summary>the field name </summary>
+        </member>
+        <member name="F:NHibernate.Tool.hbm2net.FieldProperty.accessorName">
+            <summary>the property name </summary>
+        </member>
+        <member name="F:NHibernate.Tool.hbm2net.FieldProperty.id">
+            <summary>true if this is part of an id </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.FieldProperty.beancapitalize(System.String)">
+            <summary> foo -> Foo
+            FOo -> FOo
+            
+            </summary>
+            <returns>
+            </returns>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.FieldProperty.ClassType">
+            <summary> Returns the classType. </summary>
+            <returns> ClassName
+            </returns>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.FieldProperty.ForeignClass">
+            <summary> Returns the foreignClass.</summary>
+            <returns> ClassName
+            </returns>
+            <summary> Sets the foreignClass.</summary>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.FieldProperty.ForeignKeys">
+            <summary> Returns the foreignKeys.</summary>
+            <returns> Set
+            </returns>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.FieldProperty.GetterSignature">
+            <summary> Method getGetterSignature.</summary>
+            <returns> String
+            </returns>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.FieldProperty.ImplementationClassName">
+            <summary> </summary>
+            <returns>  Return the implementation specific type for this property. e.g. java.util.ArrayList when the type is java.util.List;
+            </returns>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.FieldProperty.ParentClass">
+            <returns>
+            </returns>
+        </member>
+        <member name="T:NHibernate.Tool.hbm2net.FinderRenderer">
+            <summary> <p>Title: Basic Finder Generator for Hibernate 2</p>
+            <p>Description: Generate basic finders for hibernate properties.
+            This requires two things in the hbm.xml files.
+            
+            The first is an indication of which fields you want to generate finders for.
+            You indicate that with a meta block inside a property tag such as
+            
+            <property name="name" column="name" type="string">
+            <meta attribute="finder-method">findByName</meta>
+            </property>
+            
+            The finder method name will be the text enclosed in the meta tags.
+            
+            If you want to generate a finder based on a join you can do something like this:
+            
+            <set name="games" inverse="true" lazy="true" table="GamePlayers">
+            <meta attribute="foreign-finder-name">findSavedGames</meta>
+            <meta attribute="foreign-finder-field">save</meta>
+            <meta attribute="foreign-join-field">players</meta>
+            <key column="playerID"/>
+            <many-to-many class="com.whatever.Game" column="gameID"/>
+            </set>
+            
+            Where foreign-finder-name will be the name of the finder when generated, foreign-finder-field is the field in
+            the foreign class that you will want as a paramter to the finder (the criteria in the query) and foreign-join-field
+            is the field in teh foreign class that joins to this object (in case there are more than one collection of these
+            objects in the foreign class).
+            
+            After you've defined your finders, the second thing to do is to create a config file for hbm2net of the format:
+            
+            <codegen>
+            <generate renderer="NHibernate.Tool.hbm2net.BasicRenderer"/>
+            <generate suffix="Finder" renderer="NHibernate.Tool.hbm2net.FinderRenderer"/>
+            </codegen>
+            
+            And then use the param to hbm2net --config=xxx.xml where xxx.xml is the config file you
+            just created.
+            
+            An optional parameter is meta tag at the class level of the format:
+            
+            <meta attribute="session-method">com.whatever.SessionTable.getSessionTable().getSession();</meta>
+            
+            Which would be the way in which you get sessions if you use the Thread Local Session pattern
+            like I do.
+            </p>
+            <p>Copyright: Copyright (c) 2003</p>
+            </summary>
+            <author>  Matt Hall (matt2k(at)users.sf.net)
+            </author>
+            <author>  Max Rydahl Andersen (small adjustments and bugfixes)
+            </author>
+            <version>  1.0
+            </version>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.FinderRenderer.render(System.String,System.String,NHibernate.Tool.hbm2net.ClassMapping,System.Collections.IDictionary,System.IO.StreamWriter)">
+            <summary> Render finder classes.</summary>
+            <exception cref="T:System.Exception">Exception</exception>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.FinderRenderer.doFinders(NHibernate.Tool.hbm2net.ClassMapping,System.Collections.IDictionary,System.IO.StringWriter)">
+            <summary>  Create finders for properties that have the <meta atttribute="finder-method">
+            finderName</meta> block defined. Also, create a findAll(Session) method.
+            
+            </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.FinderRenderer.doImports(NHibernate.Tool.hbm2net.ClassMapping,System.IO.StreamWriter)">
+            <summary>  Generate the imports for the finder class.
+            
+            </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.FinderRenderer.getFieldAsObject(System.Boolean,NHibernate.Tool.hbm2net.FieldProperty)">
+            <summary>  Gets the fieldAsObject attribute of the FinderRenderer object
+            
+            </summary>
+            <returns>
+            </returns>
+        </member>
+        <member name="F:NHibernate.Tool.hbm2net.FinderRenderer.hibType">
+            <summary>  Coversion map for field types to Hibernate types, might be good to move
+            this to some other more general class
+            </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.FinderRenderer.getFieldAsHibernateType(System.Boolean,NHibernate.Tool.hbm2net.FieldProperty)">
+            <summary>  Return the hibernate type string for the given field
+            
+            </summary>
+            <returns>
+            </returns>
+        </member>
+        <member name="T:NHibernate.Tool.hbm2net.Generator">
+            <summary> </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.Generator.#ctor(System.IO.DirectoryInfo)">
+            <summary> Constructs a new Generator using the defaults.</summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.Generator.#ctor(System.IO.DirectoryInfo,System.Xml.XmlElement)">
+            <summary> Constructs a new Generator, configured from XML.</summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.Generator.generate(System.Collections.IDictionary)">
+            <summary> </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.Generator.write(NHibernate.Tool.hbm2net.ClassMapping,System.Collections.IDictionary,NHibernate.Tool.hbm2net.Renderer)">
+            <summary> </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.Generator.getFileName(System.String)">
+            <summary> </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.Generator.getName(System.String)">
+            <summary> </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.Generator.getDir(System.String)">
+            <summary> </summary>
+        </member>
+        <member name="T:NHibernate.Tool.hbm2net.LanguageTool">
+            <author>  MAX
+            
+            To change the template for this generated type comment go to
+            Window - Preferences - Java - Code Generation - Code and Comments
+            </author>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.LanguageTool.getPackageDeclaration(NHibernate.Tool.hbm2net.ClassMapping)">
+            <summary> Returns "package packagename;" where packagename is either the declared packagename,
+            or the one provide via meta attribute "generated-class".
+            
+            Returns "// default package" if no package declarition available.
+            
+            </summary>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.LanguageTool.getTrueTypeName(NHibernate.Tool.hbm2net.FieldProperty,System.Collections.IDictionary)">
+            <summary> Returns the true name for the given fields class name. By true name is
+            that it will return the Proxy for the class name if the class was
+            defined with a proxy attribute.
+            
+            If the Field has an <meta attribute="property-type"></meta> then that
+            will overrule any other information.
+            
+            </summary>
+            <param name="field">class name that we use to serach in class2classmap
+            </param>
+            <param name="class2classmap">a map from classname to classmappings
+            </param>
+            <returns> string return either name or the proxy name of the classmap
+            </returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.LanguageTool.shortenType(System.String,NHibernate.Tool.hbm2net.SupportClass.SetSupport)">
+            <summary> Returns the last part of type if it is in the set of imports.
+            e.g. java.util.Date would become Date, if imports contains 
+            java.util.Date.
+            
+            </summary>
+            <returns> String
+            </returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.LanguageTool.toJavaDoc(System.String,System.Int32)">
+            <summary> Convert string into something that can be rendered nicely into a javadoc
+            comment.
+            Prefix each line with a star ('*').
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:NHibernate.Tool.hbm2net.MetaAttributeHelper" -->
+        <member name="M:NHibernate.Tool.hbm2net.MetaAttributeHelper.loadMetaMap(System.Xml.XmlElement)">
+            <summary> Load meta attributes from jdom element into a MultiMap.
+            
+            </summary>
+            <returns> MultiMap
+            </returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.MetaAttributeHelper.mergeMetaMaps(System.Collections.Hashtable,System.Collections.Hashtable)">
+            <summary> Merges a Multimap with inherited maps.
+            Values specified always overrules/replaces the inherited values.
+            
+            </summary>
+            <returns> a MultiMap with all values from local and extra values
+            from inherited
+            </returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.MetaAttributeHelper.loadAndMergeMetaMap(System.Xml.XmlElement,System.Collections.Hashtable)">
+            <summary> Method loadAndMergeMetaMap.</summary>
+            <returns> MultiMap
+            </returns>
+        </member>
+        <member name="T:NHibernate.Tool.hbm2net.MethodSignatureBuilder">
+            <summary> Build method signatures given lots of parameters
+            Date: Apr 15, 2003
+            Time: 7:30:09 PM
+            </summary>
+            <author>  Matt Hall (matt2k(at)users.sf.net)
+            </author>
+        </member>
+        <member name="T:NHibernate.Tool.hbm2net.QueryBuilder">
+            <summary> Build queries for use in finder generation.</summary>
+            <author>  Matt Hall (matt2k(at)users.sf.net)
+            </author>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.QueryBuilder.Query">
+            <returns> The query in string form
+            </returns>
+        </member>
+        <member name="T:NHibernate.Tool.hbm2net.StringResourceLoader">
+            <author>  MAX
+            
+            To change the template for this generated type comment go to
+            Window - Preferences - Java - Code Generation - Code and Comments
+            </author>
+        </member>
+        <member name="T:NHibernate.Tool.hbm2net.SubclassMapping">
+            <summary>
+            Place holder until we can get the superclass
+            </summary>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.SubclassMapping.ClassPackage">
+            <summary>
+            Property ClassPackage (string)
+            </summary>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.SubclassMapping.MappingElement">
+            <summary>
+            Property MappingElement (MappingElement)
+            </summary>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.SubclassMapping.SuperClass">
+            <summary>
+            Property SuperClass (string)
+            </summary>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.SubclassMapping.Clazz">
+            <summary>
+            Property Clazz (Element)
+            </summary>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.SubclassMapping.MultiMap">
+            <summary>
+            Property MultiMap (MultiMap)
+            </summary>
+        </member>
+        <member name="P:NHibernate.Tool.hbm2net.SubclassMapping.Orphaned">
+            <summary>
+            Property Orphaned (bool)
+            </summary>
+        </member>
+        <member name="T:NHibernate.Tool.hbm2net.SupportClass">
+            <summary>
+            Contains conversion support elements such as classes, interfaces and static methods.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.CreateNewInstance(System.Type)">
+            <summary>
+            Creates an instance of a received Type.
+            </summary>
+            <param name="classType">The Type of the new class instance to return.</param>
+            <returns>An Object containing the new instance.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.WriteStackTrace(System.Exception,System.IO.TextWriter)">
+            <summary>
+            Writes the exception stack trace to the received stream
+            </summary>
+            <param name="throwable">Exception to obtain information from</param>
+            <param name="stream">Output sream used to write to</param>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.PutElement(System.Collections.IDictionary,System.Object,System.Object)">
+            <summary>
+            Adds a new key-and-value pair into the hash table
+            </summary>
+            <param name="collection">The collection to work with</param>
+            <param name="key">Key used to obtain the value</param>
+            <param name="newValue">Value asociated with the key</param>
+            <returns>The old element associated with the key</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.PutAll(System.Collections.IDictionary,System.Collections.IDictionary)">
+            <summary>
+            Copies all of the elements from the source Dictionary to target Dictionary. These elements will replace any elements that 
+            target Dictionary had for any of the elements currently in the source dictionary.
+            </summary>
+            <param name="target">Target Dictionary.</param>
+            <param name="source">Source Dictionary.</param>
+        </member>
+        <member name="T:NHibernate.Tool.hbm2net.SupportClass.CollectionSupport">
+            <summary>
+            This class contains different methods to manage Collections.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.CollectionSupport.#ctor">
+            <summary>
+            Creates an instance of the Collection by using an inherited constructor.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.CollectionSupport.Add(System.Object)">
+            <summary>
+            Adds an specified element to the collection.
+            </summary>
+            <param name="element">The element to be added.</param>
+            <returns>Returns true if the element was successfuly added. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.CollectionSupport.AddAll(System.Collections.ICollection)">
+            <summary>
+            Adds all the elements contained in the specified collection.
+            </summary>
+            <param name="collection">The collection used to extract the elements that will be added.</param>
+            <returns>Returns true if all the elements were successfuly added. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.CollectionSupport.AddAll(NHibernate.Tool.hbm2net.SupportClass.CollectionSupport)">
+            <summary>
+            Adds all the elements contained in the specified support class collection.
+            </summary>
+            <param name="collection">The collection used to extract the elements that will be added.</param>
+            <returns>Returns true if all the elements were successfuly added. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.CollectionSupport.Contains(System.Object)">
+            <summary>
+            Verifies if the specified element is contained into the collection. 
+            </summary>
+            <param name="element"> The element that will be verified.</param>
+            <returns>Returns true if the element is contained in the collection. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.CollectionSupport.ContainsAll(System.Collections.ICollection)">
+            <summary>
+            Verifies if all the elements of the specified collection are contained into the current collection.
+            </summary>
+            <param name="collection">The collection used to extract the elements that will be verified.</param>
+            <returns>Returns true if all the elements are contained in the collection. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.CollectionSupport.ContainsAll(NHibernate.Tool.hbm2net.SupportClass.CollectionSupport)">
+            <summary>
+            Verifies if all the elements of the specified collection are contained into the current collection.
+            </summary>
+            <param name="collection">The collection used to extract the elements that will be verified.</param>
+            <returns>Returns true if all the elements are contained in the collection. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.CollectionSupport.IsEmpty">
+            <summary>
+            Verifies if the collection is empty.
+            </summary>
+            <returns>Returns true if the collection is empty. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.CollectionSupport.Remove(System.Object)">
+            <summary>
+            Removes an specified element from the collection.
+            </summary>
+            <param name="element">The element to be removed.</param>
+            <returns>Returns true if the element was successfuly removed. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.CollectionSupport.RemoveAll(System.Collections.ICollection)">
+            <summary>
+            Removes all the elements contained into the specified collection.
+            </summary>
+            <param name="collection">The collection used to extract the elements that will be removed.</param>
+            <returns>Returns true if all the elements were successfuly removed. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.CollectionSupport.RemoveAll(NHibernate.Tool.hbm2net.SupportClass.CollectionSupport)">
+            <summary>
+            Removes all the elements contained into the specified collection.
+            </summary>
+            <param name="collection">The collection used to extract the elements that will be removed.</param>
+            <returns>Returns true if all the elements were successfuly removed. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.CollectionSupport.RetainAll(System.Collections.ICollection)">
+            <summary>
+            Removes all the elements that aren't contained into the specified collection.
+            </summary>
+            <param name="collection">The collection used to verify the elements that will be retained.</param>
+            <returns>Returns true if all the elements were successfully removed. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.CollectionSupport.RetainAll(NHibernate.Tool.hbm2net.SupportClass.CollectionSupport)">
+            <summary>
+            Removes all the elements that aren't contained into the specified collection.
+            </summary>
+            <param name="collection">The collection used to verify the elements that will be retained.</param>
+            <returns>Returns true if all the elements were successfully removed. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.CollectionSupport.ToArray">
+            <summary>
+            Obtains an array containing all the elements of the collection.
+            </summary>
+            <returns>The array containing all the elements of the collection</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.CollectionSupport.ToArray(System.Object[])">
+            <summary>
+            Obtains an array containing all the elements of the collection.
+            </summary>
+            <param name="objects">The array into which the elements of the collection will be stored.</param>
+            <returns>The array containing all the elements of the collection.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.CollectionSupport.ToCollectionSupport(System.Object[])">
+            <summary>
+            Creates a CollectionSupport object with the contents specified in array.
+            </summary>
+            <param name="array">The array containing the elements used to populate the new CollectionSupport object.</param>
+            <returns>A CollectionSupport object populated with the contents of array.</returns>
+        </member>
+        <member name="T:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport">
+            <summary>
+            This class contains different methods to manage list collections.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.#ctor">
+            <summary>
+            Creates a new instance of the class ListCollectionSupport.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.#ctor(System.Collections.ICollection)">
+            <summary>
+            Creates a new instance of the class ListCollectionSupport.
+            </summary>
+            <param name="collection">The collection to insert into the new object.</param>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.#ctor(System.Int32)">
+            <summary>
+            Creates a new instance of the class ListCollectionSupport with the specified capacity.
+            </summary>
+            <param name="capacity">The capacity of the new array.</param>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.Add(System.Object)">
+            <summary>
+            Adds an object to the end of the List.
+            </summary>          
+            <param name="valueToInsert">The value to insert in the array list.</param>
+            <returns>Returns true after adding the value.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.AddAll(System.Int32,System.Collections.IList)">
+            <summary>
+            Adds all the elements contained into the specified collection, starting at the specified position.
+            </summary>
+            <param name="index">Position at which to add the first element from the specified collection.</param>
+            <param name="list">The list used to extract the elements that will be added.</param>
+            <returns>Returns true if all the elements were successfuly added. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.AddAll(System.Collections.IList)">
+            <summary>
+            Adds all the elements contained in the specified collection.
+            </summary>
+            <param name="collection">The collection used to extract the elements that will be added.</param>
+            <returns>Returns true if all the elements were successfuly added. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.AddAll(NHibernate.Tool.hbm2net.SupportClass.CollectionSupport)">
+            <summary>
+            Adds all the elements contained in the specified support class collection.
+            </summary>
+            <param name="collection">The collection used to extract the elements that will be added.</param>
+            <returns>Returns true if all the elements were successfuly added. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.AddAll(System.Int32,NHibernate.Tool.hbm2net.SupportClass.CollectionSupport)">
+            <summary>
+            Adds all the elements contained into the specified support class collection, starting at the specified position.
+            </summary>
+            <param name="index">Position at which to add the first element from the specified collection.</param>
+            <param name="collection">The list used to extract the elements that will be added.</param>
+            <returns>Returns true if all the elements were successfuly added. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.ListCollectionClone">
+            <summary>
+            Creates a copy of the ListCollectionSupport.
+            </summary>
+            <returns> A copy of the ListCollectionSupport.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.ListIterator">
+            <summary>
+            Returns an iterator of the collection.
+            </summary>
+            <returns>An IEnumerator.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.RemoveAll(System.Collections.ICollection)">
+            <summary>
+            Removes all the elements contained into the specified collection.
+            </summary>
+            <param name="collection">The collection used to extract the elements that will be removed.</param>
+            <returns>Returns true if all the elements were successfuly removed. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.RemoveAll(NHibernate.Tool.hbm2net.SupportClass.CollectionSupport)">
+            <summary>
+            Removes all the elements contained into the specified collection.
+            </summary>
+            <param name="collection">The collection used to extract the elements that will be removed.</param>
+            <returns>Returns true if all the elements were successfuly removed. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.RemoveElement(System.Int32)">
+            <summary>
+            Removes the value in the specified index from the list.
+            </summary>          
+            <param name="index">The index of the value to remove.</param>
+            <returns>Returns the value removed.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.RemoveElement(System.Object)">
+            <summary>
+            Removes an specified element from the collection.
+            </summary>
+            <param name="element">The element to be removed.</param>
+            <returns>Returns true if the element was successfuly removed. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.RemoveFirst">
+            <summary>
+            Removes the first value from an array list.
+            </summary>          
+            <returns>Returns the value removed.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.RemoveLast">
+            <summary>
+            Removes the last value from an array list.
+            </summary>
+            <returns>Returns the value removed.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.RetainAll(System.Collections.ICollection)">
+            <summary>
+            Removes all the elements that aren't contained into the specified collection.
+            </summary>
+            <param name="collection">The collection used to verify the elements that will be retained.</param>
+            <returns>Returns true if all the elements were successfully removed. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.RetainAll(NHibernate.Tool.hbm2net.SupportClass.CollectionSupport)">
+            <summary>
+            Removes all the elements that aren't contained into the specified collection.
+            </summary>
+            <param name="collection">The collection used to verify the elements that will be retained.</param>
+            <returns>Returns true if all the elements were successfully removed. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.ContainsAll(System.Collections.ICollection)">
+            <summary>
+            Verifies if all the elements of the specified collection are contained into the current collection.
+            </summary>
+            <param name="collection">The collection used to extract the elements that will be verified.</param>
+            <returns>Returns true if all the elements are contained in the collection. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.ContainsAll(NHibernate.Tool.hbm2net.SupportClass.CollectionSupport)">
+            <summary>
+            Verifies if all the elements of the specified collection are contained into the current collection.
+            </summary>
+            <param name="collection">The collection used to extract the elements that will be verified.</param>
+            <returns>Returns true if all the elements are contained in the collection. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.SubList(System.Int32,System.Int32)">
+            <summary>
+            Returns a new list containing a portion of the current list between a specified range. 
+            </summary>
+            <param name="startIndex">The start index of the range.</param>
+            <param name="endIndex">The end index of the range.</param>
+            <returns>A ListCollectionSupport instance containing the specified elements.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.ToArray(System.Object[])">
+            <summary>
+            Obtains an array containing all the elements of the collection.
+            </summary>
+            <param name="objects">The array into which the elements of the collection will be stored.</param>
+            <returns>The array containing all the elements of the collection.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.ListIterator(System.Int32)">
+            <summary>
+            Returns an iterator of the collection starting at the specified position.
+            </summary>
+            <param name="index">The position to set the iterator.</param>
+            <returns>An IEnumerator at the specified position.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.GetLast">
+            <summary>
+            Gets the last value from a list.
+            </summary>
+            <returns>Returns the last element of the list.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.IsEmpty">
+            <summary>
+            Return whether this list is empty.
+            </summary>
+            <returns>True if the list is empty, false if it isn't.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.Set(System.Int32,System.Object)">
+            <summary>
+            Replaces the element at the specified position in this list with the specified element.
+            </summary>
+            <param name="index">Index of element to replace.</param>
+            <param name="element">Element to be stored at the specified position.</param>
+            <returns>The element previously at the specified position.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.ListCollectionSupport.Get(System.Int32)">
+            <summary>
+            Returns the element at the specified position in the list.
+            </summary>
+            <param name="index">Index of element to return.</param>
+            <returns>The element at the specified position in the list.</returns>
+        </member>
+        <member name="T:NHibernate.Tool.hbm2net.SupportClass.SetSupport">
+            <summary>
+            This class manages a set of elements.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SetSupport.#ctor">
+            <summary>
+            Creates a new set.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SetSupport.#ctor(System.Collections.ICollection)">
+            <summary>
+            Creates a new set initialized with System.Collections.ICollection object
+            </summary>
+            <param name="collection">System.Collections.ICollection object to initialize the set object</param>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SetSupport.#ctor(System.Int32)">
+            <summary>
+            Creates a new set initialized with a specific capacity.
+            </summary>
+            <param name="capacity">value to set the capacity of the set object</param>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SetSupport.Add(System.Object)">
+            <summary>
+            Adds an element to the set.
+            </summary>
+            <param name="objectToAdd">The object to be added.</param>
+            <returns>True if the object was added, false otherwise.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SetSupport.AddAll(System.Collections.ICollection)">
+            <summary>
+            Adds all the elements contained in the specified collection.
+            </summary>
+            <param name="collection">The collection used to extract the elements that will be added.</param>
+            <returns>Returns true if all the elements were successfuly added. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SetSupport.AddAll(NHibernate.Tool.hbm2net.SupportClass.CollectionSupport)">
+            <summary>
+            Adds all the elements contained in the specified support class collection.
+            </summary>
+            <param name="collection">The collection used to extract the elements that will be added.</param>
+            <returns>Returns true if all the elements were successfuly added. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SetSupport.ContainsAll(System.Collections.ICollection)">
+            <summary>
+            Verifies that all the elements of the specified collection are contained into the current collection. 
+            </summary>
+            <param name="collection">The collection used to extract the elements that will be verified.</param>
+            <returns>True if the collection contains all the given elements.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SetSupport.ContainsAll(NHibernate.Tool.hbm2net.SupportClass.CollectionSupport)">
+            <summary>
+            Verifies if all the elements of the specified collection are contained into the current collection.
+            </summary>
+            <param name="collection">The collection used to extract the elements that will be verified.</param>
+            <returns>Returns true if all the elements are contained in the collection. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SetSupport.IsEmpty">
+            <summary>
+            Verifies if the collection is empty.
+            </summary>
+            <returns>True if the collection is empty, false otherwise.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SetSupport.Remove(System.Object)">
+            <summary>
+            Removes an element from the set.
+            </summary>
+            <param name="elementToRemove">The element to be removed.</param>
+            <returns>True if the element was removed.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SetSupport.RemoveAll(System.Collections.ICollection)">
+            <summary>
+            Removes all the elements contained in the specified collection.
+            </summary>
+            <param name="collection">The collection used to extract the elements that will be removed.</param>
+            <returns>True if all the elements were successfuly removed, false otherwise.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SetSupport.RemoveAll(NHibernate.Tool.hbm2net.SupportClass.CollectionSupport)">
+            <summary>
+            Removes all the elements contained into the specified collection.
+            </summary>
+            <param name="collection">The collection used to extract the elements that will be removed.</param>
+            <returns>Returns true if all the elements were successfuly removed. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SetSupport.RetainAll(System.Collections.ICollection)">
+            <summary>
+            Removes all the elements that aren't contained in the specified collection.
+            </summary>
+            <param name="collection">The collection used to verify the elements that will be retained.</param>
+            <returns>True if all the elements were successfully removed, false otherwise.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SetSupport.RetainAll(NHibernate.Tool.hbm2net.SupportClass.CollectionSupport)">
+            <summary>
+            Removes all the elements that aren't contained into the specified collection.
+            </summary>
+            <param name="collection">The collection used to verify the elements that will be retained.</param>
+            <returns>Returns true if all the elements were successfully removed. Otherwise returns false.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SetSupport.ToArray">
+            <summary>
+            Obtains an array containing all the elements of the collection.
+            </summary>
+            <returns>The array containing all the elements of the collection.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SetSupport.ToArray(System.Object[])">
+            <summary>
+            Obtains an array containing all the elements in the collection.
+            </summary>
+            <param name="objects">The array into which the elements of the collection will be stored.</param>
+            <returns>The array containing all the elements of the collection.</returns>
+        </member>
+        <member name="T:NHibernate.Tool.hbm2net.SupportClass.TreeSetSupport">
+            <summary>
+            This class manages a tree set collection of sorted elements.
+            </summary>
+        </member>
+        <member name="T:NHibernate.Tool.hbm2net.SupportClass.SortedSetSupport">
+            <summary> 
+            This class contains methods to manage a sorted collection.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SortedSetSupport.#ctor">
+            <summary>
+            Creates a new SortedSetSupport.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SortedSetSupport.#ctor(System.Collections.ICollection)">
+            <summary>
+            Create a new SortedSetSupport with a specific collection.
+            </summary>
+            <param name="collection">The collection used to iniciatilize the SortedSetSupport</param>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SortedSetSupport.First">
+            <summary>
+            Returns the first element from the set.
+            </summary>
+            <returns>Returns the first element from the set.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SortedSetSupport.HeadSet(System.Object)">
+            <summary>
+            Returns a view of elements until the specified element.
+            </summary>
+            <returns>Returns a sorted set of elements that are strictly less than the specified element.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SortedSetSupport.Last">
+            <summary>
+            Returns the last element of the set.
+            </summary>
+            <returns>Returns the last element from the set.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SortedSetSupport.TailSet(System.Object)">
+            <summary>
+            Returns a view of elements from the specified element.
+            </summary>
+            <returns>Returns a sorted set of elements that are greater or equal to the specified element.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.SortedSetSupport.SubSet(System.Object,System.Object)">
+            <summary>
+            Returns a view of elements between the specified elements.
+            </summary>
+            <returns>Returns a sorted set of elements from the first specified element to the second specified element.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.TreeSetSupport.#ctor">
+            <summary>
+            Creates a new TreeSetSupport.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.TreeSetSupport.#ctor(System.Collections.ICollection)">
+            <summary>
+            Create a new TreeSetSupport with a specific collection.
+            </summary>
+            <param name="collection">The collection used to iniciatilize the TreeSetSupport</param>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.TreeSetSupport.TreeSetClone">
+            <summary>
+            Creates a copy of the TreeSetSupport.
+            </summary>
+            <returns>A copy of the TreeSetSupport.</returns>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.TreeSetSupport.Size">
+            <summary>
+            Retrieves the number of elements contained in the set.
+            </summary>
+            <returns>An interger value that represent the number of element in the set.</returns>
+        </member>
+        <member name="T:NHibernate.Tool.hbm2net.SupportClass.AbstractSetSupport">
+            <summary>
+            This class manages different operation with collections.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.AbstractSetSupport.#ctor">
+            <summary>
+            The constructor with no parameters to create an abstract set.
+            </summary>
+        </member>
+        <member name="T:NHibernate.Tool.hbm2net.SupportClass.HashSetSupport">
+            <summary> 
+            This class manages a hash set of elements.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.HashSetSupport.#ctor">
+            <summary>
+            Creates a new hash set collection.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.HashSetSupport.#ctor(System.Collections.ICollection)">
+            <summary>
+            Creates a new hash set collection.
+            </summary>
+            <param name="collection">The collection to initialize the hash set with.</param>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.HashSetSupport.#ctor(System.Int32)">
+            <summary>
+            Creates a new hash set with the given capacity.
+            </summary>
+            <param name="capacity">The initial capacity of the hash set.</param>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.HashSetSupport.#ctor(System.Int32,System.Single)">
+            <summary>
+            Creates a new hash set with the given capacity.
+            </summary>
+            <param name="capacity">The initial capacity of the hash set.</param>
+            <param name="loadFactor">The load factor of the hash set.</param>
+        </member>
+        <member name="M:NHibernate.Tool.hbm2net.SupportClass.HashSetSupport.HashSetClone">
+            <summary>
+            Creates a copy of the HashSetSupport.
+            </summary>
+            <returns> A copy of the HashSetSupport.</returns>
+        </member>
+        <member name="T:NHibernate.Tool.hbm2net.VelocityRenderer">
+            <author>  MAX
+            
+            To change the template for this generated type comment go to Window -
+            Preferences - Java - Code Generation - Code and Comments
+            </author>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NHibernate.UserTypes.SqlTypes</name>
+    </assembly>
+    <members>
+        <member name="T:NHibernate.UserTypes.NullableTypesType">
+            <summary>
+            Abstract type used for implementing NHibernate <see cref="T:NHibernate.Type.IType"/>s for 
+            the Nullables library.
+            </summary>
+        </member>
+        <member name="M:NHibernate.UserTypes.SqlTypes.SqlTypesType.GetValue(System.Data.SqlTypes.INullable)">
+            <summary>
+            Get the wrapped value from an <see cref="T:System.Data.SqlTypes.INullable"/> (Int32 for SqlInt32, etc.)
+            </summary>
+            <param name="value">An INullable that is not null</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

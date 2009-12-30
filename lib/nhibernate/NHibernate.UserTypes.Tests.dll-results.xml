@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\DATA\Projects\nhibernate\1.2.x\NH-spare1\build\NHibernate-1.2.1.GA\bin\net-2.0\NHibernate.UserTypes.Tests.dll" total="2" failures="0" not-run="5" date="2007-11-24" time="05:25:12">
+  <environment nunit-version="2.2.8.0" clr-version="2.0.50727.832" os-version="Microsoft Windows NT 5.1.2600 Service Pack 2" platform="Win32NT" cwd="C:\DATA\Projects\nhibernate\1.2.x\NH-spare1" machine-name="CORP-2B5TWB1" user="kchu" user-domain="LIFEMARK" />
+  <culture-info current-culture="en-CA" current-uiculture="en-US" />
+  <test-suite name="C:\DATA\Projects\nhibernate\1.2.x\NH-spare1\build\NHibernate-1.2.1.GA\bin\net-2.0\NHibernate.UserTypes.Tests.dll" success="True" time="0.188" asserts="0">
+    <results>
+      <test-suite name="NHibernate" success="True" time="0.188" asserts="0">
+        <results>
+          <test-suite name="NHibernate.UserTypes" success="True" time="0.188" asserts="0">
+            <results>
+              <test-suite name="NHibernate.UserTypes.Tests" success="True" time="0.188" asserts="0">
+                <results>
+                  <test-suite name="NHibernate.UserTypes.Tests.EmptyAnsiStringFixture" success="True" time="0.109" asserts="0">
+                    <results>
+                      <test-case name="NHibernate.UserTypes.Tests.EmptyAnsiStringFixture.NullValueInProperty" executed="False">
+                        <reason>
+                          <message><![CDATA[Error while setting up the database schema: NHibernate.MappingException: Resource not found: NHibernate.UserTypes.Tests.EmptyAnsiStringClass.hbm.xml
+   at NHibernate.Cfg.Configuration.LogAndThrow(MappingException me)
+   at NHibernate.Cfg.Configuration.AddResource(String path, Assembly assembly)
+   at NHibernate.UserTypes.Tests.TestCase.ExportSchema(IList files, String assemblyName)
+   at NHibernate.UserTypes.Tests.TestCase.TestFixtureSetUp()]]></message>
+                        </reason>
+                      </test-case>
+                      <test-case name="NHibernate.UserTypes.Tests.EmptyAnsiStringFixture.EmptyValueInProperty" executed="False">
+                        <reason>
+                          <message><![CDATA[Error while setting up the database schema: NHibernate.MappingException: Resource not found: NHibernate.UserTypes.Tests.EmptyAnsiStringClass.hbm.xml
+   at NHibernate.Cfg.Configuration.LogAndThrow(MappingException me)
+   at NHibernate.Cfg.Configuration.AddResource(String path, Assembly assembly)
+   at NHibernate.UserTypes.Tests.TestCase.ExportSchema(IList files, String assemblyName)
+   at NHibernate.UserTypes.Tests.TestCase.TestFixtureSetUp()]]></message>
+                        </reason>
+                      </test-case>
+                    </results>
+                  </test-suite>
+                  <test-suite name="NHibernate.UserTypes.Tests.EmptyStringFixture" success="True" time="0.016" asserts="0">
+                    <results>
+                      <test-case name="NHibernate.UserTypes.Tests.EmptyStringFixture.EmptyAnsiStringFixture.NullValueInProperty" executed="False">
+                        <reason>
+                          <message><![CDATA[Error while setting up the database schema: NHibernate.MappingException: Resource not found: NHibernate.UserTypes.Tests.EmptyStringClass.hbm.xml
+   at NHibernate.Cfg.Configuration.LogAndThrow(MappingException me)
+   at NHibernate.Cfg.Configuration.AddResource(String path, Assembly assembly)
+   at NHibernate.UserTypes.Tests.TestCase.ExportSchema(IList files, String assemblyName)
+   at NHibernate.UserTypes.Tests.TestCase.TestFixtureSetUp()]]></message>
+                        </reason>
+                      </test-case>
+                      <test-case name="NHibernate.UserTypes.Tests.EmptyStringFixture.EmptyAnsiStringFixture.EmptyValueInProperty" executed="False">
+                        <reason>
+                          <message><![CDATA[Error while setting up the database schema: NHibernate.MappingException: Resource not found: NHibernate.UserTypes.Tests.EmptyStringClass.hbm.xml
+   at NHibernate.Cfg.Configuration.LogAndThrow(MappingException me)
+   at NHibernate.Cfg.Configuration.AddResource(String path, Assembly assembly)
+   at NHibernate.UserTypes.Tests.TestCase.ExportSchema(IList files, String assemblyName)
+   at NHibernate.UserTypes.Tests.TestCase.TestFixtureSetUp()]]></message>
+                        </reason>
+                      </test-case>
+                    </results>
+                  </test-suite>
+                  <test-suite name="NHibernate.UserTypes.Tests.SerializabilityFixture" success="True" time="0.063" asserts="0">
+                    <results>
+                      <test-case name="NHibernate.UserTypes.Tests.SerializabilityFixture.SqlTypes" executed="True" success="True" time="0.031" asserts="13" />
+                      <test-case name="NHibernate.UserTypes.Tests.SerializabilityFixture.NullableTypes" executed="True" success="True" time="0.031" asserts="12" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="NHibernate.UserTypes.Tests.SqlTypesFixture" success="True" time="0.000" asserts="0">
+                    <results>
+                      <test-case name="NHibernate.UserTypes.Tests.SqlTypesFixture.CRUD" executed="False">
+                        <reason>
+                          <message><![CDATA[Error while setting up the database schema: NHibernate.MappingException: Resource not found: NHibernate.UserTypes.Tests.SqlTypesClass.hbm.xml
+   at NHibernate.Cfg.Configuration.LogAndThrow(MappingException me)
+   at NHibernate.Cfg.Configuration.AddResource(String path, Assembly assembly)
+   at NHibernate.UserTypes.Tests.TestCase.ExportSchema(IList files, String assemblyName)
+   at NHibernate.UserTypes.Tests.TestCase.TestFixtureSetUp()]]></message>
+                        </reason>
+                      </test-case>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

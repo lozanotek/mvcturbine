@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Type="ProjectGroup" Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+  <TemplateData>
+    <Name>StructureMap Application</Name>
+    <Description>Default MVC application that uses the StructureMap Service Locator implementation that comes with MVC Turbine.</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>MVC Turbine</ProjectSubType>
+    <SortOrder>1</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>StructureMapApplication</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <BuildOnLoad xsi:type="xsd:boolean">true</BuildOnLoad>
+    <LocationField>Enabled</LocationField>
+  </TemplateData>
+  <TemplateContent>
+    <ProjectCollection>
+      <ProjectTemplateLink ProjectName="Mvc">projects\Mvc\Mvc.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="MvcApplication">projects\MvcApplication\MvcApplication.vstemplate</ProjectTemplateLink>
+    </ProjectCollection>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly xsi:type="xsd:string">SolutionFactory.Wizard</Assembly>
+    <FullClassName xsi:type="xsd:string">SolutionFactory.Wizard</FullClassName>
+  </WizardExtension>
+  <WizardData>
+    <directory xmlns=""></directory>
+    <startUpProject xmlns="">MvcApplication</startUpProject>
+    <execute xmlns="">
+    </execute>
+  </WizardData>
+</VSTemplate>

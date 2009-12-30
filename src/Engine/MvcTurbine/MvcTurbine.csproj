@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{794C0A9F-60EB-4E25-93F2-5D4D59122529}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MvcTurbine</RootNamespace>
+    <AssemblyName>MvcTurbine</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\mvcturbine.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\MvcTurbine.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\MvcTurbine.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\CommonInfo.cs">
+      <Link>CommonInfo.cs</Link>
+    </Compile>
+    <Compile Include="CollectionExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ComponentModel\AssemblyDependencyException.cs" />
+    <Compile Include="ComponentModel\AssemblyFilter.cs" />
+    <Compile Include="ComponentModel\AutoRegistrationList.cs" />
+    <Compile Include="ComponentModel\CommonAssemblyFilter.cs" />
+    <Compile Include="ComponentModel\DefaultAutoRegistrator.cs" />
+    <Compile Include="ComponentModel\DefaultBinAssemblyLoader.cs" />
+    <Compile Include="ComponentModel\DependencyResolutionException.cs" />
+    <Compile Include="ComponentModel\IBatchRegistration.cs" />
+    <Compile Include="ComponentModel\IBinAssemblyLoader.cs" />
+    <Compile Include="ComponentModel\IAutoRegistrator.cs" />
+    <Compile Include="ComponentModel\IServiceRegistration.cs" />
+    <Compile Include="ComponentModel\IServiceLocator.cs" />
+    <Compile Include="ComponentModel\ISupportAutoRegistration.cs" />
+    <Compile Include="ComponentModel\RegistrationFilters.cs" />
+    <Compile Include="ComponentModel\ServiceLocatorExtensions.cs" />
+    <Compile Include="ComponentModel\ServiceResolutionException.cs" />
+    <Compile Include="IRotorContext.cs" />
+    <Compile Include="ITurbineApplication.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ComponentModel\Registration.cs" />
+    <Compile Include="ComponentModel\ServiceLocatorManager.cs" />
+    <Compile Include="ComponentModel\ServiceRegistration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Blades\Blade.cs" />
+    <Compile Include="Blades\IBlade.cs" />
+    <Compile Include="Blades\BladeList.cs" />
+    <Compile Include="Routing\IRouteRegistrator.cs" />
+    <Compile Include="TypeExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\mvcturbine.snk">
+      <Link>mvcturbine.snk</Link>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>xcopy $(TargetDir)*.dll $(SolutionDir)..\..\build\binaries\*.dll /Y /E
+xcopy $(TargetDir)*.xml $(SolutionDir)..\..\build\binaries\*.xml /Y /E</PostBuildEvent>
+  </PropertyGroup>
+</Project>

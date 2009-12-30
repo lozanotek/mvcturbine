@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MvcTurbine.StructureMap</name>
+    </assembly>
+    <members>
+        <member name="T:MvcTurbine.StructureMap.TurbineRegistry">
+            <summary>
+            Internal registry for Turbine to use
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.TurbineRegistry.#ctor(StructureMap.IContainer)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="container"></param>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.TurbineRegistry.Register``1(System.Type)">
+            <summary>
+            Registers the specified <paramref name="implType"/> for the <typeparamref name="Interface"/> contract.
+            </summary>
+            <typeparam name="Interface"></typeparam>
+            <param name="implType"></param>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.TurbineRegistry.Register``2">
+            <summary>
+            Registers the implemation type, <see cref="!:Implementation"/>, with the locator under
+            the <see cref="!:Interface"/> service type.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <typeparam name="Implementation">Implementation type to use for registration.
+            </typeparam>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.TurbineRegistry.Register``2(System.String)">
+            <summary>
+            Registers the implemation type, <see cref="!:Implementation"/>, with the locator under
+            the <see cref="!:Interface"/> service type.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <typeparam name="Implementation">Implementation type to use for registration.
+            </typeparam>
+            <param name="key">Unique key to distinguish the service.</param>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.TurbineRegistry.Register(System.String,System.Type)">
+            <summary>
+            Registers the implementation type, <paramref name="type"/>, with the locator
+            by the given string key.
+            </summary>
+            <param name="key">Unique key to distinguish the service.</param>
+            <param name="type">Implementation type to use.</param>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.TurbineRegistry.Register(System.Type,System.Type)">
+            <summary>
+            Registers the implementation type, <paramref name="implType"/>, with the locator
+            by the given service type, <paramref name="serviceType"/>
+            </summary>
+            <param name="serviceType">Type of the service to register.</param>
+            <param name="implType">Implementation to associate with the service.</param>
+        </member>
+        <member name="P:MvcTurbine.StructureMap.TurbineRegistry.Container">
+            <summary>
+            Gets the associated <see cref="T:StructureMap.IContainer"/> with this registry.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.StructureMap.StructureMapServiceLocator">
+            <summary>
+            Default implementation of the <seealso cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> contract with Ninject IoC.
+            </summary>
+            <remarks>
+            To learn more about StructureMap, please visit its website: http://structuremap.sourceforge.net
+            </remarks>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.StructureMapServiceLocator.#ctor">
+            <summary>
+            Creates an instance with an empty <seealso cref="T:StructureMap.IContainer"/> instance.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.StructureMapServiceLocator.#ctor(StructureMap.IContainer)">
+            <summary>
+            Creates an instance of the locator with the specified <see cref="T:StructureMap.IContainer"/> instance.
+            </summary>
+            <param name="container">Instance of <see cref="T:StructureMap.IContainer"/> to use with this locator.</param>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.StructureMapServiceLocator.Resolve``1">
+            <summary>
+            Resolves the service of the specified type.
+            </summary>
+            <typeparam name="T">Type of service to resolve.</typeparam>
+            <returns>An instance of the type, null otherwise.</returns>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.StructureMapServiceLocator.Resolve``1(System.String)">
+            <summary>
+            Resolves the service of the specified type by the given string key.
+            </summary>
+            <typeparam name="T">Type of service to resolve.</typeparam>
+            <param name="key">Unique key to distinguish the service.</param>
+            <returns>An instance of the type, null otherwise.</returns>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.StructureMapServiceLocator.Resolve``1(System.Type)">
+            <summary>
+            Resolves the service of the specified type by the given type key.
+            </summary>
+            <typeparam name="T">Type of service to resolve.</typeparam>
+            <param name="type">Key type of the service.</param>
+            <returns>An instance of the type, null otherwise.</returns>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.StructureMapServiceLocator.ResolveServices``1">
+            <summary>
+            Resolves the list of services of type <see cref="!:T"/> that are registered 
+            within the locator.
+            </summary>
+            <typeparam name="T">Type of the service to resolve.</typeparam>
+            <returns>A list of service of type <see cref="!:T"/>, null otherwise.</returns>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.StructureMapServiceLocator.Register``1(System.Type)">
+            <summary>
+            Registers the implemation type, <paramref name="implType"/>, with the locator under
+            the <see cref="!:Interface"/> service type.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <param name="implType">Implementation type to use for registration.</param>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.StructureMapServiceLocator.Register``2">
+            <summary>
+            Registers the implemation type, <see cref="!:Implementation"/>, with the locator under
+            the <see cref="!:Interface"/> service type.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <typeparam name="Implementation">Implementation type to use for registration.
+            </typeparam>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.StructureMapServiceLocator.Register``2(System.String)">
+            <summary>
+            Registers the implemation type, <see cref="!:Implementation"/>, with the locator under
+            the <see cref="!:Interface"/> service type.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <typeparam name="Implementation">Implementation type to use for registration.
+            </typeparam>
+            <param name="key">Unique key to distinguish the service.</param>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.StructureMapServiceLocator.Register(System.String,System.Type)">
+            <summary>
+            Registers the implementation type, <paramref name="type"/>, with the locator
+            by the given string key.
+            </summary>
+            <param name="key">Unique key to distinguish the service.</param>
+            <param name="type">Implementation type to use.</param>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.StructureMapServiceLocator.Register(System.Type,System.Type)">
+            <summary>
+            Registers the implementation type, <paramref name="implType"/>, with the locator
+            by the given service type, <paramref name="serviceType"/>
+            </summary>
+            <param name="serviceType">Type of the service to register.</param>
+            <param name="implType">Implementation to associate with the service.</param>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.StructureMapServiceLocator.Release(System.Object)">
+            <summary>
+            Releases (disposes) the service instance from within the locator.
+            </summary>
+            <param name="instance">Instance of a service to dipose from the locator.</param>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.StructureMapServiceLocator.Reset">
+            <summary>
+            Resets the locator to its initial state clearing all registrations.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.StructureMapServiceLocator.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="P:MvcTurbine.StructureMap.StructureMapServiceLocator.Container">
+            <summary>
+            Gets the <see cref="T:StructureMap.IContainer"/> associated with this instance.
+            </summary>
+        </member>
+    </members>
+</doc>

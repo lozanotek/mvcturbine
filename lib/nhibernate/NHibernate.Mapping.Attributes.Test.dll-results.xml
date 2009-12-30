@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\DATA\Projects\nhibernate\1.2.x\NH-spare1\build\NHibernate-1.2.1.GA\bin\net-2.0\NHibernate.Mapping.Attributes.Test.dll" total="1" failures="0" not-run="0" date="2007-11-24" time="05:25:07">
+  <environment nunit-version="2.2.8.0" clr-version="2.0.50727.832" os-version="Microsoft Windows NT 5.1.2600 Service Pack 2" platform="Win32NT" cwd="C:\DATA\Projects\nhibernate\1.2.x\NH-spare1" machine-name="CORP-2B5TWB1" user="kchu" user-domain="LIFEMARK" />
+  <culture-info current-culture="en-CA" current-uiculture="en-US" />
+  <test-suite name="C:\DATA\Projects\nhibernate\1.2.x\NH-spare1\build\NHibernate-1.2.1.GA\bin\net-2.0\NHibernate.Mapping.Attributes.Test.dll" success="True" time="1.563" asserts="0">
+    <results>
+      <test-suite name="NHibernate" success="True" time="1.563" asserts="0">
+        <results>
+          <test-suite name="NHibernate.Mapping" success="True" time="1.563" asserts="0">
+            <results>
+              <test-suite name="NHibernate.Mapping.Attributes" success="True" time="1.563" asserts="0">
+                <results>
+                  <test-suite name="NHibernate.Mapping.Attributes.Test" success="True" time="1.563" asserts="0">
+                    <results>
+                      <test-suite name="NHibernate.Mapping.Attributes.Test.Tests" success="True" time="1.563" asserts="0">
+                        <results>
+                          <test-case name="NHibernate.Mapping.Attributes.Test.Tests.TestSerialization" executed="True" success="True" time="1.547" asserts="0" />
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

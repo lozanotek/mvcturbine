@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingBlade", "LoggingBlade\LoggingBlade.csproj", "{871BB0D4-9417-4602-B5D0-6E00462305EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcApplication", "MvcApplication\MvcApplication.csproj", "{A171784C-52EA-4151-BB37-0072CEB27784}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{871BB0D4-9417-4602-B5D0-6E00462305EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{871BB0D4-9417-4602-B5D0-6E00462305EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{871BB0D4-9417-4602-B5D0-6E00462305EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{871BB0D4-9417-4602-B5D0-6E00462305EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A171784C-52EA-4151-BB37-0072CEB27784}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A171784C-52EA-4151-BB37-0072CEB27784}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A171784C-52EA-4151-BB37-0072CEB27784}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A171784C-52EA-4151-BB37-0072CEB27784}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

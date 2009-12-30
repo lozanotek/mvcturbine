@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NHibernate.Caches.Prevalence</name>
+    </assembly>
+    <members>
+        <member name="T:NHibernate.Caches.Prevalence.CacheEntry">
+            <summary>
+            An item in the cache
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.Prevalence.CacheEntry.Key">
+            <summary>
+            the unique identifier
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.Prevalence.CacheEntry.Value">
+            <summary>
+            the value
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.Prevalence.CacheEntry.DateCreated">
+            <summary>
+            the unique timestamp
+            </summary>
+        </member>
+        <member name="T:NHibernate.Caches.Prevalence.CacheSystem">
+            <summary>
+            Summary description for CacheSystem.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.Prevalence.CacheSystem.#ctor">
+            <summary>
+            default constructor
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.Prevalence.CacheSystem.Get(System.Object)">
+            <summary>
+            retrieve the value for the given key
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NHibernate.Caches.Prevalence.CacheSystem.Add(System.Object,System.Object)">
+            <summary>
+            add or update an object in the cache
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:NHibernate.Caches.Prevalence.CacheSystem.Remove(System.Object)">
+            <summary>
+            remove an item from the cache
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:NHibernate.Caches.Prevalence.CacheSystem.Clear">
+            <summary>
+            clear the cache
+            </summary>
+        </member>
+        <member name="T:NHibernate.Caches.Prevalence.PrevalenceCache">
+            <summary>
+            Summary description for PrevalenceCache.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.Prevalence.PrevalenceCache.#ctor">
+            <summary>
+            default constructor
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.Prevalence.PrevalenceCache.#ctor(System.String)">
+            <summary>
+            constructor with no properties
+            </summary>
+            <param name="region"></param>
+        </member>
+        <member name="M:NHibernate.Caches.Prevalence.PrevalenceCache.#ctor(System.String,NHibernate.Caches.Prevalence.CacheSystem)">
+            <summary>
+            full constructor
+            </summary>
+            <param name="region"></param>
+            <param name="system">the Prevalance container class</param>
+        </member>
+        <member name="M:NHibernate.Caches.Prevalence.PrevalenceCache.Get(System.Object)">
+            <summary></summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NHibernate.Caches.Prevalence.PrevalenceCache.Put(System.Object,System.Object)">
+            <summary></summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:NHibernate.Caches.Prevalence.PrevalenceCache.Remove(System.Object)">
+            <summary></summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:NHibernate.Caches.Prevalence.PrevalenceCache.Clear">
+            <summary></summary>
+        </member>
+        <member name="M:NHibernate.Caches.Prevalence.PrevalenceCache.Destroy">
+            <summary></summary>
+        </member>
+        <member name="M:NHibernate.Caches.Prevalence.PrevalenceCache.Lock(System.Object)">
+            <summary></summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:NHibernate.Caches.Prevalence.PrevalenceCache.Unlock(System.Object)">
+            <summary></summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:NHibernate.Caches.Prevalence.PrevalenceCache.NextTimestamp">
+            <summary></summary>
+        </member>
+        <member name="P:NHibernate.Caches.Prevalence.PrevalenceCache.Timeout">
+            <summary></summary>
+        </member>
+        <member name="T:NHibernate.Caches.Prevalence.PrevalenceCacheProvider">
+            <summary>
+            Cache provider using <a href="http://bbooprevalence.sourceforge.net/">Bamboo Prevalence</a>,
+            a Prevayler implementation in .NET.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.Prevalence.PrevalenceCacheProvider.BuildCache(System.String,System.Collections.IDictionary)">
+            <summary>
+            build and return a new cache implementation
+            </summary>
+            <param name="regionName"></param>
+            <param name="properties">cache configuration properties</param>
+            <remarks>There is only one configurable parameter: prevalenceBase. This is
+            the directory on the file system where the Prevalence engine will save data.
+            It can be relative to the current directory or a full path. If the directory
+            doesn't exist, it will be created.</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:NHibernate.Caches.Prevalence.PrevalenceCacheProvider.NextTimestamp">
+            <summary></summary>
+            <returns></returns>
+        </member>
+        <member name="M:NHibernate.Caches.Prevalence.PrevalenceCacheProvider.Start(System.Collections.IDictionary)">
+            <summary></summary>
+            <param name="properties"></param>
+        </member>
+        <member name="M:NHibernate.Caches.Prevalence.PrevalenceCacheProvider.Stop">
+            <summary></summary>
+        </member>
+    </members>
+</doc>

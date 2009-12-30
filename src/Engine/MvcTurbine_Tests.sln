@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine", "MvcTurbine\MvcTurbine.csproj", "{794C0A9F-60EB-4E25-93F2-5D4D59122529}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Web", "MvcTurbine.Web\MvcTurbine.Web.csproj", "{A2634ACF-E549-4861-A36D-A6BEA773BFDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Tests", "MvcTurbine.Tests\MvcTurbine.Tests.csproj", "{3CA7A41D-7F60-4425-A3F0-C4CA205EF357}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Web.Tests", "MvcTurbine.Web.Tests\MvcTurbine.Web.Tests.csproj", "{E01E498E-DC69-45CF-976A-639491E14199}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{794C0A9F-60EB-4E25-93F2-5D4D59122529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{794C0A9F-60EB-4E25-93F2-5D4D59122529}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{794C0A9F-60EB-4E25-93F2-5D4D59122529}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{794C0A9F-60EB-4E25-93F2-5D4D59122529}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2634ACF-E549-4861-A36D-A6BEA773BFDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2634ACF-E549-4861-A36D-A6BEA773BFDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2634ACF-E549-4861-A36D-A6BEA773BFDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2634ACF-E549-4861-A36D-A6BEA773BFDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CA7A41D-7F60-4425-A3F0-C4CA205EF357}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CA7A41D-7F60-4425-A3F0-C4CA205EF357}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CA7A41D-7F60-4425-A3F0-C4CA205EF357}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CA7A41D-7F60-4425-A3F0-C4CA205EF357}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E01E498E-DC69-45CF-976A-639491E14199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E01E498E-DC69-45CF-976A-639491E14199}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E01E498E-DC69-45CF-976A-639491E14199}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E01E498E-DC69-45CF-976A-639491E14199}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

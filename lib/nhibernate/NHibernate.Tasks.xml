@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NHibernate.Tasks</name>
+    </assembly>
+    <members>
+        <member name="T:NHibernate.Tasks.Hbm2DdlTask">
+            <summary>
+            NAnt task for hbm2ddl
+            </summary>
+            <remarks>
+            <p>
+            Usage example:
+            <code>
+            &lt;hbm2ddl
+            	connectionprovider="NHibernate.Connection.DriverConnectionProvider"
+            	dialect="NHibernate.Dialect.MsSql2000Dialect"
+            	connectiondriverclass="NHibernate.Driver.SqlClientDriver"
+            	connectionstring="server=(local);uid=sa;pwd=sa;database=MyProject"
+            	delimiter=" GO "
+            	outputtoconsole="false"
+            	exportonly="true"
+            	formatnice="true"
+            	outputfilename="${nant.project.basedir}/sql/schema.sql"&gt;
+            	&lt;assemblies&gt;
+            		&lt;include name="${nant.project.basedir}/bin/MyProject.dll" /&gt;
+            	&lt;/assemblies&gt;
+            &lt;/hbm2ddl&gt;
+            </code>
+            </p>
+            <p>
+            Contributed by James Geurts
+            </p>
+            </remarks>
+        </member>
+        <member name="M:NHibernate.Tasks.Hbm2DdlTask.ExecuteTask">
+            <summary>
+            Executes the task.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Tasks.Hbm2DdlTask.ConnectionProvider">
+            <summary>
+            Gets or sets the connection provider.  NHibernate.Connection.DriverConnectionProvider is the default
+            </summary>
+            <value>The connection provider.</value>
+        </member>
+        <member name="P:NHibernate.Tasks.Hbm2DdlTask.Dialect">
+            <summary>
+            Gets or sets the dialect.  NHibernate.Dialect.MsSql2000Dialect is the default
+            </summary>
+        </member>
+        <member name="P:NHibernate.Tasks.Hbm2DdlTask.ConnectionDriverClass">
+            <summary>
+            Gets or sets the connection driver class. NHibernate.Driver.SqlClientDriver is the default.
+            </summary>
+            <value>The connection driver class.</value>
+        </member>
+        <member name="P:NHibernate.Tasks.Hbm2DdlTask.ConnectionString">
+            <summary>
+            Gets or sets the connection string used to access the ddl.
+            </summary>
+            <value>The connection string.</value>
+        </member>
+        <member name="P:NHibernate.Tasks.Hbm2DdlTask.Delimiter">
+            <summary>
+            Gets or sets the delimiter.  GO is the default.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Tasks.Hbm2DdlTask.OutputToConsole">
+            <summary>
+            Gets or sets a value indicating whether the schema should be outputted to the console
+            </summary>
+            <value><see langword="true" /> to output to the console; otherwise, <see langword="false" />.</value>
+        </member>
+        <member name="P:NHibernate.Tasks.Hbm2DdlTask.ExportOnly">
+            <summary>
+            Gets or sets a value indicating whether the schema ddl script should only be exported
+            or if it should be executed on the database server.
+            </summary>
+            <value><see langword="true" /> if only output the script; otherwise, <see langword="false" /> - Execute the script on the db server.</value>
+        </member>
+        <member name="P:NHibernate.Tasks.Hbm2DdlTask.DropOnly">
+            <summary>
+            Gets or sets a value indicating whether only the drop script should be executed
+            </summary>
+            <value><see langword="true" /> if only drop objects; otherwise, <see langword="false" /> - Drop and Create objects.</value>
+        </member>
+        <member name="P:NHibernate.Tasks.Hbm2DdlTask.FormatNice">
+            <summary>
+            Gets or sets a value indicating whether the ddl script should be formatted nicely
+            </summary>
+            <value><see langword="true" /> for nice format; otherwise, <see langword="false" /> - One statement per line.</value>
+        </member>
+        <member name="P:NHibernate.Tasks.Hbm2DdlTask.OutputFilename">
+            <summary>
+            Gets or sets the filename to write the ddl schema script to.
+            </summary>
+            <value>The output filename.</value>
+        </member>
+        <member name="P:NHibernate.Tasks.Hbm2DdlTask.Assemblies">
+            <summary>
+            Gets or sets the assemblies load with embedded *.hbm.xml resources.
+            </summary>
+            <value>The assemblies.</value>
+        </member>
+    </members>
+</doc>

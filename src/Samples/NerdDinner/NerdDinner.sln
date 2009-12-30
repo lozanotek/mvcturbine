@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdDinner", "NerdDinner\NerdDinner.csproj", "{328C148C-DBEE-41A4-B1C7-104CBB216556}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1E6781E7-E597-41A7-884E-3A6865D73DB5}"
+	ProjectSection(SolutionItems) = preProject
+		CodeCoverage.testrunconfig = CodeCoverage.testrunconfig
+		NerdDinner.vsmdi = NerdDinner.vsmdi
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = NerdDinner.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{328C148C-DBEE-41A4-B1C7-104CBB216556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{328C148C-DBEE-41A4-B1C7-104CBB216556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{328C148C-DBEE-41A4-B1C7-104CBB216556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{328C148C-DBEE-41A4-B1C7-104CBB216556}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MvcTurbine</name>
+    </assembly>
+    <members>
+        <member name="T:MvcTurbine.ComponentModel.IComponentRegistration">
+            <summary>
+            Provides a simple way register components within your application.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IComponentRegistration.Register(MvcTurbine.ComponentModel.IServiceLocator)">
+            <summary>
+            Registers the components with the specified <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> instance.
+            </summary>
+            <param name="locator">Instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> to use.</param>
+        </member>
+        <member name="T:MvcTurbine.Routing.IRouteConfigurator">
+            <summary>
+            Provides a simple way to register routes within your application.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Routing.IRouteConfigurator.RegisterRoutes(System.Web.Routing.RouteCollection)">
+            <summary>
+            Registers routes within <see cref="T:System.Web.Routing.RouteCollection"/> for the application.
+            </summary>
+            <param name="routes">The <see cref="T:System.Web.Routing.RouteCollection"/> from the <see cref="P:System.Web.Routing.RouteTable.Routes"/>.</param>
+        </member>
+        <member name="T:MvcTurbine.Controllers.ServiceLocatorControllerFactory">
+            <summary>
+            Controller Factory class for instantiating controllers using the Windsor IoC container.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Controllers.ServiceLocatorControllerFactory.#ctor(MvcTurbine.ComponentModel.IServiceLocator)">
+            <summary>
+            Creates a new instance of the <see cref="T:MvcTurbine.Controllers.ServiceLocatorControllerFactory"/> class.
+            </summary>
+            <param name="serviceLocator">The <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> to use when 
+            creating controllers.</param>
+        </member>
+        <member name="M:MvcTurbine.Controllers.ServiceLocatorControllerFactory.GetControllerInstance(System.Type)">
+            <summary>
+            Provides the implementation of <see cref="T:System.Web.Mvc.IController"/> from the current
+            <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>.
+            </summary>
+            <param name="controllerType">Type of controller to search for.</param>
+            <returns>An instance of <see cref="T:System.Web.Mvc.IController"/> from the container.</returns>
+        </member>
+        <member name="M:MvcTurbine.Controllers.ServiceLocatorControllerFactory.ReleaseController(System.Web.Mvc.IController)">
+            <summary>
+            Releases the controller by giving it back to <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>.
+            </summary>
+            <param name="controller">Controller to dispose.</param>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.IServiceLocator">
+            <summary>
+            Provides a simple interface for resolving and registering components within
+            the application.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.TurbineApplication">
+            <summary>
+            Class that provides the simple IoC support for ASP.NET MVC.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.TurbineApplication.Application_Start">
+            <summary>
+            Sets up one-time only execution for the application.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.TurbineApplication.AutoComponentSetup(MvcTurbine.ComponentModel.IServiceLocator)">
+            <summary>
+            Sets up all the instances of <see cref="T:MvcTurbine.ComponentModel.IComponentRegistration"/>, <see cref="T:MvcTurbine.Routing.IRouteConfigurator"/>, 
+            <see cref="T:System.Web.Mvc.IController"/> that the application uses.
+            </summary>
+            <param name="locator">Instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> to use.</param>
+        </member>
+        <member name="M:MvcTurbine.TurbineApplication.AutoRegistration``1(MvcTurbine.ComponentModel.ServiceReg)">
+            <summary>
+            Registers the components of type <see cref="!:TComponent"/> within the specified
+            <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> instance.
+            </summary>
+            <typeparam name="TComponent">Type of component to register.</typeparam>
+        </member>
+        <member name="M:MvcTurbine.TurbineApplication.SetupControllerFactory(MvcTurbine.ComponentModel.IServiceLocator)">
+            <summary>
+            Sets the instance of <see cref="T:System.Web.Mvc.IControllerFactory"/> to use.  If one is not registered,
+            <see cref="T:MvcTurbine.Controllers.ServiceLocatorControllerFactory"/> is used.
+            </summary>
+            <param name="locator">Instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> to use.</param>
+        </member>
+        <member name="M:MvcTurbine.TurbineApplication.Init">
+            <summary>
+            Default initialization of the web application.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.TurbineApplication.InitializeModules(MvcTurbine.ComponentModel.IServiceLocator)">
+            <summary>
+            Initializes any <see cref="T:System.Web.IHttpModule"/> from the <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> instance.
+            </summary>
+            <param name="locator">Instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> to use.</param>
+        </member>
+        <member name="M:MvcTurbine.TurbineApplication.InitializeComponents(MvcTurbine.ComponentModel.IServiceLocator)">
+            <summary>
+            Initializes any components that the application will need to use.
+            </summary>
+            <param name="locator">Instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> to use.</param>
+        </member>
+        <member name="M:MvcTurbine.TurbineApplication.ProcessComponentRegistration(MvcTurbine.ComponentModel.IServiceLocator)">
+            <summary>
+            Iterates through all the registered <see cref="T:MvcTurbine.ComponentModel.IComponentRegistration"/> instances.
+            </summary>
+            <param name="locator">Instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> to use.</param>
+        </member>
+        <member name="M:MvcTurbine.TurbineApplication.ProcessRouteConfigurators(MvcTurbine.ComponentModel.IServiceLocator)">
+            <summary>
+            Iterates through all the registered <see cref="T:MvcTurbine.Routing.IRouteConfigurator"/> instances
+            and wires them up with <see cref="P:System.Web.Routing.RouteTable.Routes"/>.
+            </summary>
+            <param name="locator">Instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> to use.</param>        
+        </member>
+        <member name="M:MvcTurbine.TurbineApplication.GetServiceLocator">
+            <summary>
+            Gets the instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> that is registered with
+            <see cref="M:MvcTurbine.ComponentModel.ServiceLocatorManager.SetLocatorProvider(MvcTurbine.ComponentModel.ServiceLocatorProvider)"/>.
+            </summary>
+        </member>
+        <member name="P:MvcTurbine.TurbineApplication.ServiceLocator">
+            <summary>
+            Gets or sets the current implementation of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>
+            the application instance will use.
+            </summary>
+        </member>
+    </members>
+</doc>

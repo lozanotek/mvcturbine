@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine", "..\Engine\MvcTurbine\MvcTurbine.csproj", "{794C0A9F-60EB-4E25-93F2-5D4D59122529}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{5E4F068A-5834-4505-B1F1-A0C2F9A0476D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.EmbeddedViews", "MvcTurbine.EmbeddedViews\MvcTurbine.EmbeddedViews.csproj", "{89C29905-FA1D-46F2-B7C4-44BD6B5AD5B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{794C0A9F-60EB-4E25-93F2-5D4D59122529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{794C0A9F-60EB-4E25-93F2-5D4D59122529}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{794C0A9F-60EB-4E25-93F2-5D4D59122529}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{794C0A9F-60EB-4E25-93F2-5D4D59122529}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89C29905-FA1D-46F2-B7C4-44BD6B5AD5B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89C29905-FA1D-46F2-B7C4-44BD6B5AD5B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89C29905-FA1D-46F2-B7C4-44BD6B5AD5B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89C29905-FA1D-46F2-B7C4-44BD6B5AD5B5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{794C0A9F-60EB-4E25-93F2-5D4D59122529} = {5E4F068A-5834-4505-B1F1-A0C2F9A0476D}
+	EndGlobalSection
+EndGlobal

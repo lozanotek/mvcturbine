@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\DATA\Projects\nhibernate\1.2.x\NH-spare1\build\NHibernate-1.2.1.GA\bin\net-2.0\Nullables.Tests.dll" total="59" failures="0" not-run="1" date="2007-11-24" time="05:25:14">
+  <environment nunit-version="2.2.8.0" clr-version="2.0.50727.832" os-version="Microsoft Windows NT 5.1.2600 Service Pack 2" platform="Win32NT" cwd="C:\DATA\Projects\nhibernate\1.2.x\NH-spare1" machine-name="CORP-2B5TWB1" user="kchu" user-domain="LIFEMARK" />
+  <culture-info current-culture="en-CA" current-uiculture="en-US" />
+  <test-suite name="C:\DATA\Projects\nhibernate\1.2.x\NH-spare1\build\NHibernate-1.2.1.GA\bin\net-2.0\Nullables.Tests.dll" success="True" time="0.813" asserts="0">
+    <results>
+      <test-suite name="Nullables" success="True" time="0.813" asserts="0">
+        <results>
+          <test-suite name="Nullables.Tests" success="True" time="0.813" asserts="0">
+            <results>
+              <test-suite name="Nullables.Tests.NHibernate" success="True" time="0.719" asserts="0">
+                <results>
+                  <test-suite name="Nullables.Tests.NHibernate.NullablesFixture" success="True" time="0.703" asserts="0">
+                    <results>
+                      <test-case name="Nullables.Tests.NHibernate.NullablesFixture.CRUD" executed="False">
+                        <reason>
+                          <message><![CDATA[Error while setting up the database schema: Dialect does not support DbType.SByte
+Parameter name: typecode]]></message>
+                        </reason>
+                      </test-case>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+              <test-suite name="Nullables.Tests.NullableBooleanFixture" success="True" time="0.000" asserts="0">
+                <results>
+                  <test-case name="Nullables.Tests.NullableBooleanFixture.BooleanIComparableTest" executed="True" success="True" time="0.000" asserts="6" />
+                  <test-case name="Nullables.Tests.NullableBooleanFixture.BooleanMissingValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                  <test-case name="Nullables.Tests.NullableBooleanFixture.BasicParseTest" executed="True" success="True" time="0.000" asserts="5" />
+                  <test-case name="Nullables.Tests.NullableBooleanFixture.InvalidParseValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite name="Nullables.Tests.NullableByteFixture" success="True" time="0.016" asserts="0">
+                <results>
+                  <test-case name="Nullables.Tests.NullableByteFixture.BasicTestByte" executed="True" success="True" time="0.016" asserts="15" />
+                  <test-case name="Nullables.Tests.NullableByteFixture.ByteMissingValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                  <test-case name="Nullables.Tests.NullableByteFixture.ByteIComparableTest" executed="True" success="True" time="0.000" asserts="6" />
+                  <test-case name="Nullables.Tests.NullableByteFixture.BasicParseTest" executed="True" success="True" time="0.000" asserts="6" />
+                  <test-case name="Nullables.Tests.NullableByteFixture.InvalidParseValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite name="Nullables.Tests.NullableCharFixture" success="True" time="0.000" asserts="0">
+                <results>
+                  <test-case name="Nullables.Tests.NullableCharFixture.BasicTestChar" executed="True" success="True" time="0.000" asserts="15" />
+                  <test-case name="Nullables.Tests.NullableCharFixture.CharMissingValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                  <test-case name="Nullables.Tests.NullableCharFixture.CharIComparableTest" executed="True" success="True" time="0.000" asserts="6" />
+                  <test-case name="Nullables.Tests.NullableCharFixture.BasicParseTest" executed="True" success="True" time="0.000" asserts="5" />
+                  <test-case name="Nullables.Tests.NullableCharFixture.InvalidParseValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite name="Nullables.Tests.NullableDateTimeFixture" success="True" time="0.016" asserts="0">
+                <results>
+                  <test-case name="Nullables.Tests.NullableDateTimeFixture.BasicTestDateTime" executed="True" success="True" time="0.016" asserts="15" />
+                  <test-case name="Nullables.Tests.NullableDateTimeFixture.DateTimeMissingValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                  <test-case name="Nullables.Tests.NullableDateTimeFixture.DateTimeIComparableTest" executed="True" success="True" time="0.000" asserts="6" />
+                  <test-case name="Nullables.Tests.NullableDateTimeFixture.BasicParseTest" executed="True" success="True" time="0.000" asserts="6" />
+                  <test-case name="Nullables.Tests.NullableDateTimeFixture.InvalidParseValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite name="Nullables.Tests.NullableDecimalFixture" success="True" time="0.016" asserts="0">
+                <results>
+                  <test-case name="Nullables.Tests.NullableDecimalFixture.BasicTestDecimal" executed="True" success="True" time="0.000" asserts="15" />
+                  <test-case name="Nullables.Tests.NullableDecimalFixture.DecimalMissingValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                  <test-case name="Nullables.Tests.NullableDecimalFixture.DecimalIComparableTest" executed="True" success="True" time="0.000" asserts="6" />
+                  <test-case name="Nullables.Tests.NullableDecimalFixture.BasicParseTest" executed="True" success="True" time="0.016" asserts="6" />
+                  <test-case name="Nullables.Tests.NullableDecimalFixture.InvalidParseValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite name="Nullables.Tests.NullableDoubleFixture" success="True" time="0.000" asserts="0">
+                <results>
+                  <test-case name="Nullables.Tests.NullableDoubleFixture.BasicTestDouble" executed="True" success="True" time="0.000" asserts="15" />
+                  <test-case name="Nullables.Tests.NullableDoubleFixture.DoubleMissingValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                  <test-case name="Nullables.Tests.NullableDoubleFixture.DoubleIComparableTest" executed="True" success="True" time="0.000" asserts="6" />
+                  <test-case name="Nullables.Tests.NullableDoubleFixture.BasicParseTest" executed="True" success="True" time="0.000" asserts="6" />
+                  <test-case name="Nullables.Tests.NullableDoubleFixture.InvalidParseValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite name="Nullables.Tests.NullableGuidFixture" success="True" time="0.016" asserts="0">
+                <results>
+                  <test-case name="Nullables.Tests.NullableGuidFixture.BasicTestGuid" executed="True" success="True" time="0.000" asserts="15" />
+                  <test-case name="Nullables.Tests.NullableGuidFixture.StringCtorTest" executed="True" success="True" time="0.000" asserts="5" />
+                  <test-case name="Nullables.Tests.NullableGuidFixture.InvalidStringCtroTest" executed="True" success="True" time="0.016" asserts="0" />
+                  <test-case name="Nullables.Tests.NullableGuidFixture.GuidMissingValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                  <test-case name="Nullables.Tests.NullableGuidFixture.GuidIComparableTest" executed="True" success="True" time="0.000" asserts="6" />
+                </results>
+              </test-suite>
+              <test-suite name="Nullables.Tests.NullableInt16Fixture" success="True" time="0.000" asserts="0">
+                <results>
+                  <test-case name="Nullables.Tests.NullableInt16Fixture.BasicTestInt16" executed="True" success="True" time="0.000" asserts="15" />
+                  <test-case name="Nullables.Tests.NullableInt16Fixture.Int16MissingValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                  <test-case name="Nullables.Tests.NullableInt16Fixture.Int16IComparableTest" executed="True" success="True" time="0.000" asserts="6" />
+                  <test-case name="Nullables.Tests.NullableInt16Fixture.BasicParseTest" executed="True" success="True" time="0.000" asserts="6" />
+                  <test-case name="Nullables.Tests.NullableInt16Fixture.InvalidParseValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite name="Nullables.Tests.NullableInt32Fixture" success="True" time="0.016" asserts="0">
+                <results>
+                  <test-case name="Nullables.Tests.NullableInt32Fixture.BasicTestInt32" executed="True" success="True" time="0.000" asserts="16" />
+                  <test-case name="Nullables.Tests.NullableInt32Fixture.Int32MissingValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                  <test-case name="Nullables.Tests.NullableInt32Fixture.Int32IComparableTest" executed="True" success="True" time="0.016" asserts="6" />
+                  <test-case name="Nullables.Tests.NullableInt32Fixture.BasicParseTest" executed="True" success="True" time="0.000" asserts="6" />
+                  <test-case name="Nullables.Tests.NullableInt32Fixture.InvalidParseValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite name="Nullables.Tests.NullableInt64Fixture" success="True" time="0.000" asserts="0">
+                <results>
+                  <test-case name="Nullables.Tests.NullableInt64Fixture.BasicTestInt64" executed="True" success="True" time="0.000" asserts="15" />
+                  <test-case name="Nullables.Tests.NullableInt64Fixture.Int64MissingValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                  <test-case name="Nullables.Tests.NullableInt64Fixture.Int64IComparableTest" executed="True" success="True" time="0.000" asserts="6" />
+                  <test-case name="Nullables.Tests.NullableInt64Fixture.BasicParseTest" executed="True" success="True" time="0.000" asserts="6" />
+                  <test-case name="Nullables.Tests.NullableInt64Fixture.InvalidParseValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite name="Nullables.Tests.NullableSByteFixture" success="True" time="0.016" asserts="0">
+                <results>
+                  <test-case name="Nullables.Tests.NullableSByteFixture.BasicTestSByte" executed="True" success="True" time="0.000" asserts="15" />
+                  <test-case name="Nullables.Tests.NullableSByteFixture.SByteMissingValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                  <test-case name="Nullables.Tests.NullableSByteFixture.SByteIComparableTest" executed="True" success="True" time="0.016" asserts="6" />
+                  <test-case name="Nullables.Tests.NullableSByteFixture.BasicParseTest" executed="True" success="True" time="0.000" asserts="6" />
+                  <test-case name="Nullables.Tests.NullableSByteFixture.InvalidParseValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+              <test-suite name="Nullables.Tests.NullableSingleFixture" success="True" time="0.000" asserts="0">
+                <results>
+                  <test-case name="Nullables.Tests.NullableSingleFixture.BasicTestSingle" executed="True" success="True" time="0.000" asserts="15" />
+                  <test-case name="Nullables.Tests.NullableSingleFixture.SingleMissingValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                  <test-case name="Nullables.Tests.NullableSingleFixture.SingleIComparableTest" executed="True" success="True" time="0.000" asserts="6" />
+                  <test-case name="Nullables.Tests.NullableSingleFixture.BasicParseTest" executed="True" success="True" time="0.000" asserts="6" />
+                  <test-case name="Nullables.Tests.NullableSingleFixture.InvalidParseValueTest" executed="True" success="True" time="0.000" asserts="0" />
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

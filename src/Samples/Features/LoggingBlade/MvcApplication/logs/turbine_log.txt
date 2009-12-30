@@ -1,0 +1,4 @@
+DEBUG 8 MvcTurbine.Samples.LoggingBlade.Log4netBlade - In the HomeController.Index method!
+DEBUG 8 MvcTurbine.Samples.LoggingBlade.Log4netBlade - The welcome message is 'Welcome to ASP.NET MVC!'
+DEBUG 8 MvcTurbine.Samples.LoggingBlade.Log4netBlade - In the HomeController.About method!
+DEBUG 8 MvcTurbine.Samples.LoggingBlade.Log4netBlade - The about message is 'About ASP.NET MVC...'
