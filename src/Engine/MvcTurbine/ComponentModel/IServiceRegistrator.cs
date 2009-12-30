@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 
 //
 // Author: Javier Lozano <javier@lozanotek.com>
@@ -21,50 +21,16 @@
 
 namespace MvcTurbine.ComponentModel {
     using System;
-    using System.Collections.Generic;
 
     /// <summary>
-    /// Provides a simple interface for resolving and registering components within
-    /// the application.
+    /// Process registration as a queued batch.
     /// </summary>
-    public interface IServiceLocator : IDisposable {
+    public interface IServiceRegistrator : IDisposable {
         /// <summary>
-        /// Creates a <see cref="IServiceRegistrator"/> to process queued
-        /// registration of types.
+        /// Registers all the services of type <typeparamref name="Interface"/> into the container.
         /// </summary>
-        /// <returns></returns>
-        IServiceRegistrator Batch();
-
-        /// <summary>
-        /// Resolves the service of the specified type.
-        /// </summary>
-        /// <typeparam name="T">Type of service to resolve.</typeparam>
-        /// <returns>An instance of the type, null otherwise.</returns>
-        T Resolve<T>() where T : class;
-
-        /// <summary>
-        /// Resolves the service of the specified type by the given string key.
-        /// </summary>
-        /// <typeparam name="T">Type of service to resolve.</typeparam>
-        /// <param name="key">Unique key to distinguish the service.</param>
-        /// <returns>An instance of the type, null otherwise.</returns>
-        T Resolve<T>(string key) where T : class;
-
-        /// <summary>
-        /// Resolves the service of the specified type by the given type key.
-        /// </summary>
-        /// <typeparam name="T">Type of service to resolve.</typeparam>
-        /// <param name="type">Key type of the service.</param>
-        /// <returns>An instance of the type, null otherwise.</returns>
-        T Resolve<T>(Type type) where T : class;
-
-        /// <summary>
-        /// Resolves the list of services of type <see cref="T"/> that are registered 
-        /// within the locator.
-        /// </summary>
-        /// <typeparam name="T">Type of the service to resolve.</typeparam>
-        /// <returns>A list of service of type <see cref="T"/>, null otherwise.</returns>
-        IList<T> ResolveServices<T>() where T : class;
+        /// <typeparam name="Interface"></typeparam>
+        void RegisterAll<Interface>();
 
         /// <summary>
         /// Registers the implemation type, <paramref name="implType"/>, with the locator under
@@ -109,16 +75,5 @@ namespace MvcTurbine.ComponentModel {
         /// <param name="serviceType">Type of the service to register.</param>
         /// <param name="implType">Implementation to associate with the service.</param>
         void Register(Type serviceType, Type implType);
-
-        /// <summary>
-        /// Releases (disposes) the service instance from within the locator.
-        /// </summary>
-        /// <param name="instance">Instance of a service to dipose from the locator.</param>
-        void Release(object instance);
-
-        /// <summary>
-        /// Resets the locator to its initial state clearing all registrations.
-        /// </summary>
-        void Reset();
     }
 }

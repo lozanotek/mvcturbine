@@ -62,10 +62,10 @@ namespace MvcTurbine.Unity {
         #region IServiceLocator Members
 
         /// <summary>
-        /// Gets the associated <see cref="IBatchRegistration"/> to process.
+        /// Gets the associated <see cref="IServiceRegistrator"/> to process.
         /// </summary>
         /// <returns></returns>
-        public IBatchRegistration Batch() {
+        public IServiceRegistrator Batch() {
             return new RegistrationStub();
         }
 
@@ -214,8 +214,32 @@ namespace MvcTurbine.Unity {
     /// <summary>
     /// This class is for stubbing purposes only.
     /// </summary>
-    internal sealed class RegistrationStub : IBatchRegistration {
+    internal sealed class RegistrationStub : IServiceRegistrator {
         public void Dispose() {
+        }
+
+        public void RegisterAll<Interface>() {
+            throw new NotImplementedException();
+        }
+
+        public void Register<Interface>(Type implType) where Interface : class {
+            throw new NotImplementedException();
+        }
+
+        public void Register<Interface, Implementation>() where Implementation : class, Interface {
+            throw new NotImplementedException();
+        }
+
+        public void Register<Interface, Implementation>(string key) where Implementation : class, Interface {
+            throw new NotImplementedException();
+        }
+
+        public void Register(string key, Type type) {
+            throw new NotImplementedException();
+        }
+
+        public void Register(Type serviceType, Type implType) {
+            throw new NotImplementedException();
         }
     }
 }

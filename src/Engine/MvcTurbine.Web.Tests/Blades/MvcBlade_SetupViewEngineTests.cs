@@ -24,7 +24,7 @@
 
             Assert.IsNotNull(viewEngines);
             Assert.IsNotEmpty(viewEngines);
-            Assert.AreEqual(viewEngines.Count, 3);
+            Assert.AreEqual(viewEngines.Count, 1);
         }
 
         [Test]
@@ -48,7 +48,7 @@
 
             Assert.IsNotNull(viewEngines);
             Assert.IsNotEmpty(viewEngines);
-            Assert.AreEqual(viewEngines.Count, 3);
+            Assert.AreEqual(viewEngines.Count, 1);
         }
 
         [Test]
@@ -72,7 +72,7 @@
 
             Assert.IsNotNull(viewEngines);
             Assert.IsNotEmpty(viewEngines);
-            Assert.AreEqual(viewEngines.Count, 3);
+            Assert.AreEqual(viewEngines.Count, 1);
         }
 
         [Test]

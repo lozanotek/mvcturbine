@@ -33,7 +33,7 @@ namespace MvcTurbine.Ninject {
     /// To learn more about Ninject, please visit its website: http://ninject.org
     /// </remarks>
     [Serializable]
-    public class NinjectServiceLocator : IServiceLocator, IBatchRegistration {
+    public class NinjectServiceLocator : IServiceLocator {
         private TurbineModule currentModule;
 
         /// <summary>
@@ -63,10 +63,10 @@ namespace MvcTurbine.Ninject {
         #region Implementation of IServiceLocator
 
         /// <summary>
-        /// Gets the associated <see cref="IBatchRegistration"/> to process.
+        /// Gets the associated <see cref="IServiceRegistrator"/> to process.
         /// </summary>
         /// <returns></returns>
-        public IBatchRegistration Batch() {
+        public IServiceRegistrator Batch() {
             currentModule = new TurbineModule(Container);
             return currentModule;
         }
@@ -122,6 +122,10 @@ namespace MvcTurbine.Ninject {
         /// <returns>A list of service of type <see cref="T"/>, null otherwise.</returns>
         public IList<T> ResolveServices<T>() where T : class {
             return Container.GetAll<T>().ToList();
+        }
+
+        public void RegisterAll<Interface>() {
+            throw new NotImplementedException();
         }
 
         /// <summary>

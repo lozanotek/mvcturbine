@@ -57,7 +57,7 @@ namespace MvcTurbine.StructureMap {
 
         #region IServiceLocator Members
 
-        public IBatchRegistration Batch() {
+        public IServiceRegistrator Batch() {
             currentRegistry = new TurbineRegistry(Container);
             return currentRegistry;
         }

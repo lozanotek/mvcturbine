@@ -29,7 +29,7 @@ namespace MvcTurbine.Windsor {
     /// Implemenation of <see cref="IServiceLocator"/> using <see cref="IWindsorContainer"/> as the default container.
     /// </summary>
     [Serializable]
-    public class WindsorServiceLocator : IServiceLocator, IBatchRegistration {
+    public class WindsorServiceLocator : IServiceLocator {
         private TurbineRegistrationList registrationList;
 
         /// <summary>
@@ -52,10 +52,10 @@ namespace MvcTurbine.Windsor {
         public IWindsorContainer Container { get; private set; }
 
         /// <summary>
-        /// Gets the associated <see cref="IBatchRegistration"/> to process.
+        /// Gets the associated <see cref="IServiceRegistrator"/> to process.
         /// </summary>
         /// <returns></returns>
-        public IBatchRegistration Batch() {
+        public IServiceRegistrator Batch() {
             registrationList = new TurbineRegistrationList(Container);
             return registrationList;
         }

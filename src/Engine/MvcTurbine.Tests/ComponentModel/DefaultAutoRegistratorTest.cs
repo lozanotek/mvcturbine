@@ -81,6 +81,10 @@
             throw new NotImplementedException();
         }
 
+        public IServiceRegistrator Batch() {
+            throw new NotImplementedException();
+        }
+
         public T Resolve<T>() where T : class {
             throw new NotImplementedException();
         }

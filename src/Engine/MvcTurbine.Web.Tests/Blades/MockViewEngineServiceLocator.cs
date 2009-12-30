@@ -13,6 +13,10 @@ namespace MvcTurbine.Web.Tests.Blades {
         public void Dispose() {
         }
 
+        public IServiceRegistrator Batch() {
+            throw new NotImplementedException();
+        }
+
         public T Resolve<T>() where T : class {
             throw new NotImplementedException();
         }

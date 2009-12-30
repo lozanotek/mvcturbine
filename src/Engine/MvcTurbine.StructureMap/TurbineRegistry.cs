@@ -28,7 +28,7 @@ namespace MvcTurbine.StructureMap {
     /// <summary>
     /// Internal registry for Turbine to use
     /// </summary>
-    public class TurbineRegistry : Registry, IBatchRegistration {
+    public class TurbineRegistry : Registry, IServiceRegistrator {
 
         /// <summary>
         /// Default constructor.
@@ -42,6 +42,14 @@ namespace MvcTurbine.StructureMap {
         /// Gets the associated <see cref="IContainer"/> with this registry.
         /// </summary>
         public IContainer Container { get; private set; }
+
+        /// <summary>
+        /// Registers all the services of type <typeparamref name="Interface"/> into the container.
+        /// </summary>
+        /// <typeparam name="Interface"></typeparam>
+        public void RegisterAll<Interface>() {
+            Scan(scanner => scanner.AddAllTypesOf<Interface>());
+        }
 
         /// <summary>
         /// Registers the specified <paramref name="implType"/> for the <typeparamref name="Interface"/> contract.

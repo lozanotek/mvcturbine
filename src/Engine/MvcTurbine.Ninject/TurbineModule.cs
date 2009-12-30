@@ -29,7 +29,7 @@ namespace MvcTurbine.Ninject {
     /// Defines a module that can be used for registering components
     /// across the application.
     /// </summary>
-    public class TurbineModule : NinjectModule, IBatchRegistration {
+    public class TurbineModule : NinjectModule, IServiceRegistrator {
 
         private Guid moduleId;
 
@@ -61,6 +61,14 @@ namespace MvcTurbine.Ninject {
             get {
                 return moduleId.ToString();
             }
+        }
+
+        /// <summary>
+        /// Registers all the services of type <typeparamref name="Interface"/> into the container.
+        /// </summary>
+        /// <typeparam name="Interface"></typeparam>
+        public void RegisterAll<Interface>() {
+            RegisterAll<Interface>();
         }
 
         /// <summary>

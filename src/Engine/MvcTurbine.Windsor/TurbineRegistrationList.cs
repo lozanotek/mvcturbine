@@ -30,7 +30,7 @@ namespace MvcTurbine.Windsor {
     /// <summary>
     /// Defines the list of registrations to process
     /// </summary>
-    public class TurbineRegistrationList : IBatchRegistration {
+    public class TurbineRegistrationList : IServiceRegistrator {
         private readonly IList<IRegistration> registrationList;
         
         /// <summary>
@@ -45,6 +45,15 @@ namespace MvcTurbine.Windsor {
         /// Sets the associated <see cref="IWindsorContainer"/> instance.
         ///</summary>
         public IWindsorContainer Container { get; private set; }
+
+        /// <summary>
+        /// Registers all the services of type <typeparamref name="Interface"/> into the container.
+        /// </summary>
+        /// <typeparam name="Interface"></typeparam>
+        public void RegisterAll<Interface>() {
+            //TODO: see if this works
+            AllTypes.Of<Interface>();
+        }
 
         /// <summary>
         /// See <see cref="IServiceLocator.Register{Interface}<>"/>.
