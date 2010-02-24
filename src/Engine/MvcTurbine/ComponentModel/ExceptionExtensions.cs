@@ -34,20 +34,15 @@ namespace MvcTurbine.ComponentModel {
         /// <returns></returns>
         public static string GetDetailedMessage(this ReflectionTypeLoadException exception, string assemblyName) {
             var buffer = new StringBuilder();
-            buffer.AppendFormat("Could not load dependencies for assembly '{0}'", assemblyName);
+            buffer.AppendFormat("MVC Turbine could not find & load the dependencies for assembly '{0}'", assemblyName);
             buffer.AppendLine();
-            buffer.AppendLine("Type Loader Exception");
-            buffer.AppendLine("---------------------");
             buffer.AppendLine();
-            buffer.AppendLine(exception.Message);
-            buffer.AppendLine("---------------------");
-            buffer.AppendLine();
-
+            
             Exception[] exceptions = exception.LoaderExceptions;
 
             if (exceptions != null && exceptions.Length > 0) {
-                buffer.AppendLine("Exceptions: ");
-                buffer.AppendLine("---------------------");
+                buffer.AppendLine("Dependencies that failed to load: ");
+                buffer.AppendLine("-----------------------------------");
                 buffer.AppendLine();
 
                 var messages = new Dictionary<string, string>();
@@ -59,11 +54,8 @@ namespace MvcTurbine.ComponentModel {
 
                 foreach (var message in messages) {
                     buffer.AppendLine(message.Key);
-                    buffer.AppendLine("---------------------");
-
-                    buffer.AppendLine("Stack Trace: ");
-                    buffer.AppendLine("---------------------");
-                    buffer.AppendLine(message.Value);
+                    buffer.AppendLine();
+                    buffer.AppendLine("-----------------------------------");
                     buffer.AppendLine();
                 }
             }
