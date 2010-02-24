@@ -33,8 +33,6 @@ namespace MvcTurbine.Web {
         private static IRotorContext rotorContext;
         private static IServiceLocator serviceLocator;
 
-        #region ITurbineApplication Members
-
         /// <summary>
         /// Gets or sets the current implementation of <see cref="IServiceLocator"/>
         /// the application instance will use.
@@ -71,8 +69,6 @@ namespace MvcTurbine.Web {
         /// </summary>
         public virtual void Shutdown() {
         }
-
-        #endregion
 
         /// <summary>
         /// Sets up one-time only execution for the application.

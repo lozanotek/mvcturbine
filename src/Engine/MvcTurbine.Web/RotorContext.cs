@@ -43,8 +43,6 @@ namespace MvcTurbine.Web {
             Application = application;
         }
 
-        #region IRotorContext Members
-
         /// <summary>
         /// Gets or sets the current implementation of <see cref="IServiceLocator"/>.
         /// </summary>
@@ -118,8 +116,6 @@ namespace MvcTurbine.Web {
 
             return list;
         }
-
-        #endregion
 
         /// <summary>
         /// Loads the assemblies from the <see cref="HttpRuntime.BinDirectory"/> into the 

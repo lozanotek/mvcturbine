@@ -55,9 +55,7 @@ namespace MvcTurbine.StructureMap {
         /// </summary>
         public IContainer Container { private set; get; }
 
-        #region IServiceLocator Members
-
-        public IServiceRegistrator Batch() {
+        public IServiceRegistrar Batch() {
             currentRegistry = new TurbineRegistry(Container);
             return currentRegistry;
         }
@@ -181,6 +179,16 @@ namespace MvcTurbine.StructureMap {
         public void Reset() {
         }
 
+        public TService Inject<TService>(TService instance) where TService : class {
+            Container.Inject(instance);
+            
+            return instance;
+        }
+
+        [Obsolete("Not used for any real purposes.")]
+        public void TearDown<TService>(TService instance) where TService : class {
+        }
+
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
@@ -192,7 +200,5 @@ namespace MvcTurbine.StructureMap {
             if (disposable == null) return;
             disposable.Dispose();
         }
-
-        #endregion
     }
 }

@@ -28,16 +28,13 @@ namespace MvcTurbine.Blades {
     /// </summary>
     [Serializable]
     public abstract class Blade : IBlade {
-        #region IDisposable Members
-
+        
         /// <summary>
         /// Cleans up the current component.
         /// </summary>
         public virtual void Dispose() {
             InvokeDisposed(EventArgs.Empty);
         }
-
-        #endregion
 
         /// <summary>
         /// Informs registrants of the initialization of the component.

@@ -31,14 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MvcTurbine, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0e426322531bc5b0, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\MvcTurbine\MvcTurbine.dll</HintPath>
-    </Reference>
-    <Reference Include="MvcTurbine.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0e426322531bc5b0, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\MvcTurbine\MvcTurbine.Web.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core">
@@ -49,15 +41,10 @@
       <HintPath>..\lib\Sqlite\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
-    <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default.aspx.cs">
@@ -67,42 +54,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Antlr3.Runtime.dll" />
-    <Content Include="bin\AutoMapper.dll" />
-    <Content Include="bin\Castle.Core.dll" />
-    <Content Include="bin\Castle.Core.xml" />
-    <Content Include="bin\Castle.DynamicProxy2.dll" />
-    <Content Include="bin\Castle.DynamicProxy2.xml" />
-    <Content Include="bin\Castle.MicroKernel.dll" />
-    <Content Include="bin\Castle.MicroKernel.xml" />
-    <Content Include="bin\Castle.Windsor.dll" />
-    <Content Include="bin\Castle.Windsor.xml" />
-    <Content Include="bin\FluentNHibernate.dll" />
-    <Content Include="bin\Iesi.Collections.dll" />
-    <Content Include="bin\Iesi.Collections.xml" />
-    <Content Include="bin\log4net.dll" />
-    <Content Include="bin\log4net.xml" />
-    <Content Include="bin\MvcTurbine.dll" />
-    <Content Include="bin\MvcTurbine.Web.dll" />
-    <Content Include="bin\MvcTurbine.Web.xml" />
-    <Content Include="bin\MvcTurbine.Windsor.dll" />
-    <Content Include="bin\MvcTurbine.Windsor.xml" />
-    <Content Include="bin\MvcTurbine.xml" />
-    <Content Include="bin\NHibernate.ByteCode.Castle.dll" />
-    <Content Include="bin\NHibernate.ByteCode.Castle.xml" />
-    <Content Include="bin\NHibernate.dll" />
-    <Content Include="bin\NHibernate.Linq.dll" />
-    <Content Include="bin\NHibernate.xml" />
-    <Content Include="bin\Okonau.Domain.dll" />
-    <Content Include="bin\Okonau.Domain.pdb" />
-    <Content Include="bin\Okonau.Mvc.dll" />
-    <Content Include="bin\Okonau.Mvc.pdb" />
-    <Content Include="bin\Okonau.Persistence.dll" />
-    <Content Include="bin\Okonau.Persistence.pdb" />
-    <Content Include="bin\Okonau.Web.dll" />
-    <Content Include="bin\Okonau.Web.pdb" />
-    <Content Include="bin\System.Data.SQLite.DLL" />
-    <Content Include="bin\System.Data.SQLite.xml" />
     <Content Include="Content\images\okonau.jpg" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -120,6 +71,14 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Engine\MvcTurbine.Web\MvcTurbine.Web.csproj">
+      <Project>{A2634ACF-E549-4861-A36D-A6BEA773BFDB}</Project>
+      <Name>MvcTurbine.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Engine\MvcTurbine\MvcTurbine.csproj">
+      <Project>{794C0A9F-60EB-4E25-93F2-5D4D59122529}</Project>
+      <Name>MvcTurbine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mvc\Mvc.csproj">
       <Project>{3059DCCD-AFEC-490E-BDF3-E08DBA238924}</Project>
       <Name>Mvc</Name>

@@ -21,6 +21,7 @@
 
 namespace MvcTurbine.ComponentModel {
     using System;
+    using System.Linq.Expressions;
 
     /// <summary>
     /// Helper methods for filtering types within the framework.

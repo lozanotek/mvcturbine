@@ -59,13 +59,11 @@ namespace MvcTurbine.Unity {
         /// </summary>
         public IUnityContainer Container { private set; get; }
 
-        #region IServiceLocator Members
-
         /// <summary>
-        /// Gets the associated <see cref="IServiceRegistrator"/> to process.
+        /// Gets the associated <see cref="IServiceRegistrar"/> to process.
         /// </summary>
         /// <returns></returns>
-        public IServiceRegistrator Batch() {
+        public IServiceRegistrar Batch() {
             return new RegistrationStub();
         }
 
@@ -197,6 +195,14 @@ namespace MvcTurbine.Unity {
             Dispose();
         }
 
+        public TService Inject<TService>(TService instance) where TService : class {
+            return Container.BuildUp(instance);
+        }
+
+        public void TearDown<TService>(TService instance) where TService : class {
+            Container.Teardown(instance);
+        }
+
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
@@ -207,14 +213,12 @@ namespace MvcTurbine.Unity {
             Container.Dispose();
             Container = null;
         }
-
-        #endregion
     }
 
     /// <summary>
     /// This class is for stubbing purposes only.
     /// </summary>
-    internal sealed class RegistrationStub : IServiceRegistrator {
+    internal sealed class RegistrationStub : IServiceRegistrar {
         public void Dispose() {
         }
 

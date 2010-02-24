@@ -31,8 +31,7 @@ namespace MvcTurbine.Web.Blades {
     /// Default <see cref="IBlade"/> that supports all ASP.NET MVC components.
     /// </summary>
     public class MvcBlade : Blade, ISupportAutoRegistration {
-        #region ISupportAutoRegistration Members
-
+        
         /// <summary>
         /// Provides the auto-registration of MVC related components (controllers, view engines, filters, etc).
         /// </summary>
@@ -47,8 +46,6 @@ namespace MvcTurbine.Web.Blades {
                 .Add(MvcRegistration.RegisterFilter<IExceptionFilter>())
                 .Add(MvcRegistration.RegisterBinder());
         }
-
-        #endregion
 
         /// <summary>
         /// Executes the setup of controller factories, view engines and model binders.

@@ -61,11 +61,11 @@
     <Compile Include="ComponentModel\AssemblyFilter.cs" />
     <Compile Include="ComponentModel\AutoRegistrationList.cs" />
     <Compile Include="ComponentModel\CommonAssemblyFilter.cs" />
-    <Compile Include="ComponentModel\CompositionContext.cs" />
     <Compile Include="ComponentModel\DefaultAutoRegistrator.cs" />
     <Compile Include="ComponentModel\DefaultBinAssemblyLoader.cs" />
     <Compile Include="ComponentModel\DependencyResolutionException.cs" />
-    <Compile Include="ComponentModel\IServiceRegistrator.cs" />
+    <Compile Include="ComponentModel\ExceptionExtensions.cs" />
+    <Compile Include="ComponentModel\IServiceRegistrar.cs" />
     <Compile Include="ComponentModel\IBinAssemblyLoader.cs" />
     <Compile Include="ComponentModel\IAutoRegistrator.cs" />
     <Compile Include="ComponentModel\IServiceRegistration.cs" />

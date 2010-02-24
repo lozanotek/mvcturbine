@@ -64,6 +64,7 @@
     <Compile Include="Blades\CoreBlades.cs" />
     <Compile Include="Blades\MvcBlade.cs" />
     <Compile Include="Blades\RoutingBlade.cs" />
+    <Compile Include="Controllers\ControllerExtensions.cs" />
     <Compile Include="Controllers\DefaultFilterFinder.cs" />
     <Compile Include="Controllers\IFilterFinder.cs" />
     <Compile Include="Controllers\InferredActionDescriptor.cs" />

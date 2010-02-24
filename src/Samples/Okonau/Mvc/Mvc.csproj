@@ -35,18 +35,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\AutoMapper\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="MvcTurbine, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0e426322531bc5b0, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\MvcTurbine\MvcTurbine.dll</HintPath>
-    </Reference>
-    <Reference Include="MvcTurbine.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0e426322531bc5b0, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\MvcTurbine\MvcTurbine.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="MvcTurbine.Windsor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0e426322531bc5b0, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\MvcTurbine\Windsor\MvcTurbine.Windsor.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -78,6 +66,18 @@
     <Compile Include="ViewModels\TaskViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Engine\MvcTurbine.Web\MvcTurbine.Web.csproj">
+      <Project>{A2634ACF-E549-4861-A36D-A6BEA773BFDB}</Project>
+      <Name>MvcTurbine.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Engine\MvcTurbine.Windsor\MvcTurbine.Windsor.csproj">
+      <Project>{B253145D-A629-4A11-9F24-7FE91FBD05AE}</Project>
+      <Name>MvcTurbine.Windsor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Engine\MvcTurbine\MvcTurbine.csproj">
+      <Project>{794C0A9F-60EB-4E25-93F2-5D4D59122529}</Project>
+      <Name>MvcTurbine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{6A13BB38-C687-49E3-A23C-6CABD3FCBF79}</Project>
       <Name>Domain</Name>

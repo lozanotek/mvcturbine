@@ -30,8 +30,7 @@ namespace MvcTurbine.ComponentModel {
     /// Default implementation of the <see cref="IBinAssemblyLoader"/>.
     /// </summary>
     public class DefaultBinAssemblyLoader : IBinAssemblyLoader {
-        #region IBinAssemblyLoader Members
-
+        
         /// <summary>
         /// Loads the assemblies in the bin folder that are not currently in the <see cref="AppDomain.CurrentDomain"/>.
         /// </summary>
@@ -56,8 +55,6 @@ namespace MvcTurbine.ComponentModel {
 
             return loadedAssembly;
         }
-
-        #endregion
 
         /// <summary>
         /// Gets the assemblies that are currently in the <see cref="AppDomain.CurrentDomain"/>

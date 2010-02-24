@@ -29,7 +29,7 @@ namespace MvcTurbine.Ninject {
     /// Defines a module that can be used for registering components
     /// across the application.
     /// </summary>
-    public class TurbineModule : NinjectModule, IServiceRegistrator {
+    public class TurbineModule : NinjectModule, IServiceRegistrar {
 
         private Guid moduleId;
 

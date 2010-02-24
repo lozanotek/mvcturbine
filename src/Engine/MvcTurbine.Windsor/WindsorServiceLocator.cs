@@ -22,6 +22,8 @@
 namespace MvcTurbine.Windsor {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using Castle.MicroKernel.Resolvers.SpecializedResolvers;
     using Castle.Windsor;
     using ComponentModel;
 
@@ -35,8 +37,20 @@ namespace MvcTurbine.Windsor {
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public WindsorServiceLocator()
-            : this(new WindsorContainer()) {
+        public WindsorServiceLocator() : this(CreateContainer()) {
+        }
+
+        /// <summary>
+        /// Creates an <see cref="IWindsorContainer"/> instance with the right resolvers associated to it.
+        /// </summary>
+        /// <returns></returns>
+        private static IWindsorContainer CreateContainer() {
+            IWindsorContainer container = new WindsorContainer();
+            var kernel = container.Kernel;
+            kernel.Resolver.AddSubResolver(new ArrayResolver(kernel));
+            kernel.Resolver.AddSubResolver(new ListResolver(kernel));
+
+            return container;
         }
 
         /// <summary>
@@ -52,10 +66,10 @@ namespace MvcTurbine.Windsor {
         public IWindsorContainer Container { get; private set; }
 
         /// <summary>
-        /// Gets the associated <see cref="IServiceRegistrator"/> to process.
+        /// Gets the associated <see cref="IServiceRegistrar"/> to process.
         /// </summary>
         /// <returns></returns>
-        public IServiceRegistrator Batch() {
+        public IServiceRegistrar Batch() {
             registrationList = new TurbineRegistrationList(Container);
             return registrationList;
         }
@@ -178,6 +192,27 @@ namespace MvcTurbine.Windsor {
             Container.Dispose();
             Container = null;
             registrationList = null;
+        }
+
+        public TService Inject<TService>(TService instance) where TService : class {
+            if (instance == null) return null;
+
+            Type instanceType = instance.GetType();
+            instanceType.GetProperties()
+                .Where(property => property.CanWrite && Container.Kernel.HasComponent(property.PropertyType))
+                .ForEach(property => property.SetValue(instance, Container.Resolve(property.PropertyType), null));
+
+            return instance;
+        }
+
+        public void TearDown<TService>(TService instance) where TService : class {
+            if (instance == null) return;
+
+            Type instanceType = instance.GetType();
+
+            instanceType.GetProperties()
+                .Where(property => Container.Kernel.HasComponent(property.PropertyType))
+                .ForEach(property => Container.Release(property.GetValue(instance, null)));
         }
 
         /// <summary>

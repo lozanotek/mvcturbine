@@ -28,6 +28,9 @@ namespace MvcTurbine.Web.Controllers {
     /// Controller Factory class for instantiating controllers using the Windsor IoC container.
     /// </summary>
     public class TurbineControllerFactory : DefaultControllerFactory {
+        private static IActionInvoker actionInvoker;
+        private static readonly object _lock = new object();
+
         /// <summary>
         /// Creates a new instance of the <see cref="TurbineControllerFactory"/> class.
         /// </summary>
@@ -60,7 +63,7 @@ namespace MvcTurbine.Web.Controllers {
 
             // If you inherit from controller, implement this fine work around
             if (controller != null) {
-                controller.ActionInvoker = new TurbineActionInvoker(ServiceLocator);
+                controller.ActionInvoker = GetActionInvoker();
             }
 
             return controller;
@@ -78,6 +81,26 @@ namespace MvcTurbine.Web.Controllers {
             }
 
             ServiceLocator.Release(controller);
+        }
+
+        /// <summary>
+        /// Gets the registered <see cref="IActionInvoker"/> within the system.
+        /// </summary>
+        /// <returns></returns>
+        protected virtual IActionInvoker GetActionInvoker() {
+            if (actionInvoker == null) {
+                lock (_lock) {
+                    if (actionInvoker == null) {
+                        try {
+                            actionInvoker = ServiceLocator.Resolve<IActionInvoker>();
+                        } catch (ServiceResolutionException) {
+                            actionInvoker = new TurbineActionInvoker(ServiceLocator);
+                        }
+                    }
+                }
+            }
+
+            return actionInvoker;
         }
     }
 }

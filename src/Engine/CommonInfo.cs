@@ -4,7 +4,7 @@ using System.Security.Permissions;
 
 [assembly: AssemblyCompany("lozanotek")]
 [assembly: AssemblyProduct("MvcTurbine")]
-[assembly: AssemblyCopyright("Copyright © lozanotek, inc. 2009")]
+[assembly: AssemblyCopyright("Copyright © lozanotek, inc. 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]

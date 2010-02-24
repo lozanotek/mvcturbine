@@ -48,7 +48,7 @@ namespace Okonau.Persistence {
         /// See <see cref="IOkonauPersistence.CurrentDatabaseResolver"/>.
         /// </summary>
         public IDatabaseResolver CurrentDatabaseResolver { get; private set; }
-        
+
         /// <summary>
         /// Create the <see cref="Configuration"/> to use for the database.
         /// </summary>

@@ -37,6 +37,8 @@ namespace MvcTurbine.ComponentModel {
     /// </summary>
     public static class ServiceLocatorManager {
         private static ServiceLocatorProvider currentProvider;
+        private static IServiceLocator serviceLocator;
+        private static readonly object _lock = new object();
 
         /// <summary>
         /// Sets the current instance of <see cref="IServiceLocator"/> by using the specified
@@ -58,7 +60,17 @@ namespace MvcTurbine.ComponentModel {
                     throw new InvalidOperationException(Properties.Resources.ServiceLocatorProviderExceptionMessage);
                 }
 
-                return currentProvider();
+                if (serviceLocator == null) {
+                    lock (_lock) {
+                        if (serviceLocator == null) {
+                            lock (_lock) {
+                                serviceLocator = currentProvider();
+                            }
+                        }
+                    }
+                }
+
+                return serviceLocator;
             }
         }
     }

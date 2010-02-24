@@ -28,7 +28,7 @@ namespace MvcTurbine.StructureMap {
     /// <summary>
     /// Internal registry for Turbine to use
     /// </summary>
-    public class TurbineRegistry : Registry, IServiceRegistrator {
+    public class TurbineRegistry : Registry, IServiceRegistrar {
 
         /// <summary>
         /// Default constructor.

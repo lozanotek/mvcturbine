@@ -60,13 +60,11 @@ namespace MvcTurbine.Ninject {
         /// </summary>
         public IKernel Container { get; private set; }
 
-        #region Implementation of IServiceLocator
-
         /// <summary>
-        /// Gets the associated <see cref="IServiceRegistrator"/> to process.
+        /// Gets the associated <see cref="IServiceRegistrar"/> to process.
         /// </summary>
         /// <returns></returns>
-        public IServiceRegistrator Batch() {
+        public IServiceRegistrar Batch() {
             currentModule = new TurbineModule(Container);
             return currentModule;
         }
@@ -122,10 +120,6 @@ namespace MvcTurbine.Ninject {
         /// <returns>A list of service of type <see cref="T"/>, null otherwise.</returns>
         public IList<T> ResolveServices<T>() where T : class {
             return Container.GetAll<T>().ToList();
-        }
-
-        public void RegisterAll<Interface>() {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -204,6 +198,15 @@ namespace MvcTurbine.Ninject {
             currentModule = null;
         }
 
+        public TService Inject<TService>(TService instance) where TService : class {
+            Container.Inject(instance);
+            return instance;
+        }
+
+        [Obsolete("Not used with this implementation of IServiceLocator.")]
+        public void TearDown<TService>(TService instance) where TService : class {
+        }
+
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
@@ -211,7 +214,5 @@ namespace MvcTurbine.Ninject {
         public void Dispose() {
             Reset();
         }
-
-        #endregion
     }
 }

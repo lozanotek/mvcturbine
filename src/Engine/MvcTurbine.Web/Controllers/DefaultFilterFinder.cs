@@ -43,8 +43,6 @@ namespace MvcTurbine.Web.Controllers {
         /// </summary>
         public IServiceLocator ServiceLocator { get; private set; }
 
-        #region IFilterFinder Members
-
         /// <summary>
         /// Finds all the <see cref="InjectableFilterAttribute"/> on the specified <see cref="ActionDescriptor"/>.
         /// </summary>
@@ -64,8 +62,6 @@ namespace MvcTurbine.Web.Controllers {
             return CreateFilterInfo(authorizationFilters,
                                     actionFilters, resultFilters, exceptionFilters);
         }
-
-        #endregion
 
         /// <summary>
         /// Gets the applied <see cref="InjectableFilterAttribute"/> on the specified <see cref="ActionDescriptor"/>.
@@ -108,9 +104,9 @@ namespace MvcTurbine.Web.Controllers {
         protected virtual IList<TFilter> GetRegisteredFilters<TFilter>(InjectableFilterAttribute[] filterAttributes)
             where TFilter : class {
             var services = from svc in ServiceLocator.ResolveServices<TFilter>()
-                                     from filter in filterAttributes
-                                     where filter.FilterType.IsType<TFilter>()
-                                     select svc;
+                           from filter in filterAttributes
+                           where filter.FilterType.IsType<TFilter>()
+                           select svc;
 
             return services.ToList();
         }

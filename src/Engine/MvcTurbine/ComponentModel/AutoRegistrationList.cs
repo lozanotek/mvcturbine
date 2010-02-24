@@ -56,8 +56,6 @@ namespace MvcTurbine.ComponentModel {
             registrationList.Clear();
         }
 
-        #region IEnumerable<ServiceRegistration> implementation.
-
         /// <summary>
         /// Gets the enumerator of <seealso cref="ServiceRegistration"/>.
         /// </summary>
@@ -69,8 +67,5 @@ namespace MvcTurbine.ComponentModel {
         IEnumerator IEnumerable.GetEnumerator() {
             return GetEnumerator();
         }
-
-        #endregion
-
     }
 }
