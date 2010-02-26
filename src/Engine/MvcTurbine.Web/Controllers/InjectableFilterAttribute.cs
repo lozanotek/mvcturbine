@@ -27,6 +27,7 @@ namespace MvcTurbine.Web.Controllers {
     /// Defines the common attribute to use for injectable filters.
     ///</summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
+    [Obsolete("This class is now absolete for registering views. Please use the FilterAttribute class and allow the runtime to inject dependenices via properties.")]
     public abstract class InjectableFilterAttribute : FilterAttribute {
         /// <summary>
         /// Gets the type of the filter associated with the attribute.
