@@ -68,7 +68,6 @@ namespace MvcTurbine.Ninject {
         /// </summary>
         /// <typeparam name="Interface"></typeparam>
         public void RegisterAll<Interface>() {
-            RegisterAll<Interface>();
         }
 
         /// <summary>
