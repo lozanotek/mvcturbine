@@ -37,8 +37,8 @@ namespace MvcTurbine.Autofac {
         /// <summary>
         /// Default constructor. Locator is instantiated with a new <see cref="ContainerBuilder"/> instance.
         /// </summary>
-        public AutofacServiceLocator()
-            : this(new ContainerBuilder()) {
+        public AutofacServiceLocator() {
+            Builder = new ContainerBuilder();
         }
 
         public AutofacServiceLocator(ContainerBuilder builder) {
@@ -48,6 +48,7 @@ namespace MvcTurbine.Autofac {
             }
 
             Builder = builder;
+            builtContainers.Add(builder.Build());
         }
 
         public ContainerBuilder Builder { get; private set; }
@@ -65,10 +66,11 @@ namespace MvcTurbine.Autofac {
 
                     return container.Resolve<T>();
                 }
+
+                throw new Exception();
             } catch (Exception ex) {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
-            return null;
         }
 
         public T Resolve<T>(string key) where T : class {
@@ -78,10 +80,11 @@ namespace MvcTurbine.Autofac {
 
                     return container.Resolve<T>(key);
                 }
+
+                throw new Exception();
             } catch (Exception ex) {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
-            return null;
         }
 
         public T Resolve<T>(Type type) where T : class {
@@ -90,11 +93,11 @@ namespace MvcTurbine.Autofac {
                     if (!container.IsRegistered(type)) continue;
                     return container.Resolve(type) as T;
                 }
+
+                throw new Exception();
             } catch (Exception ex) {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
-
-            return null;
         }
 
         public IList<T> ResolveServices<T>() where T : class {
@@ -104,15 +107,15 @@ namespace MvcTurbine.Autofac {
                     var enumerable = container.Resolve<IEnumerable<T>>();
                     return new List<T>(enumerable);
                 }
+
+                throw new Exception();
             } catch (Exception ex) {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
-
-            return null;
         }
 
         public IServiceRegistrar Batch() {
-            currentModule = new TurbineAutofacModule(Builder);
+            currentModule = new TurbineAutofacModule();
             currentModule.Disposed += module_Disposed;
 
             return currentModule;

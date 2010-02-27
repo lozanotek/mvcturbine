@@ -14,12 +14,9 @@
             Type complexType = typeof (ComplexLogger);
 
             container.RegisterType(simpleType).As<ILogger>().Named(simpleType.FullName, typeof (ILogger));
-            container.RegisterType(complexType).As<ILogger>().Named(complexType.FullName, typeof (ILogger));
+            container.RegisterType(complexType).As<ILogger>().Named(complexType.FullName, typeof (ILogger)).As(typeof(ComplexLogger));
 
-            var serviceLocator = new AutofacServiceLocator(container);
-            serviceLocator.Register<ILogger, SimpleLogger>(simpleType.FullName);
-            serviceLocator.Register<ILogger, ComplexLogger>(complexType.FullName);
-            return serviceLocator;
+            return new AutofacServiceLocator(container);
         }
     }
 }

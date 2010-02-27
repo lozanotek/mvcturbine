@@ -35,7 +35,7 @@ namespace MvcTurbine.Autofac {
         }
 
         public void Register<Interface, Implementation>() where Implementation : class, Interface {
-            Builder.RegisterType<Implementation>().As<Interface>();
+            Builder.RegisterType<Implementation>().As<Interface>().As(typeof (Implementation));
         }
 
         public void Register<Interface, Implementation>(string key) where Implementation : class, Interface {
