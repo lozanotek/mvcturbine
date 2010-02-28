@@ -31,14 +31,13 @@ namespace MvcTurbine.Autofac {
     /// To learn more about Autofac, please visit its website: http://code.google.com/p/autofac
     /// </remarks>
     public class AutofacServiceLocator : IServiceLocator {
-        private readonly IList<IContainer> builtContainers = new List<IContainer>();
         private TurbineAutofacModule currentModule;
 
         /// <summary>
         /// Default constructor. Locator is instantiated with a new <see cref="ContainerBuilder"/> instance.
         /// </summary>
-        public AutofacServiceLocator() {
-            Builder = new ContainerBuilder();
+        public AutofacServiceLocator()
+            : this(new ContainerBuilder()) {
         }
 
         public AutofacServiceLocator(ContainerBuilder builder) {
@@ -48,26 +47,18 @@ namespace MvcTurbine.Autofac {
             }
 
             Builder = builder;
-            builtContainers.Add(builder.Build());
         }
 
         public ContainerBuilder Builder { get; private set; }
 
         public void Dispose() {
-            foreach (var container in builtContainers) {
-                container.Dispose();
-            }
         }
 
         public T Resolve<T>() where T : class {
             try {
-                foreach (var container in builtContainers) {
-                    if (!container.IsRegistered<T>()) continue;
-
+                using (var container = Builder.Build()) {
                     return container.Resolve<T>();
                 }
-
-                throw new Exception();
             } catch (Exception ex) {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
@@ -75,13 +66,9 @@ namespace MvcTurbine.Autofac {
 
         public T Resolve<T>(string key) where T : class {
             try {
-                foreach (var container in builtContainers) {
-                    if (!container.IsRegistered<T>(key)) continue;
-
+                using (var container = Builder.Build()) {
                     return container.Resolve<T>(key);
                 }
-
-                throw new Exception();
             } catch (Exception ex) {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
@@ -89,12 +76,9 @@ namespace MvcTurbine.Autofac {
 
         public T Resolve<T>(Type type) where T : class {
             try {
-                foreach (var container in builtContainers) {
-                    if (!container.IsRegistered(type)) continue;
+                using (var container = Builder.Build()) {
                     return container.Resolve(type) as T;
                 }
-
-                throw new Exception();
             } catch (Exception ex) {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
@@ -102,13 +86,10 @@ namespace MvcTurbine.Autofac {
 
         public IList<T> ResolveServices<T>() where T : class {
             try {
-                foreach (var container in builtContainers) {
-                    if (!container.IsRegistered<IEnumerable<T>>()) continue;
+                using (var container = Builder.Build()) {
                     var enumerable = container.Resolve<IEnumerable<T>>();
                     return new List<T>(enumerable);
                 }
-
-                throw new Exception();
             } catch (Exception ex) {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
@@ -116,15 +97,9 @@ namespace MvcTurbine.Autofac {
 
         public IServiceRegistrar Batch() {
             currentModule = new TurbineAutofacModule();
-            currentModule.Disposed += module_Disposed;
+            Builder.RegisterModule(currentModule);
 
             return currentModule;
-        }
-
-        void module_Disposed(object sender, EventArgs e) {
-            var module = sender as TurbineAutofacModule;
-            if (module == null) return;
-            builtContainers.Add(module.Builder.Build());
         }
 
         public void Register<Interface>(Type implType) where Interface : class {
@@ -135,7 +110,8 @@ namespace MvcTurbine.Autofac {
             currentModule.Register<Interface, Implementation>();
         }
 
-        public void Register<Interface, Implementation>(string key) where Implementation : class, Interface {
+        public void Register<Interface, Implementation>(string key) where Implementation :
+            class, Interface {
             currentModule.Register<Interface, Implementation>(key);
         }
 
@@ -153,18 +129,15 @@ namespace MvcTurbine.Autofac {
 
         public void Reset() {
             Dispose();
-            //Container = null;
+
             Builder = null;
             currentModule = null;
         }
 
         public TService Inject<TService>(TService instance) where TService : class {
-            TService oldInstance = instance;
-            foreach (var container in builtContainers) {
-                oldInstance = container.InjectProperties(oldInstance);
+            using (var container = Builder.Build()) {
+                return container.InjectProperties(instance);
             }
-
-            return oldInstance;
         }
 
         [Obsolete("Not used with this implementation of IServiceLocator.")]
