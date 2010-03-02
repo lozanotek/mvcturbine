@@ -1,0 +1,12 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask TaskName="NUnit" AssemblyFile="$(teamcity_dotnet_nunitlauncher_msbuild_task)"/>
+  <ItemGroup>
+    <TestAssemblies Include="..\src\Engine\**\*.Tests.dll" />
+  </ItemGroup>
+  <Target Name="Compile">
+    <MSBuild Projects="..\src\Engine\MvcTurbine.sln" Properties="Configuration=Debug" />
+  </Target>    
+  <Target Name="UnitTest" DependsOnTargets="Compile">
+    <NUnit Assemblies="@(TestAssembies)"/>
+  </Target>  
+</Project>
