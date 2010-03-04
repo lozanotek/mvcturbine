@@ -31,7 +31,7 @@ namespace MvcTurbine.EmbeddedViews {
             var table = new EmbeddedViewTable();
 
             foreach (var assembly in assemblies) {
-                var names = assembly.GetManifestResourceNames();
+                var names = GetNamesOfAssemblyResources(assembly);
                 if (names == null || names.Length == 0) continue;
 
                 foreach (var name in names) {
@@ -50,6 +50,17 @@ namespace MvcTurbine.EmbeddedViews {
                 return AppDomain.CurrentDomain.GetAssemblies();
             } catch {
                 return null;
+            }
+        }
+
+        private static string[] GetNamesOfAssemblyResources(Assembly assembly)
+        {
+            // GetManifestResourceNames will throw a NotSupportedException when run on a dynamic assembly
+            try{
+                return assembly.GetManifestResourceNames();
+            }
+            catch{
+                return new string[] { };
             }
         }
     }
