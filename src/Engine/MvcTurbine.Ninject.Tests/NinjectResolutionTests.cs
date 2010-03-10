@@ -29,13 +29,12 @@ namespace MvcTurbine.Ninject.Tests {
     [TestFixture]
     public class NinjectResolutionTests : ResolutionTests {
         protected override IServiceLocator CreateServiceLocator() {
-
             var kernel = new StandardKernel();
             var simpleType = typeof(SimpleLogger);
-            kernel.Bind<ILogger>().To(simpleType).Named(simpleType.FullName);
+            kernel.Bind<ILogger>().To<SimpleLogger>().Named(simpleType.FullName);
 
             var loggerType = typeof(ComplexLogger);
-            kernel.Bind<ILogger>().To(loggerType).Named(loggerType.FullName);
+            kernel.Bind<ILogger>().To<ComplexLogger>().Named(loggerType.FullName);
             return new NinjectServiceLocator(kernel);
         }
     }

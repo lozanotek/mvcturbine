@@ -23,10 +23,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Unity.Tests", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Windsor.Tests", "MvcTurbine.Windsor.Tests\MvcTurbine.Windsor.Tests.csproj", "{BFFC3FDB-6687-496B-B3AC-99B7F0CF2C76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Autofac", "MvcTurbine.Autofac\MvcTurbine.Autofac.csproj", "{5898FB54-4474-42DE-B605-6E68B06C0DFE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Autofac.Tests", "MvcTurbine.Autofac.Tests\MvcTurbine.Autofac.Tests.csproj", "{B7A6BA63-5246-4FC6-83DF-498FA828FDEE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,14 +69,6 @@ Global
 		{BFFC3FDB-6687-496B-B3AC-99B7F0CF2C76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFFC3FDB-6687-496B-B3AC-99B7F0CF2C76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFFC3FDB-6687-496B-B3AC-99B7F0CF2C76}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5898FB54-4474-42DE-B605-6E68B06C0DFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5898FB54-4474-42DE-B605-6E68B06C0DFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5898FB54-4474-42DE-B605-6E68B06C0DFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5898FB54-4474-42DE-B605-6E68B06C0DFE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B7A6BA63-5246-4FC6-83DF-498FA828FDEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B7A6BA63-5246-4FC6-83DF-498FA828FDEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B7A6BA63-5246-4FC6-83DF-498FA828FDEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B7A6BA63-5246-4FC6-83DF-498FA828FDEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,6 +79,5 @@ Global
 		{24E085F7-5E64-4FF0-9769-6B8989EF1CD1} = {7C04E093-A092-4110-A146-3047FF8BFD83}
 		{05F39581-C732-473D-BC3B-75A534569EEF} = {7C04E093-A092-4110-A146-3047FF8BFD83}
 		{794C0A9F-60EB-4E25-93F2-5D4D59122529} = {7C04E093-A092-4110-A146-3047FF8BFD83}
-		{5898FB54-4474-42DE-B605-6E68B06C0DFE} = {7C04E093-A092-4110-A146-3047FF8BFD83}
 	EndGlobalSection
 EndGlobal

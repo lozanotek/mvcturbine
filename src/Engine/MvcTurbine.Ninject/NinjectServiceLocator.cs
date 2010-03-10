@@ -89,13 +89,18 @@ namespace MvcTurbine.Ninject {
         /// <param name="key">Unique key to distinguish the service.</param>
         /// <returns>An instance of the type, null otherwise.</returns>
         public T Resolve<T>(string key) where T : class {
-            var value = Container.Get<T>(key);
+            try {
+                var value = Container.Get<T>(key);
 
-            if (value == null) {
-                throw new ServiceResolutionException(typeof(T));
+                if (value == null) {
+                    throw new ServiceResolutionException(typeof(T));
+                }
+
+                return value;
             }
-
-            return value;
+            catch (Exception ex) {
+                throw new ServiceResolutionException(typeof(T), ex);
+            }
         }
 
         /// <summary>
