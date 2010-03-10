@@ -81,10 +81,6 @@
             throw new NotImplementedException();
         }
 
-        public IServiceRegistrator Batch() {
-            throw new NotImplementedException();
-        }
-
         public T Resolve<T>() where T : class {
             throw new NotImplementedException();
         }
@@ -98,6 +94,11 @@
         }
 
         public IList<T> ResolveServices<T>() where T : class {
+            throw new NotImplementedException();
+        }
+
+        public IServiceRegistrar Batch()
+        {
             throw new NotImplementedException();
         }
 
@@ -126,6 +127,16 @@
         }
 
         public void Reset() {
+            throw new NotImplementedException();
+        }
+
+        public TService Inject<TService>(TService instance) where TService : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TearDown<TService>(TService instance) where TService : class
+        {
             throw new NotImplementedException();
         }
 

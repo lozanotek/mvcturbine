@@ -14,7 +14,7 @@ namespace MvcTurbine.Web.Tests.Blades {
         public void Dispose() {
         }
 
-        public IServiceRegistrator Batch() {
+        public IServiceRegistrar Batch() {
             throw new NotImplementedException();
         }
 
@@ -73,6 +73,16 @@ namespace MvcTurbine.Web.Tests.Blades {
         }
 
         public void Reset() {
+        }
+
+        public TService Inject<TService>(TService instance) where TService : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TearDown<TService>(TService instance) where TService : class
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
