@@ -1,53 +1,56 @@
 namespace MvcTurbine.Autofac {
     using System;
+    using System.Collections.Generic;
     using ComponentModel;
     using global::Autofac;
 
     public class TurbineAutofacModule : Module, IServiceRegistrar {
-        public ContainerBuilder Builder { get; private set; }
+        private readonly IList<Action<ContainerBuilder>> batchedRegistrations;
 
-        public TurbineAutofacModule()
-            : this(new ContainerBuilder()) {
+        public TurbineAutofacModule() {
+            batchedRegistrations = new List<Action<ContainerBuilder>>();
         }
-
-        public TurbineAutofacModule(ContainerBuilder builder) {
-            Builder = builder;
-        }
-
+        
         public void Dispose() {
-            InvokeDisposed(EventArgs.Empty);
-        }
-
-        public event EventHandler Disposed;
-
-        private void InvokeDisposed(EventArgs e) {
-            EventHandler disposed = Disposed;
-            if (disposed != null) {
-                disposed(this, e);
-            }
         }
 
         public void RegisterAll<Interface>() {
         }
 
+        protected override void Load(ContainerBuilder builder) {
+            foreach (var registration in batchedRegistrations) {
+                registration(builder);
+            }
+        }
+
+        void AddRegistration(Action<ContainerBuilder> builderAction) {
+            batchedRegistrations.Add(builderAction);
+        }
+
         public void Register<Interface>(Type implType) where Interface : class {
-            Builder.RegisterType(implType).As<Interface>();
+            AddRegistration(builder => 
+                builder.RegisterType(implType).As<Interface>());
         }
 
         public void Register<Interface, Implementation>() where Implementation : class, Interface {
-            Builder.RegisterType<Implementation>().As<Interface>().As(typeof (Implementation));
+            AddRegistration(builder => 
+                builder.RegisterType<Implementation>().As<Interface>());
         }
 
-        public void Register<Interface, Implementation>(string key) where Implementation : class, Interface {
-            Builder.RegisterType<Implementation>().Named<Interface>(key);
+        public void Register<Interface, Implementation>(string key) where Implementation : 
+            class, Interface {
+            AddRegistration(builder => 
+                builder.RegisterType<Implementation>().Named<Interface>(key));
         }
 
         public void Register(string key, Type type) {
-            Builder.RegisterType(type).Named(key, type);
+            AddRegistration(builder => 
+                builder.RegisterType(type).Named(key, type));
         }
 
         public void Register(Type serviceType, Type implType) {
-            Builder.RegisterType(implType).As(implType).As(serviceType);
+            AddRegistration(builder => 
+                builder.RegisterType(implType).As(implType).As(serviceType));
         }
     }
 }
