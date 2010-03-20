@@ -127,8 +127,7 @@ namespace MvcTurbine.Unity {
         /// <typeparam name="Interface">Type of the service to register.</typeparam>
         /// <param name="implType">Implementation type to use for registration.</param>
         public void Register<Interface>(Type implType) where Interface : class {
-            var key = string.Format("{0}-{1}", typeof(Interface).Name, implType.FullName);
-            Container.RegisterType(typeof (Interface), implType, key);
+            Container.RegisterType(typeof (Interface), implType);
         }
 
         /// <summary>

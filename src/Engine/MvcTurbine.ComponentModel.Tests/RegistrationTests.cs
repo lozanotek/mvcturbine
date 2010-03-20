@@ -26,7 +26,6 @@ namespace MvcTurbine.ComponentModel.Tests {
 
     public abstract class RegistrationTests : ServiceLocatorTests {
         [Test]
-        [Ignore("Need to figure out why this is not working for all containers")]
         public void Register_With_Specified_Type_Should_Return_Same_Type() {
             Type loggerType = typeof(SimpleLogger);
 
