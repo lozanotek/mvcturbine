@@ -75,9 +75,16 @@ namespace MvcTurbine.Ninject {
         /// <typeparam name="T">Type of service to resolve.</typeparam>
         /// <returns>An instance of the type, null otherwise.</returns>
         public T Resolve<T>() where T : class {
-            try {
+            try 
+            {
                 return Container.Get<T>();
-            } catch (Exception ex) {
+            } 
+            catch (ActivationException activationException)
+            {
+                return ResolveTheFirstBindingFromTheContainer<T>(activationException);
+            } 
+            catch (Exception ex) 
+            {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
         }
@@ -97,8 +104,7 @@ namespace MvcTurbine.Ninject {
                 }
 
                 return value;
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
         }
@@ -110,9 +116,16 @@ namespace MvcTurbine.Ninject {
         /// <param name="type">Key type of the service.</param>
         /// <returns>An instance of the type, null otherwise.</returns>
         public T Resolve<T>(Type type) where T : class {
-            try {
+            try
+            {
                 return Container.Get(type) as T;
-            } catch (Exception ex) {
+            } 
+            catch (ActivationException activationException) 
+            {
+                return ResolveTheFirstBindingFromTheContainer<T>(activationException);
+            } 
+            catch (Exception ex) 
+            {
                 throw new ServiceResolutionException(type, ex);
             }
         }
@@ -219,5 +232,34 @@ namespace MvcTurbine.Ninject {
         public void Dispose() {
             Reset();
         }
+
+        #region handle activation exception 
+
+        private T ResolveTheFirstBindingFromTheContainer<T>(Exception activationException) where T : class
+        {
+            var type = typeof(T);
+            var firstBinding = GetNameOfFirstBinding(type);
+            if (firstBinding.BindingExists)
+                return Container.Get(type, firstBinding.Name) as T;
+            throw new ServiceResolutionException(typeof(T), activationException);
+        }
+
+        private FirstBindingInfo GetNameOfFirstBinding(Type type)
+        {
+            var binding = Container.GetBindings(type).OrderBy(x => x.Metadata.Name).FirstOrDefault();
+            if (binding == null)
+                return new FirstBindingInfo { BindingExists = false };
+            return new FirstBindingInfo { BindingExists = true, Name = binding.Metadata.Name };
+        }
+
+        private class FirstBindingInfo
+        {
+            public string Name { get; set; }
+            public bool BindingExists { get; set; }
+        }
+
+        #endregion
+
     }
+
 }

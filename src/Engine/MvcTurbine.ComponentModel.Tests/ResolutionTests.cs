@@ -27,7 +27,6 @@ namespace MvcTurbine.ComponentModel.Tests {
 
     public abstract class ResolutionTests : ServiceLocatorTests {
         [Test]
-        [Ignore("Need to figure out why this is not working for all containers")]
         public void Resolve_Should_Return_Valid_Instance() {
             var instance = locator.Resolve<ILogger>();
             Assert.IsNotNull(instance);
