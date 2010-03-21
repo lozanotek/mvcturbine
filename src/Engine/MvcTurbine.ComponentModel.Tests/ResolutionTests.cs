@@ -71,7 +71,6 @@ namespace MvcTurbine.ComponentModel.Tests {
         }
 
         [Test]
-        [Ignore("Need to figure out why this is not working for all containers")]
         public void Overloaded_Resolve_Method_Should_Return_Same_Instance_Type() {
             Assert.AreEqual(
                 locator.Resolve<ILogger>().GetType(),
