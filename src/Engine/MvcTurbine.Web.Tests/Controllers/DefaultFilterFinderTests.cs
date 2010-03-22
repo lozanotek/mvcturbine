@@ -16,7 +16,6 @@
             DefaultFilterFinder finder;
             var locator = new MockServiceLocator();
 
-            var foo = Get<IServiceLocator>();
             finder = new DefaultFilterFinder(locator);
             Assert.IsNotNull(finder);
             Assert.IsNotNull(finder.ServiceLocator);
