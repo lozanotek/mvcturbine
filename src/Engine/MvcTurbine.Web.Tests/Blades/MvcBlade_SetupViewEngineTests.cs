@@ -24,7 +24,7 @@ namespace MvcTurbine.Web.Tests.Blades {
 
             Assert.IsNotNull(viewEngines);
             Assert.IsNotEmpty(viewEngines);
-            Assert.AreEqual(viewEngines.Count, 1);
+            Assert.AreEqual(viewEngines.Count, 2);
         }
 
         [Test]
