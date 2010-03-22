@@ -6,6 +6,7 @@
     using Rhino.Mocks;
     using Web.Blades;
     using Web.Controllers;
+    using Moq;
 
     [TestFixture]
     public class RoutingBlade_SpinTests : TestFixtureBase {
@@ -29,22 +30,20 @@
 
         [Test]
         public void Resolve_Controller_Factory_Returns_TurbineControllerFactory() {
-            var context = Get<IRotorContext>();
+            
             var locator = new MockControllerFactoryServiceLocator()
             {
                 ShouldThrowExceptionForControllerFactory = true
             };
 
-            using (Record()) {
-                Expect.Call(context.ServiceLocator).Return(locator);
-            }
+            var contextFake = new Mock<IRotorContext>();
+            contextFake.Setup(x => x.ServiceLocator)
+                .Returns(locator);
 
-            IControllerFactory currentFactory;
-            using (Playback()) {
-                var blade = new MvcBlade();
-                blade.SetupControllerFactory(context);
-                currentFactory = ControllerBuilder.Current.GetControllerFactory();
-            }
+            var blade = new MvcBlade();
+            blade.SetupControllerFactory(contextFake.Object);
+
+            IControllerFactory currentFactory = ControllerBuilder.Current.GetControllerFactory();
 
             Assert.IsNotNull(currentFactory);
             Assert.AreEqual(currentFactory.GetType(), typeof(TurbineControllerFactory));
@@ -52,20 +51,18 @@
 
         [Test]
         public void Resolve_Controller_Factory_Returns_Null_Which_Implies_TurbineControllerFactory() {
-            var context = Get<IRotorContext>();
+            
             var locator = new MockControllerFactoryServiceLocator()
             {
                 ShouldReturnNullForControllerFactory = true
             };
 
-            using (Record()) {
-                Expect.Call(context.ServiceLocator).Return(locator);
-            }
+            var contextFake = new Mock<IRotorContext>();
+            contextFake.Setup(x => x.ServiceLocator)
+                .Returns(locator);
 
-            using (Playback()) {
-                var blade = new MvcBlade();
-                blade.SetupControllerFactory(context);
-            }
+            var blade = new MvcBlade();
+            blade.SetupControllerFactory(contextFake.Object);
 
             var currentFactory = ControllerBuilder.Current.GetControllerFactory();
             Assert.IsNotNull(currentFactory);

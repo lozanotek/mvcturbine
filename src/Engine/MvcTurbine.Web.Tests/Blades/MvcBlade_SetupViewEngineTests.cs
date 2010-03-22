@@ -1,4 +1,6 @@
-﻿namespace MvcTurbine.Web.Tests.Blades {
+﻿using Moq;
+
+namespace MvcTurbine.Web.Tests.Blades {
     using System;
     using System.Web.Mvc;
     using NUnit.Framework;
@@ -8,17 +10,15 @@
     public class MvcBlade_SetupViewEngineTests : TestFixtureBase {
         [Test]
         public void Resolve_View_Engines_Returns_SimpleList() {
-            var context = Get<IRotorContext>();
+            
             var locator = new MockViewEngineServiceLocator();
 
-            using (Record()) {
-                Expect.Call(context.ServiceLocator).Return(locator);
-            }
+            var contextFake = new Mock<IRotorContext>();
+            contextFake.Setup(x => x.ServiceLocator)
+                .Returns(locator);
 
-            using (Playback()) {
-                var blade = new MvcBlade();
-                blade.SetupViewEngines(context);
-            }
+            var blade = new MvcBlade();
+            blade.SetupViewEngines(contextFake.Object);
 
             var viewEngines = ViewEngines.Engines;
 
@@ -29,20 +29,18 @@
 
         [Test]
         public void Resolve_View_Engines_Returns_Null() {
-            var context = Get<IRotorContext>();
+            
             var locator = new MockViewEngineServiceLocator()
             {
                 ShouldReturnNullForViewEngines = true
             };
 
-            using (Record()) {
-                Expect.Call(context.ServiceLocator).Return(locator);
-            }
+            var contextFake = new Mock<IRotorContext>();
+            contextFake.Setup(x => x.ServiceLocator)
+                .Returns(locator);
 
-            using (Playback()) {
-                var blade = new MvcBlade();
-                blade.SetupViewEngines(context);
-            }
+            var blade = new MvcBlade();
+            blade.SetupViewEngines(contextFake.Object);
 
             var viewEngines = ViewEngines.Engines;
 
