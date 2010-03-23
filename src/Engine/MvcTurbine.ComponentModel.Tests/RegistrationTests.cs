@@ -84,5 +84,17 @@ namespace MvcTurbine.ComponentModel.Tests {
             var logger = locator.Resolve<ILogger>(implType);
             Assert.AreEqual(implType, logger.GetType());
         }
+
+        [Test]
+        public void Register_With_Specified_Service_Should_Return_Same_Type()
+        {
+            Type implType = typeof(SimpleLogger);
+
+            using (locator.Batch())
+                locator.Register(implType, implType);
+
+            var logger = locator.Resolve(implType);
+            Assert.AreEqual(implType, logger.GetType());
+        }
     }
 }

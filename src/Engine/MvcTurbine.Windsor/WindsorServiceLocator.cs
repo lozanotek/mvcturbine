@@ -115,6 +115,20 @@ namespace MvcTurbine.Windsor {
             }
         }
 
+        ///<summary>
+        /// Resolves the service of the specified type by the given type key.
+        ///</summary>
+        ///<param name="type">Type of service to resolve.</param>
+        ///<returns>An instance of the type, null otherwise</returns>
+        public object Resolve(Type type)
+        {
+            try{
+                return Container.Resolve(type);
+            } catch (Exception ex){
+                throw new ServiceResolutionException(type, ex);
+            }
+        }
+
         /// <summary>
         /// See <see cref="IServiceLocator.ResolveServices{T}<>"/>.
         /// </summary>
