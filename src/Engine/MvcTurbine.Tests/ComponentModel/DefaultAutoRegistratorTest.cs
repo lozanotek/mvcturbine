@@ -93,6 +93,11 @@
             throw new NotImplementedException();
         }
 
+        public object Resolve(Type type)
+        {
+            throw new NotImplementedException();
+        }
+
         public IList<T> ResolveServices<T>() where T : class {
             throw new NotImplementedException();
         }
