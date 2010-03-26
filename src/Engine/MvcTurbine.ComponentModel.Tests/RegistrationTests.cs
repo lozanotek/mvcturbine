@@ -26,7 +26,6 @@ namespace MvcTurbine.ComponentModel.Tests {
 
     public abstract class RegistrationTests : ServiceLocatorTests {
         [Test]
-        [Ignore("Need to figure out why this is not working for all containers")]
         public void Register_With_Specified_Type_Should_Return_Same_Type() {
             Type loggerType = typeof(SimpleLogger);
 
@@ -75,16 +74,26 @@ namespace MvcTurbine.ComponentModel.Tests {
         }
 
         [Test]
-        [Ignore("Need to figure out why this is not working for all containers")]
         public void Register_With_Specified_Service_And_Type_Should_Return_Same_Type() {
-            Type serviceType = typeof(ILogger);
             Type implType = typeof(SimpleLogger);
 
             using (locator.Batch()) {
-                locator.Register(serviceType, implType);
+                locator.Register(implType, implType);
             }
 
             var logger = locator.Resolve<ILogger>(implType);
+            Assert.AreEqual(implType, logger.GetType());
+        }
+
+        [Test]
+        public void Register_With_Specified_Service_Should_Return_Same_Type()
+        {
+            Type implType = typeof(SimpleLogger);
+
+            using (locator.Batch())
+                locator.Register(implType, implType);
+
+            var logger = locator.Resolve(implType);
             Assert.AreEqual(implType, logger.GetType());
         }
     }

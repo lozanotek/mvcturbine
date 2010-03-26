@@ -108,6 +108,22 @@ namespace MvcTurbine.Unity {
             }
         }
 
+        ///<summary>
+        /// Resolves the service of the specified type by the given type key.
+        ///</summary>
+        ///<param name="type">Type of service to resolve.</param>
+        ///<returns>An instance of the type, null otherwise</returns>
+        public object Resolve(Type type)
+        {
+            try
+            {
+                return Container.Resolve(type);
+            } catch (Exception ex)
+            {
+                throw new ServiceResolutionException(type, ex);
+            }
+        }
+
         /// <summary>
         /// Resolves the list of services of type <see cref="T"/> that are registered 
         /// within the locator.
@@ -127,8 +143,7 @@ namespace MvcTurbine.Unity {
         /// <typeparam name="Interface">Type of the service to register.</typeparam>
         /// <param name="implType">Implementation type to use for registration.</param>
         public void Register<Interface>(Type implType) where Interface : class {
-            var key = string.Format("{0}-{1}", typeof(Interface).Name, implType.FullName);
-            Container.RegisterType(typeof (Interface), implType, key);
+            Container.RegisterType(typeof (Interface), implType);
         }
 
         /// <summary>

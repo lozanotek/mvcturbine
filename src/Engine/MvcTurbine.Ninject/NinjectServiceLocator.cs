@@ -19,7 +19,8 @@
 
 #endregion
 
-namespace MvcTurbine.Ninject {
+namespace MvcTurbine.Ninject
+{
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -33,22 +34,26 @@ namespace MvcTurbine.Ninject {
     /// To learn more about Ninject, please visit its website: http://ninject.org
     /// </remarks>
     [Serializable]
-    public class NinjectServiceLocator : IServiceLocator {
+    public class NinjectServiceLocator : IServiceLocator
+    {
         private TurbineModule currentModule;
 
         /// <summary>
         /// Default constructor. Locator is instantiated with a new <seealso cref="StandardKernel"/> instance.
         /// </summary>
         public NinjectServiceLocator()
-            : this(new StandardKernel()) {
+            : this(new StandardKernel())
+        {
         }
 
         /// <summary>
         /// Creates an instance of the locator with the specified <seealso cref="IKernel"/>.
         /// </summary>
         /// <param name="kernel">Pre-defined <see cref="IKernel"/> to use within the container.</param>
-        public NinjectServiceLocator(IKernel kernel) {
-            if (kernel == null) {
+        public NinjectServiceLocator(IKernel kernel)
+        {
+            if (kernel == null)
+            {
                 throw new ArgumentNullException("kernel", "The specified Ninject IKernel cannot be null.");
             }
 
@@ -64,7 +69,8 @@ namespace MvcTurbine.Ninject {
         /// Gets the associated <see cref="IServiceRegistrar"/> to process.
         /// </summary>
         /// <returns></returns>
-        public IServiceRegistrar Batch() {
+        public IServiceRegistrar Batch()
+        {
             currentModule = new TurbineModule(Container);
             return currentModule;
         }
@@ -74,10 +80,18 @@ namespace MvcTurbine.Ninject {
         /// </summary>
         /// <typeparam name="T">Type of service to resolve.</typeparam>
         /// <returns>An instance of the type, null otherwise.</returns>
-        public T Resolve<T>() where T : class {
-            try {
+        public T Resolve<T>() where T : class
+        {
+            try
+            {
                 return Container.Get<T>();
-            } catch (Exception ex) {
+            }
+            catch (ActivationException activationException)
+            {
+                return ResolveTheFirstBindingFromTheContainer(activationException, typeof(T)) as T;
+            }
+            catch (Exception ex)
+            {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
         }
@@ -88,17 +102,21 @@ namespace MvcTurbine.Ninject {
         /// <typeparam name="T">Type of service to resolve.</typeparam>
         /// <param name="key">Unique key to distinguish the service.</param>
         /// <returns>An instance of the type, null otherwise.</returns>
-        public T Resolve<T>(string key) where T : class {
-            try {
+        public T Resolve<T>(string key) where T : class
+        {
+            try
+            {
                 var value = Container.Get<T>(key);
 
-                if (value == null) {
+                if (value == null)
+                {
                     throw new ServiceResolutionException(typeof(T));
                 }
 
                 return value;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
         }
@@ -109,11 +127,36 @@ namespace MvcTurbine.Ninject {
         /// <typeparam name="T">Type of service to resolve.</typeparam>
         /// <param name="type">Key type of the service.</param>
         /// <returns>An instance of the type, null otherwise.</returns>
-        public T Resolve<T>(Type type) where T : class {
-            try {
+        public T Resolve<T>(Type type) where T : class
+        {
+            try
+            {
                 return Container.Get(type) as T;
-            } catch (Exception ex) {
+            }
+            catch (ActivationException activationException)
+            {
+                return ResolveTheFirstBindingFromTheContainer(activationException, typeof(T)) as T;
+            }
+            catch (Exception ex)
+            {
                 throw new ServiceResolutionException(type, ex);
+            }
+        }
+
+        ///<summary>
+        /// Resolves the service of the specified type by the given type key.
+        ///</summary>
+        ///<param name="type">Type of service to resolve.</param>
+        ///<returns>An instance of the type, null otherwise</returns>
+        public object Resolve(Type type)
+        {
+            try
+            {
+                return Container.Get(type);
+            }
+            catch (ActivationException activationException)
+            {
+                return ResolveTheFirstBindingFromTheContainer(activationException, type);
             }
         }
 
@@ -123,7 +166,8 @@ namespace MvcTurbine.Ninject {
         /// </summary>
         /// <typeparam name="T">Type of the service to resolve.</typeparam>
         /// <returns>A list of service of type <see cref="T"/>, null otherwise.</returns>
-        public IList<T> ResolveServices<T>() where T : class {
+        public IList<T> ResolveServices<T>() where T : class
+        {
             return Container.GetAll<T>().ToList();
         }
 
@@ -133,7 +177,8 @@ namespace MvcTurbine.Ninject {
         /// </summary>
         /// <typeparam name="Interface">Type of the service to register.</typeparam>
         /// <param name="implType">Implementation type to use for registration.</param>
-        public void Register<Interface>(Type implType) where Interface : class {
+        public void Register<Interface>(Type implType) where Interface : class
+        {
             currentModule.Register<Interface>(implType);
         }
 
@@ -145,7 +190,8 @@ namespace MvcTurbine.Ninject {
         /// <typeparam name="Implementation">Implementation type to use for registration.
         /// </typeparam>
         public void Register<Interface, Implementation>()
-            where Implementation : class, Interface {
+            where Implementation : class, Interface
+        {
 
             currentModule.Register<Interface, Implementation>();
         }
@@ -159,7 +205,8 @@ namespace MvcTurbine.Ninject {
         /// </typeparam>
         /// <param name="key">Unique key to distinguish the service.</param>
         public void Register<Interface, Implementation>(string key)
-            where Implementation : class, Interface {
+            where Implementation : class, Interface
+        {
 
             currentModule.Register<Interface, Implementation>(key);
         }
@@ -170,7 +217,8 @@ namespace MvcTurbine.Ninject {
         /// </summary>
         /// <param name="key">Unique key to distinguish the service.</param>
         /// <param name="type">Implementation type to use.</param>
-        public void Register(string key, Type type) {
+        public void Register(string key, Type type)
+        {
             currentModule.Register(key, type);
         }
 
@@ -179,7 +227,8 @@ namespace MvcTurbine.Ninject {
         /// </summary>
         /// <param name="serviceType"></param>
         /// <param name="implType"></param>
-        public void Register(Type serviceType, Type implType) {
+        public void Register(Type serviceType, Type implType)
+        {
             currentModule.Register(serviceType, implType);
         }
 
@@ -188,13 +237,15 @@ namespace MvcTurbine.Ninject {
         /// </summary>
         /// <param name="instance">Instance of a service to dipose from the locator.</param>
         [Obsolete("Not used with this implementation of IServiceLocator.")]
-        public void Release(object instance) {
+        public void Release(object instance)
+        {
         }
 
         /// <summary>
         /// Resets the locator to its initial state clearing all registrations.
         /// </summary>
-        public void Reset() {
+        public void Reset()
+        {
             if (Container == null)
                 return;
 
@@ -203,21 +254,52 @@ namespace MvcTurbine.Ninject {
             currentModule = null;
         }
 
-        public TService Inject<TService>(TService instance) where TService : class {
+        public TService Inject<TService>(TService instance) where TService : class
+        {
             Container.Inject(instance);
             return instance;
         }
 
         [Obsolete("Not used with this implementation of IServiceLocator.")]
-        public void TearDown<TService>(TService instance) where TService : class {
+        public void TearDown<TService>(TService instance) where TService : class
+        {
         }
 
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         /// <filterpriority>2</filterpriority>
-        public void Dispose() {
+        public void Dispose()
+        {
             Reset();
         }
+
+        #region handle activation exception
+
+        private object ResolveTheFirstBindingFromTheContainer(Exception activationException, Type type)
+        {
+            var firstBinding = GetNameOfFirstBinding(type);
+            if (firstBinding.BindingExists)
+                return Container.Get(type, firstBinding.Name);
+            throw new ServiceResolutionException(type, activationException);
+        }
+
+        private FirstBindingInfo GetNameOfFirstBinding(Type type)
+        {
+            var binding = Container.GetBindings(type).OrderBy(x => x.Metadata.Name).FirstOrDefault();
+            if (binding == null)
+                return new FirstBindingInfo { BindingExists = false };
+            return new FirstBindingInfo { BindingExists = true, Name = binding.Metadata.Name };
+        }
+
+        private class FirstBindingInfo
+        {
+            public string Name { get; set; }
+            public bool BindingExists { get; set; }
+        }
+
+        #endregion
+
     }
+
 }

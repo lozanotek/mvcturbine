@@ -50,7 +50,15 @@ namespace MvcTurbine.ComponentModel {
         /// <typeparam name="T">Type of service to resolve.</typeparam>
         /// <param name="type">Key type of the service.</param>
         /// <returns>An instance of the type, null otherwise.</returns>
+        [Obsolete("Use object Resolve(Type type)")]
         T Resolve<T>(Type type) where T : class;
+
+        ///<summary>
+        /// Resolves the service of the specified type by the given type key.
+        ///</summary>
+        ///<param name="type">Type of service to resolve.</param>
+        ///<returns>An instance of the type, null otherwise</returns>
+        object Resolve(Type type);
 
         /// <summary>
         /// Resolves the list of services of type <see cref="T"/> that are registered 

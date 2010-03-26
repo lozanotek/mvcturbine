@@ -101,6 +101,23 @@ namespace MvcTurbine.StructureMap {
             }
         }
 
+        ///<summary>
+        /// Resolves the service of the specified type by the given type key.
+        ///</summary>
+        ///<param name="type">Type of service to resolve.</param>
+        ///<returns>An instance of the type, null otherwise</returns>
+        public object Resolve(Type type)
+        {
+            try
+            {
+                return Container.GetInstance(type);
+            }
+            catch (Exception ex)
+            {
+                throw new ServiceResolutionException(type, ex);
+            }
+        }
+
         /// <summary>
         /// Resolves the list of services of type <see cref="T"/> that are registered 
         /// within the locator.
