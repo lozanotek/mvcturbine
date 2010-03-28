@@ -84,6 +84,16 @@ namespace MvcTurbine.Autofac {
             }
         }
 
+        public object Resolve(Type type) {
+            try {
+                using (var container = Builder.Build()) {
+                    return container.Resolve(type);
+                }
+            } catch (Exception ex) {
+                throw new ServiceResolutionException(type, ex);
+            }
+        }
+
         public IList<T> ResolveServices<T>() where T : class {
             try {
                 using (var container = Builder.Build()) {
