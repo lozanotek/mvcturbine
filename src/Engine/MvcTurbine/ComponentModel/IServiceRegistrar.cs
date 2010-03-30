@@ -75,5 +75,12 @@ namespace MvcTurbine.ComponentModel {
         /// <param name="serviceType">Type of the service to register.</param>
         /// <param name="implType">Implementation to associate with the service.</param>
         void Register(Type serviceType, Type implType);
+
+        /// <summary>
+        /// Registers the instance of type, <typeparamref name="Interface"/>, with the locator.
+        /// </summary>
+        /// <typeparam name="Interface">Type of the service to register.</typeparam>
+        /// <param name="instance">Instance of the type to register.</param>
+        void Register<Interface>(Interface instance) where Interface : class;
     }
 }

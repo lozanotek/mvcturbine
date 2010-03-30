@@ -96,5 +96,25 @@ namespace MvcTurbine.ComponentModel.Tests {
             var logger = locator.Resolve(implType);
             Assert.AreEqual(implType, logger.GetType());
         }
+
+        [Test]
+        public void Register_With_Instance_Should_Return_Same_Object()
+        {
+            using (locator.Batch())
+                locator.Register<ILogger>(new SimpleLogger());
+
+            var logger = locator.Resolve<ILogger>();
+            Assert.AreEqual(typeof(SimpleLogger), logger.GetType());
+        }
+
+        [Test]
+        public void Register_With_Instance_Should_Return_Same_Object_For_Same_Type()
+        {
+            using (locator.Batch())
+                locator.Register(new SimpleLogger());
+
+            var logger = locator.Resolve<SimpleLogger>();
+            Assert.AreEqual(typeof(SimpleLogger), logger.GetType());
+        }
     }
 }

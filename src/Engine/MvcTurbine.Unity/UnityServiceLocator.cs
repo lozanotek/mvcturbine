@@ -194,6 +194,15 @@ namespace MvcTurbine.Unity {
         }
 
         /// <summary>
+        /// Registers the instance of type, <typeparamref name="Interface"/>, with the locator.
+        /// </summary>
+        /// <typeparam name="Interface">Type of the service to register.</typeparam>
+        /// <param name="instance">Instance of the type to register.</param>
+        public void Register<Interface>(Interface instance) where Interface : class {
+            Container.RegisterInstance(instance);
+        }
+
+        /// <summary>
         /// Releases (disposes) the service instance from within the locator.
         /// </summary>
         /// <param name="instance">Instance of a service to dipose from the locator.</param>
@@ -258,6 +267,10 @@ namespace MvcTurbine.Unity {
         }
 
         public void Register(Type serviceType, Type implType) {
+            throw new NotImplementedException();
+        }
+
+        public void Register<Interface>(Interface instance) where Interface : class {
             throw new NotImplementedException();
         }
     }

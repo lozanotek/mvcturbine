@@ -182,6 +182,15 @@ namespace MvcTurbine.StructureMap {
         }
 
         /// <summary>
+        /// See <see cref="IServiceLocator.Register{Interface}(Interface)"/>.
+        /// </summary>
+        /// <typeparam name="Interface"></typeparam>
+        /// <param name="instance"></param>
+        public void Register<Interface>(Interface instance) where Interface : class {
+            currentRegistry.Register(instance);
+        }
+
+        /// <summary>
         /// Releases (disposes) the service instance from within the locator.
         /// </summary>
         /// <param name="instance">Instance of a service to dipose from the locator.</param>

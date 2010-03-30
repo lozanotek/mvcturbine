@@ -113,6 +113,15 @@ namespace MvcTurbine.StructureMap {
                 .AddType(implType);
         }
 
+        /// <summary>
+        /// See <see cref="IServiceRegistrar.Register{Interface}(Interface)"/>.
+        /// </summary>
+        /// <typeparam name="Interface"></typeparam>
+        /// <param name="instance"></param>
+        public void Register<Interface>(Interface instance) where Interface : class {
+            For<Interface>().Use(instance);
+        }
+
         public void Dispose() {
             // Process the current registration
             Container.Configure(x => x.AddRegistry(this));

@@ -126,6 +126,15 @@ namespace MvcTurbine.Ninject {
         /// <param name="implType"></param>
         public void Register(Type serviceType, Type implType) {
             Bind(serviceType).To(implType);
-        }        
+        }
+
+        /// <summary>
+        /// See <see cref="IServiceLocator.Register{Interface}<>"/>
+        /// </summary>
+        /// <typeparam name="Interface"></typeparam>
+        /// <param name="instance"></param>
+        public void Register<Interface>(Interface instance) where Interface : class {
+            Bind<Interface>().ToConstant(instance);
+        }
     }
 }

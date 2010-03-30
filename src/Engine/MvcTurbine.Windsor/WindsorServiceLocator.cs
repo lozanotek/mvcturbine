@@ -190,6 +190,15 @@ namespace MvcTurbine.Windsor {
         }
 
         /// <summary>
+        /// See <see cref="IServiceLocator.Register{Interface}(Interface)"/>.
+        /// </summary>
+        /// <typeparam name="Interface"></typeparam>
+        /// <param name="instance"></param>
+        public void Register<Interface>(Interface instance) where Interface : class {
+            registrationList.Register(instance);
+        }
+
+        /// <summary>
         /// See <see cref="IServiceLocator.Release"/>.
         /// </summary>
         /// <param name="instance"></param>
