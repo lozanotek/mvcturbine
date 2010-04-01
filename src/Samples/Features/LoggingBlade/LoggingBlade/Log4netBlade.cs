@@ -1,12 +1,14 @@
 ﻿namespace MvcTurbine.Samples.LoggingBlade {
     using System;
     using System.IO;
+    using System.Web.Mvc;
     using Blades;
     using ComponentModel;
     using log4net.Config;
 
-    public class Log4netBlade : Blade, ISupportAutoRegistration {
+    public class Log4NetBlade : Blade, ISupportAutoRegistration {
         public override void Spin(IRotorContext context) {
+            
             // Setup log4net
             SetupLogging();
         }

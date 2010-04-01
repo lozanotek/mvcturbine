@@ -14,6 +14,12 @@
             Default constructor
             </summary>
         </member>
+        <member name="M:MvcTurbine.Windsor.TurbineRegistrationList.RegisterAll``1">
+            <summary>
+            Registers all the services of type <typeparamref name="Interface"/> into the container.
+            </summary>
+            <typeparam name="Interface"></typeparam>
+        </member>
         <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.TurbineRegistrationList.Register``1(System.Type)" -->
         <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.TurbineRegistrationList.Register``2" -->
         <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.TurbineRegistrationList.Register``2(System.String)" -->
@@ -54,6 +60,12 @@
             Default constructor.
             </summary>
         </member>
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.CreateContainer">
+            <summary>
+            Creates an <see cref="T:Castle.Windsor.IWindsorContainer"/> instance with the right resolvers associated to it.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.#ctor(Castle.Windsor.IWindsorContainer)">
             <summary>
             Create an instance of the type an use the specified <see cref="T:Castle.Windsor.IWindsorContainer"/>.
@@ -61,13 +73,20 @@
         </member>
         <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.Batch">
             <summary>
-            Gets the associated <see cref="T:MvcTurbine.ComponentModel.IBatchRegistration"/> to process.
+            Gets the associated <see cref="T:MvcTurbine.ComponentModel.IServiceRegistrar"/> to process.
             </summary>
             <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.Resolve``1" -->
         <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.Resolve``1(System.String)" -->
         <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.Resolve``1(System.Type)" -->
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.Resolve(System.Type)">
+            <summary>
+             Resolves the service of the specified type by the given type key.
+            </summary>
+            <param name="type">Type of service to resolve.</param>
+            <returns>An instance of the type, null otherwise</returns>
+        </member>
         <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.ResolveServices``1" -->
         <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.Register``1(System.Type)" -->
         <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.Register``2" -->
@@ -85,6 +104,13 @@
             </summary>
             <param name="serviceType"></param>
             <param name="implType"></param>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.Register``1(``0)">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceLocator.Register``1(``0)"/>.
+            </summary>
+            <typeparam name="Interface"></typeparam>
+            <param name="instance"></param>
         </member>
         <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.Release(System.Object)">
             <summary>

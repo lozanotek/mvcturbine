@@ -5,7 +5,7 @@
     // This class should be auto-registered.
     public class Logger : ILogger {
         // Declare the log4net logger to use
-        private static readonly ILog log = LogManager.GetLogger(typeof(Log4netBlade));
+        private static readonly ILog log = LogManager.GetLogger(typeof(Log4NetBlade));
 
         public ILog InternalLog {
             get { return log; }

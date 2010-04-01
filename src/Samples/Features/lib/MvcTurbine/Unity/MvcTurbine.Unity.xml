@@ -25,7 +25,7 @@
         </member>
         <member name="M:MvcTurbine.Unity.UnityServiceLocator.Batch">
             <summary>
-            Gets the associated <see cref="T:MvcTurbine.ComponentModel.IBatchRegistration"/> to process.
+            Gets the associated <see cref="T:MvcTurbine.ComponentModel.IServiceRegistrar"/> to process.
             </summary>
             <returns></returns>
         </member>
@@ -51,6 +51,13 @@
             <typeparam name="T">Type of service to resolve.</typeparam>
             <param name="type">Key type of the service.</param>
             <returns>An instance of the type, null otherwise.</returns>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.Resolve(System.Type)">
+            <summary>
+             Resolves the service of the specified type by the given type key.
+            </summary>
+            <param name="type">Type of service to resolve.</param>
+            <returns>An instance of the type, null otherwise</returns>
         </member>
         <member name="M:MvcTurbine.Unity.UnityServiceLocator.ResolveServices``1">
             <summary>
@@ -102,6 +109,13 @@
             </summary>
             <param name="serviceType">Type of the service to register.</param>
             <param name="implType">Implementation to associate with the service.</param>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.Register``1(``0)">
+            <summary>
+            Registers the instance of type, <typeparamref name="Interface"/>, with the locator.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <param name="instance">Instance of the type to register.</param>
         </member>
         <member name="M:MvcTurbine.Unity.UnityServiceLocator.Release(System.Object)">
             <summary>

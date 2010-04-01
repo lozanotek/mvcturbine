@@ -13,6 +13,7 @@
         public IMessageService MessageService { get; private set; }
         public ILogger Logger { get; private set; }
 
+        [Log]
         public ActionResult Index() {
             Logger.LogMessage("In the HomeController.Index method!");
 
@@ -20,6 +21,7 @@
             return View();
         }
 
+        [Log]
         public ActionResult About() {
             Logger.LogMessage("In the HomeController.About method!");
 

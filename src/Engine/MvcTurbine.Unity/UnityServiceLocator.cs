@@ -220,10 +220,11 @@ namespace MvcTurbine.Unity {
         }
 
         public TService Inject<TService>(TService instance) where TService : class {
-            return (TService)Container.BuildUp(instance.GetType(), instance);
+            return instance == null ? instance : Container.BuildUp(instance);
         }
 
         public void TearDown<TService>(TService instance) where TService : class {
+            if(instance == null) return;
             Container.Teardown(instance);
         }
 

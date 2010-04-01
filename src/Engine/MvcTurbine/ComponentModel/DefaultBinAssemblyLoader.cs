@@ -35,7 +35,7 @@ namespace MvcTurbine.ComponentModel {
         /// Loads the assemblies in the bin folder that are not currently in the <see cref="AppDomain.CurrentDomain"/>.
         /// </summary>
         /// <returns>A list of assemblies that were loaded into the <see cref="AppDomain.CurrentDomain"/>.</returns>
-        public IList<string> LoadAssembliesFromBinFolder() {
+        public virtual IList<string> LoadAssembliesFromBinFolder() {
             var currentAssemblies = GetCurrentAppDomainAssemblies();
 
             var assemblyFiles = GetAssembliesInBinFolder();

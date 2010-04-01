@@ -20,6 +20,7 @@
 #endregion
 
 namespace MvcTurbine.Web.Controllers {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
@@ -51,13 +52,29 @@ namespace MvcTurbine.Web.Controllers {
         public FilterInfo FindFilters(ActionDescriptor actionDescriptor) {
             if (actionDescriptor == null) return null;
 
-            InjectableFilterAttribute[] attributes = GetAttributes(actionDescriptor);
+            var globalFilters = GetGlobalFilters();
+            var injectableFilters = GetInjectableFilters(actionDescriptor);
+
+            return new MergedFilters(globalFilters, injectableFilters);
+        }
+
+        private FilterInfo GetGlobalFilters() {
+            var actionFilters = GetGlobalFilterFromContainer<IActionFilter>();
+            var resultFilters = GetGlobalFilterFromContainer<IResultFilter>();
+            var exceptionFilters = GetGlobalFilterFromContainer<IExceptionFilter>();
+            var authFilters = GetGlobalFilterFromContainer<IAuthorizationFilter>();
+
+            return CreateFilterInfo(authFilters, actionFilters, resultFilters, exceptionFilters);
+        }
+
+        private FilterInfo GetInjectableFilters(ICustomAttributeProvider actionDescriptor) {
+            var attributes = GetAttributes(actionDescriptor);
             if (attributes == null || attributes.Length == 0) return null;
 
-            IList<IActionFilter> actionFilters = GetRegisteredFilters<IActionFilter>(attributes);
-            IList<IResultFilter> resultFilters = GetRegisteredFilters<IResultFilter>(attributes);
-            IList<IExceptionFilter> exceptionFilters = GetRegisteredFilters<IExceptionFilter>(attributes);
-            IList<IAuthorizationFilter> authorizationFilters = GetRegisteredFilters<IAuthorizationFilter>(attributes);
+            var actionFilters = GetRegisteredFilters<IActionFilter>(attributes);
+            var resultFilters = GetRegisteredFilters<IResultFilter>(attributes);
+            var exceptionFilters = GetRegisteredFilters<IExceptionFilter>(attributes);
+            var authorizationFilters = GetRegisteredFilters<IAuthorizationFilter>(attributes);
 
             return CreateFilterInfo(authorizationFilters,
                                     actionFilters, resultFilters, exceptionFilters);
@@ -109,6 +126,21 @@ namespace MvcTurbine.Web.Controllers {
                            select svc;
 
             return services.ToList();
+        }
+
+        protected virtual IList<TFilter> GetGlobalFilterFromContainer<TFilter>()
+            where TFilter : class {
+            var attributeList = ServiceLocator.ResolveServices<TFilter>()
+                .Where(filter => !filter.IsType<IController>());
+
+            //HACK: For some reason 'distict' couldn't work, so I had to make this 'workaround' :)
+            var distinctList = new Dictionary<Type, TFilter>();
+
+            foreach (var filter in attributeList) {
+                distinctList[filter.GetType()] = filter;
+            }
+
+            return distinctList.Values.ToList();
         }
     }
 }

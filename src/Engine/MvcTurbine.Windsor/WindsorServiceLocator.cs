@@ -220,6 +220,7 @@ namespace MvcTurbine.Windsor {
         public TService Inject<TService>(TService instance) where TService : class {
             if (instance == null) return null;
 
+            // Go through all properties and resolve them if any
             Type instanceType = instance.GetType();
             instanceType.GetProperties()
                 .Where(property => property.CanWrite && Container.Kernel.HasComponent(property.PropertyType))

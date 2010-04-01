@@ -192,7 +192,6 @@ namespace MvcTurbine.Ninject
         public void Register<Interface, Implementation>()
             where Implementation : class, Interface
         {
-
             currentModule.Register<Interface, Implementation>();
         }
 
@@ -207,7 +206,6 @@ namespace MvcTurbine.Ninject
         public void Register<Interface, Implementation>(string key)
             where Implementation : class, Interface
         {
-
             currentModule.Register<Interface, Implementation>(key);
         }
 
@@ -253,62 +251,53 @@ namespace MvcTurbine.Ninject
         /// <summary>
         /// Resets the locator to its initial state clearing all registrations.
         /// </summary>
-        public void Reset()
-        {
-            if (Container == null)
-                return;
+        public void Reset() {
+            if (Container == null) return;
 
             Container.Dispose();
             Container = null;
             currentModule = null;
         }
 
-        public TService Inject<TService>(TService instance) where TService : class
-        {
+        public TService Inject<TService>(TService instance) where TService : class {
             Container.Inject(instance);
             return instance;
         }
 
         [Obsolete("Not used with this implementation of IServiceLocator.")]
-        public void TearDown<TService>(TService instance) where TService : class
-        {
+        public void TearDown<TService>(TService instance) where TService : class {
         }
 
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         /// <filterpriority>2</filterpriority>
-        public void Dispose()
-        {
+        public void Dispose() {
             Reset();
         }
 
-        #region handle activation exception
+        #region Handle Activation Exception
 
-        private object ResolveTheFirstBindingFromTheContainer(Exception activationException, Type type)
-        {
+        private object ResolveTheFirstBindingFromTheContainer(Exception activationException, Type type) {
             var firstBinding = GetNameOfFirstBinding(type);
-            if (firstBinding.BindingExists)
-                return Container.Get(type, firstBinding.Name);
+            if (firstBinding.BindingExists) return Container.Get(type, firstBinding.Name);
+            
             throw new ServiceResolutionException(type, activationException);
         }
 
-        private FirstBindingInfo GetNameOfFirstBinding(Type type)
-        {
+        private FirstBindingInfo GetNameOfFirstBinding(Type type) {
             var binding = Container.GetBindings(type).OrderBy(x => x.Metadata.Name).FirstOrDefault();
-            if (binding == null)
-                return new FirstBindingInfo { BindingExists = false };
-            return new FirstBindingInfo { BindingExists = true, Name = binding.Metadata.Name };
+            
+            return binding == null ? new FirstBindingInfo { BindingExists = false } : 
+                new FirstBindingInfo { BindingExists = true, Name = binding.Metadata.Name };
         }
 
-        private class FirstBindingInfo
-        {
+        private class FirstBindingInfo {
             public string Name { get; set; }
             public bool BindingExists { get; set; }
         }
 
         #endregion
-
     }
 
 }

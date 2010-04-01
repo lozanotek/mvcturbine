@@ -22,6 +22,7 @@
 namespace MvcTurbine.StructureMap {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using ComponentModel;
     using global::StructureMap;
 
@@ -206,8 +207,17 @@ namespace MvcTurbine.StructureMap {
         }
 
         public TService Inject<TService>(TService instance) where TService : class {
-            Container.Inject(instance);
-            
+            if (instance == null) return null;
+
+            // Honor SM's configuration, if any
+            Container.BuildUp(instance);
+
+            // Go through all properties and resolve them if any
+            Type instanceType = instance.GetType();
+            instanceType.GetProperties()
+                .Where(property => property.CanWrite && Container.Model.HasImplementationsFor(property.PropertyType))
+                .ForEach(property => property.SetValue(instance, Container.GetInstance(property.PropertyType), null));
+
             return instance;
         }
 
