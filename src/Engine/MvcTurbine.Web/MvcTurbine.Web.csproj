@@ -94,6 +94,7 @@
     <Compile Include="RotorContext.cs" />
     <Compile Include="TurbineApplication.cs" />
     <Compile Include="TypeExtensions.cs" />
+    <Compile Include="Views\ViewExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MvcTurbine\MvcTurbine.csproj">
