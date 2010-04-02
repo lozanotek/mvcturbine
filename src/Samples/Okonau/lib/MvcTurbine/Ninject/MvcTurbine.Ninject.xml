@@ -25,7 +25,7 @@
         </member>
         <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Batch">
             <summary>
-            Gets the associated <see cref="T:MvcTurbine.ComponentModel.IBatchRegistration"/> to process.
+            Gets the associated <see cref="T:MvcTurbine.ComponentModel.IServiceRegistrar"/> to process.
             </summary>
             <returns></returns>
         </member>
@@ -51,6 +51,13 @@
             <typeparam name="T">Type of service to resolve.</typeparam>
             <param name="type">Key type of the service.</param>
             <returns>An instance of the type, null otherwise.</returns>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Resolve(System.Type)">
+            <summary>
+             Resolves the service of the specified type by the given type key.
+            </summary>
+            <param name="type">Type of service to resolve.</param>
+            <returns>An instance of the type, null otherwise</returns>
         </member>
         <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.ResolveServices``1">
             <summary>
@@ -102,6 +109,13 @@
             <param name="serviceType"></param>
             <param name="implType"></param>
         </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Register``1(``0)">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceLocator.Register``1(``0)"/>.
+            </summary>
+            <typeparam name="Interface"></typeparam>
+            <param name="instance"></param>
+        </member>
         <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Release(System.Object)">
             <summary>
             Releases (disposes) the service instance from within the locator.
@@ -140,6 +154,12 @@
             <summary>
             Sets the unique ID for the module
             </summary>
+        </member>
+        <member name="M:MvcTurbine.Ninject.TurbineModule.RegisterAll``1">
+            <summary>
+            Registers all the services of type <typeparamref name="Interface"/> into the container.
+            </summary>
+            <typeparam name="Interface"></typeparam>
         </member>
         <member name="M:MvcTurbine.Ninject.TurbineModule.Register``1(System.Type)">
             <summary>
@@ -183,6 +203,7 @@
             <param name="serviceType"></param>
             <param name="implType"></param>
         </member>
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Ninject.TurbineModule.Register``1(``0)" -->
         <member name="P:MvcTurbine.Ninject.TurbineModule.Container">
             <summary>
             Gets the associated <see cref="T:Ninject.IKernel"/> for the registration.

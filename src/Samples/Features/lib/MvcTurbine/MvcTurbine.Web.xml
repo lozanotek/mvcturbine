@@ -144,6 +144,27 @@
             <param name="controller">Current controller.</param>
             <returns>Current <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> or nul if not applicable</returns>
         </member>
+        <member name="M:MvcTurbine.Web.Controllers.ControllerExtensions.TurbineApplication(System.Web.Mvc.ControllerContext)">
+            <summary>
+            Gets the current <see cref="T:MvcTurbine.ITurbineApplication"/> associated with the MVC application.
+            </summary>
+            <param name="controller">Current controller.</param>
+            <returns>Current <see cref="T:MvcTurbine.ITurbineApplication"/> or null if not applicable.</returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Controllers.ControllerExtensions.RotorContext(System.Web.Mvc.ControllerContext)">
+            <summary>
+            Gets the current <see cref="T:MvcTurbine.IRotorContext"/> associated with the MVC application.
+            </summary>
+            <param name="controller">Current controller.</param>
+            <returns>Current <see cref="T:MvcTurbine.IRotorContext"/> or null if not applicable.</returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Controllers.ControllerExtensions.ServiceLocator(System.Web.Mvc.ControllerContext)">
+            <summary>
+            Gets the current <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> associated with the MVC application.
+            </summary>
+            <param name="controller">Current controller.</param>
+            <returns>Current <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> or nul if not applicable</returns>
+        </member>
         <member name="T:MvcTurbine.Web.Controllers.DefaultFilterFinder">
             <summary>
             Default implementation to find <see cref="T:MvcTurbine.Web.Controllers.InjectableFilterAttribute"/> for a controller action.
@@ -799,6 +820,32 @@
             </summary>
             <param name="type"></param>
             <returns></returns>
+        </member>
+        <member name="T:MvcTurbine.Web.Views.ViewExtensions">
+            <summary>
+             Extensions for <see cref="T:System.Web.Mvc.ViewContext"/> types.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Web.Views.ViewExtensions.TurbineApplication(System.Web.Mvc.ViewContext)">
+            <summary>
+            Gets the current <see cref="T:MvcTurbine.ITurbineApplication"/> associated with the MVC application.
+            </summary>
+            <param name="viewContext">Current view context.</param>
+            <returns>Current <see cref="T:MvcTurbine.ITurbineApplication"/> or null if not applicable.</returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Views.ViewExtensions.RotorContext(System.Web.Mvc.ViewContext)">
+            <summary>
+            Gets the current <see cref="T:MvcTurbine.IRotorContext"/> associated with the MVC application.
+            </summary>
+            <param name="controller">Current controller.</param>
+            <returns>Current <see cref="T:MvcTurbine.IRotorContext"/> or null if not applicable.</returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Views.ViewExtensions.ServiceLocator(System.Web.Mvc.ViewContext)">
+            <summary>
+            Gets the current <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> associated with the MVC application.
+            </summary>
+            <param name="controller">Current controller.</param>
+            <returns>Current <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> or nul if not applicable</returns>
         </member>
     </members>
 </doc>
