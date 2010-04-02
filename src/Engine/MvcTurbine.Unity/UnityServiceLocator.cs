@@ -132,7 +132,6 @@ namespace MvcTurbine.Unity {
         /// <returns>A list of service of type <see cref="T"/>, null otherwise.</returns>
         public IList<T> ResolveServices<T>() where T : class {
             IEnumerable<T> services = Container.ResolveAll<T>();
-
             return new List<T>(services);
         }
 
@@ -143,7 +142,8 @@ namespace MvcTurbine.Unity {
         /// <typeparam name="Interface">Type of the service to register.</typeparam>
         /// <param name="implType">Implementation type to use for registration.</param>
         public void Register<Interface>(Type implType) where Interface : class {
-            Container.RegisterType(typeof (Interface), implType);
+            var key = string.Format("{0}-{1}", typeof(Interface).Name, implType.FullName);
+            Container.RegisterType(typeof(Interface), implType, key);
         }
 
         /// <summary>

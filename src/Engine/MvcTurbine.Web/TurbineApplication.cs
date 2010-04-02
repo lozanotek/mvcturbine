@@ -170,10 +170,10 @@ namespace MvcTurbine.Web {
                 throw new InvalidOperationException(Resources.ServiceLocatorExceptionMessage);
             }
 
-            using (var registrar = locator.Batch()) {
+            using (locator.Batch()) {
                 // Add the IServiceLocator instance to itself so if any types later on need it,
                 // they can have it injected into them.
-                registrar.Register(locator);
+                locator.Register(locator);
             }
 
             return locator;
