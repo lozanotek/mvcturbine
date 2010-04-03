@@ -51,20 +51,17 @@ namespace MvcTurbine.Web.Tests.Blades {
 
         [Test]
         public void Resolve_View_Engine_Throws_Exception_Which_Returns_Null_List() {
-            var context = Get<IRotorContext>();
+            var contextFake = new Mock<IRotorContext>();
             var locator = new MockViewEngineServiceLocator()
             {
                 ShouldThrowExceptionForViewEngine = true
             };
 
-            using (Record()) {
-                Expect.Call(context.ServiceLocator).Return(locator);
-            }
+            contextFake.Setup(x => x.ServiceLocator)
+                .Returns(locator);
 
-            using (Playback()) {
-                var blade = new MvcBlade();
-                blade.SetupViewEngines(context);
-            }
+            var blade = new MvcBlade();
+            blade.SetupViewEngines(contextFake.Object);
 
             var viewEngines = ViewEngines.Engines;
 

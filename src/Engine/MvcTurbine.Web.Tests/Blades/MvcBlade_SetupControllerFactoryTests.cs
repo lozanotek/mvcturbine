@@ -11,17 +11,14 @@
     public class MvcBlade_SetupControllerFactoryTests : TestFixtureBase {
         [Test]
         public void Resolve_Controller_Factory_Returns_DefaultControllerFactory() {
-            var context = Get<IRotorContext>();
+            var contextFake = new Mock<IRotorContext>();
             var locator = new MockControllerFactoryServiceLocator();
 
-            using (Record()) {
-                Expect.Call(context.ServiceLocator).Return(locator);
-            }
+            contextFake.Setup(x => x.ServiceLocator)
+                .Returns(locator);
 
-            using (Playback()) {
-                var blade = new MvcBlade();
-                blade.SetupControllerFactory(context);
-            }
+            var blade = new MvcBlade();
+            blade.SetupControllerFactory(contextFake.Object);
 
             var currentFactory = ControllerBuilder.Current.GetControllerFactory();
             Assert.IsNotNull(currentFactory);
