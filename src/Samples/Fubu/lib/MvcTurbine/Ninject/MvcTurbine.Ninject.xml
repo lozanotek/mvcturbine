@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MvcTurbine.Ninject</name>
+    </assembly>
+    <members>
+        <member name="T:MvcTurbine.Ninject.NinjectServiceLocator">
+            <summary>
+            Default implementation of the <seealso cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> contract with Ninject IoC.
+            </summary>
+            <remarks>
+            To learn more about Ninject, please visit its website: http://ninject.org
+            </remarks>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.#ctor">
+            <summary>
+            Default constructor. Locator is instantiated with a new <seealso cref="T:Ninject.StandardKernel"/> instance.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.#ctor(Ninject.IKernel)">
+            <summary>
+            Creates an instance of the locator with the specified <seealso cref="T:Ninject.IKernel"/>.
+            </summary>
+            <param name="kernel">Pre-defined <see cref="T:Ninject.IKernel"/> to use within the container.</param>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Batch">
+            <summary>
+            Gets the associated <see cref="T:MvcTurbine.ComponentModel.IServiceRegistrar"/> to process.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Resolve``1">
+            <summary>
+            Resolves the service of the specified type.
+            </summary>
+            <typeparam name="T">Type of service to resolve.</typeparam>
+            <returns>An instance of the type, null otherwise.</returns>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Resolve``1(System.String)">
+            <summary>
+            Resolves the service of the specified type by the given string key.
+            </summary>
+            <typeparam name="T">Type of service to resolve.</typeparam>
+            <param name="key">Unique key to distinguish the service.</param>
+            <returns>An instance of the type, null otherwise.</returns>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Resolve``1(System.Type)">
+            <summary>
+            Resolves the service of the specified type by the given type key.
+            </summary>
+            <typeparam name="T">Type of service to resolve.</typeparam>
+            <param name="type">Key type of the service.</param>
+            <returns>An instance of the type, null otherwise.</returns>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Resolve(System.Type)">
+            <summary>
+             Resolves the service of the specified type by the given type key.
+            </summary>
+            <param name="type">Type of service to resolve.</param>
+            <returns>An instance of the type, null otherwise</returns>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.ResolveServices``1">
+            <summary>
+            Resolves the list of services of type <see cref="!:T"/> that are registered 
+            within the locator.
+            </summary>
+            <typeparam name="T">Type of the service to resolve.</typeparam>
+            <returns>A list of service of type <see cref="!:T"/>, null otherwise.</returns>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Register``1(System.Type)">
+            <summary>
+            Registers the implemation type, <paramref name="implType"/>, with the locator under
+            the <see cref="!:Interface"/> service type.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <param name="implType">Implementation type to use for registration.</param>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Register``2">
+            <summary>
+            Registers the implemation type, <see cref="!:Implementation"/>, with the locator under
+            the <see cref="!:Interface"/> service type.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <typeparam name="Implementation">Implementation type to use for registration.
+            </typeparam>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Register``2(System.String)">
+            <summary>
+            Registers the implemation type, <see cref="!:Implementation"/>, with the locator under
+            the <see cref="!:Interface"/> service type.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <typeparam name="Implementation">Implementation type to use for registration.
+            </typeparam>
+            <param name="key">Unique key to distinguish the service.</param>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Register(System.String,System.Type)">
+            <summary>
+            Registers the implementation type, <paramref name="type"/>, with the locator
+            by the given string key.
+            </summary>
+            <param name="key">Unique key to distinguish the service.</param>
+            <param name="type">Implementation type to use.</param>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Register(System.Type,System.Type)">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceLocator.Register(System.Type,System.Type)"/>.
+            </summary>
+            <param name="serviceType"></param>
+            <param name="implType"></param>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Register``1(``0)">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceLocator.Register``1(``0)"/>.
+            </summary>
+            <typeparam name="Interface"></typeparam>
+            <param name="instance"></param>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Release(System.Object)">
+            <summary>
+            Releases (disposes) the service instance from within the locator.
+            </summary>
+            <param name="instance">Instance of a service to dipose from the locator.</param>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Reset">
+            <summary>
+            Resets the locator to its initial state clearing all registrations.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="P:MvcTurbine.Ninject.NinjectServiceLocator.Container">
+            <summary>
+            Gets the current <see cref="T:Ninject.IKernel"/> associated with this instance.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.Ninject.TurbineModule">
+            <summary>
+            Defines a module that can be used for registering components
+            across the application.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Ninject.TurbineModule.#ctor(Ninject.IKernel)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="kernel"></param>
+        </member>
+        <member name="M:MvcTurbine.Ninject.TurbineModule.Load">
+            <summary>
+            Sets the unique ID for the module
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Ninject.TurbineModule.RegisterAll``1">
+            <summary>
+            Registers all the services of type <typeparamref name="Interface"/> into the container.
+            </summary>
+            <typeparam name="Interface"></typeparam>
+        </member>
+        <member name="M:MvcTurbine.Ninject.TurbineModule.Register``1(System.Type)">
+            <summary>
+            Registers the implemation type, <paramref name="implType"/>, with the locator under
+            the <see cref="!:Interface"/> service type.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <param name="implType">Implementation type to use for registration.</param>
+        </member>
+        <member name="M:MvcTurbine.Ninject.TurbineModule.Register``2">
+            <summary>
+            Registers the implemation type, <see cref="!:Implementation"/>, with the locator under
+            the <see cref="!:Interface"/> service type.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <typeparam name="Implementation">Implementation type to use for registration.
+            </typeparam>
+        </member>
+        <member name="M:MvcTurbine.Ninject.TurbineModule.Register``2(System.String)">
+            <summary>
+            Registers the implemation type, <see cref="!:Implementation"/>, with the locator under
+            the <see cref="!:Interface"/> service type.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <typeparam name="Implementation">Implementation type to use for registration.
+            </typeparam>
+            <param name="key">Unique key to distinguish the service.</param>
+        </member>
+        <member name="M:MvcTurbine.Ninject.TurbineModule.Register(System.String,System.Type)">
+            <summary>
+            Registers the implementation type, <paramref name="type"/>, with the locator
+            by the given string key.
+            </summary>
+            <param name="key">Unique key to distinguish the service.</param>
+            <param name="type">Implementation type to use.</param>
+        </member>
+        <member name="M:MvcTurbine.Ninject.TurbineModule.Register(System.Type,System.Type)">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceLocator.Register(System.Type,System.Type)"/>.
+            </summary>
+            <param name="serviceType"></param>
+            <param name="implType"></param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Ninject.TurbineModule.Register``1(``0)" -->
+        <member name="P:MvcTurbine.Ninject.TurbineModule.Container">
+            <summary>
+            Gets the associated <see cref="T:Ninject.IKernel"/> for the registration.
+            </summary>
+        </member>
+        <member name="P:MvcTurbine.Ninject.TurbineModule.Name">
+            <summary>
+            Gets the name for the module
+            </summary>
+        </member>
+    </members>
+</doc>
