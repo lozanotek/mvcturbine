@@ -26,7 +26,7 @@ namespace MvcTurbine.ComponentModel.Tests {
 
     public abstract class RegistrationTests : ServiceLocatorTests {
         [Test]
-        public void Register_With_Specified_Type_Should_Return_Same_Type() {
+        public virtual void Register_With_Specified_Type_Should_Return_Same_Type() {
             Type loggerType = typeof(SimpleLogger);
 
             using (locator.Batch()) {
@@ -86,8 +86,7 @@ namespace MvcTurbine.ComponentModel.Tests {
         }
 
         [Test]
-        public void Register_With_Specified_Service_Should_Return_Same_Type()
-        {
+        public void Register_With_Specified_Service_Should_Return_Same_Type() {
             Type implType = typeof(SimpleLogger);
 
             using (locator.Batch())
@@ -98,8 +97,7 @@ namespace MvcTurbine.ComponentModel.Tests {
         }
 
         [Test]
-        public void Register_With_Instance_Should_Return_Same_Object()
-        {
+        public void Register_With_Instance_Should_Return_Same_Object() {
             using (locator.Batch())
                 locator.Register<ILogger>(new SimpleLogger());
 
@@ -108,8 +106,7 @@ namespace MvcTurbine.ComponentModel.Tests {
         }
 
         [Test]
-        public void Register_With_Instance_Should_Return_Same_Object_For_Same_Type()
-        {
+        public void Register_With_Instance_Should_Return_Same_Object_For_Same_Type() {
             using (locator.Batch())
                 locator.Register(new SimpleLogger());
 
