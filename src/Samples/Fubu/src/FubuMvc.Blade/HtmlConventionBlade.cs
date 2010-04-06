@@ -14,11 +14,13 @@
         public override void Spin(IRotorContext context) {
             IServiceLocator locator = context.ServiceLocator;
 
+            // Hydrate the library from the system.
             var library = locator.Resolve<TagProfileLibrary>();
 
             // Get all the registered HTML conventions
             var conventions = locator.ResolveServices<HtmlConventionRegistry>();
 
+            // Register each convention
             foreach (HtmlConventionRegistry convention in conventions) {
                 library.ImportRegistry(convention);
             }

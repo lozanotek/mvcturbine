@@ -6,6 +6,7 @@
 
     public class SupportingServiceRegistration : IServiceRegistration {
         public void Register(IServiceLocator locator) {
+            // Register the common Fubu UI pieces
             locator.Register<IElementNamingConvention, DefaultElementNamingConvention>();
             locator.Register<Stringifier, Stringifier>();
             locator.Register(typeof (ITagGenerator<>), typeof (TagGenerator<>));

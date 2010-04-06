@@ -4,9 +4,14 @@
     using Microsoft.Practices.ServiceLocation;
     using ITurbineLocator=MvcTurbine.ComponentModel.IServiceLocator;
 
+    /// <summary>
+    /// This is a facade for the MS CSL to the MVC Turbine CSL. Minimal pieces have been implemented 
+    /// for getting this demo to work.
+    /// </summary>
     public sealed class ServiceLocatorProxy : ServiceLocatorImplBase {
         public ITurbineLocator Locator { get; private set; }
 
+        // Inject the Turbine CSL from the container
         public ServiceLocatorProxy(ITurbineLocator locator) {
             Locator = locator;
         }
