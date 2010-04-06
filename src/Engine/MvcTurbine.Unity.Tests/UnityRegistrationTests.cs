@@ -20,14 +20,28 @@
 #endregion
 
 namespace MvcTurbine.Unity.Tests {
+    using System;
     using ComponentModel;
     using ComponentModel.Tests;
+    using ComponentModel.Tests.Components;
     using NUnit.Framework;
 
     [TestFixture]
     public class UnityRegistrationTests : RegistrationTests {
         protected override IServiceLocator CreateServiceLocator() {
             return new UnityServiceLocator();
+        }
+
+        [Test]
+        public override void Register_With_Specified_Type_Should_Return_Same_Type() {
+            Type loggerType = typeof(SimpleLogger);
+
+            using (locator.Batch()) {
+                locator.Register<ILogger, SimpleLogger>("logger");
+            }
+
+            var logger = locator.Resolve<ILogger>("logger");
+            Assert.AreEqual(logger.GetType(), loggerType);
         }
     }
 }
