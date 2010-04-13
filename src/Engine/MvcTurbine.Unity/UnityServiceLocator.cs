@@ -224,7 +224,7 @@ namespace MvcTurbine.Unity {
         }
 
         public TService Inject<TService>(TService instance) where TService : class {
-            return instance == null ? instance : Container.BuildUp(instance);
+            return instance == null ? instance : (TService)Container.BuildUp(instance.GetType(), instance);
         }
 
         public void TearDown<TService>(TService instance) where TService : class {
