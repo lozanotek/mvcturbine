@@ -42,14 +42,15 @@ namespace MvcTurbine.Unity.Tests {
         }
 
         [Test]
-        public void Inject_Should_Not_Set_Dependencies_On_Instance_When_Dependencies_Are_Not_Defined_On_The_Interface_And_Resolved_As_The_Interface_Type() {
+        public void Inject_Should_Set_Dependencies_On_Instance_When_Dependencies_Are_Not_Defined_On_The_Interface_And_Resolved_As_The_Interface_Type()
+        {
             locator.Register(typeof(ITestDependency), typeof(TestDependency));
 
             ISample instanceAsInterface = new Sample();
             locator.Inject(instanceAsInterface);
 
             var instance = (Sample)instanceAsInterface;
-            Assert.IsNull(instance.DependencyThatDoesNotExistOnInterface);
+            Assert.IsNotNull(instance.DependencyThatDoesNotExistOnInterface);
         }
     }
 

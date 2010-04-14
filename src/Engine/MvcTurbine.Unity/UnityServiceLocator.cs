@@ -144,6 +144,10 @@ namespace MvcTurbine.Unity {
         public void Register<Interface>(Type implType) where Interface : class {
             var key = string.Format("{0}-{1}", typeof(Interface).Name, implType.FullName);
             Container.RegisterType(typeof(Interface), implType, key);
+
+            // Work-around, also register this implementation to service mapping
+            // without the generated key above.
+            Container.RegisterType(typeof(Interface), implType);
         }
 
         /// <summary>
@@ -220,7 +224,7 @@ namespace MvcTurbine.Unity {
         }
 
         public TService Inject<TService>(TService instance) where TService : class {
-            return instance == null ? instance : Container.BuildUp(instance);
+            return instance == null ? instance : (TService)Container.BuildUp(instance.GetType(), instance);
         }
 
         public void TearDown<TService>(TService instance) where TService : class {

@@ -1,7 +1,7 @@
-namespace MvcTurbine.Samples.LoggingBlade.Web {
+namespace MvcTurbine.Samples.ExtensionMethods {
     using ComponentModel;
-    using MvcTurbine.Web;
-    using Unity;
+    using Ninject;
+    using Web;
 
     public class MvcApplication : TurbineApplication {
         static MvcApplication() {
@@ -9,8 +9,7 @@ namespace MvcTurbine.Samples.LoggingBlade.Web {
             // Everything else is wired automatically
 
             // For now, let's use the Unity IoC
-            ServiceLocatorManager.SetLocatorProvider(() => new UnityServiceLocator());
-        
+            ServiceLocatorManager.SetLocatorProvider(() => new NinjectServiceLocator());
         }
     }
 }

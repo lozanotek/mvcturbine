@@ -6,8 +6,11 @@
 <asp:Content ID="indexContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2>
         Injectable filters</h2>
-    <h3>
-        <%= Html.Encode(ViewData["ActionMessage"]) %></h3>
-    <h3>
-        <%= Html.Encode(ViewData["AuthMessage"]) %></h3>
+    <ul>
+        <li>Injectable Action Filter: <strong><%= Html.Encode(ViewData["ActionMessage"]) %></strong></li>
+        <li>Injectable Authorization Filter: <strong><%= Html.Encode(ViewData["AuthMessage"]) %></strong></li>
+        <li>Regular Authorization Filter: <strong><%= Html.Encode(ViewData["ReplayAuthMessage"]) %></strong></li>
+        <li>Regular Action Filter: <strong><%= Html.Encode(ViewData["ReplayActionMessage"]) %></strong></li>
+        <li>Global Action Filter: <strong><%= Html.Encode(ViewData["GlobalActionMessage"])%></strong></li>
+    </ul>
 </asp:Content>

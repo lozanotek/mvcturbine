@@ -7,16 +7,11 @@
             : base(service) {
         }
 
-        #region IActionFilter Members
-
         public void OnActionExecuting(ActionExecutingContext filterContext) {
         }
 
         public void OnActionExecuted(ActionExecutedContext filterContext) {
             filterContext.Controller.ViewData["ActionMessage"] = GetFilterMessage();
         }
-
-
-        #endregion
     }
 }
