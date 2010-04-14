@@ -2,8 +2,6 @@
     using System.Diagnostics;
 
     public class MessageService : IMessageService {
-        #region IMessageService Members
-
         public string GetWelcomeMessage() {
             return "Welcome to ASP.NET MVC!";
         }
@@ -16,6 +14,8 @@
             return "I'm in method " + name;
         }
 
-        #endregion
+        public string ReplayMessage(string message) {
+            return message;
+        }
     }
 }

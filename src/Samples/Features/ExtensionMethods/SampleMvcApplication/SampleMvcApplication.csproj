@@ -9,8 +9,8 @@
     <ProjectTypeGuids>{603C0E0B-DB56-11DC-BE95-000D561079B0};{349C5851-65DF-11DA-9384-00065B846F21};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MvcTurbine.Samples.FilterInjection</RootNamespace>
-    <AssemblyName>MvcTurbine.Samples.FilterInjection</AssemblyName>
+    <RootNamespace>MvcTurbine.Samples.ExtensionMethods</RootNamespace>
+    <AssemblyName>MvcTurbine.Samples.ExtensionMethods</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
   </PropertyGroup>
@@ -32,21 +32,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Practices.Unity, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\MvcTurbine\Unity\Microsoft.Practices.Unity.dll</HintPath>
-    </Reference>
     <Reference Include="MvcTurbine, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0e426322531bc5b0, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\MvcTurbine\MvcTurbine.dll</HintPath>
     </Reference>
-    <Reference Include="MvcTurbine.Unity, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0e426322531bc5b0, processorArchitecture=MSIL">
+    <Reference Include="MvcTurbine.Ninject, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0e426322531bc5b0, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\MvcTurbine\Unity\MvcTurbine.Unity.dll</HintPath>
+      <HintPath>..\..\lib\MvcTurbine\Ninject\MvcTurbine.Ninject.dll</HintPath>
     </Reference>
     <Reference Include="MvcTurbine.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0e426322531bc5b0, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\MvcTurbine\MvcTurbine.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\MvcTurbine\Ninject\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -79,27 +79,16 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Filters\BaseFilter.cs" />
-    <Compile Include="Filters\CustomActionFilter.cs" />
-    <Compile Include="Filters\CustomAuthorizationFilter.cs" />
-    <Compile Include="Filters\CustomAuthorizationAttribute.cs" />
-    <Compile Include="Filters\CustomActionAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Filters\GlobalFilter.cs" />
-    <Compile Include="Filters\ReplayAuthAttribute.cs" />
-    <Compile Include="Filters\ReplayActionAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Html\ContentHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registration\ServiceRegistration.cs" />
-    <Compile Include="Routing\RouteRegistrator.cs" />
+    <Compile Include="Routing\RouteConfigurator.cs" />
     <Compile Include="Services\IMessageService.cs" />
     <Compile Include="Services\Impl\MessageService.cs" />
+    <Compile Include="Services\ServiceConfigurator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
@@ -114,6 +103,7 @@
     <Content Include="Scripts\MicrosoftAjax.debug.js" />
     <Content Include="Scripts\MicrosoftMvcAjax.js" />
     <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Views\Home\About.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
     <Content Include="Views\Shared\Site.Master" />
@@ -134,7 +124,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>62274</DevelopmentServerPort>
+          <DevelopmentServerPort>5709</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
