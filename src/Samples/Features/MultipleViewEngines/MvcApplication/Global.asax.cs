@@ -1,7 +1,7 @@
 namespace MvcTurbine.Samples.MultipleViewEngines {
     using ComponentModel;
+    using Unity;
     using Web;
-    using Windsor;
 
     public class MvcApplication : TurbineApplication {
         static MvcApplication() {
@@ -9,7 +9,7 @@ namespace MvcTurbine.Samples.MultipleViewEngines {
             // Everything else is wired automatically
 
             // For now, let's use the Castle Windsor IoC
-            ServiceLocatorManager.SetLocatorProvider(() => new WindsorServiceLocator());
+            ServiceLocatorManager.SetLocatorProvider(() => new UnityServiceLocator());
         }
     }
 }
