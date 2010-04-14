@@ -1,9 +1,7 @@
 namespace MvcTurbine.Samples.LoggingBlade.Web {
     using ComponentModel;
     using MvcTurbine.Web;
-    using StructureMap;
-
-    //using Unity;
+    using Unity;
 
     public class MvcApplication : TurbineApplication {
         static MvcApplication() {
@@ -11,7 +9,8 @@ namespace MvcTurbine.Samples.LoggingBlade.Web {
             // Everything else is wired automatically
 
             // For now, let's use the Unity IoC
-            ServiceLocatorManager.SetLocatorProvider(() => new StructureMapServiceLocator());
+            ServiceLocatorManager.SetLocatorProvider(() => new UnityServiceLocator());
+        
         }
     }
 }
