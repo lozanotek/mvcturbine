@@ -107,11 +107,6 @@
     <Compile Include="Blades\Blade.cs" />
     <Compile Include="Blades\IBlade.cs" />
     <Compile Include="Blades\BladeList.cs" />
-    <Compile Include="Properties\Resources1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Routing\IRouteRegistrator.cs" />
     <Compile Include="TypeExtensions.cs" />
   </ItemGroup>
