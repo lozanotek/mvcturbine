@@ -31,25 +31,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MvcTurbine, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0e426322531bc5b0, processorArchitecture=MSIL">
+    <Reference Include="MvcTurbine, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0e426322531bc5b0, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\MvcTurbine.dll</HintPath>
+      <HintPath>..\..\lib\MvcTurbine\MvcTurbine.dll</HintPath>
     </Reference>
     <Reference Include="MvcTurbine.EmbeddedViews, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\MvcTurbine.EmbeddedViews.dll</HintPath>
+      <HintPath>..\..\lib\MvcTurbine\Blades\MvcTurbine.EmbeddedViews.dll</HintPath>
     </Reference>
-    <Reference Include="MvcTurbine.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0e426322531bc5b0, processorArchitecture=MSIL">
+    <Reference Include="MvcTurbine.Web, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0e426322531bc5b0, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\MvcTurbine.Web.dll</HintPath>
+      <HintPath>..\..\lib\MvcTurbine\MvcTurbine.Web.dll</HintPath>
     </Reference>
     <Reference Include="Spark, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\Spark.dll</HintPath>
+      <HintPath>..\..\lib\Spark\Spark.dll</HintPath>
     </Reference>
     <Reference Include="Spark.Web.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\Spark.Web.Mvc.dll</HintPath>
+      <HintPath>..\..\lib\Spark\Spark.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
