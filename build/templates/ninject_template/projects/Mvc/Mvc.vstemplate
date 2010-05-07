@@ -19,7 +19,6 @@
       <Folder Name="Services" TargetFolderName="Services">
         <ProjectItem TargetFileName="IMessageService.cs" ReplaceParameters="true">IMessageService.cs</ProjectItem>
 	<ProjectItem TargetFileName="MessageService.cs" ReplaceParameters="true">MessageService.cs</ProjectItem>
-        <ProjectItem TargetFileName="DefaultServiceRegistration.cs" ReplaceParameters="true">DefaultServiceRegistration.cs</ProjectItem>
       </Folder>
       <Folder Name="Properties" TargetFolderName="Properties">
         <ProjectItem TargetFileName="AssemblyInfo.cs" ReplaceParameters="true">AssemblyInfo.cs</ProjectItem>

@@ -15,7 +15,6 @@
       <ProjectItem TargetFileName="Default.aspx" ReplaceParameters="true">Default.aspx</ProjectItem>
       <ProjectItem TargetFileName="Default.aspx.cs" ReplaceParameters="true">Default.aspx.cs</ProjectItem>
       <ProjectItem TargetFileName="Global.asax" ReplaceParameters="true">Global.asax</ProjectItem>
-      <ProjectItem TargetFileName="Global.asax.cs" ReplaceParameters="true">Global.asax.cs</ProjectItem>
       <ProjectItem TargetFileName="Web.config" ReplaceParameters="true">Web.config</ProjectItem>
       <Folder Name="Content" TargetFolderName="Content">
         <ProjectItem TargetFileName="Site.css" ReplaceParameters="false">Site.css</ProjectItem>
