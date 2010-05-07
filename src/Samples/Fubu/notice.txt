@@ -1,0 +1,11 @@
+Original Source from Ryan Ohs (ryanohs)
+Source Repository: http://github.com/ryanohs/Fubu-HtmlTags-For-ASP.NET-MVC
+
+This is a Derivative Work of the original HtmlTags and "reboot" FubuMVC.UI projects available from
+
+http://github.com/DarthFubuMVC/fubumvc
+
+
+I have included the compiled HtmlTags assembly and copied all necessary classes/files from FubuMVC.UI and FubuMVC.Core to get this adapter to compile against Microsoft MVC 1.0. Directory structures have mostly been left in tact and namespaces are the original.
+
+The sample web application is original work available under the Apache License, Version 2.0.

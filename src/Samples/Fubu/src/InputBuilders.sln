@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "WebTest\Sample.csproj", "{7D39E73C-E276-46C4-872E-A16A56B88029}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FubuMvc.Blade", "FubuMvc.Blade\FubuMvc.Blade.csproj", "{E18A0A76-6F01-4F21-A455-E251E53714E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlConventions", "HtmlConventions\HtmlConventions.csproj", "{02B3F1CE-CA96-4FF4-96C3-86C01C2D0560}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D39E73C-E276-46C4-872E-A16A56B88029}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D39E73C-E276-46C4-872E-A16A56B88029}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D39E73C-E276-46C4-872E-A16A56B88029}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D39E73C-E276-46C4-872E-A16A56B88029}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E18A0A76-6F01-4F21-A455-E251E53714E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E18A0A76-6F01-4F21-A455-E251E53714E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E18A0A76-6F01-4F21-A455-E251E53714E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E18A0A76-6F01-4F21-A455-E251E53714E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02B3F1CE-CA96-4FF4-96C3-86C01C2D0560}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02B3F1CE-CA96-4FF4-96C3-86C01C2D0560}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02B3F1CE-CA96-4FF4-96C3-86C01C2D0560}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02B3F1CE-CA96-4FF4-96C3-86C01C2D0560}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
