@@ -1,13 +1,21 @@
 namespace Mvc.Controllers
 {
     using System.Web.Mvc;
+    using Services;
 
     [HandleError]
     public class HomeController : Controller
     {
+        public HomeController(IMessageService messageService)
+        {
+            MessageService = messageService;
+        }
+
+        public IMessageService MessageService { get; private set; }
+
         public ActionResult Index()
         {
-            ViewData["Message"] = "Welcome to ASP.NET MVC!";
+            ViewData["Message"] = MessageService.GetWelcomeMessage();
 
             return View();
         }

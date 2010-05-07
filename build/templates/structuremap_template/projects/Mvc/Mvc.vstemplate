@@ -16,6 +16,10 @@
       <Folder Name="Controllers" TargetFolderName="Controllers">
         <ProjectItem TargetFileName="HomeController.cs" ReplaceParameters="true">HomeController.cs</ProjectItem>
       </Folder>
+      <Folder Name="Services" TargetFolderName="Services">
+        <ProjectItem TargetFileName="IMessageService.cs" ReplaceParameters="true">IMessageService.cs</ProjectItem>
+	<ProjectItem TargetFileName="MessageService.cs" ReplaceParameters="true">MessageService.cs</ProjectItem>
+      </Folder>
       <Folder Name="Properties" TargetFolderName="Properties">
         <ProjectItem TargetFileName="AssemblyInfo.cs" ReplaceParameters="true">AssemblyInfo.cs</ProjectItem>
       </Folder>
