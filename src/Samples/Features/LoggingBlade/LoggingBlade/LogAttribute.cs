@@ -1,7 +1,11 @@
 ﻿namespace MvcTurbine.Samples.LoggingBlade {
     using System.Web.Mvc;
+    using Microsoft.Practices.Unity;
 
     public class LogAttribute : ActionFilterAttribute {
+        // Since we're using the Unity container, we need to splicitly tell Unity
+        // that this piece is a property dependency
+        [Dependency]
         public ILogger Logger { get; set; }
 
         public override void OnActionExecuted(ActionExecutedContext filterContext) {

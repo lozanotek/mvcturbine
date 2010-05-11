@@ -22,6 +22,7 @@
 namespace MvcTurbine.Web.Controllers {
     using System;
     using System.Web.Mvc;
+    using System.Web.Routing;
     using ComponentModel;
 
     /// <summary>
@@ -53,10 +54,15 @@ namespace MvcTurbine.Web.Controllers {
         /// Provides the implementation of <see cref="IController"/> from the current
         /// <see cref="IServiceLocator"/>.
         /// </summary>
+        /// <param name="requestContext">Request context for the current request.</param>
         /// <param name="controllerType">Type of controller to search for.</param>
         /// <returns>An instance of <see cref="IController"/> from the container.</returns>
-        protected override IController GetControllerInstance(Type controllerType) {
-            if (controllerType == null) return null;
+        protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType) {
+            if (controllerType == null) {
+                // this will make sure that the MVC framework throws the corresponding 
+                // exception for a non-registered controller
+                return base.GetControllerInstance(requestContext, controllerType);
+            }
 
             var instance = ServiceLocator.Resolve<IController>(controllerType);
             var controller = instance as Controller;
@@ -74,6 +80,8 @@ namespace MvcTurbine.Web.Controllers {
         /// </summary>
         /// <param name="controller">Controller to dispose.</param>
         public override void ReleaseController(IController controller) {
+            if (controller == null) return;
+
             var disposable = controller as IDisposable;
 
             if (disposable != null) {

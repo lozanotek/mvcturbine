@@ -1,7 +1,6 @@
 ﻿namespace MvcTurbine.Samples.LoggingBlade {
     using System;
     using System.IO;
-    using System.Web.Mvc;
     using Blades;
     using ComponentModel;
     using log4net.Config;
