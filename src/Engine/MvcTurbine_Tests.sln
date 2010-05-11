@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine", "MvcTurbine\MvcTurbine.csproj", "{794C0A9F-60EB-4E25-93F2-5D4D59122529}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Web", "MvcTurbine.Web\MvcTurbine.Web.csproj", "{A2634ACF-E549-4861-A36D-A6BEA773BFDB}"

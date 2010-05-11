@@ -63,12 +63,20 @@ namespace MvcTurbine.Web {
 
             if (components != null) {
                 foreach (IBlade component in components) {
-                    component.Dispose();
+                    try {
+                        //HACK: Yes, I know this is ugly but need to figure out how to best handle this
+                        component.Dispose();
+                    } catch {
+                    }
                 }
             }
 
-            if (ServiceLocator != null) {
+            if (ServiceLocator == null) return;
+
+            try {
+                //HACK: Yes, I know this is ugly but need to figure out how to best handle this
                 ServiceLocator.Dispose();
+            } catch {
             }
         }
 

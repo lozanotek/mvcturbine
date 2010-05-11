@@ -491,11 +491,12 @@
             <param name="serviceLocator">The <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> to use when 
             creating controllers.</param>
         </member>
-        <member name="M:MvcTurbine.Web.Controllers.TurbineControllerFactory.GetControllerInstance(System.Type)">
+        <member name="M:MvcTurbine.Web.Controllers.TurbineControllerFactory.GetControllerInstance(System.Web.Routing.RequestContext,System.Type)">
             <summary>
             Provides the implementation of <see cref="T:System.Web.Mvc.IController"/> from the current
             <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>.
             </summary>
+            <param name="requestContext">Request context for the current request.</param>
             <param name="controllerType">Type of controller to search for.</param>
             <returns>An instance of <see cref="T:System.Web.Mvc.IController"/> from the container.</returns>
         </member>

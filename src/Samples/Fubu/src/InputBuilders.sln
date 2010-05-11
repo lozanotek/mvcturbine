@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "WebTest\Sample.csproj", "{7D39E73C-E276-46C4-872E-A16A56B88029}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FubuMvc.Blade", "FubuMvc.Blade\FubuMvc.Blade.csproj", "{E18A0A76-6F01-4F21-A455-E251E53714E2}"

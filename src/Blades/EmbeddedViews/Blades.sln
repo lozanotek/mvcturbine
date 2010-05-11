@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{5E4F068A-5834-4505-B1F1-A0C2F9A0476D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.EmbeddedViews", "MvcTurbine.EmbeddedViews\MvcTurbine.EmbeddedViews.csproj", "{89C29905-FA1D-46F2-B7C4-44BD6B5AD5B5}"

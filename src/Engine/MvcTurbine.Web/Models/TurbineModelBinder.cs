@@ -68,7 +68,7 @@ namespace MvcTurbine.Web.Models {
             }
 
             foreach (var binder in binders) {
-                if (!binder.SupportsModelType(bindingContext.ModelType)) continue;
+                if (!binder.SupportsModelType(bindingContext.ModelMetadata.ModelType)) continue;
 
                 return binder.BindModel(controllerContext, bindingContext);
             }

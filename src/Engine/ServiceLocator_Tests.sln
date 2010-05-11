@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7C04E093-A092-4110-A146-3047FF8BFD83}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine", "MvcTurbine\MvcTurbine.csproj", "{794C0A9F-60EB-4E25-93F2-5D4D59122529}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Windsor", "MvcTurbine.Windsor\MvcTurbine.Windsor.csproj", "{B253145D-A629-4A11-9F24-7FE91FBD05AE}"
@@ -10,8 +12,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.StructureMap", "MvcTurbine.StructureMap\MvcTurbine.StructureMap.csproj", "{24E085F7-5E64-4FF0-9769-6B8989EF1CD1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Ninject", "MvcTurbine.Ninject\MvcTurbine.Ninject.csproj", "{05F39581-C732-473D-BC3B-75A534569EEF}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7C04E093-A092-4110-A146-3047FF8BFD83}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Ninject.Tests", "MvcTurbine.Ninject.Tests\MvcTurbine.Ninject.Tests.csproj", "{7F2290B5-CDD0-4A89-9009-D77126EF492E}"
 EndProject
@@ -74,10 +74,10 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{794C0A9F-60EB-4E25-93F2-5D4D59122529} = {7C04E093-A092-4110-A146-3047FF8BFD83}
 		{B253145D-A629-4A11-9F24-7FE91FBD05AE} = {7C04E093-A092-4110-A146-3047FF8BFD83}
 		{57CCBB78-5A1A-41D6-BBFF-8CE6F0F3B5EF} = {7C04E093-A092-4110-A146-3047FF8BFD83}
 		{24E085F7-5E64-4FF0-9769-6B8989EF1CD1} = {7C04E093-A092-4110-A146-3047FF8BFD83}
 		{05F39581-C732-473D-BC3B-75A534569EEF} = {7C04E093-A092-4110-A146-3047FF8BFD83}
-		{794C0A9F-60EB-4E25-93F2-5D4D59122529} = {7C04E093-A092-4110-A146-3047FF8BFD83}
 	EndGlobalSection
 EndGlobal
