@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Product Id="0c4461f6-d3fd-44e9-a45f-3a3c4434737d" Name="MVC Turbine" Language="1033" Version="2.1.0.1"
+    <Product Id="8442370B-FD2D-45A6-B48B-4B871C6A0574" Name="MVC Turbine - Visual Studio 2010 Templates" Language="1033" Version="2.1.0.1"
            Manufacturer="lozanotek, inc." UpgradeCode="12881519-180b-4038-94b7-acd6594da365">
         <Package InstallerVersion="200" Compressed="yes" />
         <Media Id="1" Cabinet="turbine.cab" EmbedCab="yes" />
+
         <Icon Id="ProductIco" SourceFile="lozanotek.ico" />
         <Property Id="ARPPRODUCTICON" Value="ProductIco" />
         <Property Id="ARPHELPLINK" Value="http://mvcturbine.codeplex.com" />
         <Property Id="INSTALLDIR">
             <RegistrySearch Id='VSInstallDir' Type='raw'
-              Root='HKLM' Key='Software\Microsoft\VisualStudio\9.0' Name='InstallDir' />
+              Root='HKLM' Key='Software\Microsoft\VisualStudio\10.0' Name='InstallDir' />
         </Property>
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="INSTALLDIR">
@@ -20,12 +21,12 @@
                     </Component>
                 </Directory>
                 <Directory Id="PersonalFolder">
-                    <Directory Id="VS" Name="Visual Studio 2008">
+                    <Directory Id="VS" Name="Visual Studio 2010">
                         <Directory Id="Templates" Name="Templates" >
                             <Directory Id="ProjectTemplates" Name="ProjectTemplates" >
                                 <Directory Id="category" Name="CSharp" >
                                     <Directory Id="subcategory" Name="MVC Turbine">
-                                        <Directory Id="version" Name="MVC1">
+                                        <Directory Id="version" Name="MVC2">
                                             <Component Id="TemplateComponent" Guid="e0dba466-6c92-4655-8e8b-a0419e8c5e65">
                                                 <RemoveFolder Id="RemoveCategoryDir" Directory="category" On="uninstall"/>
                                                 <RemoveFolder Id="RemoveVersionDir" Directory="version" On="uninstall"/>
@@ -34,27 +35,26 @@
                                                 <RemoveFolder Id="RemoveTemplatesDir" Directory="Templates" On="uninstall"/>
                                                 <RemoveFolder Id="RemoveVSDir" Directory="VS" On="uninstall"/>
 
-                                                <RegistryValue Root='HKCU' Key='SOFTWARE\lozanotek\turbine\mvc1' Type='string' Value='InstallKey' KeyPath='yes' />
+                                                <RegistryValue Root='HKCU' Key='SOFTWARE\lozanotek\turbine\mvc2' Type='string' Value='InstallKey' KeyPath='yes' />
                                             </Component>
-                                            <!--  
-		    <Component Id="WindsorComponent" Guid="c192e240-a347-4cab-acae-7d6db2c308ba">
-                      <RegistryValue Root='HKCU' Key='SOFTWARE\lozanotek\turbine\WindsorApplication' Type='string' Value='InstallKey' KeyPath='yes' />
-                      <File Id="windsorTemplate" Name="windsor_template.zip" Source="windsor_template.zip" DiskId="1"  />
-                      <RemoveFile Id="RemoveWindsorTemplate"  Name="windsor_template.zip" On="uninstall"/>
-	      </Component>
-	      -->
+
+                                            <Component Id="WindsorComponent" Guid="c192e240-a347-4cab-acae-7d6db2c308ba">
+                                                <RegistryValue Root='HKCU' Key='SOFTWARE\lozanotek\turbine\mvc2\WindsorApplication' Type='string' Value='InstallKey' KeyPath='yes' />
+                                                <File Id="windsorTemplate" Name="windsor_template.zip" Source="windsor_template.zip" DiskId="1"  />
+                                                <RemoveFile Id="RemoveWindsorTemplate"  Name="windsor_template.zip" On="uninstall"/>
+                                            </Component>
                                             <Component Id="NinjectComponent" Guid="b3ad9ae1-a962-428d-a24b-fb69fca73a07">
-                                                <RegistryValue Root='HKCU' Key='SOFTWARE\lozanotek\turbine\mvc1\NinjectApplication' Type='string' Value='InstallKey' KeyPath='yes' />
+                                                <RegistryValue Root='HKCU' Key='SOFTWARE\lozanotek\turbine\mvc2\NinjectApplication' Type='string' Value='InstallKey' KeyPath='yes' />
                                                 <File Id="ninjectTempate" Name="ninject_template.zip" Source="ninject_template.zip" DiskId="1"  />
                                                 <RemoveFile Id="RemoveNinjectTemplate"  Name="ninject_template.zip" On="uninstall"/>
                                             </Component>
                                             <Component Id="UnityComponent" Guid="89b6d7de-7f46-4b2c-aed3-7ec9bc0b52e6">
-                                                <RegistryValue Root='HKCU' Key='SOFTWARE\lozanotek\turbine\mvc1\UnityApplication' Type='string' Value='InstallKey' KeyPath='yes' />
+                                                <RegistryValue Root='HKCU' Key='SOFTWARE\lozanotek\turbine\mvc2\UnityApplication' Type='string' Value='InstallKey' KeyPath='yes' />
                                                 <File Id="unityTempate" Name="unity_template.zip" Source="unity_template.zip" DiskId="1"  />
                                                 <RemoveFile Id="RemoveUnityTemplate"  Name="unity_template.zip" On="uninstall"/>
                                             </Component>
                                             <Component Id="StructureMapComponent" Guid="f939ecc0-0594-4922-aea1-a1b1bc284d49">
-                                                <RegistryValue Root='HKCU' Key='SOFTWARE\lozanotek\turbine\mvc1\StructureMapApplication' Type='string' Value='InstallKey' KeyPath='yes' />
+                                                <RegistryValue Root='HKCU' Key='SOFTWARE\lozanotek\turbine\mvc2\StructureMapApplication' Type='string' Value='InstallKey' KeyPath='yes' />
                                                 <File Id="structureTempate" Name="structuremap_template.zip" Source="structuremap_template.zip" DiskId="1"  />
                                                 <RemoveFile Id="RemoveStructureTemplate"  Name="structuremap_template.zip" On="uninstall"/>
                                             </Component>
@@ -67,15 +67,14 @@
                 </Directory>
             </Directory>
         </Directory>
+        
         <Feature Id="WizardFeature" Title="Wizard Pieces" Level="1">
             <ComponentRef Id="WizardComponent" />
             <ComponentRef Id="TemplateComponent"/>
         </Feature>
-        <!--
-    <Feature Id="WindsorFeature" Title="Windsor Application" Level="1">
-      <ComponentRef Id="WindsorComponent" />
-    </Feature>
-    -->
+        <Feature Id="WindsorFeature" Title="Windsor Application" Level="1">
+            <ComponentRef Id="WindsorComponent" />
+        </Feature>
         <Feature Id="NinjectFeature" Title="Ninject Application" Level="1">
             <ComponentRef Id="NinjectComponent" />
         </Feature>

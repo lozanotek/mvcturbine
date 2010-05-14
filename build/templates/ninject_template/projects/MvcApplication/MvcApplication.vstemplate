@@ -1,52 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VSTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Type="Project" Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
-  <TemplateData>
-    <Name>MvcApplication</Name>
-    <Description />
-    <Icon>__TemplateIcon.ico</Icon>
-    <ProjectType>CSharp</ProjectType>
-    <SortOrder>1000</SortOrder>
-    <CreateNewFolder>true</CreateNewFolder>
-    <DefaultName>MvcApplication</DefaultName>
-    <ProvideDefaultName>true</ProvideDefaultName>
-  </TemplateData>
-  <TemplateContent>
-    <Project File="MvcApplication.csproj" TargetFileName="MvcApplication.csproj" ReplaceParameters="true">
-      <ProjectItem TargetFileName="Default.aspx" ReplaceParameters="true">Default.aspx</ProjectItem>
-      <ProjectItem TargetFileName="Default.aspx.cs" ReplaceParameters="true">Default.aspx.cs</ProjectItem>
-      <ProjectItem TargetFileName="Global.asax" ReplaceParameters="true">Global.asax</ProjectItem>
-      <ProjectItem TargetFileName="Web.config" ReplaceParameters="true">Web.config</ProjectItem>
-      <Folder Name="Content" TargetFolderName="Content">
-        <ProjectItem TargetFileName="Site.css" ReplaceParameters="false">Site.css</ProjectItem>
-      </Folder>
-      <Folder Name="Properties" TargetFolderName="Properties">
-        <ProjectItem TargetFileName="AssemblyInfo.cs" ReplaceParameters="true">AssemblyInfo.cs</ProjectItem>
-      </Folder>
-      <Folder Name="Scripts" TargetFolderName="Scripts">
-        <ProjectItem TargetFileName="jquery-1.3.2-vsdoc.js" ReplaceParameters="false">jquery-1.3.2-vsdoc.js</ProjectItem>
-        <ProjectItem TargetFileName="jquery-1.3.2.js" ReplaceParameters="false">jquery-1.3.2.js</ProjectItem>
-        <ProjectItem TargetFileName="jquery-1.3.2.min-vsdoc.js" ReplaceParameters="false">jquery-1.3.2.min-vsdoc.js</ProjectItem>
-        <ProjectItem TargetFileName="jquery-1.3.2.min.js" ReplaceParameters="false">jquery-1.3.2.min.js</ProjectItem>
-        <ProjectItem TargetFileName="MicrosoftAjax.debug.js" ReplaceParameters="false">MicrosoftAjax.debug.js</ProjectItem>
-        <ProjectItem TargetFileName="MicrosoftAjax.js" ReplaceParameters="false">MicrosoftAjax.js</ProjectItem>
-        <ProjectItem TargetFileName="MicrosoftMvcAjax.debug.js" ReplaceParameters="false">MicrosoftMvcAjax.debug.js</ProjectItem>
-        <ProjectItem TargetFileName="MicrosoftMvcAjax.js" ReplaceParameters="false">MicrosoftMvcAjax.js</ProjectItem>
-      </Folder>
-      <Folder Name="Views" TargetFolderName="Views">
-        <ProjectItem TargetFileName="Web.config" ReplaceParameters="true">Web.config</ProjectItem>
-        <Folder Name="Home" TargetFolderName="Home">
-          <ProjectItem TargetFileName="About.aspx" ReplaceParameters="true">About.aspx</ProjectItem>
-          <ProjectItem TargetFileName="Index.aspx" ReplaceParameters="true">Index.aspx</ProjectItem>
-        </Folder>
-        <Folder Name="Shared" TargetFolderName="Shared">
-          <ProjectItem TargetFileName="Error.aspx" ReplaceParameters="true">Error.aspx</ProjectItem>
-          <ProjectItem TargetFileName="Site.Master" ReplaceParameters="true">Site.Master</ProjectItem>
-        </Folder>
-      </Folder>
-    </Project>
-  </TemplateContent>
-  <WizardExtension>
-    <Assembly xsi:type="xsd:string">SolutionFactory.Wizard</Assembly>
-    <FullClassName xsi:type="xsd:string">SolutionFactory.Wizard</FullClassName>
-  </WizardExtension>
+    <TemplateData>
+        <Name>MvcApplication</Name>
+        <Description />
+        <Icon>__TemplateIcon.ico</Icon>
+        <ProjectType>CSharp</ProjectType>
+        <SortOrder>1000</SortOrder>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>MvcApplication</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+    </TemplateData>
+    <TemplateContent>
+        <Project File="MvcApplication.csproj" TargetFileName="MvcApplication.csproj" ReplaceParameters="true">
+            <ProjectItem TargetFileName="Default.aspx" ReplaceParameters="true">Default.aspx</ProjectItem>
+            <ProjectItem TargetFileName="Default.aspx.cs" ReplaceParameters="true">Default.aspx.cs</ProjectItem>
+            <ProjectItem TargetFileName="Global.asax" ReplaceParameters="true">Global.asax</ProjectItem>
+            <ProjectItem TargetFileName="Web.config" ReplaceParameters="true">Web.config</ProjectItem>
+            <Folder Name="Content" TargetFolderName="Content">
+                <ProjectItem TargetFileName="Site.css" ReplaceParameters="false">Site.css</ProjectItem>
+            </Folder>
+            <Folder Name="Properties" TargetFolderName="Properties">
+                <ProjectItem TargetFileName="AssemblyInfo.cs" ReplaceParameters="true">AssemblyInfo.cs</ProjectItem>
+            </Folder>
+            <Folder Name="Scripts" TargetFolderName="Scripts">
+                <ProjectItem TargetFileName="jquery.validate.js" ReplaceParameters="false">jquery.validate.js</ProjectItem>
+                <ProjectItem TargetFileName="jquery.validate.min.js" ReplaceParameters="false">jquery.validate.min.js</ProjectItem>
+                <ProjectItem TargetFileName="jquery.validate-vsdoc.js" ReplaceParameters="false">jquery.validate-vsdoc.js</ProjectItem>
+                <ProjectItem TargetFileName="jquery-1.4.1-vsdoc.js" ReplaceParameters="false">jquery-1.4.1-vsdoc.js</ProjectItem>
+                <ProjectItem TargetFileName="jquery-1.4.1.js" ReplaceParameters="false">jquery-1.4.1.js</ProjectItem>
+                <ProjectItem TargetFileName="jquery-1.4.1.min.js" ReplaceParameters="false">jquery-1.4.1.min.js</ProjectItem>
+                <ProjectItem TargetFileName="MicrosoftAjax.debug.js" ReplaceParameters="false">MicrosoftAjax.debug.js</ProjectItem>
+                <ProjectItem TargetFileName="MicrosoftAjax.js" ReplaceParameters="false">MicrosoftAjax.js</ProjectItem>
+                <ProjectItem TargetFileName="MicrosoftMvcAjax.debug.js" ReplaceParameters="false">MicrosoftMvcAjax.debug.js</ProjectItem>
+                <ProjectItem TargetFileName="MicrosoftMvcAjax.js" ReplaceParameters="false">MicrosoftMvcAjax.js</ProjectItem>
+                <ProjectItem TargetFileName="MicrosoftMvcValidation.debug.js" ReplaceParameters="false">MicrosoftMvcValidation.debug.js</ProjectItem>
+                <ProjectItem TargetFileName="MicrosoftMvcValidation.js" ReplaceParameters="false">MicrosoftMvcValidation.js</ProjectItem>
+            </Folder>
+            <Folder Name="Views" TargetFolderName="Views">
+                <ProjectItem TargetFileName="Web.config" ReplaceParameters="true">Web.config</ProjectItem>
+                <Folder Name="Home" TargetFolderName="Home">
+                    <ProjectItem TargetFileName="About.aspx" ReplaceParameters="true">About.aspx</ProjectItem>
+                    <ProjectItem TargetFileName="Index.aspx" ReplaceParameters="true">Index.aspx</ProjectItem>
+                </Folder>
+                <Folder Name="Shared" TargetFolderName="Shared">
+                    <ProjectItem TargetFileName="Error.aspx" ReplaceParameters="true">Error.aspx</ProjectItem>
+                    <ProjectItem TargetFileName="Site.Master" ReplaceParameters="true">Site.Master</ProjectItem>
+                </Folder>
+            </Folder>
+        </Project>
+    </TemplateContent>
+    <WizardExtension>
+        <Assembly xsi:type="xsd:string">SolutionFactory.Wizard</Assembly>
+        <FullClassName xsi:type="xsd:string">SolutionFactory.Wizard</FullClassName>
+    </WizardExtension>
 </VSTemplate>
