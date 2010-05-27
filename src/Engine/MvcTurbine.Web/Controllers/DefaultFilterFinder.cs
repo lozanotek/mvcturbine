@@ -53,9 +53,10 @@ namespace MvcTurbine.Web.Controllers {
             if (actionDescriptor == null) return null;
 
             var globalFilters = GetGlobalFilters();
-            var injectableFilters = GetInjectableFilters(actionDescriptor);
+            //var injectableFilters = GetInjectableFilters(actionDescriptor);
 
-            return new MergedFilters(globalFilters, injectableFilters);
+            //return new MergedFilters(globalFilters, injectableFilters);
+            return globalFilters;
         }
 
         private FilterInfo GetGlobalFilters() {
