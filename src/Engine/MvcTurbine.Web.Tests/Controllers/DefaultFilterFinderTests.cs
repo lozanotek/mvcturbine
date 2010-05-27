@@ -28,7 +28,7 @@ namespace MvcTurbine.Web.Tests.Controllers {
         }
 
         [Test]
-        public void FindDefaultFilters_Returns_Registered_Action_Filters()
+        public void FindFilters_Returns_Registered_Action_Filters()
         {
             var expectedActionFilter = new Mock<IActionFilter>().Object;
 
@@ -43,7 +43,7 @@ namespace MvcTurbine.Web.Tests.Controllers {
         }
 
         [Test]
-        public void FindDefaultFilters_Does_Not_Include_Controllers_In_ActionFilter_Results()
+        public void FindFilters_Does_Not_Include_Controllers_In_ActionFilter_Results()
         {
             var expectedActionFilter = new Mock<IActionFilter>().Object;
             var actionFilters = new[] { new DefaultFilterFinderTestClasses.TestController(), expectedActionFilter,  };
@@ -58,9 +58,8 @@ namespace MvcTurbine.Web.Tests.Controllers {
             Assert.AreSame(expectedActionFilter, result.ActionFilters.First()); 
         }
 
-
         [Test]
-        public void FindDefaultFilters_Returns_Registered_Authorization_Filters()
+        public void FindFilters_Returns_Registered_Authorization_Filters()
         {
             var expectedAuthorizationFilter = new Mock<IAuthorizationFilter>().Object;
 
@@ -75,7 +74,7 @@ namespace MvcTurbine.Web.Tests.Controllers {
         }
 
         [Test]
-        public void FindDefaultFilters_Does_Not_Include_Controllers_In_Authorization_Results()
+        public void FindFilters_Does_Not_Include_Controllers_In_Authorization_Results()
         {
             var expectedAuthorizationFilter = new Mock<IAuthorizationFilter>().Object;
             var authorizationFilters = new[] { new DefaultFilterFinderTestClasses.TestController(), expectedAuthorizationFilter, };
@@ -91,7 +90,7 @@ namespace MvcTurbine.Web.Tests.Controllers {
         }
 
         [Test]
-        public void FindDefaultFilters_Returns_Registered_Exception_Filters()
+        public void FindFilters_Returns_Registered_Exception_Filters()
         {
             var expectedExceptionFilter = new Mock<IExceptionFilter>().Object;
 
@@ -106,7 +105,7 @@ namespace MvcTurbine.Web.Tests.Controllers {
         }
 
         [Test]
-        public void FindDefaultFilters_Does_Not_Include_Controllers_In_Exception_Results()
+        public void FindFilters_Does_Not_Include_Controllers_In_Exception_Results()
         {
             var expectedExceptionFilter = new Mock<IExceptionFilter>().Object;
             var exceptionFilters = new[] { new DefaultFilterFinderTestClasses.TestController(), expectedExceptionFilter, };
@@ -122,7 +121,7 @@ namespace MvcTurbine.Web.Tests.Controllers {
         }
 
         [Test]
-        public void FindDefaultFilters_Returns_Registered_Result_Filters()
+        public void FindFilters_Returns_Registered_Result_Filters()
         {
             var expectedResultFilter = new Mock<IResultFilter>().Object;
 
@@ -137,7 +136,7 @@ namespace MvcTurbine.Web.Tests.Controllers {
         }
 
         [Test]
-        public void FindDefaultFilters_Does_Not_Include_Controllers_In_Result_Results()
+        public void FindFilters_Does_Not_Include_Controllers_In_Result_Results()
         {
             var expectedResultFilter = new Mock<IResultFilter>().Object;
             var resultFilters = new[] { new DefaultFilterFinderTestClasses.TestController(), expectedResultFilter, };
@@ -151,6 +150,7 @@ namespace MvcTurbine.Web.Tests.Controllers {
             Assert.AreEqual(1, result.ResultFilters.Count);
             Assert.AreSame(expectedResultFilter, result.ResultFilters.First());
         }
+
     }
 
     public class DefaultFilterFinderTestClasses
