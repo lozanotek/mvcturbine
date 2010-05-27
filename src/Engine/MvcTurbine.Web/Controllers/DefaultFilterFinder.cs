@@ -31,12 +31,16 @@ namespace MvcTurbine.Web.Controllers {
     /// Default implementation to find <see cref="InjectableFilterAttribute"/> for a controller action.
     /// </summary>
     public class DefaultFilterFinder : IFilterFinder {
+
+        private IDictionary<Type, IEnumerable<Type>> filterTypes;
+
         /// <summary>
         /// Default constructor.
         /// </summary>
         /// <param name="serviceLocator"></param>
         public DefaultFilterFinder(IServiceLocator serviceLocator) {
             ServiceLocator = serviceLocator;
+            filterTypes = new Dictionary<Type, IEnumerable<Type>>();
         }
 
         /// <summary>
@@ -130,16 +134,22 @@ namespace MvcTurbine.Web.Controllers {
         }
 
         protected virtual IList<TFilter> GetGlobalFilterFromContainer<TFilter>()
-            where TFilter : class {
+            where TFilter : class
+        {
+            if (filterTypes.ContainsKey(typeof(TFilter)))
+                return new List<TFilter>();
+
             var attributeList = ServiceLocator.ResolveServices<TFilter>()
                 .Where(filter => !filter.IsType<IController>());
 
             //HACK: For some reason 'distict' couldn't work, so I had to make this 'workaround' :)
             var distinctList = new Dictionary<Type, TFilter>();
 
-            foreach (var filter in attributeList) {
+            foreach (var filter in attributeList)
                 distinctList[filter.GetType()] = filter;
-            }
+
+            if (filterTypes.ContainsKey(typeof(TFilter)) == false)
+                filterTypes.Add(typeof(TFilter), distinctList.Select(x => x.Key));
 
             return distinctList.Values.ToList();
         }

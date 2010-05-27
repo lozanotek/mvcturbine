@@ -151,6 +151,26 @@ namespace MvcTurbine.Web.Tests.Controllers {
             Assert.AreSame(expectedResultFilter, result.ResultFilters.First());
         }
 
+        [Test]
+        public void FindFilters_Does_Not_Call_ResolveServices_Again_After_The_First_Call()
+        {
+            var locator = new DefaultFilterFinderTestClasses.TestServiceLocator();
+            var finder = new DefaultFilterFinder(locator);
+
+            finder.FindFilters(new DefaultFilterFinderTestClasses.TestActionDescriptor());
+            var countAfterFirstCall = locator.NumberOfTimesResolveServicesHasBeenCalled;
+
+            finder.FindFilters(new DefaultFilterFinderTestClasses.TestActionDescriptor());
+            var countAfterSecondCall = locator.NumberOfTimesResolveServicesHasBeenCalled;
+
+            Assert.AreEqual(countAfterFirstCall, countAfterSecondCall);
+        }
+
+        [Test]
+        public void FindFilters_Returns_Filters_From_Resolve_After_First_Call()
+        {
+            Assert.Fail("START HERE");
+        }
     }
 
     public class DefaultFilterFinderTestClasses
@@ -198,7 +218,6 @@ namespace MvcTurbine.Web.Tests.Controllers {
 
         public class TestServiceLocator : IServiceLocator
         {
-
             public Dictionary<Type, IEnumerable<object>> typeDictionary = new Dictionary<Type, IEnumerable<object>>();
 
             public void ReturnTheseClassesWhenResolvingThisType<T>(IEnumerable<object> objects)
@@ -206,8 +225,11 @@ namespace MvcTurbine.Web.Tests.Controllers {
                 typeDictionary.Add(typeof (T), objects);
             }
 
+            public int NumberOfTimesResolveServicesHasBeenCalled = 0;
+
             public IList<T> ResolveServices<T>() where T : class
             {
+                NumberOfTimesResolveServicesHasBeenCalled++;
                 if (typeDictionary.ContainsKey(typeof(T)))
                     return typeDictionary[typeof (T)].Cast<T>().ToList();
                 return new List<T>();
