@@ -136,15 +136,8 @@ namespace MvcTurbine.Web.Controllers {
         protected virtual IList<TFilter> GetGlobalFilterFromContainer<TFilter>()
             where TFilter : class
         {
-            if (filterTypes.ContainsKey(typeof(TFilter)))
-            {
-                return filterTypes
-                    .Where(x => x.Key == typeof (TFilter))
-                    .First().Value
-                    .Select(x=>ServiceLocator.Resolve(x))
-                    .Cast<TFilter>()
-                    .ToList();
-            }
+            if (TheTypesForTFilterHaveBeenCached<TFilter>())
+                return ResolveTheCachedTypesForTFilter<TFilter>();
 
             var attributeList = ServiceLocator.ResolveServices<TFilter>()
                 .Where(filter => !filter.IsType<IController>());
@@ -155,10 +148,30 @@ namespace MvcTurbine.Web.Controllers {
             foreach (var filter in attributeList)
                 distinctList[filter.GetType()] = filter;
 
-            if (filterTypes.ContainsKey(typeof(TFilter)) == false)
-                filterTypes.Add(typeof(TFilter), distinctList.Select(x => x.Key));
+            CacheTheTypeMatchesForResolutionLater(distinctList);
 
             return distinctList.Values.ToList();
+        }
+
+        private IList<TFilter> ResolveTheCachedTypesForTFilter<TFilter>()
+        {
+            return filterTypes
+                .Where(x => x.Key == typeof (TFilter))
+                .First().Value
+                .Select(x=>ServiceLocator.Resolve(x))
+                .Cast<TFilter>()
+                .ToList();
+        }
+
+        private bool TheTypesForTFilterHaveBeenCached<TFilter>()
+        {
+            return filterTypes.ContainsKey(typeof(TFilter));
+        }
+
+        private void CacheTheTypeMatchesForResolutionLater<TFilter>(Dictionary<Type, TFilter> distinctList)
+        {
+            if (filterTypes.ContainsKey(typeof(TFilter)) == false)
+                filterTypes.Add(typeof(TFilter), distinctList.Select(x => x.Key));
         }
     }
 }
