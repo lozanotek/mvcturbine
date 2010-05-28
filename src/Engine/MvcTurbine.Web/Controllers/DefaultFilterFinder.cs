@@ -137,7 +137,14 @@ namespace MvcTurbine.Web.Controllers {
             where TFilter : class
         {
             if (filterTypes.ContainsKey(typeof(TFilter)))
-                return new List<TFilter>();
+            {
+                return filterTypes
+                    .Where(x => x.Key == typeof (TFilter))
+                    .First().Value
+                    .Select(x=>ServiceLocator.Resolve(x))
+                    .Cast<TFilter>()
+                    .ToList();
+            }
 
             var attributeList = ServiceLocator.ResolveServices<TFilter>()
                 .Where(filter => !filter.IsType<IController>());

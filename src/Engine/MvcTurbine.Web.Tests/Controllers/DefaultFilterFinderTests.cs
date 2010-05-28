@@ -33,7 +33,7 @@ namespace MvcTurbine.Web.Tests.Controllers {
             var expectedActionFilter = new Mock<IActionFilter>().Object;
 
             var locator = new DefaultFilterFinderTestClasses.TestServiceLocator();
-            locator.ReturnTheseClassesWhenResolvingThisType<IActionFilter>(new []{expectedActionFilter});
+            locator.ReturnTheseClassesWhenUsingResolveServicesForThisType<IActionFilter>(new []{expectedActionFilter});
 
             var finder = new DefaultFilterFinder(locator);
             var result = finder.FindFilters(new DefaultFilterFinderTestClasses.TestActionDescriptor());
@@ -49,7 +49,7 @@ namespace MvcTurbine.Web.Tests.Controllers {
             var actionFilters = new[] { new DefaultFilterFinderTestClasses.TestController(), expectedActionFilter,  };
 
             var locator = new DefaultFilterFinderTestClasses.TestServiceLocator();
-            locator.ReturnTheseClassesWhenResolvingThisType<IActionFilter>(actionFilters);
+            locator.ReturnTheseClassesWhenUsingResolveServicesForThisType<IActionFilter>(actionFilters);
 
             var finder = new DefaultFilterFinder(locator);
             var result = finder.FindFilters(new DefaultFilterFinderTestClasses.TestActionDescriptor());
@@ -64,7 +64,7 @@ namespace MvcTurbine.Web.Tests.Controllers {
             var expectedAuthorizationFilter = new Mock<IAuthorizationFilter>().Object;
 
             var locator = new DefaultFilterFinderTestClasses.TestServiceLocator();
-            locator.ReturnTheseClassesWhenResolvingThisType<IAuthorizationFilter>(new[] { expectedAuthorizationFilter });
+            locator.ReturnTheseClassesWhenUsingResolveServicesForThisType<IAuthorizationFilter>(new[] { expectedAuthorizationFilter });
 
             var finder = new DefaultFilterFinder(locator);
             var result = finder.FindFilters(new DefaultFilterFinderTestClasses.TestActionDescriptor());
@@ -80,7 +80,7 @@ namespace MvcTurbine.Web.Tests.Controllers {
             var authorizationFilters = new[] { new DefaultFilterFinderTestClasses.TestController(), expectedAuthorizationFilter, };
 
             var locator = new DefaultFilterFinderTestClasses.TestServiceLocator();
-            locator.ReturnTheseClassesWhenResolvingThisType<IAuthorizationFilter>(authorizationFilters);
+            locator.ReturnTheseClassesWhenUsingResolveServicesForThisType<IAuthorizationFilter>(authorizationFilters);
 
             var finder = new DefaultFilterFinder(locator);
             var result = finder.FindFilters(new DefaultFilterFinderTestClasses.TestActionDescriptor());
@@ -95,7 +95,7 @@ namespace MvcTurbine.Web.Tests.Controllers {
             var expectedExceptionFilter = new Mock<IExceptionFilter>().Object;
 
             var locator = new DefaultFilterFinderTestClasses.TestServiceLocator();
-            locator.ReturnTheseClassesWhenResolvingThisType<IExceptionFilter>(new[] { expectedExceptionFilter });
+            locator.ReturnTheseClassesWhenUsingResolveServicesForThisType<IExceptionFilter>(new[] { expectedExceptionFilter });
 
             var finder = new DefaultFilterFinder(locator);
             var result = finder.FindFilters(new DefaultFilterFinderTestClasses.TestActionDescriptor());
@@ -111,7 +111,7 @@ namespace MvcTurbine.Web.Tests.Controllers {
             var exceptionFilters = new[] { new DefaultFilterFinderTestClasses.TestController(), expectedExceptionFilter, };
 
             var locator = new DefaultFilterFinderTestClasses.TestServiceLocator();
-            locator.ReturnTheseClassesWhenResolvingThisType<IExceptionFilter>(exceptionFilters);
+            locator.ReturnTheseClassesWhenUsingResolveServicesForThisType<IExceptionFilter>(exceptionFilters);
 
             var finder = new DefaultFilterFinder(locator);
             var result = finder.FindFilters(new DefaultFilterFinderTestClasses.TestActionDescriptor());
@@ -126,7 +126,7 @@ namespace MvcTurbine.Web.Tests.Controllers {
             var expectedResultFilter = new Mock<IResultFilter>().Object;
 
             var locator = new DefaultFilterFinderTestClasses.TestServiceLocator();
-            locator.ReturnTheseClassesWhenResolvingThisType<IResultFilter>(new[] { expectedResultFilter });
+            locator.ReturnTheseClassesWhenUsingResolveServicesForThisType<IResultFilter>(new[] { expectedResultFilter });
 
             var finder = new DefaultFilterFinder(locator);
             var result = finder.FindFilters(new DefaultFilterFinderTestClasses.TestActionDescriptor());
@@ -142,7 +142,7 @@ namespace MvcTurbine.Web.Tests.Controllers {
             var resultFilters = new[] { new DefaultFilterFinderTestClasses.TestController(), expectedResultFilter, };
 
             var locator = new DefaultFilterFinderTestClasses.TestServiceLocator();
-            locator.ReturnTheseClassesWhenResolvingThisType<IResultFilter>(resultFilters);
+            locator.ReturnTheseClassesWhenUsingResolveServicesForThisType<IResultFilter>(resultFilters);
 
             var finder = new DefaultFilterFinder(locator);
             var result = finder.FindFilters(new DefaultFilterFinderTestClasses.TestActionDescriptor());
@@ -169,7 +169,23 @@ namespace MvcTurbine.Web.Tests.Controllers {
         [Test]
         public void FindFilters_Returns_Filters_From_Resolve_After_First_Call()
         {
-            Assert.Fail("START HERE");
+            var expectedResultFilter = new Mock<IResultFilter>().Object;
+
+            var locator = new DefaultFilterFinderTestClasses.TestServiceLocator();
+            locator.ReturnTheseClassesWhenUsingResolveServicesForThisType<IResultFilter>(new []{expectedResultFilter});
+            locator.ReturnThisClassWhenUsingResolveForThisType(expectedResultFilter);
+
+            var finder = new DefaultFilterFinder(locator);
+
+            // first call, should cache the types
+            finder.FindFilters(new DefaultFilterFinderTestClasses.TestActionDescriptor());
+
+            //
+            var secondResult = finder.FindFilters(new DefaultFilterFinderTestClasses.TestActionDescriptor());
+
+
+            Assert.AreEqual(1, secondResult.ResultFilters.Count);
+            Assert.AreSame(expectedResultFilter, secondResult.ResultFilters.First());
         }
     }
 
@@ -218,20 +234,33 @@ namespace MvcTurbine.Web.Tests.Controllers {
 
         public class TestServiceLocator : IServiceLocator
         {
-            public Dictionary<Type, IEnumerable<object>> typeDictionary = new Dictionary<Type, IEnumerable<object>>();
+            public Dictionary<Type, IEnumerable<object>> resolveServicesDictionary = new Dictionary<Type, IEnumerable<object>>();
+            public Dictionary<Type, object> resolveDictionary = new Dictionary<Type, object>();
 
-            public void ReturnTheseClassesWhenResolvingThisType<T>(IEnumerable<object> objects)
+            public void ReturnThisClassWhenUsingResolveForThisType(object @object)
             {
-                typeDictionary.Add(typeof (T), objects);
+                resolveDictionary.Add(@object.GetType(), @object);
+            }
+
+            public void ReturnTheseClassesWhenUsingResolveServicesForThisType<T>(IEnumerable<object> objects)
+            {
+                resolveServicesDictionary.Add(typeof (T), objects);
             }
 
             public int NumberOfTimesResolveServicesHasBeenCalled = 0;
 
+            public object Resolve(Type type)
+            {
+                if (resolveDictionary.ContainsKey(type))
+                    return resolveDictionary[type];
+                return null;
+            }
+
             public IList<T> ResolveServices<T>() where T : class
             {
                 NumberOfTimesResolveServicesHasBeenCalled++;
-                if (typeDictionary.ContainsKey(typeof(T)))
-                    return typeDictionary[typeof (T)].Cast<T>().ToList();
+                if (resolveServicesDictionary.ContainsKey(typeof(T)))
+                    return resolveServicesDictionary[typeof (T)].Cast<T>().ToList();
                 return new List<T>();
             }
 
@@ -253,11 +282,6 @@ namespace MvcTurbine.Web.Tests.Controllers {
             }
 
             public T Resolve<T>(Type type) where T : class
-            {
-                throw new NotImplementedException();
-            }
-
-            public object Resolve(Type type)
             {
                 throw new NotImplementedException();
             }
