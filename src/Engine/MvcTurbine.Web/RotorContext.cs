@@ -35,6 +35,7 @@ namespace MvcTurbine.Web {
         private static readonly object _lock = new object();
         private static readonly object _regLock = new object();
         private IAutoRegistrator autoRegistrator;
+        private static bool manualRegistrationHasCompleted;
 
         /// <summary>
         /// Default constructor
@@ -227,12 +228,13 @@ namespace MvcTurbine.Web {
             if (registrationList == null || registrationList.Count == 0) return;
 
             lock (_regLock) {
-                if (registrationList.Count == 0) return;
+                if (manualRegistrationHasCompleted == false)
+                {
+                    using (ServiceLocator.Batch())
+                        foreach (IServiceRegistration reg in registrationList)
+                            reg.Register(ServiceLocator);
 
-                using (ServiceLocator.Batch()) {
-                    foreach (IServiceRegistration reg in registrationList) {
-                        reg.Register(ServiceLocator);
-                    }
+                    manualRegistrationHasCompleted = true;
                 }
             }
         }
