@@ -18,6 +18,9 @@
 //
 
 #endregion
+
+using Autofac.Builder;
+
 namespace MvcTurbine.Autofac {
     using System;
     using System.Collections.Generic;
@@ -116,16 +119,28 @@ namespace MvcTurbine.Autofac {
         }
 
         public void Register<Interface>(Type implType) where Interface : class {
-            Builder.RegisterType(implType).As<Interface>();
+            if (container != null)
+                container.ComponentRegistry.Register(
+                    RegistrationBuilder.ForType(implType).As<Interface>().CreateRegistration());
+            else
+                Builder.RegisterType(implType).As<Interface>();
         }
 
         public void Register<Interface, Implementation>() where Implementation : class, Interface {
-            Builder.RegisterType<Implementation>().As<Interface>();
+            if (container != null)
+                container.ComponentRegistry.Register(
+                    RegistrationBuilder.ForType<Implementation>().As<Interface>().CreateRegistration());
+            else
+                Builder.RegisterType<Implementation>().As<Interface>();
         }
 
         public void Register<Interface, Implementation>(string key) where Implementation :
             class, Interface {
-            Builder.RegisterType<Implementation>().Named<Interface>(key);
+            if (container != null)
+                container.ComponentRegistry.Register(
+                    RegistrationBuilder.ForType<Implementation>().Named<Interface>(key).CreateRegistration());
+            else
+                Builder.RegisterType<Implementation>().Named<Interface>(key);
         }
 
         public void Register(string key, Type type) {
@@ -133,12 +148,19 @@ namespace MvcTurbine.Autofac {
         }
 
         public void Register(Type serviceType, Type implType) {
-            Builder.RegisterType(implType).As(serviceType);
+            if (container != null)
+                container.ComponentRegistry.Register(
+                    RegistrationBuilder.ForType(implType).As(serviceType).CreateRegistration());
+            else
+                Builder.RegisterType(implType).As(serviceType);
         }
 
         public void Register<Interface>(Interface instance) where Interface : class
         {
-            Builder.RegisterInstance(instance);
+            if (container != null)
+                throw new Exception("Need to figure out how to register an instance here.");
+            else
+                Builder.RegisterInstance(instance);
         }
 
         [Obsolete("Not used with this implementation of IServiceLocator.")]
