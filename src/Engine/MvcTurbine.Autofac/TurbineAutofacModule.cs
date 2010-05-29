@@ -52,5 +52,10 @@ namespace MvcTurbine.Autofac {
             AddRegistration(builder => 
                 builder.RegisterType(implType).As(implType).As(serviceType));
         }
+
+        public void Register<Interface>(Interface instance) where Interface : class
+        {
+            AddRegistration(builder => builder.RegisterInstance(instance));
+        }
     }
 }
