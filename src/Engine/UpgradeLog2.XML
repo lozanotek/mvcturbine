@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="ServiceLocator_Tests">
+</Property><Property Name="Solution File" Value="C:\Code\mvcturbine\src\Engine\ServiceLocator_Tests.sln">
+</Property><Property Name="Date" Value="Friday, May 28, 2010">
+</Property><Property Name="Time" Value="22:48:33 PM">
+</Property><Property Name="Log Number" Value="2">
+</Property></Properties><Event ErrorLevel="0" Project="MvcTurbine.Autofac.Tests" Source="MvcTurbine.Autofac.Tests\MvcTurbine.Autofac.Tests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="MvcTurbine.Autofac.Tests" Source="MvcTurbine.Autofac.Tests\MvcTurbine.Autofac.Tests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="MvcTurbine.Autofac.Tests" Source="MvcTurbine.Autofac.Tests\MvcTurbine.Autofac.Tests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>
