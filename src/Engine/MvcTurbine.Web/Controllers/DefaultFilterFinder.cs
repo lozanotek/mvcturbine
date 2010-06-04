@@ -28,7 +28,7 @@ namespace MvcTurbine.Web.Controllers {
     using ComponentModel;
 
     /// <summary>
-    /// Default implementation to find <see cref="InjectableFilterAttribute"/> for a controller action.
+    /// Default implementation for <see cref="IFilterFinder"/> to get all filters through IoC.
     /// </summary>
     public class DefaultFilterFinder : IFilterFinder {
 
@@ -56,11 +56,7 @@ namespace MvcTurbine.Web.Controllers {
         public FilterInfo FindFilters(ActionDescriptor actionDescriptor) {
             if (actionDescriptor == null) return null;
 
-            var globalFilters = GetGlobalFilters();
-            //var injectableFilters = GetInjectableFilters(actionDescriptor);
-
-            //return new MergedFilters(globalFilters, injectableFilters);
-            return globalFilters;
+            return GetGlobalFilters();
         }
 
         private FilterInfo GetGlobalFilters() {
