@@ -237,10 +237,9 @@ namespace MvcTurbine.Unity {
         /// </summary>
         /// <filterpriority>2</filterpriority>
         public void Dispose() {
-            if (Container == null) return;
-
-            Container.Dispose();
-            Container = null;
+            // Cannot call Dispose on the Unity container. 
+            // If Unity is registered with itself (which includes registering an instance of the IServiceLocator),
+            // it will get caught in an endless loop trying to dispose of itself.
         }
     }
 
