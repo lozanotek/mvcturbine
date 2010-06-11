@@ -28,15 +28,19 @@ namespace MvcTurbine.Web.Controllers {
     using ComponentModel;
 
     /// <summary>
-    /// Default implementation to find <see cref="InjectableFilterAttribute"/> for a controller action.
+    /// Default implementation for <see cref="IFilterFinder"/> to get all filters through IoC.
     /// </summary>
     public class DefaultFilterFinder : IFilterFinder {
+
+        private IDictionary<Type, IEnumerable<Type>> filterTypes;
+
         /// <summary>
         /// Default constructor.
         /// </summary>
         /// <param name="serviceLocator"></param>
         public DefaultFilterFinder(IServiceLocator serviceLocator) {
             ServiceLocator = serviceLocator;
+            filterTypes = new Dictionary<Type, IEnumerable<Type>>();
         }
 
         /// <summary>
@@ -52,10 +56,7 @@ namespace MvcTurbine.Web.Controllers {
         public FilterInfo FindFilters(ActionDescriptor actionDescriptor) {
             if (actionDescriptor == null) return null;
 
-            var globalFilters = GetGlobalFilters();
-            var injectableFilters = GetInjectableFilters(actionDescriptor);
-
-            return new MergedFilters(globalFilters, injectableFilters);
+            return GetGlobalFilters();
         }
 
         private FilterInfo GetGlobalFilters() {
@@ -129,18 +130,44 @@ namespace MvcTurbine.Web.Controllers {
         }
 
         protected virtual IList<TFilter> GetGlobalFilterFromContainer<TFilter>()
-            where TFilter : class {
+            where TFilter : class
+        {
+            if (TheTypesForTFilterHaveBeenCached<TFilter>())
+                return ResolveTheCachedTypesForTFilter<TFilter>();
+
             var attributeList = ServiceLocator.ResolveServices<TFilter>()
                 .Where(filter => !filter.IsType<IController>());
 
             //HACK: For some reason 'distict' couldn't work, so I had to make this 'workaround' :)
             var distinctList = new Dictionary<Type, TFilter>();
 
-            foreach (var filter in attributeList) {
+            foreach (var filter in attributeList)
                 distinctList[filter.GetType()] = filter;
-            }
+
+            CacheTheTypeMatchesForResolutionLater(distinctList);
 
             return distinctList.Values.ToList();
+        }
+
+        private IList<TFilter> ResolveTheCachedTypesForTFilter<TFilter>()
+        {
+            return filterTypes
+                .Where(x => x.Key == typeof (TFilter))
+                .First().Value
+                .Select(x=>ServiceLocator.Resolve(x))
+                .Cast<TFilter>()
+                .ToList();
+        }
+
+        private bool TheTypesForTFilterHaveBeenCached<TFilter>()
+        {
+            return filterTypes.ContainsKey(typeof(TFilter));
+        }
+
+        private void CacheTheTypeMatchesForResolutionLater<TFilter>(Dictionary<Type, TFilter> distinctList)
+        {
+            if (filterTypes.ContainsKey(typeof(TFilter)) == false)
+                filterTypes.Add(typeof(TFilter), distinctList.Select(x => x.Key));
         }
     }
 }
