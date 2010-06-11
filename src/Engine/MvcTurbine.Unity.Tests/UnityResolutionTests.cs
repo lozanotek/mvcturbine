@@ -38,7 +38,7 @@ namespace MvcTurbine.Unity.Tests {
             container.RegisterType(typeof(ILogger), simpleType, simpleType.FullName);
             container.RegisterType(typeof(ILogger), complexType, complexType.FullName);
 
-            return new UnityServiceLocator(container);
+            return new Unity.UnityServiceLocator(container);
         }
 
         [Test]
