@@ -1,0 +1,53 @@
+2010-06-15 17:29:25,376 [4] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Message Mvc.Bus.TestMessage has been allocated to endpoint MvcInputQueue.
+2010-06-15 17:29:25,399 [4] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Message NServiceBus.Messages.ReadyMessage has been allocated to endpoint .
+2010-06-15 17:29:25,399 [4] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Message NServiceBus.Saga.ISagaMessage has been allocated to endpoint .
+2010-06-15 17:29:25,399 [4] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Message NServiceBus.Saga.TimeoutMessage has been allocated to endpoint .
+2010-06-15 17:29:25,400 [4] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Message NServiceBus.Grid.Messages.ChangeNumberOfWorkerThreadsMessage has been allocated to endpoint .
+2010-06-15 17:29:25,400 [4] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Message NServiceBus.Grid.Messages.GetNumberOfWorkerThreadsMessage has been allocated to endpoint .
+2010-06-15 17:29:25,400 [4] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Message NServiceBus.Grid.Messages.GotNumberOfWorkerThreadsMessage has been allocated to endpoint .
+2010-06-15 17:29:25,401 [4] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Message NServiceBus.Unicast.Transport.CompletionMessage has been allocated to endpoint .
+2010-06-15 17:29:25,401 [4] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Message NServiceBus.Unicast.Transport.SubscriptionMessage has been allocated to endpoint .
+2010-06-15 17:29:25,402 [4] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Message Messages.WorkflowMessage has been allocated to endpoint .
+2010-06-15 17:29:25,402 [4] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Message DocumentWorkflows.Messages.NewDocumentMessage has been allocated to endpoint .
+2010-06-15 17:29:25,402 [4] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Message DocumentWorkflows.Messages.SubmittedDocumentMessage has been allocated to endpoint .
+2010-06-15 17:29:25,405 [4] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Associated 'NServiceBus.Grid.Messages.ChangeNumberOfWorkerThreadsMessage' message with 'NServiceBus.Grid.MessageHandlers.ChangeNumberOfWorkerThreadsMessageHandler' handler
+2010-06-15 17:29:25,406 [4] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Associated 'NServiceBus.Grid.Messages.GetNumberOfWorkerThreadsMessage' message with 'NServiceBus.Grid.MessageHandlers.GetNumberOfWorkerThreadsMessageHandler' handler
+2010-06-15 17:29:25,406 [4] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Associated 'NServiceBus.IMessage' message with 'NServiceBus.Grid.MessageHandlers.GridInterceptingMessageHandler' handler
+2010-06-15 17:29:25,407 [4] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Associated 'NServiceBus.IMessage' message with 'NServiceBus.Sagas.Impl.SagaMessageHandler' handler
+2010-06-15 17:29:25,407 [4] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Associated 'Messages.WorkflowMessage' message with 'Workflows.MessageWithWorkflowHandler' handler
+2010-06-15 17:29:25,407 [4] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Associated 'Mvc.Bus.TestMessage' message with 'Mvc.Bus.TestHandler' handler
+2010-06-15 17:29:25,425 [4] DEBUG NServiceBus.Utils.MsmqUtilities [(null)] - Checking if queue exists: MvcInputQueue.
+2010-06-15 17:29:25,433 [4] DEBUG NServiceBus.Utils.MsmqUtilities [(null)] - Checking if queue exists: MvcErrorQueue.
+2010-06-15 17:29:25,493 [4] INFO  NServiceBus.Unicast.UnicastBus [(null)] - Subscribing to Mvc.Bus.TestMessage, Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null at publisher queue MvcInputQueue
+2010-06-15 17:29:25,523 [4] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Sending message NServiceBus.Unicast.Transport.CompletionMessage, NServiceBus.Core, Version=2.0.0.1145, Culture=neutral, PublicKeyToken=9fc386479f8a226c with ID 3c7a7732-18da-43d3-9244-55b6138f9889\16473 to destination MvcInputQueue.
+ToString() of the message yields: NServiceBus.Unicast.Transport.CompletionMessage
+Message headers:
+SubscriptionMessageType:Mvc.Bus.TestMessage, Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null, EnclosedMessageTypes:
+2010-06-15 17:29:25,523 [Worker.10] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Calling 'HandleBeginMessage' on NServiceBus.SagaPersisters.NHibernate.NHibernateMessageModule
+2010-06-15 17:29:25,530 [Worker.9] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Calling 'HandleBeginMessage' on NServiceBus.SagaPersisters.NHibernate.NHibernateMessageModule
+2010-06-15 17:29:25,541 [Worker.9] INFO  NServiceBus.Unicast.UnicastBus [(null)] - MvcInputQueue initialized.
+2010-06-15 17:29:25,542 [Worker.9] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Calling 'HandleEndMessage' on NServiceBus.SagaPersisters.NHibernate.NHibernateMessageModule
+2010-06-15 17:29:25,544 [Worker.10] WARN  NServiceBus.Unicast.UnicastBus [(null)] - Subscription message from MvcInputQueue@DM4F4ZKK1LT arrived at this endpoint, yet this endpoint is not configured to be a publisher.
+2010-06-15 17:29:25,551 [Worker.10] WARN  NServiceBus.Unicast.Transport.Msmq.MsmqTransport [(null)] - Failed raising 'transport message received' event for message with ID=3c7a7732-18da-43d3-9244-55b6138f9889\16473
+System.InvalidOperationException: Subscription message from MvcInputQueue@DM4F4ZKK1LT arrived at this endpoint, yet this endpoint is not configured to be a publisher.
+   at NServiceBus.Unicast.UnicastBus.<>c__DisplayClass12.<HandledSubscriptionMessage>b__11() in d:\BuildAgent-02\work\672d81652eaca4e1\src\unicast\NServiceBus.Unicast\UnicastBus.cs:line 1039
+   at NServiceBus.Unicast.UnicastBus.HandledSubscriptionMessage(TransportMessage msg, ISubscriptionStorage subscriptionStorage, IAuthorizeSubscriptions subscriptionAuthorizer) in d:\BuildAgent-02\work\672d81652eaca4e1\src\unicast\NServiceBus.Unicast\UnicastBus.cs:line 1063
+   at NServiceBus.Unicast.UnicastBus.TransportMessageReceived(Object sender, TransportMessageReceivedEventArgs e) in d:\BuildAgent-02\work\672d81652eaca4e1\src\unicast\NServiceBus.Unicast\UnicastBus.cs:line 986
+   at NServiceBus.Unicast.Transport.Msmq.MsmqTransport.OnTransportMessageReceived(TransportMessage msg) in d:\BuildAgent-02\work\672d81652eaca4e1\src\impl\unicast\NServiceBus.Unicast.Msmq\MsmqTransport.cs:line 780
+2010-06-15 17:29:25,567 [Worker.10] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Calling 'HandleEndMessage' on NServiceBus.SagaPersisters.NHibernate.NHibernateMessageModule
+2010-06-15 17:29:25,576 [Worker.10] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Calling 'HandleError' on NServiceBus.SagaPersisters.NHibernate.NHibernateMessageModule
+2010-06-15 17:29:47,170 [4] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Sending message Mvc.Bus.TestMessage, Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null with ID 3c7a7732-18da-43d3-9244-55b6138f9889\16477 to destination MvcInputQueue.
+ToString() of the message yields: Mvc.Bus.TestMessage
+Message headers:
+EnclosedMessageTypes:
+2010-06-15 17:29:47,171 [Worker.10] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Calling 'HandleBeginMessage' on NServiceBus.SagaPersisters.NHibernate.NHibernateMessageModule
+2010-06-15 17:29:47,171 [Worker.10] INFO  NServiceBus.Unicast.UnicastBus [(null)] - Received message Mvc.Bus.TestMessage, Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null with ID 3c7a7732-18da-43d3-9244-55b6138f9889\16477 from sender MvcInputQueue@DM4F4ZKK1LT
+2010-06-15 17:29:47,176 [Worker.10] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Activating: GridInterceptingMessageHandler
+2010-06-15 17:29:47,180 [Worker.10] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - GridInterceptingMessageHandler Done.
+2010-06-15 17:29:47,180 [Worker.10] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Activating: SagaMessageHandler
+2010-06-15 17:29:47,185 [Worker.10] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - SagaMessageHandler Done.
+2010-06-15 17:29:47,185 [Worker.10] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Activating: TestHandler
+2010-06-15 17:29:47,186 [Worker.10] INFO  Mvc.Bus.TestHandler [(null)] - Received message with contents 'javier is testing'
+2010-06-15 17:29:47,187 [Worker.10] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - TestHandler Done.
+2010-06-15 17:29:47,187 [Worker.10] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Finished handling message.
+2010-06-15 17:29:47,188 [Worker.10] DEBUG NServiceBus.Unicast.UnicastBus [(null)] - Calling 'HandleEndMessage' on NServiceBus.SagaPersisters.NHibernate.NHibernateMessageModule

@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MvcTurbine.Windsor</name>
+    </assembly>
+    <members>
+        <member name="T:MvcTurbine.Windsor.TurbineRegistrationList">
+            <summary>
+            Defines the list of registrations to process
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Windsor.TurbineRegistrationList.#ctor(Castle.Windsor.IWindsorContainer)">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Windsor.TurbineRegistrationList.RegisterAll``1">
+            <summary>
+            Registers all the services of type <typeparamref name="Interface"/> into the container.
+            </summary>
+            <typeparam name="Interface"></typeparam>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.TurbineRegistrationList.Register``1(System.Type)" -->
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.TurbineRegistrationList.Register``2" -->
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.TurbineRegistrationList.Register``2(System.String)" -->
+        <member name="M:MvcTurbine.Windsor.TurbineRegistrationList.Register(System.String,System.Type)">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceLocator.Register(System.String,System.Type)"/>.
+            </summary>
+            <param name="key"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:MvcTurbine.Windsor.TurbineRegistrationList.Register(System.Type,System.Type)">
+            <summary>
+            See <seealso cref="M:MvcTurbine.ComponentModel.IServiceLocator.Register(System.Type,System.Type)"/>.
+            </summary>
+            <param name="serviceType"></param>
+            <param name="implType"></param>
+        </member>
+        <member name="M:MvcTurbine.Windsor.TurbineRegistrationList.GetKey(System.Type,System.Type)">
+            <summary>
+            Gets the key generated from the type and implementation.
+            </summary>
+            <param name="service"></param>
+            <param name="impl"></param>
+            <returns></returns>
+        </member>
+        <member name="P:MvcTurbine.Windsor.TurbineRegistrationList.Container">
+            <summary>
+             Sets the associated <see cref="T:Castle.Windsor.IWindsorContainer"/> instance.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.Windsor.WindsorServiceLocator">
+            <summary>
+            Implemenation of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> using <see cref="T:Castle.Windsor.IWindsorContainer"/> as the default container.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.CreateContainer">
+            <summary>
+            Creates an <see cref="T:Castle.Windsor.IWindsorContainer"/> instance with the right resolvers associated to it.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.#ctor(Castle.Windsor.IWindsorContainer)">
+            <summary>
+            Create an instance of the type an use the specified <see cref="T:Castle.Windsor.IWindsorContainer"/>.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.Batch">
+            <summary>
+            Gets the associated <see cref="T:MvcTurbine.ComponentModel.IServiceRegistrar"/> to process.
+            </summary>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.Resolve``1" -->
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.Resolve``1(System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.Resolve``1(System.Type)" -->
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.Resolve(System.Type)">
+            <summary>
+             Resolves the service of the specified type by the given type key.
+            </summary>
+            <param name="type">Type of service to resolve.</param>
+            <returns>An instance of the type, null otherwise</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.ResolveServices``1" -->
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.Register``1(System.Type)" -->
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.Register``2" -->
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.Register``2(System.String)" -->
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.Register(System.String,System.Type)">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceLocator.Register(System.String,System.Type)"/>.
+            </summary>
+            <param name="key"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.Register(System.Type,System.Type)">
+            <summary>
+            See <seealso cref="M:MvcTurbine.ComponentModel.IServiceLocator.Register(System.Type,System.Type)"/>.
+            </summary>
+            <param name="serviceType"></param>
+            <param name="implType"></param>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.Register``1(``0)">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceLocator.Register``1(``0)"/>.
+            </summary>
+            <typeparam name="Interface"></typeparam>
+            <param name="instance"></param>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.Release(System.Object)">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceLocator.Release(System.Object)"/>.
+            </summary>
+            <param name="instance"></param>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.Reset">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceLocator.Reset"/>.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.Dispose">
+            <summary>
+            Disposes (resets) the current service locator.
+            </summary>
+        </member>
+        <member name="P:MvcTurbine.Windsor.WindsorServiceLocator.Container">
+            <summary>
+             Gets or sets the current <see cref="T:Castle.Windsor.IWindsorContainer"/> for the locator.
+            </summary>
+        </member>
+    </members>
+</doc>
