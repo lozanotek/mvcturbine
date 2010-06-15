@@ -18,6 +18,9 @@
 //
 
 #endregion
+
+using Autofac.Builder;
+
 namespace MvcTurbine.Autofac {
     using System;
     using System.Collections.Generic;
@@ -32,6 +35,7 @@ namespace MvcTurbine.Autofac {
     /// </remarks>
     public class AutofacServiceLocator : IServiceLocator {
         private TurbineAutofacModule currentModule;
+        private IContainer container;
 
         /// <summary>
         /// Default constructor. Locator is instantiated with a new <see cref="ContainerBuilder"/> instance.
@@ -45,20 +49,21 @@ namespace MvcTurbine.Autofac {
                 throw new ArgumentNullException("builder",
                     "The specified Autofac ContainerBuilder cannot be null.");
             }
-
             Builder = builder;
         }
 
         public ContainerBuilder Builder { get; private set; }
 
         public void Dispose() {
+            if (container != null)
+                container.Dispose();
         }
 
         public T Resolve<T>() where T : class {
             try {
-                using (var container = Builder.Build()) {
-                    return container.Resolve<T>();
-                }
+                if (container == null)
+                    container = Builder.Build();
+                return container.Resolve<T>();
             } catch (Exception ex) {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
@@ -66,9 +71,9 @@ namespace MvcTurbine.Autofac {
 
         public T Resolve<T>(string key) where T : class {
             try {
-                using (var container = Builder.Build()) {
-                    return container.Resolve<T>(key);
-                }
+                if (container == null)
+                    container = Builder.Build();
+                return container.Resolve<T>(key);
             } catch (Exception ex) {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
@@ -76,9 +81,10 @@ namespace MvcTurbine.Autofac {
 
         public T Resolve<T>(Type type) where T : class {
             try {
-                using (var container = Builder.Build()) {
-                    return container.Resolve(type) as T;
-                }
+                if (container == null)
+                    container = Builder.Build();
+
+                return container.Resolve(type) as T;
             } catch (Exception ex) {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
@@ -86,9 +92,9 @@ namespace MvcTurbine.Autofac {
 
         public object Resolve(Type type) {
             try {
-                using (var container = Builder.Build()) {
-                    return container.Resolve(type);
-                }
+                if (container == null)
+                    container = Builder.Build();
+                return container.Resolve(type);
             } catch (Exception ex) {
                 throw new ServiceResolutionException(type, ex);
             }
@@ -96,10 +102,10 @@ namespace MvcTurbine.Autofac {
 
         public IList<T> ResolveServices<T>() where T : class {
             try {
-                using (var container = Builder.Build()) {
-                    var enumerable = container.Resolve<IEnumerable<T>>();
-                    return new List<T>(enumerable);
-                }
+                if (container == null)
+                    container = Builder.Build();
+                var enumerable = container.Resolve<IEnumerable<T>>();
+                return new List<T>(enumerable);
             } catch (Exception ex) {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
@@ -113,24 +119,48 @@ namespace MvcTurbine.Autofac {
         }
 
         public void Register<Interface>(Type implType) where Interface : class {
-            currentModule.Register<Interface>(implType);
+            if (container != null)
+                container.ComponentRegistry.Register(
+                    RegistrationBuilder.ForType(implType).As<Interface>().CreateRegistration());
+            else
+                Builder.RegisterType(implType).As<Interface>();
         }
 
         public void Register<Interface, Implementation>() where Implementation : class, Interface {
-            currentModule.Register<Interface, Implementation>();
+            if (container != null)
+                container.ComponentRegistry.Register(
+                    RegistrationBuilder.ForType<Implementation>().As<Interface>().CreateRegistration());
+            else
+                Builder.RegisterType<Implementation>().As<Interface>();
         }
 
         public void Register<Interface, Implementation>(string key) where Implementation :
             class, Interface {
-            currentModule.Register<Interface, Implementation>(key);
+            if (container != null)
+                container.ComponentRegistry.Register(
+                    RegistrationBuilder.ForType<Implementation>().Named<Interface>(key).CreateRegistration());
+            else
+                Builder.RegisterType<Implementation>().Named<Interface>(key);
         }
 
         public void Register(string key, Type type) {
-            currentModule.Register(key, type);
+            Builder.RegisterType(type).Named(key, type);
         }
 
         public void Register(Type serviceType, Type implType) {
-            currentModule.Register(serviceType, implType);
+            if (container != null)
+                container.ComponentRegistry.Register(
+                    RegistrationBuilder.ForType(implType).As(serviceType).CreateRegistration());
+            else
+                Builder.RegisterType(implType).As(serviceType);
+        }
+
+        public void Register<Interface>(Interface instance) where Interface : class
+        {
+            if (container != null)
+                throw new Exception("Need to figure out how to register an instance here.");
+            else
+                Builder.RegisterInstance(instance);
         }
 
         [Obsolete("Not used with this implementation of IServiceLocator.")]
@@ -145,9 +175,9 @@ namespace MvcTurbine.Autofac {
         }
 
         public TService Inject<TService>(TService instance) where TService : class {
-            using (var container = Builder.Build()) {
-                return container.InjectProperties(instance);
-            }
+            if (container == null)
+                container = Builder.Build();
+            return container.InjectProperties(instance);
         }
 
         [Obsolete("Not used with this implementation of IServiceLocator.")]
