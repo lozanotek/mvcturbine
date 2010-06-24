@@ -22,6 +22,7 @@
 namespace MvcTurbine.Web.Models {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
     using ComponentModel;
 
@@ -29,30 +30,32 @@ namespace MvcTurbine.Web.Models {
     /// Default <see cref="IModelBinder"/> to use within an application.
     /// </summary>
     public class TurbineModelBinder : DefaultModelBinder {
-
-        private static readonly object _lock = new object();
-
-        /// <summary>
-        /// Cache list for the model binders to use
-        /// </summary>
-        private IList<IFilterableModelBinder> modelBinders;
-
         /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="locator"></param>
-        public TurbineModelBinder(IServiceLocator locator) {
+        public TurbineModelBinder(IServiceLocator locator, IBinderRegistrationManager binderManager) {
             if (locator == null) {
                 throw new ArgumentNullException("locator", "The specified IServiceLocator cannot be null.");
             }
 
+            if (binderManager == null) {
+                throw new ArgumentNullException("binderManager", "The specified IBinderRegistrationManager cannot be null.");
+            }
+
             ServiceLocator = locator;
+            BinderManager = binderManager;
         }
 
         /// <summary>
-        /// Gets the current ServiceLocator associated with this binder
+        /// Gets the <see cref="IServiceLocator"/> to use.
         /// </summary>
         public IServiceLocator ServiceLocator { get; private set; }
+
+        /// <summary>
+        /// Gets the <see cref="IBinderRegistrationManager"/> to use.
+        /// </summary>
+        public IBinderRegistrationManager BinderManager { get; private set; }
 
         /// <summary>
         /// Processes the registered <see cref="IModelBinder"/> within the <see cref="ServiceLocator"/>.
@@ -61,38 +64,56 @@ namespace MvcTurbine.Web.Models {
         /// <param name="bindingContext"></param>
         /// <returns></returns>
         public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) {
-            var binders = GetRegisteredModelBinders();
+            var registeredModelBinders = GetRegisteredModelBinders();
 
-            if (binders == null || binders.Count == 0) {
+            if (registeredModelBinders == null || registeredModelBinders.Count == 0) {
                 return base.BindModel(controllerContext, bindingContext);
             }
 
-            foreach (var binder in binders) {
-                if (!binder.SupportsModelType(bindingContext.ModelMetadata.ModelType)) continue;
+            var modelType = bindingContext.ModelMetadata.ModelType;
+            var binderType = BinderManager.GetModelBinderForType(modelType);
 
-                return binder.BindModel(controllerContext, bindingContext);
+            if (binderType != null) {
+                var foundBinder = registeredModelBinders
+                    .Where(binder => binder.GetType().IsAssignableFrom(binderType))
+                    .FirstOrDefault();
+
+                if (foundBinder != null) {
+                    //TODO: Can be better addressed with nested container
+                    var result = foundBinder.BindModel(controllerContext, bindingContext);
+                    ServiceLocator.Release(foundBinder);
+                    return result;
+                }
+
+            }
+
+            foreach (var binder in registeredModelBinders) {
+                var filterableBinder = binder as IFilterableModelBinder;
+                if (filterableBinder == null) continue;
+
+                if (!filterableBinder.SupportsModelType(modelType)) continue;
+
+                //TODO: Can be better addressed with nested container
+                var result = binder.BindModel(controllerContext, bindingContext);
+                ServiceLocator.Release(binder);
+                return result;
             }
 
             return base.BindModel(controllerContext, bindingContext);
         }
 
         /// <summary>
-        /// Gets the current registered <see cref="IFilterableModelBinder"/> instances from the container
+        /// Gets the current registered <see cref="IModelBinder"/> instances from the container
         /// and caches them.
         /// </summary>
-        /// <returns>Cached list of <see cref="IFilterableModelBinder"/>, if cache null, <see cref="IServiceLocator"/> 
+        /// <returns>Cached list of <see cref="IModelBinder"/>, if cache null, <see cref="IServiceLocator"/> 
         /// is queried and results are cached.</returns>
-        //THOUGHT: Might need to remve this piece when we have dynamic addition of the model binders.       
-        protected virtual IList<IFilterableModelBinder> GetRegisteredModelBinders() {
-            if (modelBinders == null) {
-                lock (_lock) {
-                    if (modelBinders == null) {
-                        modelBinders = ServiceLocator.ResolveServices<IFilterableModelBinder>();
-                    }
-                }
+        protected virtual IList<IModelBinder> GetRegisteredModelBinders() {
+            try {
+                return ServiceLocator.ResolveServices<IModelBinder>();
+            } catch {
+                return null;
             }
-
-            return modelBinders;
         }
     }
 }

@@ -95,6 +95,7 @@
     <Compile Include="ComponentModel\RegistrationFilters.cs" />
     <Compile Include="ComponentModel\ServiceLocatorExtensions.cs" />
     <Compile Include="ComponentModel\ServiceResolutionException.cs" />
+    <Compile Include="ComponentModel\TypeCache.cs" />
     <Compile Include="IRotorContext.cs" />
     <Compile Include="ITurbineApplication.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

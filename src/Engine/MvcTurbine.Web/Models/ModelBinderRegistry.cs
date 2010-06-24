@@ -20,20 +20,23 @@
 #endregion
 
 namespace MvcTurbine.Web.Models {
-    using System;
     using System.Web.Mvc;
+    using ComponentModel;
 
     /// <summary>
-    /// Defines a common interface for checking whether a <see cref="IModelBinder"/> should
-    /// be applied to a specified model.
+    /// Base class to provide Model (ViewModel) registration for <see cref="IModelBinder"/>.
     /// </summary>
-    [Obsolete("This type is obsolete. Start using the ModelBinderRegistry approach to associate IModelBinder to a Mode/ViewModel.")]
-    public interface IFilterableModelBinder : IModelBinder {
+    public abstract class ModelBinderRegistry : BinderRegistratrionExpression {
+        protected ModelBinderRegistry()
+            : base(new TypeCache()) {
+        }
+
         /// <summary>
-        /// Checks whether the current instance supports the specified type.
+        /// Gets the registered <see cref="IModelBinder"/> list for the specified models.
         /// </summary>
-        /// <param name="modelType">Type to check against.</param>
-        /// <returns>True of they're the same, false otherwise.</returns>
-        bool SupportsModelType(Type modelType);
+        /// <returns></returns>
+        public virtual TypeCache GetBinderRegistrations() {
+            return BinderTable;
+        }
     }
 }
