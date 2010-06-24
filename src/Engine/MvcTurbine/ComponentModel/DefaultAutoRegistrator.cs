@@ -68,7 +68,7 @@ namespace MvcTurbine.ComponentModel {
                     try {
                         var registrationTypes = assembly.GetTypes()
                             .Where(matchedType => typeFilter(matchedType, serviceType));
-
+                        
                         foreach (Type type in registrationTypes) {
                             registration(ServiceLocator, type);
                         }

@@ -21,41 +21,54 @@
 
 namespace MvcTurbine.Web.Blades {
     using MvcTurbine.Blades;
-    
+
     /// <summary>
     /// Static gateway for the core blades of MVC Turbine.
     /// </summary>
     public static class CoreBlades {
-        private static MvcBlade mvcBlade;
-        private static RoutingBlade routingBlade;
+        private static Blade viewBlade;
+        private static Blade routingBlade;
+        private static Blade controllerBlade;
+        private static Blade filterBlade;
+        private static Blade binderBlade;
 
         /// <summary>
-        /// Gets or sets the <see cref="MvcBlade"/> instance to use.
+        /// Gets or sets the blade that handles the model binder registration.
         /// </summary>
-        public static MvcBlade Mvc {
-            get {
-                if (mvcBlade == null) {
-                    mvcBlade = new MvcBlade();
-                }
-
-                return mvcBlade;
-            }
-
-            set { mvcBlade = value; }
+        public static Blade Model {
+            get { return binderBlade ?? (binderBlade = new ModelBinderBlade()); }
+            set { binderBlade = value; }
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="RoutingBlade"/> instance to use.
+        /// Gets or sets the blade that handles the filter registration.
         /// </summary>
-        public static RoutingBlade Routing {
-            get {
-                if (routingBlade == null) {
-                    routingBlade = new RoutingBlade();
-                }
+        public static Blade Filter {
+            get { return filterBlade ?? (filterBlade = new FilterBlade()); }
+            set { filterBlade = value; }
+        }
 
-                return routingBlade;
-            }
+        /// <summary>
+        /// Gets or sets the blade that handles the controller registration.
+        /// </summary>
+        public static Blade Controller {
+            get { return controllerBlade ?? (controllerBlade = new ControllerBlade()); }
+            set { controllerBlade = value; }
+        }
 
+        /// <summary>
+        /// Gets or sets the blade that handles the view engine registration.
+        /// </summary>
+        public static Blade View {
+            get { return viewBlade ?? (viewBlade = new ViewBlade()); }
+            set { viewBlade = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the blade that handles the routing registration.
+        /// </summary>
+        public static Blade Routing {
+            get { return routingBlade ?? (routingBlade = new RoutingBlade()); }
             set { routingBlade = value; }
         }
 
@@ -64,7 +77,7 @@ namespace MvcTurbine.Web.Blades {
         /// </summary>
         /// <returns></returns>
         public static BladeList GetBlades() {
-            return new BladeList { Routing, Mvc};
+            return new BladeList { Routing, Controller, Model, View, Filter };
         }
     }
 }

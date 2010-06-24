@@ -92,8 +92,11 @@
       <Link>CommonInfo.cs</Link>
     </Compile>
     <Compile Include="Blades\BladeExtensions.cs" />
+    <Compile Include="Blades\ControllerBlade.cs" />
     <Compile Include="Blades\CoreBlades.cs" />
-    <Compile Include="Blades\MvcBlade.cs" />
+    <Compile Include="Blades\FilterBlade.cs" />
+    <Compile Include="Blades\ModelBinderBlade.cs" />
+    <Compile Include="Blades\ViewBlade.cs" />
     <Compile Include="Blades\RoutingBlade.cs" />
     <Compile Include="Controllers\ControllerExtensions.cs" />
     <Compile Include="Controllers\DefaultFilterFinder.cs" />
@@ -107,7 +110,11 @@
     <Compile Include="Controllers\TurbineActionInvoker.cs" />
     <Compile Include="Controllers\TurbineControllerFactory.cs" />
     <Compile Include="Controllers\InjectableFilterAttribute.cs" />
+    <Compile Include="Models\BinderRegistratrionExpression.cs" />
+    <Compile Include="Models\DefaultBinderRegistrationManager.cs" />
+    <Compile Include="Models\IBinderRegistrationManager.cs" />
     <Compile Include="Models\IFilterableModelBinder.cs" />
+    <Compile Include="Models\ModelBinderRegistry.cs" />
     <Compile Include="Models\TurbineModelBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
