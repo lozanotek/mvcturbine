@@ -193,7 +193,7 @@ namespace MvcTurbine.StructureMap {
 
         public void Register<Interface>(Func<Interface> func) where Interface : class
         {
-            throw new NotImplementedException();
+            Container.Configure(cfg => cfg.For<Interface>().Use(func.Invoke));
         }
 
         /// <summary>
