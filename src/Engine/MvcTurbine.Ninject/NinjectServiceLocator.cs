@@ -243,10 +243,10 @@ namespace MvcTurbine.Ninject
         /// Resolves the service of the specified interface with the provided factory method.
         /// </summary>
         /// <typeparam name="Interface"></typeparam>
-        /// <param name="func"></param>
-        public void Register<Interface>(Func<Interface> func) where Interface : class
+        /// <param name="factoryMethod"></param>
+        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class
         {
-            currentModule.Register(func);
+            currentModule.Register(factoryMethod);
         }
 
         /// <summary>
@@ -272,7 +272,7 @@ namespace MvcTurbine.Ninject
         /// <summary>
         /// Resolves the service of the specified interface with the provided factory method.
         /// </summary>
-        /// <param name="func">The factory method which will be used to resolve this interface.</param>
+        /// <param name="factoryMethod">The factory method which will be used to resolve this interface.</param>
         /// <returns>An instance of the type, null otherwise</returns>
         public TService Inject<TService>(TService instance) where TService : class {
             Container.Inject(instance);

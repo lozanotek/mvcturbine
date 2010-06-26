@@ -83,6 +83,6 @@ namespace MvcTurbine.ComponentModel {
         /// <param name="instance">Instance of the type to register.</param>
         void Register<Interface>(Interface instance) where Interface : class;
 
-        void Register<Interface>(Func<Interface> func) where Interface : class;
+        void Register<Interface>(Func<Interface> factoryMethod) where Interface : class;
     }
 }

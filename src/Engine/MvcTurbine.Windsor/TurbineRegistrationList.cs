@@ -131,10 +131,10 @@ namespace MvcTurbine.Windsor {
             registrationList.Add(registration);
         }
 
-        public void Register<Interface>(Func<Interface> func) where Interface : class
+        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class
         {
             var registration = Component.For<Interface>()
-                .UsingFactoryMethod(func.Invoke);
+                .UsingFactoryMethod(factoryMethod.Invoke);
             registrationList.Add(registration);
         }
 

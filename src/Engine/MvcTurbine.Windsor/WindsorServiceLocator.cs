@@ -201,11 +201,11 @@ namespace MvcTurbine.Windsor {
         /// <summary>
         /// Resolves the service of the specified interface with the provided factory method.
         /// </summary>
-        /// <param name="func">The factory method which will be used to resolve this interface.</param>
+        /// <param name="factoryMethod">The factory method which will be used to resolve this interface.</param>
         /// <returns>An instance of the type, null otherwise</returns>
-        public void Register<Interface>(Func<Interface> func) where Interface : class
+        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class
         {
-            registrationList.Register(func);
+            registrationList.Register(factoryMethod);
         }
 
         /// <summary>

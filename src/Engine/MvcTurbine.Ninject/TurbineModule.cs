@@ -141,10 +141,10 @@ namespace MvcTurbine.Ninject {
         /// See <see cref="IServiceLocator.Register{Interface}<>(Func{Interface})"/>
         /// </summary>
         /// <typeparam name="Interface"></typeparam>
-        /// <param name="func"></param>
-        public void Register<Interface>(Func<Interface> func) where Interface : class
+        /// <param name="factoryMethod"></param>
+        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class
         {
-            Bind<Interface>().ToMethod(c => func.Invoke());
+            Bind<Interface>().ToMethod(c => factoryMethod.Invoke());
         }
     }
 }
