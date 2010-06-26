@@ -264,6 +264,11 @@ namespace MvcTurbine.Ninject
             currentModule = null;
         }
 
+        /// <summary>
+        /// Resolves the service of the specified interface with the provided factory method.
+        /// </summary>
+        /// <param name="func">The factory method which will be used to resolve this interface.</param>
+        /// <returns>An instance of the type, null otherwise</returns>
         public TService Inject<TService>(TService instance) where TService : class {
             Container.Inject(instance);
             return instance;

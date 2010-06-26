@@ -126,6 +126,11 @@ namespace MvcTurbine.ComponentModel {
         /// <param name="instance">Instance of the type to register.</param>
         void Register<Interface>(Interface instance) where Interface : class;
 
+        /// <summary>
+        /// Resolves the service of the specified interface with the provided factory method.
+        /// </summary>
+        /// <param name="func">The factory method which will be used to resolve this interface.</param>
+        /// <returns>An instance of the type, null otherwise</returns>
         void Register<Interface>(Func<Interface> func) where Interface : class;
 
         /// <summary>
