@@ -198,7 +198,7 @@ namespace MvcTurbine.StructureMap {
         /// <returns>An instance of the type, null otherwise</returns>
         public void Register<Interface>(Func<Interface> func) where Interface : class
         {
-            Container.Configure(cfg => cfg.For<Interface>().Use(func.Invoke));
+            currentRegistry.Register(func);
         }
 
         /// <summary>

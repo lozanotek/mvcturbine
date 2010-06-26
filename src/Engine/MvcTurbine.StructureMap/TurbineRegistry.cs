@@ -122,9 +122,14 @@ namespace MvcTurbine.StructureMap {
             For<Interface>().Use(instance);
         }
 
+        /// <summary>
+        /// See <see cref="IServiceRegistrar.Register{Interface}(Func{Interface})"/>.
+        /// </summary>
+        /// <typeparam name="Interface"></typeparam>
+        /// <param name="func"></param>
         public void Register<Interface>(Func<Interface> func) where Interface : class
         {
-            throw new NotImplementedException();
+            Container.Configure(cfg => cfg.For<Interface>().Use(func.Invoke));
         }
 
         public void Dispose() {
