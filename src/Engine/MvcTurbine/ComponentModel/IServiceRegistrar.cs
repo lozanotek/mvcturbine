@@ -82,5 +82,7 @@ namespace MvcTurbine.ComponentModel {
         /// <typeparam name="Interface">Type of the service to register.</typeparam>
         /// <param name="instance">Instance of the type to register.</param>
         void Register<Interface>(Interface instance) where Interface : class;
+
+        void Register<Interface>(Func<Interface> func) where Interface : class;
     }
 }

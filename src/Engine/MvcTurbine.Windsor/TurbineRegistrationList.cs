@@ -131,6 +131,13 @@ namespace MvcTurbine.Windsor {
             registrationList.Add(registration);
         }
 
+        public void Register<Interface>(Func<Interface> func) where Interface : class
+        {
+            var registration = Component.For<Interface>()
+                .UsingFactoryMethod(func.Invoke);
+            registrationList.Add(registration);
+        }
+
         /// <summary>
         /// Gets the key generated from the type and implementation.
         /// </summary>

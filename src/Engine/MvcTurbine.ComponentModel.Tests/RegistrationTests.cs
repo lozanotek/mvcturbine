@@ -117,11 +117,11 @@ namespace MvcTurbine.ComponentModel.Tests {
         [Test]
         public void Register_With_Factory_Method_Should_Return_Result_From_Factory()
         {
-            var firstExpectedLogger = new SimpleLogger();
-            var secondExpectedLogger = new SimpleLogger();
+            var firstExpectedLogger = new FactoryMethodTest();
+            var secondExpectedLogger = new FactoryMethodTest();
             var hasBeenCalled = false;
             using (locator.Batch())
-                locator.Register(() =>
+                locator.Register<IFactoryMethodTest>(() =>
                                      {
                                         if (hasBeenCalled == false)
                                         {
@@ -131,11 +131,16 @@ namespace MvcTurbine.ComponentModel.Tests {
                                         return secondExpectedLogger;
                                      });
 
-            var first = locator.Resolve<SimpleLogger>();
+            var first = locator.Resolve<IFactoryMethodTest>();
             Assert.AreSame(firstExpectedLogger, first);
 
-            var second = locator.Resolve<SimpleLogger>();
+            var second = locator.Resolve<IFactoryMethodTest>();
             Assert.AreSame(secondExpectedLogger, second);
         }
     }
+
+    public interface IFactoryMethodTest{}
+
+    public class FactoryMethodTest : IFactoryMethodTest {}
+
 }

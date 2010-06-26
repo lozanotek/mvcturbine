@@ -136,5 +136,10 @@ namespace MvcTurbine.Ninject {
         public void Register<Interface>(Interface instance) where Interface : class {
             Bind<Interface>().ToConstant(instance);
         }
+
+        public void Register<Interface>(Func<Interface> func) where Interface : class
+        {
+            throw new NotImplementedException();
+        }
     }
 }

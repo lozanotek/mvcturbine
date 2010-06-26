@@ -291,5 +291,10 @@ namespace MvcTurbine.Unity {
         public void Register<Interface>(Interface instance) where Interface : class {
             throw new NotImplementedException();
         }
+
+        public void Register<Interface>(Func<Interface> func) where Interface : class
+        {
+            throw new NotImplementedException();
+        }
     }
 }

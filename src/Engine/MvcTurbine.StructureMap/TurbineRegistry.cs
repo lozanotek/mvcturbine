@@ -122,6 +122,11 @@ namespace MvcTurbine.StructureMap {
             For<Interface>().Use(instance);
         }
 
+        public void Register<Interface>(Func<Interface> func) where Interface : class
+        {
+            throw new NotImplementedException();
+        }
+
         public void Dispose() {
             // Process the current registration
             Container.Configure(x => x.AddRegistry(this));

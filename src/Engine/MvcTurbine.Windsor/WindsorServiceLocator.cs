@@ -205,7 +205,7 @@ namespace MvcTurbine.Windsor {
         /// <returns>An instance of the type, null otherwise</returns>
         public void Register<Interface>(Func<Interface> func) where Interface : class
         {
-            throw new NotImplementedException();
+            registrationList.Register(func);
         }
 
         /// <summary>
