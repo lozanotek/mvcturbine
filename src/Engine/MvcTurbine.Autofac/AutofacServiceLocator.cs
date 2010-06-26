@@ -163,6 +163,11 @@ namespace MvcTurbine.Autofac {
                 Builder.RegisterInstance(instance);
         }
 
+        public void Register<Interface>(Func<Interface> func) where Interface : class
+        {
+            throw new NotImplementedException();
+        }
+
         [Obsolete("Not used with this implementation of IServiceLocator.")]
         public void Release(object instance) {
         }

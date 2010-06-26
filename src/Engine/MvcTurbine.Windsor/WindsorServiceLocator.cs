@@ -198,6 +198,11 @@ namespace MvcTurbine.Windsor {
             registrationList.Register(instance);
         }
 
+        public void Register<Interface>(Func<Interface> func) where Interface : class
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// See <see cref="IServiceLocator.Release"/>.
         /// </summary>

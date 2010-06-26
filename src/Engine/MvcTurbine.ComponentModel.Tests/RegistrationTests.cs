@@ -113,5 +113,16 @@ namespace MvcTurbine.ComponentModel.Tests {
             var logger = locator.Resolve<SimpleLogger>();
             Assert.AreEqual(typeof(SimpleLogger), logger.GetType());
         }
+
+        [Test]
+        public void Register_With_Factory_Method_Should_Return_Result_From_Factory()
+        {
+            var expected = new SimpleLogger();
+            using (locator.Batch())
+                locator.Register(() => expected);
+
+            var logger = locator.Resolve<SimpleLogger>();
+            Assert.AreSame(expected, logger);
+        }
     }
 }

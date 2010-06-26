@@ -239,6 +239,11 @@ namespace MvcTurbine.Ninject
             currentModule.Register(instance);
         }
 
+        public void Register<Interface>(Func<Interface> func) where Interface : class
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Releases (disposes) the service instance from within the locator.
         /// </summary>

@@ -19,6 +19,8 @@
 
 #endregion
 
+using Microsoft.Practices.Unity.StaticFactory;
+
 namespace MvcTurbine.Unity {
     using System;
     using System.Collections.Generic;
@@ -204,6 +206,13 @@ namespace MvcTurbine.Unity {
         /// <param name="instance">Instance of the type to register.</param>
         public void Register<Interface>(Interface instance) where Interface : class {
             Container.RegisterInstance(instance);
+        }
+
+        public void Register<Interface>(Func<Interface> func) where Interface : class
+        {
+            var container = this.Container;
+            Func<IUnityContainer, object> factoryFunc = c => func.Invoke();
+            container.RegisterType<Interface>(new InjectionFactory(factoryFunc));
         }
 
         /// <summary>
