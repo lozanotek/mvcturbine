@@ -60,7 +60,7 @@ namespace MvcTurbine.Autofac {
 
         public void Register<Interface>(Func<Interface> func) where Interface : class
         {
-            throw new NotImplementedException();
+            AddRegistration(builder => builder.Register(c => func.Invoke()));
         }
     }
 }
