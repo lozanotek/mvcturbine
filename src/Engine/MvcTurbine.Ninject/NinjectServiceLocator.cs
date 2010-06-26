@@ -241,7 +241,7 @@ namespace MvcTurbine.Ninject
 
         public void Register<Interface>(Func<Interface> func) where Interface : class
         {
-            throw new NotImplementedException();
+            currentModule.Bind<Interface>().ToMethod(c => func.Invoke());
         }
 
         /// <summary>
