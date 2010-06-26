@@ -117,12 +117,25 @@ namespace MvcTurbine.ComponentModel.Tests {
         [Test]
         public void Register_With_Factory_Method_Should_Return_Result_From_Factory()
         {
-            var expected = new SimpleLogger();
+            var firstExpectedLogger = new SimpleLogger();
+            var secondExpectedLogger = new SimpleLogger();
+            var hasBeenCalled = false;
             using (locator.Batch())
-                locator.Register(() => expected);
+                locator.Register(() =>
+                                     {
+                                        if (hasBeenCalled == false)
+                                        {
+                                            hasBeenCalled = true;
+                                            return firstExpectedLogger;
+                                        }
+                                        return secondExpectedLogger;
+                                     });
 
-            var logger = locator.Resolve<SimpleLogger>();
-            Assert.AreSame(expected, logger);
+            var first = locator.Resolve<SimpleLogger>();
+            Assert.AreSame(firstExpectedLogger, first);
+
+            var second = locator.Resolve<SimpleLogger>();
+            Assert.AreSame(secondExpectedLogger, second);
         }
     }
 }
