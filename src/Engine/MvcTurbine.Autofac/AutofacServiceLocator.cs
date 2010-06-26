@@ -165,7 +165,7 @@ namespace MvcTurbine.Autofac {
 
         public void Register<Interface>(Func<Interface> func) where Interface : class
         {
-            throw new NotImplementedException();
+            Builder.Register(c => func.Invoke());
         }
 
         [Obsolete("Not used with this implementation of IServiceLocator.")]
