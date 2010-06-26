@@ -239,9 +239,14 @@ namespace MvcTurbine.Ninject
             currentModule.Register(instance);
         }
 
+        /// <summary>
+        /// Resolves the service of the specified interface with the provided factory method.
+        /// </summary>
+        /// <typeparam name="Interface"></typeparam>
+        /// <param name="func"></param>
         public void Register<Interface>(Func<Interface> func) where Interface : class
         {
-            currentModule.Bind<Interface>().ToMethod(c => func.Invoke());
+            currentModule.Register(func);
         }
 
         /// <summary>

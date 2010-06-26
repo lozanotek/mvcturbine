@@ -136,10 +136,15 @@ namespace MvcTurbine.Ninject {
         public void Register<Interface>(Interface instance) where Interface : class {
             Bind<Interface>().ToConstant(instance);
         }
-
+        
+        /// <summary>
+        /// See <see cref="IServiceLocator.Register{Interface}<>(Func{Interface})"/>
+        /// </summary>
+        /// <typeparam name="Interface"></typeparam>
+        /// <param name="func"></param>
         public void Register<Interface>(Func<Interface> func) where Interface : class
         {
-            throw new NotImplementedException();
+            Bind<Interface>().ToMethod(c => func.Invoke());
         }
     }
 }
