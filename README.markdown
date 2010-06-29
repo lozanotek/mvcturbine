@@ -13,17 +13,28 @@ MVC Turbine is a plugin for ASP.NET MVC that bakes in composition/IoC into your 
 
 # RESOURCES
 ## Source
+<<<<<<< HEAD
 1. Clone to repository locally: `git clone git://github.com/lozanotek/mvcturbine.git`
 
 ## Build
 * Open the src/MvcTurbine.sln solution and explore! OR ...
 * Want to build the binaries? Run the build/build_binaries.bat script
+=======
+1. Clone to repository locally
+ `git clone git://github.com/lozanotek/mvcturbine.git`
+
+## Build
+1a. Open the src/MvcTurbine.sln solution and explore!
+1b. Want to build the binaries? Run the build/build_binaries.bat script and watch the fun unleash
+>>>>>>> Updated the README with more important information
 
 ## Videos
 Check out this [Channel9 video](http://channel9.msdn.com/posts/jongalloway/Jon-Takes-Five-with-Javier-Lozano-on-MVC-Turbine) that explains a little bit about the project's purpose and features.
 
+
 ## Community
 * [MVC Turbine Google Group](http://groups.google.com/group/mvcturbine)
+
 
 # REQUIREMENTS
 * .NET Framework 3.5
