@@ -1,5 +1,6 @@
 MVC Turbine
 ===========
+![MVC Turbine](http://download.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=mvcturbine&DownloadId=128771 "MVC Turbine")
 
 MVC Turbine is a plugin for ASP.NET MVC that has IoC baked in and auto-wires controllers, binders, view engines, http modules, etc. that reside within your application. Thus you worry more about what your application should do, rather than how it should do it.
 
