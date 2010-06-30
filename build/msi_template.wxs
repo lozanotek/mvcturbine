@@ -9,9 +9,9 @@
         <Property Id="ARPPRODUCTICON" Value="ProductIco" />
         <Property Id="ARPHELPLINK" Value="http://mvcturbine.codeplex.com" />
         <Property Id="INSTALLDIR">
-            <RegistrySearch Id='VSInstallDir' Type='raw' Root='HKLM' Key='Software\Microsoft\VisualStudio\10.0' Name='InstallDir' />
+            <RegistrySearch Id='VSInstallDir' Type='raw'
+              Root='HKLM' Key='Software\Microsoft\VisualStudio\10.0' Name='InstallDir' />
         </Property>
-        
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="INSTALLDIR">
                 <Directory Id="PRIVATEASSEMBIES" Name="PrivateAssemblies">
@@ -19,25 +19,6 @@
                         <File Id="Wizard" Name="SolutionFactory.Wizard.dll" Source="SolutionFactory.Wizard.dll" DiskId="1"  />
                         <RegistryValue Root='HKLM' Key='SOFTWARE\SolutionFactory\Wizard' Type='string' Value='InstallKey' KeyPath='yes' />
                     </Component>
-                </Directory>
-                        <Directory Id="EXT" Name="Extensions">
-                            <Directory Id="CompanyExt" Name="lozanotek">
-                                <Directory Id="ProductExt" Name="MvcTurbine">
-                                    <Directory Id="VersionExt" Name="v2.1">
-                                        <Component Id="ExtComponent" Guid="0F4BC67A-9BA6-468B-8DD4-0DAFC97CA663">
-                                            <RemoveFolder Id="RemoveVerDir" Directory="VersionExt" On="uninstall"/>
-                                            <RemoveFolder Id="RemoveProductDir" Directory="ProductExt" On="uninstall"/>
-                                            <RemoveFolder Id="RemoveCompanyDir" Directory="CompanyExt" On="uninstall"/>
-                                        </Component>
-                                        <Component Id="VsExtComponent" Guid="28F87011-D0F9-4229-A210-33B878E510CF">
-                                            <File Id="VsExtManifest" Name="extension.vsixmanifest" Source="extension.vsixmanifest" DiskId="1"  />
-					    <File Id="ExtIcon" Name="VSIXProject_small.png" Source="VSIXProject_small.png" DiskId="1"  />
-					    <File Id="ExtLogo" Name="VSIXProject_large.png" Source="VSIXProject_large.png" DiskId="1"  />
-					    <RemoveFile Id="VsExtManifest"  Name="extension.vsixmanifest" On="uninstall"/>
-                                        </Component>
-                                    </Directory>
-                                </Directory>
-                            </Directory>
                 </Directory>
                 <Directory Id="PersonalFolder">
                     <Directory Id="VS" Name="Visual Studio 2010">
@@ -86,14 +67,11 @@
                 </Directory>
             </Directory>
         </Directory>
-
+        
         <Feature Id="WizardFeature" Title="Wizard Pieces" Level="1">
             <ComponentRef Id="WizardComponent" />
             <ComponentRef Id="TemplateComponent"/>
-            <ComponentRef Id="ExtComponent" />
-            <ComponentRef Id="VsExtComponent" />
         </Feature>
-        
         <Feature Id="WindsorFeature" Title="Windsor Application" Level="1">
             <ComponentRef Id="WindsorComponent" />
         </Feature>
@@ -108,3 +86,4 @@
         </Feature>
     </Product>
 </Wix>
+
