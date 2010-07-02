@@ -59,16 +59,6 @@
             Assert.IsInstanceOfType(typeof(AccountRepository), instance);
         }
 
-        [Test]
-        public void Register_with_instance_should_override_the_previous_registration_when_resolve_is_called_inbetween()
-        {
-            locator.Register<IRepository>(new ProductRepository());
-            locator.Resolve<IRepository>();
-            locator.Register<IRepository>(new AccountRepository());
-            var instance = locator.Resolve<IRepository>();
-            Assert.IsInstanceOfType(typeof(AccountRepository), instance);
-        }
-
         #region fakes for testing
 
         private interface IRepository { }
