@@ -30,7 +30,7 @@ namespace MvcTurbine.ComponentModel {
     /// Default implementation of the <see cref="IBinAssemblyLoader"/>.
     /// </summary>
     public class DefaultBinAssemblyLoader : IBinAssemblyLoader {
-        
+
         /// <summary>
         /// Loads the assemblies in the bin folder that are not currently in the <see cref="AppDomain.CurrentDomain"/>.
         /// </summary>
@@ -66,7 +66,12 @@ namespace MvcTurbine.ComponentModel {
 
             var nameList = new List<string>();
             foreach (var assembly in assemblies) {
-                nameList.Add(assembly.GetName().Name);
+                var parts = assembly.FullName.Split(",".ToCharArray(), 
+                    StringSplitOptions.RemoveEmptyEntries);
+                if (parts.Length == 0) continue;
+
+                var assemblyName = parts[0];
+                nameList.Add(assemblyName);
             }
 
             return nameList;
