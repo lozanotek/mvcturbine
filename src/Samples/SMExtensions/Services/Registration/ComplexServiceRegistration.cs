@@ -1,6 +1,6 @@
 ﻿namespace Services.Registration {
-    using MvcTurbine.StructureMap;
     using StructureMap;
+    using StructureMapExtensions;
 
     public class ComplexServiceRegistration : StructureMapRegistrator {
         public override void Register(IContainer container) {
