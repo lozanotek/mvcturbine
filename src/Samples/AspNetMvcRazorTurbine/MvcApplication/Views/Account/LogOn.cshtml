@@ -1,0 +1,37 @@
+﻿@{ LayoutPage = "~/Views/Shared/_Master.cshtml"; }
+@section title {
+    Log On
+}
+<h2>Log On</h2>
+<p>
+    Please enter your username and password. @Html.ActionLink("Register", "Register") if you don't have an account.
+</p>
+<form method="post">
+    @Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
+    <div>
+        <fieldset>
+            <legend>Account Information</legend>
+            <div class="editor-label">
+                @Html.Label("UserName")
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("UserName")
+                @Html.ValidationMessage("UserName")
+            </div>
+            <div class="editor-label">
+                @Html.Label("Password")
+            </div>
+            <div class="editor-field">
+                @Html.Password("Password")
+                @Html.ValidationMessage("Password")
+            </div>
+            <div class="editor-label">
+                @Html.CheckBox("RememberMe")
+                @Html.Label("RememberMe")
+            </div>
+            <p>
+                <input type="submit" value="Log On"/>
+            </p>
+        </fieldset>
+    </div>
+</form>
