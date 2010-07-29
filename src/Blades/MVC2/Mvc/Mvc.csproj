@@ -95,7 +95,9 @@
     <Compile Include="Areas\IAreaDependency.cs" />
     <Compile Include="Areas\SimpleAreaDependency.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SimpleController.cs" />
     <Compile Include="DefaultMvcApplication.cs" />
+    <Compile Include="Model\SimpleModelMetadataProvider.cs" />
     <Compile Include="Model\SimpleModelValidatorProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\DefaultRouteRegistrator.cs" />

@@ -28,7 +28,6 @@ namespace MvcTurbine.EmbeddedViews {
 
     public class EmbeddedViewVirtualPathProvider : VirtualPathProvider {
         private readonly EmbeddedViewTable embeddedViews;
-        private VirtualPathProvider defaultProvider;
 
         public EmbeddedViewVirtualPathProvider(EmbeddedViewTable table) {
             if (table == null) {
@@ -38,10 +37,7 @@ namespace MvcTurbine.EmbeddedViews {
             embeddedViews = table;
         }
 
-        public void SetDefaultVirtualPathProvider(VirtualPathProvider provider) {
-            defaultProvider = provider;
-        }
-
+        
         private bool IsEmbeddedView(string virtualPath) {
             string checkPath = VirtualPathUtility.ToAppRelative(virtualPath);
 
@@ -51,7 +47,7 @@ namespace MvcTurbine.EmbeddedViews {
 
         public override bool FileExists(string virtualPath) {
             return (IsEmbeddedView(virtualPath) ||
-                    defaultProvider.FileExists(virtualPath));
+                    base.FileExists(virtualPath));
         }
 
         public override VirtualFile GetFile(string virtualPath) {
@@ -60,16 +56,15 @@ namespace MvcTurbine.EmbeddedViews {
                 return new AssemblyResourceFile(embeddedView, virtualPath);
             }
 
-            return defaultProvider.GetFile(virtualPath);
+            return base.GetFile(virtualPath);
         }
 
         public override CacheDependency GetCacheDependency(
             string virtualPath,
             IEnumerable virtualPathDependencies,
             DateTime utcStart) {
-            return IsEmbeddedView(virtualPath)
-                       ? null
-                       : defaultProvider.GetCacheDependency(virtualPath, virtualPathDependencies, utcStart);
+            return IsEmbeddedView(virtualPath) ? null : 
+                base.GetCacheDependency(virtualPath, virtualPathDependencies, utcStart);
         }
     }
 }

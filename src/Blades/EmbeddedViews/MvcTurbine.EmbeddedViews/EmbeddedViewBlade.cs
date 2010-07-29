@@ -28,13 +28,10 @@ namespace MvcTurbine.EmbeddedViews {
         public override void Spin(IRotorContext context) {
             IServiceLocator serviceLocator = GetServiceLocatorFromContext(context);
             IEmbeddedViewResolver resolver = GetEmbeddedViewResolver(serviceLocator);
-            VirtualPathProvider virtualPathProvider = HostingEnvironment.VirtualPathProvider;
 
             EmbeddedViewTable table = resolver.GetEmbeddedViews();
 
             var embeddedProvider = new EmbeddedViewVirtualPathProvider(table);
-            embeddedProvider.SetDefaultVirtualPathProvider(virtualPathProvider);
-
             HostingEnvironment.RegisterVirtualPathProvider(embeddedProvider);
         }
 
