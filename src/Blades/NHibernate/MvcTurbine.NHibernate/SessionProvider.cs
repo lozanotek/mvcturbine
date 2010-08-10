@@ -23,7 +23,14 @@ namespace MvcTurbine.NHibernate {
 	using global::NHibernate;
 	using global::NHibernate.Cfg;
 
+	/// <summary>
+	/// Base implementation of <see cref="ISessionProvider"/> that wires up the 
+	/// pieces for simple consumption of NHiberate.
+	/// </summary>
 	public abstract class SessionProvider : ISessionProvider {
+		/// <summary>
+		/// See <see cref="ISessionProvider.CurrentSession"/>
+		/// </summary>
 		public virtual ISession CurrentSession {
 			get {
 				// Get the default SessionFactory
@@ -34,6 +41,10 @@ namespace MvcTurbine.NHibernate {
 			}
 		}
 
+		/// <summary>
+		/// Gets the type of session context that should be used for storing
+		/// the <see cref="ISession"/> instance. Default is Managed Web.
+		/// </summary>
 		public virtual string SessionContextName {
 			get {
 				// for more information, 
@@ -42,19 +53,41 @@ namespace MvcTurbine.NHibernate {
 			}
 		}
 
-		public abstract Configuration GetConfiguration();
+		/// <summary>
+		/// See <see cref="ISessionProvider.BuildConfiguration"/>
+		/// </summary>
+		/// <returns></returns>
+		public abstract Configuration BuildConfiguration();
+
+		/// <summary>
+		/// See <see cref="ISessionProvider.GetSessionFactory"/>
+		/// </summary>
+		/// <returns></returns>
 		public abstract ISessionFactory GetSessionFactory();
 
+		/// <summary>
+		/// See <see cref="ISessionProvider.OpenSession"/>
+		/// </summary>
+		/// <returns></returns>
 		public virtual ISession OpenSession() {
 			ISessionFactory factory = GetSessionFactory();
 			return factory.OpenSession();
 		}
 
+		/// <summary>
+		/// See <see cref="ISessionProvider.OpenStatelessSession"/>
+		/// </summary>
+		/// <returns></returns>
 		public virtual IStatelessSession OpenStatelessSession() {
 			var factory = GetSessionFactory();
 			return factory.OpenStatelessSession();
 		}
 
+		/// <summary>
+		/// Adds properties to the configuration object. Default property added is
+		/// <see cref="SessionContextName"/> as the Session Context class to use.
+		/// </summary>
+		/// <param name="configuration"></param>
 		protected virtual void AddProperties(Configuration configuration) {
 			if (!configuration.Properties.ContainsKey("current_session_context_class")) {
 				configuration.SetProperty("current_session_context_class", SessionContextName);

@@ -24,10 +24,36 @@ namespace MvcTurbine.NHibernate {
 	using global::NHibernate.Cfg;
 
 	public interface ISessionProvider {
+		/// <summary>
+		/// Gets the current <see cref="ISession"/> associated with the context.
+		/// </summary>
 		ISession CurrentSession { get; }
+
+		/// <summary>
+		/// Opens a new <see cref="ISession"/> from the <see cref="ISessionFactory"/>
+		/// associated with the context.
+		/// </summary>
+		/// <returns></returns>
 		ISession OpenSession();
+
+		/// <summary>
+		/// Opens a new <see cref="IStatelessSession"/> from the <see cref="ISessionFactory"/>
+		/// associated with the context.
+		/// </summary>
+		/// <returns></returns>
 		IStatelessSession OpenStatelessSession();
+
+		/// <summary>
+		/// Gets the current <see cref="ISessionFactory"/> associated with the context.
+		/// </summary>
+		/// <returns></returns>
 		ISessionFactory GetSessionFactory();
-		Configuration GetConfiguration();
+
+
+		/// <summary>
+		/// Builds the <see cref="Configuration"/> for the context.
+		/// </summary>
+		/// <returns></returns>
+		Configuration BuildConfiguration();
 	}
 }

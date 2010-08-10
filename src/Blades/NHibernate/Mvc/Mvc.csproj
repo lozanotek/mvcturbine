@@ -108,6 +108,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AnotherMappings\AnotherMappings.csproj">
+      <Project>{171FFC9F-06E3-4111-814E-36A36554D5D6}</Project>
+      <Name>AnotherMappings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{23E3DBCE-1BA3-40CB-AE86-36952FA7EF7B}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mappings\Mappings.csproj">
       <Project>{F6A481E3-679D-4908-8EBE-87E6A17BD741}</Project>
       <Name>Mappings</Name>

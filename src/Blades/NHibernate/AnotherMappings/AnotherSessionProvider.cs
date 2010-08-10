@@ -20,16 +20,10 @@
 #endregion
 
 namespace Mappings {
-	using System.IO;
-	using FluentNHibernate.Cfg;
-	using FluentNHibernate.Cfg.Db;
-	using MvcTurbine.NHibernate;
 	using NHibernate;
-	using NHibernate.ByteCode.Castle;
 	using NHibernate.Cfg;
-	using NHibernate.Tool.hbm2ddl;
 
-	public class SomeModelSessionProvider : SessionProvider {
+	public class AnotherSessionProvider : SimpleSessionProvider {
 		private static readonly object _lock = new object();
 		private static Configuration configuration;
 		private static ISessionFactory sessionFactory;
@@ -37,18 +31,17 @@ namespace Mappings {
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
-		/// <param name="databaseResolver"></param>
-		public SomeModelSessionProvider(IDatabaseResolver databaseResolver) {
-			CurrentDatabaseResolver = databaseResolver;
+		public AnotherSessionProvider(TaskDatabase database) {
+			Database = database;
 		}
 
-		public IDatabaseResolver CurrentDatabaseResolver { get; private set; }
+		public TaskDatabase Database { get; private set; }
 
-		public override Configuration GetConfiguration() {
+		public override Configuration BuildConfiguration() {
 			lock (_lock) {
 				if (configuration == null) {
 					lock (_lock) {
-						BuildConfiguration();
+						configuration = FluentlyConfigureSqlite(Database);
 					}
 				}
 
@@ -60,39 +53,13 @@ namespace Mappings {
 			lock (_lock) {
 				if (sessionFactory == null) {
 					lock (_lock) {
-						var config = GetConfiguration();
+						var config = BuildConfiguration();
 						sessionFactory = config.BuildSessionFactory();
 					}
 				}
 
 				return sessionFactory;
 			}
-		}
-
-		private void BuildConfiguration() {
-			var filePath = CurrentDatabaseResolver.FilePath;
-			SQLiteConfiguration liteConfiguration =
-				SQLiteConfiguration.Standard
-					.UsingFile(filePath)
-					.ProxyFactoryFactory(typeof(ProxyFactoryFactory));
-
-			configuration =
-				Fluently
-					.Configure()
-					.Database(liteConfiguration)
-					.Mappings(m => m.FluentMappings.AddFromAssemblyOf<SomeModelSessionProvider>())
-				// Install the database if it doesn't exist
-					.ExposeConfiguration(config =>
-					{
-						if (File.Exists(filePath)) return;
-
-						SchemaExport export = new SchemaExport(config);
-						export.Drop(false, true);
-						export.Create(false, true);
-					})
-					.BuildConfiguration();
-
-			AddProperties(configuration);
 		}
 	}
 }

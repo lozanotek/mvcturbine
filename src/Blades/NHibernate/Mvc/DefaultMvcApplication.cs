@@ -11,9 +11,10 @@ namespace Mvc {
 	using SomeModel;
 
 	public class DefaultMvcApplication : TurbineApplication {
-		//NOTE: You want to hit this piece of code only once.
 		static DefaultMvcApplication() {
-			ServiceLocatorManager.SetLocatorProvider(() => new WindsorServiceLocator(CreateContainer()));
+			var container = CreateContainer();
+
+			ServiceLocatorManager.SetLocatorProvider(() => new WindsorServiceLocator(container));
 		}
 
 		static IWindsorContainer CreateContainer() {
@@ -30,14 +31,24 @@ namespace Mvc {
 				.ImplementedBy<GenericRepository<Person>>());
 
 			// Persistence mappings
-			container.Register(
-				Component.For<ISessionProvider>()
-						.ImplementedBy<SomeModelSessionProvider>(),
-
-				Component.For<IDatabaseResolver>()
-						.ImplementedBy<SqliteDatabase>());
+			PersistenceRegistration(container);
 
 			return container;
+		}
+
+		private static void PersistenceRegistration(IWindsorContainer container) {
+			container.Register(
+				Component.For<ISessionProvider>()
+					.ImplementedBy<SomeSessionProvider>().LifeStyle.Singleton,
+
+				Component.For<ISessionProvider>()
+					.ImplementedBy<AnotherSessionProvider>().LifeStyle.Singleton,
+
+				Component.For<PersonDatabase>()
+					.ImplementedBy<PersonDatabase>(),
+
+				Component.For<TaskDatabase>()
+					.ImplementedBy<TaskDatabase>());
 		}
 	}
 }

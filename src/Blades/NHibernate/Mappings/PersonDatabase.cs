@@ -20,21 +20,9 @@
 #endregion
 
 namespace Mappings {
-	using System.IO;
-	using System.Web;
-
-	/// <summary>
-	/// Default implementation of <see cref="IDatabaseResolver"/>.
-	/// </summary>
-	public class SqliteDatabase : IDatabaseResolver {
-
-		public string FilePath {
-			get {
-				string path = HttpRuntime.AppDomainAppPath;
-				string dataPath = Path.Combine(path, "Data\\SomeModel.db3");
-
-				return dataPath;
-			}
+	public class PersonDatabase : SqliteDatabase {
+		public override string DbName {
+			get { return "Person"; }
 		}
 	}
 }

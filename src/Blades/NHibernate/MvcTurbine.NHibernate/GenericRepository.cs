@@ -25,24 +25,57 @@ namespace MvcTurbine.NHibernate {
 	using global::NHibernate.Linq;
 	using Data;
 
+	/// <summary>
+	/// Simple repository for accessing entities via Linq to NHibernate.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public class GenericRepository<T> : RepositoryBase<T> {
-		public virtual ISessionProvider SessionProvider { get; set; }
+		/// <summary>
+		/// Creates a new instance of the repository with the specified 
+		/// <see cref="ISessionProvider"/> to use.
+		/// </summary>
+		/// <param name="provider"></param>
+		public GenericRepository(ISessionProvider provider) {
+			SessionProvider = provider;
+		}
 
+		/// <summary>
+		/// Gets the <see cref="ISessionProvider"/> associated with this 
+		/// repository.
+		/// </summary>
+		public virtual ISessionProvider SessionProvider { get; private set; }
+
+		/// <summary>
+		/// Provides the IQueryable adapter for Linq to NH.
+		/// </summary>
+		/// <returns></returns>
 		public override IQueryable<T> LinqAdapter() {
 			ISession session = GetSession();
 			return session.Linq<T>();
 		}
 
+		/// <summary>
+		/// Saves or updates the entity.
+		/// </summary>
+		/// <param name="entity">Entity to add/update.</param>
 		public override void Add(T entity) {
 			ISession session = GetSession();
 			session.SaveOrUpdate(entity);
 		}
 
+		/// <summary>
+		/// Deletes the current entity.
+		/// </summary>
+		/// <param name="entity">Entity to delete.</param>
 		public override void Remove(T entity) {
 			ISession session = GetSession();
 			session.Delete(entity);
 		}
 
+		/// <summary>
+		/// Gets the current <see cref="ISession"/> for the context.
+		/// </summary>
+		/// <returns></returns>
 		protected virtual ISession GetSession() {
 			return SessionProvider.CurrentSession;
 		}

@@ -19,24 +19,32 @@
 
 #endregion
 
-namespace Mappings {
-	using FluentNHibernate.Mapping;
-	using SomeModel;
+namespace AnotherModel {
+	using System;
 
-	public sealed class AddressMap : ClassMap<Address> {
-		public AddressMap() {
-			Table("Addresses");
+	/// <summary>
+	/// Defines a Task for the system to use.
+	/// </summary>
+	[Serializable]
+	public class Task {
+		/// <summary>
+		/// Gets or sets the Id.
+		/// </summary>
+		public virtual int Id { get; set; }
 
-			Id(x => x.Id)
-				.GeneratedBy.Identity();
-
-			Map(x => x.City);
-			Map(x => x.Line1);
-			Map(x => x.Line2);
-			Map(x => x.State);
-			Map(x => x.Zip);
-
-			Not.LazyLoad();
-		}
+		/// <summary>
+		/// Gets or sets the Name.
+		/// </summary>
+		public virtual string Name { get; set; }
+		
+		/// <summary>
+		/// Gets or sets the Description.
+		/// </summary>
+		public virtual string Description { get; set; }
+		
+		/// <summary>
+		/// Gets or sets the Created date time.
+		/// </summary>
+		public virtual DateTime Created { get; set; }
 	}
 }
