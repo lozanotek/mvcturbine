@@ -20,12 +20,11 @@
 #endregion
 
 namespace MvcTurbine.Mvc2 {
-    using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
     using System.Web.Routing;
-    using MvcTurbine.Blades;
-    using MvcTurbine.ComponentModel;
+    using Blades;
+    using ComponentModel;
 
     public class AreaBlade : Blade, ISupportAutoRegistration {
         public virtual void AddRegistrations(AutoRegistrationList registrationList) {
@@ -63,8 +62,7 @@ namespace MvcTurbine.Mvc2 {
 
             RouteTable.Routes.Clear();
 
-            foreach (var route in aggregateList)
-            {
+            foreach (var route in aggregateList) {
                 RouteTable.Routes.Add(route);
             }
         }

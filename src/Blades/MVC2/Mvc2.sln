@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcApplication", "MvcApplic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Mvc2", "MvcTurbine.Mvc2\MvcTurbine.Mvc2.csproj", "{2CD67B66-F41E-4C21-9048-967EB6890CA8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mv2Support", "Mv2Support", "{1BE60209-D92E-4CCB-B6E6-C74E15614938}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Mv2.Tests", "MvcTurbine.Mv2.Tests\MvcTurbine.Mv2.Tests.csproj", "{913D7902-CAF1-45EE-97FF-A4E9D79296BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,8 +29,16 @@ Global
 		{2CD67B66-F41E-4C21-9048-967EB6890CA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CD67B66-F41E-4C21-9048-967EB6890CA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CD67B66-F41E-4C21-9048-967EB6890CA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{913D7902-CAF1-45EE-97FF-A4E9D79296BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{913D7902-CAF1-45EE-97FF-A4E9D79296BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{913D7902-CAF1-45EE-97FF-A4E9D79296BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{913D7902-CAF1-45EE-97FF-A4E9D79296BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2CD67B66-F41E-4C21-9048-967EB6890CA8} = {1BE60209-D92E-4CCB-B6E6-C74E15614938}
+		{913D7902-CAF1-45EE-97FF-A4E9D79296BA} = {1BE60209-D92E-4CCB-B6E6-C74E15614938}
 	EndGlobalSection
 EndGlobal

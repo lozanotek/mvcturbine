@@ -7,5 +7,5 @@
     <h2>
         I'm a mixed controller and I'm using the WebForms ViewEngine!</h2>
     <%Html.RenderPartial("sparkpartial"); %>
-    <%Html.RenderPartial("nvelocity"); %>
+    <%--<%Html.RenderPartial("nvelocity"); %>--%>
 </asp:Content>
