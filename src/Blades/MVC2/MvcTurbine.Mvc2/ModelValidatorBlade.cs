@@ -20,43 +20,37 @@
 #endregion
 
 namespace MvcTurbine.Mvc2 {
-    using System;
-    using System.Collections.Generic;
-    using System.Web.Mvc;
-    using MvcTurbine.Blades;
-    using MvcTurbine.ComponentModel;
+	using System.Collections.Generic;
+	using System.Web.Mvc;
+	using Blades;
+	using ComponentModel;
 
-    public class ModelValidatorBlade : Blade, ISupportAutoRegistration {
-        public virtual void AddRegistrations(AutoRegistrationList registrationList) {
-            registrationList.Add(Registration.Simple<ModelValidatorProvider>());
-        }
+	public class ModelValidatorBlade : Blade, ISupportAutoRegistration {
+		public virtual void AddRegistrations(AutoRegistrationList registrationList) {
+			registrationList.Add(Registration.Simple<ModelValidatorProvider>());
+		}
 
-        public override void Spin(IRotorContext context) {
-            IServiceLocator serviceLocator = GetServiceLocatorFromContext(context);
-            IList<ModelValidatorProvider> validatorList = GetValidationProviders(serviceLocator);
+		public override void Spin(IRotorContext context) {
+			var serviceLocator = GetServiceLocatorFromContext(context);
+			var validatorList = GetValidationProviders(serviceLocator);
 
-            if (validatorList == null || validatorList.Count == 0) return;
+			if (validatorList == null || validatorList.Count == 0) return;
 
-            // Clear the original state
-            ModelValidatorProviders.Providers.Clear();
+			// Clear the original state
+			ModelValidatorProviders.Providers.Clear();
 
-            foreach (ModelValidatorProvider validatorProvider in validatorList) {
-                ModelValidatorProviders.Providers.Add(validatorProvider);
-            }
+			foreach (ModelValidatorProvider validatorProvider in validatorList) {
+				ModelValidatorProviders.Providers.Add(validatorProvider);
+			}
 
-            // Add the default providers
-            ModelValidatorProviders.Providers.Add(new DataAnnotationsModelValidatorProvider());
-            ModelValidatorProviders.Providers.Add(new DataErrorInfoModelValidatorProvider());
-            ModelValidatorProviders.Providers.Add(new ClientDataTypeModelValidatorProvider());
-        }
+			// Add the default providers
+			ModelValidatorProviders.Providers.Add(new DataAnnotationsModelValidatorProvider());
+			ModelValidatorProviders.Providers.Add(new DataErrorInfoModelValidatorProvider());
+			ModelValidatorProviders.Providers.Add(new ClientDataTypeModelValidatorProvider());
+		}
 
-        public virtual IList<ModelValidatorProvider> GetValidationProviders(IServiceLocator serviceLocator) {
-            try {
-                return serviceLocator.ResolveServices<ModelValidatorProvider>();
-            }
-            catch (Exception) {
-                return null;
-            }
-        }
-    }
+		public virtual IList<ModelValidatorProvider> GetValidationProviders(IServiceLocator serviceLocator) {
+			return serviceLocator.ResolveServices<ModelValidatorProvider>();
+		}
+	}
 }

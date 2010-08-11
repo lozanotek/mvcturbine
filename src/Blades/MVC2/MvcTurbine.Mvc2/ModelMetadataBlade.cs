@@ -20,30 +20,25 @@
 #endregion
 
 namespace MvcTurbine.Mvc2 {
-    using System.Web.Mvc;
-    using MvcTurbine.Blades;
-    using MvcTurbine.ComponentModel;
+	using System.Web.Mvc;
+	using Blades;
+	using ComponentModel;
 
-    public class ModelMetadataBlade : Blade, ISupportAutoRegistration {
-        public override void Spin(IRotorContext context) {
-            var locator = base.GetServiceLocatorFromContext(context);
-            var provider = GetModelMetadataProvider(locator);
+	public class ModelMetadataBlade : Blade, ISupportAutoRegistration {
+		public override void Spin(IRotorContext context) {
+			var locator = base.GetServiceLocatorFromContext(context);
+			var provider = GetModelMetadataProvider(locator);
 
-            if (provider == null) return;
-            ModelMetadataProviders.Current = provider;
-        }
+			if (provider == null) return;
+			ModelMetadataProviders.Current = provider;
+		}
 
-        public virtual ModelMetadataProvider GetModelMetadataProvider(IServiceLocator locator) {
-            try {
-                return locator.Resolve<ModelMetadataProvider>();
-            }
-            catch {
-                return null;
-            }
-        }
+		public virtual ModelMetadataProvider GetModelMetadataProvider(IServiceLocator locator) {
+			return locator.Resolve<ModelMetadataProvider>();
+		}
 
-        public virtual void AddRegistrations(AutoRegistrationList registrationList) {
-            registrationList.Add(Registration.Simple<ModelMetadataProvider>());
-        }
-    }
+		public virtual void AddRegistrations(AutoRegistrationList registrationList) {
+			registrationList.Add(Registration.Simple<ModelMetadataProvider>());
+		}
+	}
 }

@@ -20,60 +20,55 @@
 #endregion
 
 namespace MvcTurbine.Mvc2 {
-    using System.Collections.Generic;
-    using System.Web.Mvc;
-    using System.Web.Routing;
-    using Blades;
-    using ComponentModel;
+	using System.Collections.Generic;
+	using System.Web.Mvc;
+	using System.Web.Routing;
+	using Blades;
+	using ComponentModel;
 
-    public class AreaBlade : Blade, ISupportAutoRegistration {
-        public virtual void AddRegistrations(AutoRegistrationList registrationList) {
-            registrationList.Add(Registration.Simple<AreaRegistration>());
-        }
+	public class AreaBlade : Blade, ISupportAutoRegistration {
+		public virtual void AddRegistrations(AutoRegistrationList registrationList) {
+			registrationList.Add(Registration.Simple<AreaRegistration>());
+		}
 
-        public override void Spin(IRotorContext context) {
-            var serviceLocator = GetServiceLocatorFromContext(context);
-            var areaList = GetRegisteredAreas(serviceLocator);
+		public override void Spin(IRotorContext context) {
+			var serviceLocator = GetServiceLocatorFromContext(context);
+			var areaList = GetRegisteredAreas(serviceLocator);
 
-            if (areaList == null || areaList.Count == 0) return;
+			if (areaList == null || areaList.Count == 0) return;
 
-            var areaRoutes = new RouteCollection();
-            foreach (AreaRegistration registration in areaList) {
-                var registrationContext = new AreaRegistrationContext(registration.AreaName, areaRoutes);
-                var areaNamespace = registration.GetType().Namespace;
+			var areaRoutes = new RouteCollection();
+			foreach (AreaRegistration registration in areaList) {
+				var registrationContext = new AreaRegistrationContext(registration.AreaName, areaRoutes);
+				var areaNamespace = registration.GetType().Namespace;
 
-                if (areaNamespace != null) {
-                    registrationContext.Namespaces.Add(areaNamespace + ".*");
-                }
+				if (areaNamespace != null) {
+					registrationContext.Namespaces.Add(areaNamespace + ".*");
+				}
 
-                registration.RegisterArea(registrationContext);
-            }
+				registration.RegisterArea(registrationContext);
+			}
 
-            ReOrderRoutingTable(areaRoutes);
-        }
+			ReOrderRoutingTable(areaRoutes);
+		}
 
-        protected virtual void ReOrderRoutingTable(RouteCollection areaRoutes) {
-            var existingRoutes = new RouteBase[RouteTable.Routes.Count];
-            RouteTable.Routes.CopyTo(existingRoutes, 0);
+		protected virtual void ReOrderRoutingTable(RouteCollection areaRoutes) {
+			var existingRoutes = new RouteBase[RouteTable.Routes.Count];
+			RouteTable.Routes.CopyTo(existingRoutes, 0);
 
-            var aggregateList = new List<RouteBase>();
-            aggregateList.AddRange(areaRoutes);
-            aggregateList.AddRange(existingRoutes);
+			var aggregateList = new List<RouteBase>();
+			aggregateList.AddRange(areaRoutes);
+			aggregateList.AddRange(existingRoutes);
 
-            RouteTable.Routes.Clear();
+			RouteTable.Routes.Clear();
 
-            foreach (var route in aggregateList) {
-                RouteTable.Routes.Add(route);
-            }
-        }
+			foreach (var route in aggregateList) {
+				RouteTable.Routes.Add(route);
+			}
+		}
 
-        public virtual IList<AreaRegistration> GetRegisteredAreas(IServiceLocator locator) {
-            try {
-                return locator.ResolveServices<AreaRegistration>();
-            }
-            catch {
-                return null;
-            }
-        }
-    }
+		public virtual IList<AreaRegistration> GetRegisteredAreas(IServiceLocator locator) {
+			return locator.ResolveServices<AreaRegistration>();
+		}
+	}
 }

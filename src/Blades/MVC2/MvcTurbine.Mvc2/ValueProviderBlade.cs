@@ -20,34 +20,29 @@
 #endregion
 
 namespace MvcTurbine.Mvc2 {
-    using System.Collections.Generic;
-    using System.Web.Mvc;
-    using MvcTurbine.Blades;
-    using MvcTurbine.ComponentModel;
+	using System.Collections.Generic;
+	using System.Web.Mvc;
+	using Blades;
+	using ComponentModel;
 
-    public class ValueProviderBlade : Blade, ISupportAutoRegistration {
-        public override void Spin(IRotorContext context) {
-            var locator = GetServiceLocatorFromContext(context);
+	public class ValueProviderBlade : Blade, ISupportAutoRegistration {
+		public override void Spin(IRotorContext context) {
+			var locator = GetServiceLocatorFromContext(context);
 
-            var valueProviders = GetValueProviders(locator);
-            if (valueProviders == null || valueProviders.Count == 0) return;
+			var valueProviders = GetValueProviders(locator);
+			if (valueProviders == null || valueProviders.Count == 0) return;
 
-            foreach (var valueProvider in valueProviders) {
-                ValueProviderFactories.Factories.Add(valueProvider);
-            }
-        }
+			foreach (var valueProvider in valueProviders) {
+				ValueProviderFactories.Factories.Add(valueProvider);
+			}
+		}
 
-        public virtual IList<ValueProviderFactory> GetValueProviders(IServiceLocator locator) {
-            try {
-                return locator.ResolveServices<ValueProviderFactory>();
-            }
-            catch {
-                return null;
-            }
-        }
+		public virtual IList<ValueProviderFactory> GetValueProviders(IServiceLocator locator) {
+			return locator.ResolveServices<ValueProviderFactory>();
+		}
 
-        public virtual void AddRegistrations(AutoRegistrationList registrationList) {
-            registrationList.Add(Registration.Simple<ValueProviderFactory>());
-        }
-    }
+		public virtual void AddRegistrations(AutoRegistrationList registrationList) {
+			registrationList.Add(Registration.Simple<ValueProviderFactory>());
+		}
+	}
 }

@@ -8,8 +8,8 @@
     <ProjectGuid>{913D7902-CAF1-45EE-97FF-A4E9D79296BA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MvcTurbine.Mv2.Tests</RootNamespace>
-    <AssemblyName>MvcTurbine.Mv2.Tests</AssemblyName>
+    <RootNamespace>MvcTurbine.Mvc2.Tests</RootNamespace>
+    <AssemblyName>MvcTurbine.Mvc2.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
