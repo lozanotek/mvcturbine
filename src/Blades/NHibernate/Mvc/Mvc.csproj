@@ -85,8 +85,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\CrudController.cs" />
+    <Compile Include="Controllers\PersonController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="DefaultMvcApplication.cs" />
+    <Compile Include="Persistence\AnotherGenericRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\DefaultRouteRegistrator.cs" />
   </ItemGroup>
@@ -112,9 +115,17 @@
       <Project>{171FFC9F-06E3-4111-814E-36A36554D5D6}</Project>
       <Name>AnotherMappings</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AnotherModel\AnotherModel.csproj">
+      <Project>{C72EE6B3-CE6B-4AA6-89BE-18DD54E9F57E}</Project>
+      <Name>AnotherModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{23E3DBCE-1BA3-40CB-AE86-36952FA7EF7B}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{3D848EED-E5E3-4FB6-A70B-A255D8FC90B0}</Project>
+      <Name>Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mappings\Mappings.csproj">
       <Project>{F6A481E3-679D-4908-8EBE-87E6A17BD741}</Project>

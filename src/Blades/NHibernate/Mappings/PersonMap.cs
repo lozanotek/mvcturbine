@@ -30,16 +30,8 @@ namespace Mappings {
 			Id(x => x.Id)
 				.GeneratedBy.Identity();
 
-			Component(entity => entity.FullName,
-				component =>
-				{
-					component.Map(name => name.FirstName, "First_Name");
-					component.Map(name => name.LastName, "Last_Name");
-					component.Map(name => name.MiddleName, "Middle_Name");
-				});
-
-			References(x => x.Address);
-			Not.LazyLoad();
+			Map(name => name.FirstName, "First_Name");
+			Map(name => name.LastName, "Last_Name");
 		}
 	}
 }

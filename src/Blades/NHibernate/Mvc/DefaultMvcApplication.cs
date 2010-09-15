@@ -1,4 +1,5 @@
 namespace Mvc {
+	using AnotherModel;
 	using Castle.MicroKernel.Registration;
 	using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 	using Castle.Windsor;
@@ -8,6 +9,7 @@ namespace Mvc {
 	using MvcTurbine.NHibernate;
 	using MvcTurbine.Windsor;
 	using MvcTurbine.Web;
+	using Persistence;
 	using SomeModel;
 
 	public class DefaultMvcApplication : TurbineApplication {
@@ -30,6 +32,9 @@ namespace Mvc {
 			container.Register(Component.For<IRepository<Person>>()
 				.ImplementedBy<GenericRepository<Person>>());
 
+			container.Register(Component.For<IRepository<Task>>()
+				.ImplementedBy<AnotherGenericRepository<Task>>());
+
 			// Persistence mappings
 			PersistenceRegistration(container);
 
@@ -41,14 +46,14 @@ namespace Mvc {
 				Component.For<ISessionProvider>()
 					.ImplementedBy<SomeSessionProvider>().LifeStyle.Singleton,
 
-				Component.For<ISessionProvider>()
+				Component.For<AnotherSessionProvider>()
 					.ImplementedBy<AnotherSessionProvider>().LifeStyle.Singleton,
 
 				Component.For<PersonDatabase>()
-					.ImplementedBy<PersonDatabase>(),
+					.ImplementedBy<PersonDatabase>().LifeStyle.Singleton,
 
 				Component.For<TaskDatabase>()
-					.ImplementedBy<TaskDatabase>());
+					.ImplementedBy<TaskDatabase>().LifeStyle.Singleton);
 		}
 	}
 }

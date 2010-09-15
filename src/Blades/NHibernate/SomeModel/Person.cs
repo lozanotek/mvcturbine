@@ -21,10 +21,11 @@
 
 namespace SomeModel {
 	using System;
+	using Domain;
 
 	[Serializable]
 	public class Person : EntityBase {
-		public virtual Name FullName { get; set; }
-		public virtual Address Address { get; set; }
+		public virtual string FirstName { get; set; }
+		public virtual string LastName { get; set; }
 	}
 }

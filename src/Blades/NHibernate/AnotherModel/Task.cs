@@ -21,17 +21,13 @@
 
 namespace AnotherModel {
 	using System;
+	using Domain;
 
 	/// <summary>
 	/// Defines a Task for the system to use.
 	/// </summary>
 	[Serializable]
-	public class Task {
-		/// <summary>
-		/// Gets or sets the Id.
-		/// </summary>
-		public virtual int Id { get; set; }
-
+	public class Task : EntityBase {
 		/// <summary>
 		/// Gets or sets the Name.
 		/// </summary>
@@ -41,10 +37,5 @@ namespace AnotherModel {
 		/// Gets or sets the Description.
 		/// </summary>
 		public virtual string Description { get; set; }
-		
-		/// <summary>
-		/// Gets or sets the Created date time.
-		/// </summary>
-		public virtual DateTime Created { get; set; }
 	}
 }

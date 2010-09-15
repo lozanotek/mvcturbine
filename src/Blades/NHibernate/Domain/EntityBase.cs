@@ -19,24 +19,36 @@
 
 #endregion
 
-namespace Mappings {
-	using FluentNHibernate.Mapping;
-	using SomeModel;
+namespace Domain {
+	using System;
 
-	public sealed class AddressMap : ClassMap<Address> {
-		public AddressMap() {
-			Table("Addresses");
+	[Serializable]
+	public class EntityBase {
+		public virtual int Id { get; set; }
+		public virtual DateTime? Created { get; set; }
 
-			Id(x => x.Id)
-				.GeneratedBy.Identity();
+		public override bool Equals(object obj) {
+			if (ReferenceEquals(null, obj)) {
+				return false;
+			}
+			if (ReferenceEquals(this, obj)) {
+				return true;
+			}
+			return obj.GetType() == typeof(EntityBase) && Equals((EntityBase)obj);
+		}
 
-			Map(x => x.City);
-			Map(x => x.Line1);
-			Map(x => x.Line2);
-			Map(x => x.State);
-			Map(x => x.Zip);
+		public virtual bool Equals(EntityBase other) {
+			if (ReferenceEquals(null, other)) {
+				return false;
+			}
+			if (ReferenceEquals(this, other)) {
+				return true;
+			}
+			return other.Id == Id;
+		}
 
-			Not.LazyLoad();
+		public override int GetHashCode() {
+			return Id;
 		}
 	}
 }
