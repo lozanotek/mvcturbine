@@ -55,6 +55,20 @@ namespace MvcTurbine.Web.Models {
         public IServiceLocator ServiceLocator { get; private set; }
 
         /// <summary>
+        /// Create a model instance from ServiceLocator or using the default behavior.
+        /// </summary>
+        /// <param name="controllerContext"></param>
+        /// <param name="bindingContext"></param>
+        /// <param name="modelType"></param>
+        /// <returns></returns>
+        protected override object CreateModel(ControllerContext controllerContext, ModelBindingContext bindingContext, Type modelType)
+        {
+            var model = ServiceLocator.Resolve(modelType);
+
+            return model ?? base.CreateModel(controllerContext, bindingContext, modelType);
+        }
+
+        /// <summary>
         /// Processes the registered <see cref="IModelBinder"/> within the <see cref="ServiceLocator"/>.
         /// </summary>
         /// <param name="controllerContext"></param>
