@@ -27,13 +27,13 @@ namespace MvcTurbine.Web.Metadata
         {
             return x.GetInterfaces()
                 .Any(i => (i.FullName ?? string.Empty)
-                              .StartsWith("MvcTurbine.Metadata.IMetadataAttributeHandler`1"));
+                              .StartsWith("MvcTurbine.Web.Metadata.IMetadataAttributeHandler`1"));
         }
 
         private static IEnumerable<Assembly> GetAllAssemblies()
         {
             return AppDomain.CurrentDomain.GetAssemblies()
-                .Where(x => x.FullName.StartsWith("MvcTurbine.Metadata.,") == false)
+                .Where(x => x.FullName.StartsWith("MvcTurbine.Web.Metadata.,") == false)
                 .ToList();
         }
     }

@@ -40,7 +40,7 @@ namespace MvcTurbine.Web.Blades
         {
             return x.IsGenericType &&
                    x.FullName != null &&
-                   x.FullName.StartsWith("MvcTurbine.Metadata.IMetadataAttributeHandler`1");
+                   x.FullName.StartsWith("MvcTurbine.Web.Metadata.IMetadataAttributeHandler`1");
         }
     }
 }
