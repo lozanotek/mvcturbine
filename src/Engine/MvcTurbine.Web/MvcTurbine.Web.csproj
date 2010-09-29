@@ -107,6 +107,13 @@
     <Compile Include="Controllers\TurbineActionInvoker.cs" />
     <Compile Include="Controllers\TurbineControllerFactory.cs" />
     <Compile Include="Controllers\InjectableFilterAttribute.cs" />
+    <Compile Include="Metadata\CreateMetadataArguments.cs" />
+    <Compile Include="Metadata\CustomMetadataProvider.cs" />
+    <Compile Include="Metadata\IMetadataAttributeHandler.cs" />
+    <Compile Include="Metadata\Mapping.cs" />
+    <Compile Include="Metadata\MetadataAttribute.cs" />
+    <Compile Include="Metadata\MetadataAttributeRetriever.cs" />
+    <Compile Include="Metadata\MetadataProviderBlade.cs" />
     <Compile Include="Models\IFilterableModelBinder.cs" />
     <Compile Include="Models\TurbineModelBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -154,6 +161,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
