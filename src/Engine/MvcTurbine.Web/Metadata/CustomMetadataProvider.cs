@@ -9,9 +9,9 @@ namespace MvcTurbine.Web.Metadata
     public class CustomMetadataProvider : DataAnnotationsModelMetadataProvider
     {
         private readonly IServiceLocator serviceLocator;
-        private readonly List<Mapping> mappingList;
+        private readonly List<MetadataAttributeMapping> mappingList;
 
-        public CustomMetadataProvider(IServiceLocator serviceLocator, List<Mapping> mappingList)
+        public CustomMetadataProvider(IServiceLocator serviceLocator, List<MetadataAttributeMapping> mappingList)
         {
             this.serviceLocator = serviceLocator;
             this.mappingList = mappingList;
@@ -47,12 +47,12 @@ namespace MvcTurbine.Web.Metadata
                 .Select(CreateTheHandler);
         }
 
-        private IMetadataAttributeHandlerBase CreateTheHandler(Mapping map)
+        private IMetadataAttributeHandlerBase CreateTheHandler(MetadataAttributeMapping map)
         {
             return serviceLocator.Resolve(map.HandlerType) as IMetadataAttributeHandlerBase;
         }
 
-        private static bool ThisIsAHandlerforThisType(CreateMetadataArguments args, Mapping map)
+        private static bool ThisIsAHandlerforThisType(CreateMetadataArguments args, MetadataAttributeMapping map)
         {
             return args.Attributes.Any(x => x.GetType() == map.AttributeType);
         }

@@ -2,7 +2,7 @@
 
 namespace MvcTurbine.Web.Metadata
 {
-    public class Mapping
+    public class MetadataAttributeMapping
     {
         public Type AttributeType { get; set; }
         public Type HandlerType { get; set; }

@@ -110,7 +110,7 @@
     <Compile Include="Metadata\CreateMetadataArguments.cs" />
     <Compile Include="Metadata\CustomMetadataProvider.cs" />
     <Compile Include="Metadata\IMetadataAttributeHandler.cs" />
-    <Compile Include="Metadata\Mapping.cs" />
+    <Compile Include="Metadata\MetadataAttributeMapping.cs" />
     <Compile Include="Metadata\MetadataAttribute.cs" />
     <Compile Include="Metadata\MetadataAttributeRetriever.cs" />
     <Compile Include="Metadata\MetadataProviderBlade.cs" />

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Web.Mvc;
 using MvcTurbine.Blades;
 
@@ -11,25 +10,36 @@ namespace MvcTurbine.Web.Metadata
     {
         public override void Spin(IRotorContext context)
         {
-            var retriever = new MetadataAttributeRetriever();
-
-            var list = retriever.GetTypesOfAllMetadataAttributeHandlers()
-                .Select(type => new Mapping
-                {
-                    AttributeType = GetTheGenericValidatorType(type),
-                    HandlerType = type
-                }).ToList();
+            var list = CreateAListOfMappingsOfHandlersAndTheTypesTheyHandle();
 
             ModelMetadataProviders.Current = new CustomMetadataProvider(context.ServiceLocator, list);
         }
 
-        private static Type GetTheGenericValidatorType(Type validatorType)
+        private static List<MetadataAttributeMapping> CreateAListOfMappingsOfHandlersAndTheTypesTheyHandle()
+        {
+            var retriever = new MetadataAttributeRetriever();
+
+            return retriever.GetTypesOfAllMetadataAttributeHandlers()
+                .Select(type => new MetadataAttributeMapping
+                                    {
+                                        AttributeType = GetTheTypeThatThisHandlerHandles(type),
+                                        HandlerType = type
+                                    }).ToList();
+        }
+
+        private static Type GetTheTypeThatThisHandlerHandles(Type validatorType)
         {
             return validatorType.GetInterfaces()
-                .Where(x => x.IsGenericType &&
-                            x.FullName.StartsWith("MvcTurbine.Metadata.IMetadataAttributeHandler`1"))
+                .Where(ThisIsAMetadataAttributeHandler)
                 .First()
                 .GetGenericArguments()[0];
+        }
+
+        private static bool ThisIsAMetadataAttributeHandler(Type x)
+        {
+            return x.IsGenericType &&
+                   x.FullName != null &&
+                   x.FullName.StartsWith("MvcTurbine.Metadata.IMetadataAttributeHandler`1");
         }
     }
 }
