@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using MvcTurbine.Blades;
+using MvcTurbine.Web.Metadata;
 
-namespace MvcTurbine.Web.Metadata
+namespace MvcTurbine.Web.Blades
 {
     public class MetadataProviderBlade : Blade
     {

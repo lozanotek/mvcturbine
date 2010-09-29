@@ -28,6 +28,7 @@ namespace MvcTurbine.Web.Blades {
     public static class CoreBlades {
         private static MvcBlade mvcBlade;
         private static RoutingBlade routingBlade;
+        private static MetadataProviderBlade metadataProviderBlade;
 
         /// <summary>
         /// Gets or sets the <see cref="MvcBlade"/> instance to use.
@@ -60,11 +61,29 @@ namespace MvcTurbine.Web.Blades {
         }
 
         /// <summary>
+        /// Gets or sets the <see cref="MetadataProvider"/> instance to use.
+        /// </summary>
+        public static MetadataProviderBlade MetadataProvider
+        {
+            get
+            {
+                if (metadataProviderBlade == null)
+                {
+                    metadataProviderBlade = new MetadataProviderBlade();
+                }
+
+                return metadataProviderBlade;
+            }
+
+            set { metadataProviderBlade = value; }
+        }
+
+        /// <summary>
         /// Gets the registered core blades in a <see cref="BladeList"/>.
         /// </summary>
         /// <returns></returns>
         public static BladeList GetBlades() {
-            return new BladeList { Routing, Mvc};
+            return new BladeList { Routing, Mvc, MetadataProvider};
         }
     }
 }

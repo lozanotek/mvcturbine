@@ -113,7 +113,7 @@
     <Compile Include="Metadata\MetadataAttributeMapping.cs" />
     <Compile Include="Metadata\MetadataAttribute.cs" />
     <Compile Include="Metadata\MetadataAttributeRetriever.cs" />
-    <Compile Include="Metadata\MetadataProviderBlade.cs" />
+    <Compile Include="Blades\MetadataProviderBlade.cs" />
     <Compile Include="Models\IFilterableModelBinder.cs" />
     <Compile Include="Models\TurbineModelBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
