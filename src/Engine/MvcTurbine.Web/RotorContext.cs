@@ -35,8 +35,6 @@ namespace MvcTurbine.Web {
         private static readonly object _lock = new object();
         private static readonly object _regLock = new object();
         private IAutoRegistrator autoRegistrator;
-        private static bool manualRegistrationHasCompleted;
-        private static bool automaticRegistrationHasCompleted;
 
         /// <summary>
         /// Default constructor
@@ -228,16 +226,10 @@ namespace MvcTurbine.Web {
             var registrationList = ServiceLocator.ResolveServices<IServiceRegistration>();
             if (registrationList == null || registrationList.Count == 0) return;
 
-            lock (_regLock) {
-                if (manualRegistrationHasCompleted == false)
-                {
-                    using (ServiceLocator.Batch())
-                        foreach (IServiceRegistration reg in registrationList)
-                            reg.Register(ServiceLocator);
-
-                    manualRegistrationHasCompleted = true;
-                }
-            }
+            lock (_regLock)
+                using (ServiceLocator.Batch())
+                    foreach (IServiceRegistration reg in registrationList)
+                        reg.Register(ServiceLocator);
         }
 
         /// <summary>
@@ -250,15 +242,10 @@ namespace MvcTurbine.Web {
         protected virtual void ProcessAutomaticRegistration(AutoRegistrationList registrationList) {
             IAutoRegistrator registrator = GetAutoRegistrator();
 
-            lock (_regLock) {
-                if (automaticRegistrationHasCompleted == false){
-                    using (ServiceLocator.Batch())
-                        foreach (ServiceRegistration registration in registrationList)
-                            registrator.AutoRegister(registration);
-
-                    automaticRegistrationHasCompleted = true;
-                }
-            }
+            lock (_regLock)
+                using (ServiceLocator.Batch())
+                    foreach (ServiceRegistration registration in registrationList)
+                        registrator.AutoRegister(registration);
         }
 
         /// <summary>
