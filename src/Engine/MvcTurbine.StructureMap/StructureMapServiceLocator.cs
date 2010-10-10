@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 //
 // Author: Javier Lozano <javier@lozanotek.com>
@@ -55,6 +55,11 @@ namespace MvcTurbine.StructureMap {
         /// Gets the <see cref="IContainer"/> associated with this instance.
         /// </summary>
         public IContainer Container { private set; get; }
+
+        public IList<object> ResolveServices(Type type) {
+            var results = Container.GetAllInstances(type);
+            return results.Cast<object>().ToList();
+        }
 
         public IServiceRegistrar Batch() {
             currentRegistry = new TurbineRegistry(Container);

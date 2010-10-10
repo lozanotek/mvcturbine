@@ -68,6 +68,8 @@ namespace MvcTurbine.ComponentModel {
         /// <returns>A list of service of type <see cref="T"/>, null otherwise.</returns>
         IList<T> ResolveServices<T>() where T : class;
 
+        IList<object> ResolveServices(Type type);
+
         /// <summary>
         /// Creates a <see cref="IServiceRegistrar"/> to process queued
         /// registration of types.

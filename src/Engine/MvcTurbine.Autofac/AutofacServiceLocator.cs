@@ -111,6 +111,11 @@ namespace MvcTurbine.Autofac {
             }
         }
 
+        public IList<object> ResolveServices(Type type)
+        {
+            throw new NotImplementedException();
+        }
+
         public IServiceRegistrar Batch() {
             currentModule = new TurbineAutofacModule();
             Builder.RegisterModule(currentModule);

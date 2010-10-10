@@ -58,6 +58,11 @@ namespace MvcTurbine.Unity {
         /// </summary>
         public IUnityContainer Container { private set; get; }
 
+        public IList<object> ResolveServices(Type type)
+        {
+            return new List<object>(Container.ResolveAll(type));
+        }
+
         /// <summary>
         /// Gets the associated <see cref="IServiceRegistrar"/> to process.
         /// </summary>
