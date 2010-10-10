@@ -9,6 +9,11 @@ namespace MvcTurbine.Web.Tests.Controllers {
         public void Dispose() {
         }
 
+        public IList<object> ResolveServices(Type type)
+        {
+            throw new NotImplementedException();
+        }
+
         public IServiceRegistrar Batch() {
             throw new NotImplementedException();
         }
