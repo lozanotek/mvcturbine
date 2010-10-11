@@ -113,6 +113,7 @@
     <Compile Include="Blades\RoutingBlade_SpinTests.cs" />
     <Compile Include="Controllers\DefaultFilterFinderTests.cs" />
     <Compile Include="Controllers\MockServiceLocator.cs" />
+    <Compile Include="Controllers\TurbineDependencyResolverTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestFixtureBase.cs" />
   </ItemGroup>

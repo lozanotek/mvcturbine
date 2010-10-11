@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MvcTurbine.Web</RootNamespace>
     <AssemblyName>MvcTurbine.Web</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\mvcturbine.snk</AssemblyOriginatorKeyFile>
@@ -110,6 +110,7 @@
     <Compile Include="Controllers\TurbineActionInvoker.cs" />
     <Compile Include="Controllers\TurbineControllerFactory.cs" />
     <Compile Include="Controllers\InjectableFilterAttribute.cs" />
+    <Compile Include="Controllers\TurbineDependencyResolver.cs" />
     <Compile Include="Models\BinderRegistratrionExpression.cs" />
     <Compile Include="Models\DefaultBinderRegistrationManager.cs" />
     <Compile Include="Models\IBinderRegistrationManager.cs" />
