@@ -13,11 +13,13 @@ namespace MvcTurbine.Web.Tests.Blades
     public class DependencyResolverBladeTests
     {
         [Test]
-        public void Sets_the_dependency_resolver_to_an_instance_of_TurbineDependencyResolver_when_no_IDependencyResolver_is_registered()
+        public void
+            Sets_the_dependency_resolver_to_an_instance_of_TurbineDependencyResolver_when_no_IDependencyResolver_is_registered
+            ()
         {
             var blade = new DependencyResolverBlade();
 
-            var serviceLocator = new MockServiceLocator();
+            var serviceLocator = new DependencyResolverMockServiceLocator();
             serviceLocator.ReturnAResolutionErrorWhenResolving();
 
             var fakeRotorContext = CreateRotorContextWithThisServiceLocator(serviceLocator);
@@ -29,7 +31,7 @@ namespace MvcTurbine.Web.Tests.Blades
         [Test]
         public void Passes_the_service_locator_from_rotorcontext_to_the_TurbineDependencyResolver()
         {
-            var expected = new MockServiceLocator();
+            var expected = new DependencyResolverMockServiceLocator();
             expected.ReturnAResolutionErrorWhenResolving();
 
             var blade = new DependencyResolverBlade();
@@ -45,7 +47,7 @@ namespace MvcTurbine.Web.Tests.Blades
         {
             var expected = new Mock<IDependencyResolver>().Object;
 
-            var locator = new MockServiceLocator();
+            var locator = new DependencyResolverMockServiceLocator();
             locator.ReturnThisDependencyResolver(expected);
 
             var blade = new DependencyResolverBlade();
@@ -56,123 +58,124 @@ namespace MvcTurbine.Web.Tests.Blades
             Assert.AreSame(expected, DependencyResolver.Current);
         }
 
-        private IRotorContext CreateRotorContextWithThisServiceLocator(MockServiceLocator serviceLocator)
+        private IRotorContext CreateRotorContextWithThisServiceLocator(
+            DependencyResolverMockServiceLocator serviceLocator)
         {
             var fakeRotorContext = new Mock<IRotorContext>();
             fakeRotorContext.Setup(x => x.ServiceLocator)
                 .Returns(serviceLocator);
             return fakeRotorContext.Object;
         }
+    }
 
-        public class MockServiceLocator : IServiceLocator
+    public class DependencyResolverMockServiceLocator : IServiceLocator
+    {
+        private IDependencyResolver dependencyResolverToUse;
+
+        public void ReturnAResolutionErrorWhenResolving()
         {
-            private IDependencyResolver dependencyResolverToUse;
-
-            public void ReturnAResolutionErrorWhenResolving()
-            {
-                dependencyResolverToUse = null;
-            }
-
-            public T Resolve<T>() where T : class
-            {
-                if (dependencyResolverToUse == null)
-                    throw new ServiceResolutionException(typeof (T));
-                return dependencyResolverToUse as T;
-            }
-
-            public void ReturnThisDependencyResolver(IDependencyResolver dependencyResolver)
-            {
-                dependencyResolverToUse = dependencyResolver;
-            }
-
-            #region Methods
-
-            public void Dispose()
-            {
-                throw new NotImplementedException();
-            }
-
-            public T Resolve<T>(string key) where T : class
-            {
-                throw new NotImplementedException();
-            }
-
-            public T Resolve<T>(Type type) where T : class
-            {
-                throw new NotImplementedException();
-            }
-
-            public object Resolve(Type type)
-            {
-                throw new NotImplementedException();
-            }
-
-            public IList<T> ResolveServices<T>() where T : class
-            {
-                throw new NotImplementedException();
-            }
-
-            public IList<object> ResolveServices(Type type)
-            {
-                throw new NotImplementedException();
-            }
-
-            public IServiceRegistrar Batch()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Register<Interface>(Type implType) where Interface : class
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Register<Interface, Implementation>() where Implementation : class, Interface
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Register<Interface, Implementation>(string key) where Implementation : class, Interface
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Register(string key, Type type)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Register(Type serviceType, Type implType)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Register<Interface>(Interface instance) where Interface : class
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Release(object instance)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Reset()
-            {
-                throw new NotImplementedException();
-            }
-
-            public TService Inject<TService>(TService instance) where TService : class
-            {
-                throw new NotImplementedException();
-            }
-
-            public void TearDown<TService>(TService instance) where TService : class
-            {
-                throw new NotImplementedException();
-            }
-
-            #endregion
+            dependencyResolverToUse = null;
         }
+
+        public T Resolve<T>() where T : class
+        {
+            if (dependencyResolverToUse == null)
+                throw new ServiceResolutionException(typeof (T));
+            return dependencyResolverToUse as T;
+        }
+
+        public void ReturnThisDependencyResolver(IDependencyResolver dependencyResolver)
+        {
+            dependencyResolverToUse = dependencyResolver;
+        }
+
+        #region Methods
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Resolve<T>(string key) where T : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Resolve<T>(Type type) where T : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public object Resolve(Type type)
+        {
+            return null;
+        }
+
+        public IList<T> ResolveServices<T>() where T : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<object> ResolveServices(Type type)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IServiceRegistrar Batch()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Register<Interface>(Type implType) where Interface : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Register<Interface, Implementation>() where Implementation : class, Interface
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Register<Interface, Implementation>(string key) where Implementation : class, Interface
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Register(string key, Type type)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Register(Type serviceType, Type implType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Register<Interface>(Interface instance) where Interface : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Release(object instance)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Reset()
+        {
+            throw new NotImplementedException();
+        }
+
+        public TService Inject<TService>(TService instance) where TService : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TearDown<TService>(TService instance) where TService : class
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }
