@@ -34,6 +34,18 @@ namespace MvcTurbine.Web.Tests.Controllers
             Assert.AreEqual(2, results.Count());            
         }
 
+        [Test]
+        public void ServiceLocator_returns_the_service_locator_passed_in_the_constructor()
+        {
+            var expected = new MockServiceLocator();
+
+            var resolver = new TurbineDependencyResolver(expected);
+
+            var locator = resolver.ServiceLocator;
+
+            Assert.AreSame(expected, locator);
+        }
+
         private class MockServiceLocator : IServiceLocator
         {
             public object Resolve(Type type)

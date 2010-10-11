@@ -14,6 +14,11 @@ namespace MvcTurbine.Web.Controllers
             this.serviceLocator = serviceLocator;
         }
 
+        public IServiceLocator ServiceLocator
+        {
+            get { return serviceLocator; }
+        }
+
         public object GetService(Type serviceType)
         {
             return serviceLocator.Resolve(serviceType);

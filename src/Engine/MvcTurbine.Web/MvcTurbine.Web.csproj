@@ -94,6 +94,9 @@
     <Compile Include="Blades\BladeExtensions.cs" />
     <Compile Include="Blades\ControllerBlade.cs" />
     <Compile Include="Blades\CoreBlades.cs" />
+    <Compile Include="Blades\MvcBlade.cs" />
+    <Compile Include="Blades\DependencyResolverBlade.cs" />
+    <Compile Include="Blades\MvcBlade.cs" />
     <Compile Include="Blades\FilterBlade.cs" />
     <Compile Include="Blades\ModelBinderBlade.cs" />
     <Compile Include="Blades\ViewBlade.cs" />
