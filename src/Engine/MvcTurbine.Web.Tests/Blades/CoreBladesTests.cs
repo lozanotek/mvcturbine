@@ -1,90 +1,121 @@
-﻿namespace MvcTurbine.Web.Tests.Blades {
-	using NUnit.Framework;
-	using Web.Blades;
+﻿using MvcTurbine.Web.Blades;
 
-	[TestFixture]
-	public class CoreBladesTests {
-		[Test]
-		public void Mvc_Blade_Property_Return_Default_Mvc_Blade_Instance() {
-			var result = CoreBlades.Controller;
+namespace MvcTurbine.Web.Tests.Blades {
+    using NUnit.Framework;
 
-			Assert.IsNotNull(result);
-			Assert.AreEqual(CoreBlades.Controller, result);
-		}
+    [TestFixture]
+    public class CoreBladesTests {
+        [Test]
+        public void Mvc_Blade_Property_Return_Default_Mvc_Blade_Instance() {
+            MvcBlade result = CoreBlades.Mvc;
 
-		[Test]
-		public void When_Mvc_Blade_Property_Is_Set_To_Null_Return_Default_Mvc_Blade_Instance() {
-			CoreBlades.Mvc = null;
+            Assert.IsNotNull(result);
+            Assert.AreEqual(CoreBlades.Mvc, result);
+        }
 
-			var result = CoreBlades.Mvc;
-			Assert.IsNotNull(result);
-			Assert.AreEqual(CoreBlades.Mvc, result);
-		}
+        [Test]
+        public void When_Mvc_Blade_Property_Is_Set_To_Null_Return_Default_Mvc_Blade_Instance() {
+            CoreBlades.Mvc = null;
 
-		[Test]
-		public void When_Mvc_Blade_Property_Is_Set_To_Valid_Hierarchy_Return_Same_Blade_Instance() {
-			var instance = new CustomControllerBlade();
-			CoreBlades.Controller = instance;
+            var result = CoreBlades.Mvc;
+            Assert.IsNotNull(result);
+            Assert.AreEqual(CoreBlades.Mvc, result);
+        }
 
-			Assert.IsNotNull(CoreBlades.Mvc);
-			Assert.AreEqual(CoreBlades.Mvc, instance);
-		}
+        [Test]
+        public void When_Mvc_Blade_Property_Is_Set_To_Valid_Hierarchy_Return_Same_Blade_Instance() {
+            var instance = new CustomMvcBlade();
+            CoreBlades.Mvc = instance;
 
-		[Test]
-		public void Routing_Blade_Property_Return_Default_Routing_Blade_Instance() {
-			var result = CoreBlades.Routing;
+            Assert.IsNotNull(CoreBlades.Mvc);
+            Assert.AreEqual(CoreBlades.Mvc, instance);
+        }
 
-			Assert.IsNotNull(result);
-			Assert.AreEqual(CoreBlades.Routing, result);
-		}
+        [Test]
+        public void Routing_Blade_Property_Return_Default_Routing_Blade_Instance() {
+            var result = CoreBlades.Routing;
 
-		[Test]
-		public void When_Routing_Blade_Property_Is_Set_To_Null_Return_Default_Routing_Blade_Instance() {
-			CoreBlades.Routing = null;
+            Assert.IsNotNull(result);
+            Assert.AreEqual(CoreBlades.Routing, result);
+        }
 
-			var result = CoreBlades.Routing;
-			Assert.IsNotNull(result);
-			Assert.AreEqual(CoreBlades.Routing, result);
-		}
+        [Test]
+        public void When_Routing_Blade_Property_Is_Set_To_Null_Return_Default_Routing_Blade_Instance() {
+            CoreBlades.Routing = null;
 
-		[Test]
-		public void When_Routing_Blade_Property_Is_Set_To_Valid_Hierarchy_Return_Same_Blade_Instance() {
-			var instance = new CustomRoutingBlade();
-			CoreBlades.Routing = instance;
+            var result = CoreBlades.Routing;
+            Assert.IsNotNull(result);
+            Assert.AreEqual(CoreBlades.Routing, result);
+        }
 
-			Assert.IsNotNull(CoreBlades.Routing);
-			Assert.AreEqual(CoreBlades.Routing, instance);
-		}
+        [Test]
+        public void When_Routing_Blade_Property_Is_Set_To_Valid_Hierarchy_Return_Same_Blade_Instance() {
+            var instance = new CustomRoutingBlade();
+            CoreBlades.Routing = instance;
 
-		[Test]
-		public void GetBlades_Returns_Filled_List_By_Default() {
-			var result = CoreBlades.GetBlades();
+            Assert.IsNotNull(CoreBlades.Routing);
+            Assert.AreEqual(CoreBlades.Routing, instance);
+        }
 
-			Assert.IsNotNull(result);
-			Assert.IsNotEmpty(result);
-			Assert.AreEqual(result.Count, 2);
-		}
+        [Test]
+        public void DependencyResolver_Blade_Property_Return_Default_DependencyResolver_Blade_Instance()
+        {
+            var result = CoreBlades.DependencyResolver;
 
-		[Test]
-		public void GetBlades_Returns_Filled_List_When_Properties_Are_Null() {
-			CoreBlades.Controller = null;
-			CoreBlades.Filter = null;
-			CoreBlades.Model = null;
-			CoreBlades.View = null;
-			CoreBlades.Routing = null;
+            Assert.IsNotNull(result);
+            Assert.AreEqual(CoreBlades.DependencyResolver, result);
+        }
 
-			var result = CoreBlades.GetBlades();
+        [Test]
+        public void When_DependencyResolver_Blade_Property_Is_Set_To_Null_Return_Default_DependencyResolver_Blade_Instance()
+        {
+            CoreBlades.DependencyResolver = null;
 
-			Assert.IsNotNull(result);
-			Assert.IsNotEmpty(result);
-			Assert.AreEqual(result.Count, 2);
-		}
-	}
+            var result = CoreBlades.DependencyResolver;
+            Assert.IsNotNull(result);
+            Assert.AreEqual(CoreBlades.DependencyResolver, result);
+        }
 
+        [Test]
+        public void When_DependencyResolver_Blade_Property_Is_Set_To_Valid_Hierarchy_Return_Same_Blade_Instance()
+        {
+            var instance = new CustomDependencyResolverBlade();
+            CoreBlades.DependencyResolver = instance;
 
-	internal class CustomRoutingBlade : RoutingBlade {
-	}
+            Assert.IsNotNull(CoreBlades.DependencyResolver);
+            Assert.AreEqual(CoreBlades.DependencyResolver, instance);
+        }
 
-	internal class CustomControllerBlade : ControllerBlade {
-	}
+        [Test]
+        public void GetBlades_Returns_Filled_List_By_Default() {
+            var result = CoreBlades.GetBlades();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotEmpty(result);
+            Assert.AreEqual(result.Count, 3);
+        }
+
+        [Test]
+        public void GetBlades_Returns_Filled_List_When_Properties_Are_Null() {
+            CoreBlades.Mvc = null;
+            CoreBlades.Routing = null;
+            CoreBlades.DependencyResolver = null;
+
+            var result = CoreBlades.GetBlades();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotEmpty(result);
+            Assert.AreEqual(result.Count, 3);
+        }
+    }
+
+    internal class CustomMvcBlade : MvcBlade {
+    }
+
+    internal class CustomRoutingBlade : RoutingBlade {
+    }
+
+    internal class CustomDependencyResolverBlade : DependencyResolverBlade
+    {
+    }
 }
