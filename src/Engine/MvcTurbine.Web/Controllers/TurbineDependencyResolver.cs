@@ -21,7 +21,14 @@ namespace MvcTurbine.Web.Controllers
 
         public object GetService(Type serviceType)
         {
-            return serviceLocator.Resolve(serviceType);
+            try
+            {
+                return serviceLocator.Resolve(serviceType);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public IEnumerable<object> GetServices(Type serviceType)

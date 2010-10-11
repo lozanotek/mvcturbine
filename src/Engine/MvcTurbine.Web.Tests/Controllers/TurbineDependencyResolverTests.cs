@@ -15,11 +15,23 @@ namespace MvcTurbine.Web.Tests.Controllers
         {
             var locator = new MockServiceLocator();
 
-            var resolver  = new TurbineDependencyResolver(locator);
-            
-            var result = resolver.GetService(typeof(string));
+            var resolver = new TurbineDependencyResolver(locator);
+
+            var result = resolver.GetService(ATypeThatCanBeResolved());
 
             Assert.AreEqual("expected", result);
+        }
+
+        [Test]
+        public void GetService_returns_null_when_the_service_locator_throws()
+        {
+            var locator = new MockServiceLocator();
+
+            var resolver = new TurbineDependencyResolver(locator);
+
+            var result = resolver.GetService(ATypeThatCannotBeResolved());
+
+            Assert.IsNull(result);
         }
 
         [Test]
@@ -29,9 +41,9 @@ namespace MvcTurbine.Web.Tests.Controllers
 
             var resolver = new TurbineDependencyResolver(locator);
 
-            var results = resolver.GetServices(typeof(string));
+            var results = resolver.GetServices(ATypeThatCanBeResolved());
 
-            Assert.AreEqual(2, results.Count());            
+            Assert.AreEqual(2, results.Count());
         }
 
         [Test]
@@ -46,18 +58,28 @@ namespace MvcTurbine.Web.Tests.Controllers
             Assert.AreSame(expected, locator);
         }
 
+        private static Type ATypeThatCanBeResolved()
+        {
+            return typeof (string);
+        }
+
+        private static Type ATypeThatCannotBeResolved()
+        {
+            return typeof (int);
+        }
+
         private class MockServiceLocator : IServiceLocator
         {
             public object Resolve(Type type)
             {
-                if (type == typeof(string))
+                if (type == typeof (string))
                     return "expected";
                 throw new Exception();
             }
 
             public IList<object> ResolveServices(Type type)
             {
-                if (type == typeof(string))
+                if (type == typeof (string))
                     return (new[] {"one", "two"}).Cast<object>().ToList();
                 throw new Exception();
             }
