@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 
 //
 // Author: Javier Lozano <javier@lozanotek.com>
@@ -26,47 +26,33 @@ namespace MvcTurbine.Web.Blades {
     using Controllers;
     using MvcTurbine.Blades;
 
-    /// <summary>
-    /// Provides all the functionality to wire up <see cref="IViewEngine"/> types for the 
-    /// runtime to use.
-    /// </summary>
+    ///<summary>
+    /// Blade for all View related components
+    ///</summary>
     public class ViewBlade : Blade, ISupportAutoRegistration {
-        /// <summary>
-        /// Provides the auto-registration of <see cref="IViewEngine"/>.
-        /// </summary>
-        /// <param name="registrationList"></param>
-        public virtual void AddRegistrations(AutoRegistrationList registrationList) {
-            registrationList.Add(MvcRegistration.RegisterViewEngine());
-        }
-
-        /// <summary>
-        /// Executes the setup of all the found <see cref="IViewEngine"/> types.
-        /// </summary>
-        /// <param name="context"></param>
-        public override void Spin(IRotorContext context) {
-            SetupViewEngines(context);
-        }
-
         /// <summary>
         /// Initializes the <see cref="ViewEngines.Engines"/> by pulling all associated <seealso cref="IViewEngine"/> instances
         /// in the current application.
         /// </summary>
         /// <param name="context"></param>
-        public virtual void SetupViewEngines(IRotorContext context) {
+        public override void Spin(IRotorContext context) {
             // Get the current IServiceLocator
             var locator = GetServiceLocatorFromContext(context);
-
-            IList<IViewEngine> viewEngines = GetViewEngines(locator);
 
             // Clear all ViewEngines
             ViewEngines.Engines.Clear();
 
+            var viewEngines = GetViewEngines(locator);
+
             // Add any registered ones
             if (viewEngines != null && viewEngines.Count > 0) {
-                viewEngines.ForEach(ViewEngines.Engines.Add);
+                foreach (var viewEngine in viewEngines) {
+                    ViewEngines.Engines.Add(viewEngine);
+                }
             }
 
             // Re-add the WebForms view engine since that's the default one
+            ViewEngines.Engines.Add(new RazorViewEngine());
             ViewEngines.Engines.Add(new WebFormViewEngine());
         }
 
@@ -81,6 +67,10 @@ namespace MvcTurbine.Web.Blades {
             } catch {
                 return null;
             }
+        }
+
+        public void AddRegistrations(AutoRegistrationList registrationList) {
+            registrationList.Add(MvcRegistration.RegisterViewEngine());
         }
     }
 }

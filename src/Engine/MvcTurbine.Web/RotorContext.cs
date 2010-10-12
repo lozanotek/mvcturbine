@@ -84,6 +84,7 @@ namespace MvcTurbine.Web {
             if (ServiceLocator == null) return;
 
             try {
+                //TODO: Remove this piece since you'll be using the Factory method for injection.
                 //HACK: Yes, I know this is ugly but need to figure out how to best handle this
                 ServiceLocator.Dispose();
             }

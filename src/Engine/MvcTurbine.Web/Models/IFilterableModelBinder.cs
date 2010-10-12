@@ -27,7 +27,7 @@ namespace MvcTurbine.Web.Models {
     /// Defines a common interface for checking whether a <see cref="IModelBinder"/> should
     /// be applied to a specified model.
     /// </summary>
-    [Obsolete("This type is obsolete. Start using the ModelBinderRegistry approach to associate IModelBinder to a Mode/ViewModel.")]
+    [Obsolete("This method of registering IModelBinders will be retired in favor of the ModelBinderRegistry model.", false)]
     public interface IFilterableModelBinder : IModelBinder {
         /// <summary>
         /// Checks whether the current instance supports the specified type.

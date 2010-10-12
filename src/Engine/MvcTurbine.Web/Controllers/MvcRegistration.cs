@@ -71,16 +71,7 @@
         /// </summary>
         /// <returns></returns>
         public static ServiceRegistration RegisterBinder() {
-            return RegisterBinder((locator, type) => locator.Register<IFilterableModelBinder>(type));
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="regAction"></param>
-        /// <returns></returns>
-        public static ServiceRegistration RegisterBinder(Action<IServiceLocator, Type> regAction) {
-            return Registration.Custom<IFilterableModelBinder>(MvcRegistrationFilters.ModelBinderFilter, regAction);
+            return Registration.Simple<IFilterableModelBinder>();
         }
     }
 }

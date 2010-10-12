@@ -44,7 +44,6 @@ namespace MvcTurbine.Web.Blades {
         /// <returns></returns>
         public static bool IsCoreBlade(this IBlade blade) {
             Type type = blade.GetType();
-
             return bladeTypes.Any(bladeType => bladeType.IsAssignableFrom(type));
         }
     }

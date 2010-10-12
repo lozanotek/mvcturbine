@@ -26,46 +26,40 @@ namespace MvcTurbine.Web.Blades {
     using MvcTurbine.Blades;
 
     /// <summary>
-    /// Provides all the functionality to wire up the specified <see cref="IControllerFactory"/>
-    /// for the runtime to use.
+    /// Blade for all controller related components.
     /// </summary>
     public class ControllerBlade : Blade, ISupportAutoRegistration {
-        public override void Spin(IRotorContext context) {
-            SetupControllerFactory(context);
-        }
-
         /// <summary>
         /// Sets the instance of <see cref="IControllerFactory"/> to use.  If one is not registered,
-        /// <see cref="TurbineControllerFactory"/> is used.
+        /// <see cref="IControllerActivator"/> is used.
         /// </summary>
-        public virtual void SetupControllerFactory(IRotorContext context) {
+        public override void Spin(IRotorContext context) {
             // Get the current IServiceLocator
             var locator = GetServiceLocatorFromContext(context);
 
             // Get the registered controller factory
-            var controllerFactory = GetControllerFactory(locator);
+            var controllerActivator = GetControllerActivator(locator);
+            if (controllerActivator != null) return;
 
-            // Set the default controller factory
-            ControllerBuilder.Current.SetControllerFactory(controllerFactory);
+            // Register with the runtime -- this is due to the fact that we're using the DefaultControllerFactory uses
+            // this new type for creation of the controllers -- we need to inject our own if one is not specified
+            using (locator.Batch())
+            {
+                // Set the default controller factory
+                locator.Register<IControllerActivator, TurbineControllerActivator>();
+            }
         }
 
         /// <summary>
-        /// Gets the registered <seealso cref="IControllerFactory"/>, if one is not found the default one is used.
+        /// Gets the registered <seealso cref="IControllerActivator"/>, if one is not found the default one is used.
         /// </summary>
         /// <param name="locator"></param>
         /// <returns></returns>
-        protected virtual IControllerFactory GetControllerFactory(IServiceLocator locator) {
-            IControllerFactory controllerFactory;
-
+        protected virtual IControllerActivator GetControllerActivator(IServiceLocator locator) {
             try {
-                controllerFactory = locator.Resolve<IControllerFactory>() ??
-                                    new TurbineControllerFactory(locator);
-            } catch {
-                // Use default factory since one was not specified
-                return new TurbineControllerFactory(locator);
+                return locator.Resolve<IControllerActivator>();
             }
-
-            return controllerFactory;
+            catch { return null; }
         }
 
         public void AddRegistrations(AutoRegistrationList registrationList) {

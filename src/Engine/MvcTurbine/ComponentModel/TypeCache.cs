@@ -28,6 +28,14 @@ namespace MvcTurbine.ComponentModel {
     /// </summary>
     [Serializable]
     public class TypeCache : Dictionary<Type, Type> {
+        public void Merge(TypeCache cache) {
+            if (cache == null) return;
+
+            foreach (var pair in cache) {
+                Add(pair);
+            }
+        }
+
         public void Add(KeyValuePair<Type, Type> pair) {
             Add(pair.Key, pair.Value);
         }

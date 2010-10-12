@@ -1,4 +1,4 @@
-﻿namespace MvcTurbine.Autofac.Tests {
+namespace MvcTurbine.Autofac.Tests {
     using ComponentModel;
     using ComponentModel.Tests;
     using NUnit.Framework;

@@ -19,7 +19,8 @@
 
 #endregion
 
-namespace MvcTurbine.Web.Controllers {
+namespace MvcTurbine.Web.Filters
+{
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -29,15 +30,16 @@ namespace MvcTurbine.Web.Controllers {
     /// <summary>
     /// Default implementation for <see cref="IFilterFinder"/> to get all filters through IoC.
     /// </summary>
-    public class DefaultFilterFinder : IFilterFinder {
-
+    public class DefaultFilterFinder : IFilterFinder
+    {
         private IDictionary<Type, IEnumerable<Type>> filterTypes;
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         /// <param name="serviceLocator"></param>
-        public DefaultFilterFinder(IServiceLocator serviceLocator) {
+        public DefaultFilterFinder(IServiceLocator serviceLocator)
+        {
             ServiceLocator = serviceLocator;
             filterTypes = new Dictionary<Type, IEnumerable<Type>>();
         }
@@ -48,17 +50,17 @@ namespace MvcTurbine.Web.Controllers {
         public IServiceLocator ServiceLocator { get; private set; }
 
         /// <summary>
-        /// Finds all the GlobalFilters on the specified <see cref="ActionDescriptor"/>.
+        /// Finds all the <see cref="InjectableFilterAttribute"/> on the specified <see cref="ActionDescriptor"/>.
         /// </summary>
         /// <param name="actionDescriptor">Current action being executed.</param>
         /// <returns></returns>
-        public FilterInfo FindFilters(ActionDescriptor actionDescriptor) {
-            if (actionDescriptor == null) return null;
-
-            return GetGlobalFilters();
+        public FilterInfo FindFilters(ActionDescriptor actionDescriptor)
+        {
+            return actionDescriptor == null ? null : GetGlobalFilters();
         }
 
-        private FilterInfo GetGlobalFilters() {
+        private FilterInfo GetGlobalFilters()
+        {
             var actionFilters = GetGlobalFilterFromContainer<IActionFilter>();
             var resultFilters = GetGlobalFilterFromContainer<IResultFilter>();
             var exceptionFilters = GetGlobalFilterFromContainer<IExceptionFilter>();
@@ -78,7 +80,8 @@ namespace MvcTurbine.Web.Controllers {
         protected virtual FilterInfo CreateFilterInfo(IEnumerable<IAuthorizationFilter> authFilters,
                                                       IEnumerable<IActionFilter> actionFilters,
                                                       IEnumerable<IResultFilter> resultFilters,
-                                                      IEnumerable<IExceptionFilter> exceptionFilters) {
+                                                      IEnumerable<IExceptionFilter> exceptionFilters)
+        {
             var registeredFilters = new FilterInfo();
 
             authFilters.ForEach(registeredFilters.AuthorizationFilters.Add);
@@ -112,9 +115,9 @@ namespace MvcTurbine.Web.Controllers {
         private IList<TFilter> ResolveTheCachedTypesForTFilter<TFilter>()
         {
             return filterTypes
-                .Where(x => x.Key == typeof (TFilter))
+                .Where(x => x.Key == typeof(TFilter))
                 .First().Value
-                .Select(x=>ServiceLocator.Resolve(x))
+                .Select(x => ServiceLocator.Resolve(x))
                 .Cast<TFilter>()
                 .ToList();
         }

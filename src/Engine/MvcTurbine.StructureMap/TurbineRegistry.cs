@@ -127,8 +127,7 @@ namespace MvcTurbine.StructureMap {
         /// </summary>
         /// <typeparam name="Interface"></typeparam>
         /// <param name="factoryMethod"></param>
-        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class
-        {
+        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class {
             Container.Configure(cfg => cfg.For<Interface>().Use(factoryMethod.Invoke));
         }
 

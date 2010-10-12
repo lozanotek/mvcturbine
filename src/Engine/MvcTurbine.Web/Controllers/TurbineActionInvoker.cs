@@ -23,6 +23,7 @@ namespace MvcTurbine.Web.Controllers {
     using System.Linq;
     using System.Web.Mvc;
     using ComponentModel;
+    using Filters;
 
     /// <summary>
     /// Defines a custom <see cref="ControllerActionInvoker"/> to use that will 

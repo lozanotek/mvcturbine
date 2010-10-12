@@ -1,32 +1,46 @@
-﻿using System.Web.Mvc;
-using MvcTurbine.Blades;
-using MvcTurbine.Web.Controllers;
+﻿#region License
 
-namespace MvcTurbine.Web.Blades
-{
-    public class DependencyResolverBlade : Blade
-    {
-        public override void Spin(IRotorContext context)
-        {
+//
+// Author: Javier Lozano <javier@lozanotek.com>
+// Copyright (c) 2009-2010, lozanotek, inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+#endregion
+
+namespace MvcTurbine.Web.Blades {
+    using System.Web.Mvc;
+    using Controllers;
+    using MvcTurbine.Blades;
+
+    /// <summary>
+    /// Blade for handling the registration of <see cref="IDependencyResolver"/>.
+    /// </summary>
+    public class DependencyResolverBlade : Blade {
+        public override void Spin(IRotorContext context) {
             var dependencyResolver = GetTheDependencyResolver(context);
-
             DependencyResolver.SetResolver(dependencyResolver);
         }
 
-        private IDependencyResolver GetTheDependencyResolver(IRotorContext context)
-        {
+        protected virtual IDependencyResolver GetTheDependencyResolver(IRotorContext context) {
             var serviceLocator = context.ServiceLocator;
 
-            IDependencyResolver dependencyResolver;
-            try
-            {
-                dependencyResolver = serviceLocator.Resolve<IDependencyResolver>();
+            try {
+                return serviceLocator.Resolve<IDependencyResolver>();
+            } catch {
+                return new TurbineDependencyResolver(serviceLocator);
             }
-            catch
-            {
-                dependencyResolver = new TurbineDependencyResolver(serviceLocator);
-            }
-            return dependencyResolver;
         }
     }
 }

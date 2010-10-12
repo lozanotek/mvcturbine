@@ -33,6 +33,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -61,19 +62,9 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Abstractions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\system.web.mvc\System.Web.Abstractions.dll</HintPath>
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\system.web.mvc\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Routing, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\system.web.mvc\System.Web.Routing.dll</HintPath>
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+      <HintPath>..\..\..\lib\mvc3beta\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -94,32 +85,28 @@
     <Compile Include="Blades\BladeExtensions.cs" />
     <Compile Include="Blades\ControllerBlade.cs" />
     <Compile Include="Blades\CoreBlades.cs" />
-    <Compile Include="Blades\MvcBlade.cs" />
     <Compile Include="Blades\DependencyResolverBlade.cs" />
-    <Compile Include="Blades\MvcBlade.cs" />
-    <Compile Include="Blades\FilterBlade.cs" />
     <Compile Include="Blades\ModelBinderBlade.cs" />
-    <Compile Include="Blades\ViewBlade.cs" />
+    <Compile Include="Blades\FilterBlade.cs" />
     <Compile Include="Blades\RoutingBlade.cs" />
+    <Compile Include="Blades\ViewBlade.cs" />
     <Compile Include="Controllers\ControllerExtensions.cs" />
-    <Compile Include="Controllers\DefaultFilterFinder.cs" />
-    <Compile Include="Controllers\IFilterFinder.cs" />
+    <Compile Include="Filters\DefaultFilterFinder.cs" />
+    <Compile Include="Filters\IFilterFinder.cs" />
     <Compile Include="Controllers\InferredActionDescriptor.cs" />
     <Compile Include="Controllers\InferredParameterDescriptor.cs" />
     <Compile Include="Controllers\InferredViewResult.cs" />
-    <Compile Include="Controllers\MergedFilters.cs" />
+    <Compile Include="Filters\MergedFilters.cs" />
     <Compile Include="Controllers\MvcRegistration.cs" />
-    <Compile Include="Controllers\MvcRegistrationFilters.cs" />
     <Compile Include="Controllers\TurbineActionInvoker.cs" />
-    <Compile Include="Controllers\TurbineControllerFactory.cs" />
-    <Compile Include="Controllers\InjectableFilterAttribute.cs" />
-    <Compile Include="Controllers\TurbineDependencyResolver.cs" />
+    <Compile Include="Controllers\TurbineControllerActivator.cs" />
+    <Compile Include="TurbineDependencyResolver.cs" />
+    <Compile Include="Filters\TurbineFilterProvider.cs" />
     <Compile Include="Models\BinderRegistratrionExpression.cs" />
-    <Compile Include="Models\DefaultBinderRegistrationManager.cs" />
-    <Compile Include="Models\IBinderRegistrationManager.cs" />
     <Compile Include="Models\IFilterableModelBinder.cs" />
     <Compile Include="Models\ModelBinderRegistry.cs" />
-    <Compile Include="Models\TurbineModelBinder.cs" />
+    <Compile Include="Models\FilterableBinderProvider.cs" />
+    <Compile Include="Models\ModelBinderRegistryProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

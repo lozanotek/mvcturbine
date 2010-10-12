@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 //
 // Author: Javier Lozano <javier@lozanotek.com>
