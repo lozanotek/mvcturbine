@@ -4,10 +4,10 @@
     using System.Web.Mvc;
     using ComponentModel;
 
-    public class TurbineFilterProvider : IFilterProvider {
+    public class FilterRegistryProvider : IFilterProvider {
         public IServiceLocator ServiceLocator { get; private set; }
 
-        public TurbineFilterProvider(IServiceLocator serviceLocator) {
+        public FilterRegistryProvider(IServiceLocator serviceLocator) {
             ServiceLocator = serviceLocator;
         }
 

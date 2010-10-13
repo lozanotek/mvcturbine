@@ -7,6 +7,7 @@ using System.Web.Mvc;
 namespace Mvc3Host.Controllers
 {
     using MvcTurbine;
+    using MvcTurbine.ComponentModel;
     using MvcTurbine.Web.Models;
 
     public class FooRegistry : ModelBinderRegistry
@@ -48,8 +49,40 @@ namespace Mvc3Host.Controllers
         }
     }
 
+    public class FooAttribute : ActionFilterAttribute
+    {
+        public IFooService FooService { get; set; }
+
+        public override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            filterContext.Controller.ViewData["fooMessage"] = FooService.GetFoo();
+        }
+    }
+
+    public interface IFooService
+    {
+        string GetFoo();
+    }
+
+    public class FooService : IFooService
+    {
+        public string GetFoo()
+        {
+            return "Got foo??";
+        }
+    }
+
+    public class ServiceRegistry : IServiceRegistration
+    {
+        public void Register(IServiceLocator locator)
+        {
+            locator.Register<IFooService, FooService>();
+        }
+    }
+
     public class HomeController : Controller
     {
+        [Foo]
         public ActionResult Index(Foo foo, Bar bar)
         {
             ViewModel.Message = "Welcome to ASP.NET MVC!";

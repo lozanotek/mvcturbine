@@ -33,11 +33,12 @@ namespace MvcTurbine.Web {
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static bool IsMvcFilter(this Type type) {
-            return typeof(IAuthorizationFilter).IsAssignableFrom(type)
-                   || typeof(IActionFilter).IsAssignableFrom(type)
-                   || typeof(IResultFilter).IsAssignableFrom(type)
-                   || typeof(IExceptionFilter).IsAssignableFrom(type);
+        public static bool IsMvcFilter(this Type currentType) {
+            return currentType.IsType<IActionFilter>() ||
+                   currentType.IsType<IExceptionFilter>() ||
+                   currentType.IsType<IAuthorizationFilter>() ||
+                   currentType.IsType<IResultFilter>() ||
+                   currentType.IsType<IMvcFilter>();
         }
 
         /// <summary>
@@ -46,7 +47,7 @@ namespace MvcTurbine.Web {
         /// <param name="type"></param>
         /// <returns></returns>
         public static bool IsController(this Type type) {
-            return typeof(IController).IsAssignableFrom(type);
+            return type.IsType<IController>();
         }
     }
 }

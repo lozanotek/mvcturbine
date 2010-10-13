@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 //
 // Author: Javier Lozano <javier@lozanotek.com>
@@ -20,26 +20,60 @@
 #endregion
 
 namespace MvcTurbine.Web.Blades {
+    using System.Collections.Generic;
     using System.Web.Mvc;
     using ComponentModel;
-    using Controllers;
+    using Filters;
     using MvcTurbine.Blades;
 
     /// <summary>
-    /// Provides all the functionality to wire up the filters (action, result, authorization, exception)
-    /// for the runtime to use.
+    /// Default <see cref="IBlade"/> that supports all ASP.NET MVC components.
     /// </summary>
     public class FilterBlade : Blade, ISupportAutoRegistration {
-        public override void Spin(IRotorContext context) {
-            //TODO: Add logic here to pull the filter types from the container and put into the cache
+
+        /// <summary>
+        /// Provides the auto-registration of MVC related components (controllers, view engines, filters, etc).
+        /// </summary>
+        /// <param name="registrationList"></param>
+        public virtual void AddRegistrations(AutoRegistrationList registrationList) {
+            registrationList
+                .Add(Registration.Simple<IFilterProvider>());
         }
 
-        public void AddRegistrations(AutoRegistrationList registrationList) {
-            registrationList
-                .Add(MvcRegistration.RegisterFilter<IActionFilter>())
-                .Add(MvcRegistration.RegisterFilter<IResultFilter>())
-                .Add(MvcRegistration.RegisterFilter<IAuthorizationFilter>())
-                .Add(MvcRegistration.RegisterFilter<IExceptionFilter>());
+        ///<summary>
+        /// Sets up the <see cref="IFilterProvider"/>s that have been registered with the system. Also, injects the one from
+        /// MVC Turbine.
+        ///</summary>
+        ///<param name="context">Current <see cref="IRotorContext"/> performing the execution.</param>
+        public override void Spin(IRotorContext context) {
+            // Get the current IServiceLocator
+            var serviceLocator = GetServiceLocatorFromContext(context);
+
+            SetupFilterProviders(serviceLocator);
+        }
+
+        public virtual void SetupFilterProviders(IServiceLocator serviceLocator) {
+            // Clear out what's there by default
+            FilterProviders.Providers.Clear();
+            
+            FilterProviders.Providers.Add(GlobalFilters.Filters);
+            FilterProviders.Providers.Add(new ControllerInstanceFilterProvider());
+            FilterProviders.Providers.Add(new InjectableAttributeFilterProvider(serviceLocator));
+
+            var filterProviders = GetFilterProviders(serviceLocator);
+            if (filterProviders == null || filterProviders.Count == 0) return;
+
+            foreach (var filterProvider in filterProviders) {
+                FilterProviders.Providers.Add(filterProvider);
+            }
+        }
+
+        protected virtual IList<IFilterProvider> GetFilterProviders(IServiceLocator locator) {
+            try {
+                return locator.ResolveServices<IFilterProvider>();
+            } catch {
+                return null;
+            }
         }
     }
 }
