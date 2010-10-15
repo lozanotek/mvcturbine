@@ -35,13 +35,13 @@ namespace MvcTurbine.Web.Models {
             BinderTable = cache ?? new TypeCache();
         }
 
-        public BinderRegistratrionExpression Register<TModel, TBinder>()
+        public BinderRegistratrionExpression Bind<TModel, TBinder>()
             where TModel : class
             where TBinder : IModelBinder {
-            return Register(typeof(TModel), typeof(TBinder));
+            return Bind(typeof(TModel), typeof(TBinder));
         }
 
-        public BinderRegistratrionExpression Register(Type modelType, Type binderType) {
+        public BinderRegistratrionExpression Bind(Type modelType, Type binderType) {
             BinderTable.Add(new KeyValuePair<Type, Type>(modelType, binderType));
             return this;
         }

@@ -81,7 +81,8 @@ namespace MvcTurbine.Web {
                 }
             }
 
-            if (ServiceLocator == null) return;
+            if (ServiceLocator == null)
+                return;
 
             try {
                 //TODO: Remove this piece since you'll be using the Factory method for injection.
@@ -200,7 +201,8 @@ namespace MvcTurbine.Web {
 
             PerformBladeAction(autoRegAction);
 
-            if (registrationList.Count() == 0) return;
+            if (registrationList.Count() == 0)
+                return;
 
             ProcessAutomaticRegistration(registrationList);
         }
@@ -236,7 +238,8 @@ namespace MvcTurbine.Web {
         /// </summary>
         protected virtual void ProcessManualRegistrations() {
             var registrationList = ServiceLocator.ResolveServices<IServiceRegistration>();
-            if (registrationList == null || registrationList.Count == 0) return;
+            if (registrationList == null || registrationList.Count == 0)
+                return;
 
             lock (_regLock) {
                 using (ServiceLocator.Batch()) {

@@ -91,11 +91,13 @@
     <Compile Include="Blades\RoutingBlade.cs" />
     <Compile Include="Blades\ViewBlade.cs" />
     <Compile Include="Controllers\ControllerExtensions.cs" />
-    <Compile Include="Filters\DefaultFilterFinder.cs" />
+    <Compile Include="Filters\ActionFilterReg.cs" />
+    <Compile Include="Filters\ControllerFilterReg.cs" />
+    <Compile Include="Filters\ControllerFilterRegistry.cs" />
     <Compile Include="Filters\FilterReg.cs" />
-    <Compile Include="Filters\FilterRegistratrionExpression.cs" />
     <Compile Include="Filters\FilterRegistry.cs" />
-    <Compile Include="Filters\IFilterFinder.cs" />
+    <Compile Include="Filters\GlobalFilterReg.cs" />
+    <Compile Include="Filters\GlobalFilterRegistry.cs" />
     <Compile Include="Controllers\InferredActionDescriptor.cs" />
     <Compile Include="Controllers\InferredParameterDescriptor.cs" />
     <Compile Include="Controllers\InferredViewResult.cs" />

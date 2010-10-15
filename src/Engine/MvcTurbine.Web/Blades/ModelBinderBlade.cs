@@ -20,6 +20,7 @@
 #endregion
 
 namespace MvcTurbine.Web.Blades {
+    using System.Collections.Generic;
     using System.Web.Mvc;
     using ComponentModel;
     using Controllers;
@@ -27,61 +28,73 @@ namespace MvcTurbine.Web.Blades {
     using MvcTurbine.Blades;
 
     /// <summary>
-    /// Provides all the functionality to wire up all the <see cref="IModelBinder"/> types
-    /// for the runtime to use.
+    /// Blade for all the <see cref="IModelBinder"/> components.
     /// </summary>
     public class ModelBinderBlade : Blade, ISupportAutoRegistration {
-        private static IBinderRegistrationManager binderManager;
-        private static readonly object _lock = new object();
-
         public override void Spin(IRotorContext context) {
-            SetupModelBinders(context);
-        }
-
-        /// <summary>
-        /// Sets up registrations for <see cref="IModelBinder"/> types.
-        /// </summary>
-        /// <param name="registrationList"></param>
-        public void AddRegistrations(AutoRegistrationList registrationList) {
-            registrationList
-                .Add(MvcRegistration.RegisterBinder())
-                .Add(Registration.Simple<ModelBinderRegistry>());
-        }
-
-        ///<summary>
-        /// Changes the <see cref="ModelBinderDictionary.DefaultBinder"/> instance to be <see cref="TurbineModelBinder"/>.
-        ///</summary>
-        ///<param name="context">Current <see cref="IRotorContext"/> performing the execution.</param>
-        public virtual void SetupModelBinders(IRotorContext context) {
             // Get the current IServiceLocator
             var serviceLocator = GetServiceLocatorFromContext(context);
 
-            // Get the current IBinderRegistrationManager
-            var manager = GetRegistrationManager(serviceLocator);
-
-            // Set the default IModelBinder to use for all requests
-            ModelBinders.Binders.DefaultBinder = new TurbineModelBinder(serviceLocator, manager);
+            SetupBinderProviders(serviceLocator);
+            SetupBinderRegistries(serviceLocator);
         }
 
-        /// <summary>
-        /// Gets the registered <see cref="IBinderRegistrationManager"/>, if null <see cref="DefaultBinderRegistrationManager"/> is used.
-        /// </summary>
-        /// <param name="locator"></param>
-        /// <returns></returns>
-        protected virtual IBinderRegistrationManager GetRegistrationManager(IServiceLocator locator) {
-            if (binderManager == null) {
-                lock (_lock) {
-                    if (binderManager == null) {
-                        try {
-                            binderManager = locator.Resolve<IBinderRegistrationManager>();
-                        } catch {
-                            binderManager = new DefaultBinderRegistrationManager(locator);
-                        }
+        public virtual void SetupBinderRegistries(IServiceLocator serviceLocator) {
+            var binderRegistries = GetBinderRegistries(serviceLocator);
+            if (binderRegistries == null) return;
+
+            var aggregateCache = new TypeCache();
+
+            foreach (var modelBinderRegistry in binderRegistries) {
+                var binderCache = modelBinderRegistry.GetBinderRegistrations();
+                if (binderCache == null) continue;
+
+                // We will register auto-register the binders for you
+                using (serviceLocator.Batch()) {
+                    foreach (var binderType in binderCache.Values) {
+                        serviceLocator.Register(binderType, binderType);
                     }
+                }
+
+                aggregateCache.Merge(binderCache);
+            }
+
+            ModelBinderProviders.BinderProviders.Add(new ModelBinderRegistryProvider(serviceLocator, aggregateCache));
+        }
+
+        public virtual void SetupBinderProviders(IServiceLocator serviceLocator) {
+            var binderProviders = GetModelBinderProviders(serviceLocator);
+
+            if (binderProviders != null && binderProviders.Count != 0) {
+                foreach (var binderProvider in binderProviders) {
+                    ModelBinderProviders.BinderProviders.Add(binderProvider);
                 }
             }
 
-            return binderManager;
+            ModelBinderProviders.BinderProviders.Add(new FilterableBinderProvider(serviceLocator));
+        }
+
+        public void AddRegistrations(AutoRegistrationList registrationList) {
+            registrationList
+                .Add(MvcRegistration.RegisterBinder())
+                .Add(Registration.Simple<IModelBinderProvider>())
+                .Add(Registration.Simple<ModelBinderRegistry>());
+        }
+
+        protected virtual IList<IModelBinderProvider> GetModelBinderProviders(IServiceLocator locator) {
+            try {
+                return locator.ResolveServices<IModelBinderProvider>();
+            } catch {
+                return null;
+            }
+        }
+
+        protected virtual IList<ModelBinderRegistry> GetBinderRegistries(IServiceLocator locator) {
+            try {
+                return locator.ResolveServices<ModelBinderRegistry>();
+            } catch {
+                return null;
+            }
         }
     }
 }

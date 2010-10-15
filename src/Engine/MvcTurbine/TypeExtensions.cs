@@ -44,5 +44,14 @@ namespace MvcTurbine {
         public static bool IsType<TType>(this object obj) {
             return IsType<TType>(obj.GetType());
         }
+
+        /// <summary>
+        /// Checks to see if the specified type is assignable.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static bool IsType(this object obj, Type type) {
+            return type != null && type.IsAssignableFrom(obj.GetType());
+        }
     }
 }

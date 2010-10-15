@@ -3,6 +3,7 @@
     using System.Web.Mvc;
     using ComponentModel;
     using Models;
+    using MvcTurbine.Web.Filters;
 
     /// <summary>
     /// Helper class for registration of ASP.MVC components.
@@ -43,16 +44,6 @@
         /// <returns></returns>
         public static ServiceRegistration RegisterViewEngine(Action<IServiceLocator, Type> regAction) {
             return Registration.Custom<IViewEngine>(RegistrationFilters.DefaultFilter, regAction);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="TFilter"></typeparam>
-        /// <returns></returns>
-        public static ServiceRegistration RegisterFilter<TFilter>()
-            where TFilter : class {
-            return RegisterFilter<TFilter>((locator, type) => locator.Register<TFilter>(type));
         }
 
         /// <summary>

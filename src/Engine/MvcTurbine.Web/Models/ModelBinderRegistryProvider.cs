@@ -28,17 +28,12 @@ namespace MvcTurbine.Web.Models {
     /// Provides resolution of <see cref="IModelBinder"/> using the types from <see cref="ModelBinderRegistry"/>.
     /// </summary>
     public class ModelBinderRegistryProvider : IModelBinderProvider {
-        public static TypeCache _binderCache;
-
         public IServiceLocator ServiceLocator { get; set; }
+        public TypeCache BinderCache { get; private set; }
 
-        public TypeCache BinderCache {
-            get { return _binderCache; }
-            set { _binderCache = value; }
-        }
-
-        public ModelBinderRegistryProvider(IServiceLocator serviceLocator) {
+        public ModelBinderRegistryProvider(IServiceLocator serviceLocator, TypeCache cache) {
             ServiceLocator = serviceLocator;
+            BinderCache = cache;
         }
 
         public IModelBinder GetBinder(Type modelType) {
