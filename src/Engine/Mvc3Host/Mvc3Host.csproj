@@ -64,12 +64,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DynamicLocator.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TurbinePage.cs" />
+    <Compile Include="Controllers\TurbinePageView.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Filters\FooAttribute.cs" />
+    <Compile Include="Filters\GlobalFilter.cs" />
+    <Compile Include="Filters\HomeActionFilter.cs" />
+    <Compile Include="Filters\HomeFilter.cs" />
+    <Compile Include="Filters\HomeFilters.cs" />
+    <Compile Include="Filters\MyGlobalFilters.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Bar.cs" />
+    <Compile Include="Models\BarBinder.cs" />
+    <Compile Include="Models\Foo.cs" />
+    <Compile Include="Models\FooBinder.cs" />
+    <Compile Include="Models\FooRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\FooService.cs" />
+    <Compile Include="Services\IFooService.cs" />
+    <Compile Include="Services\ServiceRegistry.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -141,12 +160,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>37831</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost/Mvc3Host</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -53,10 +53,10 @@ namespace MvcTurbine.Web.Views {
         /// <summary>
         /// Gets the current <see cref="IServiceLocator"/> associated with the MVC application.
         /// </summary>
-        /// <param name="controller">Current controller.</param>
-        /// <returns>Current <see cref="IServiceLocator"/> or nul if not applicable</returns>
-        public static IServiceLocator ServiceLocator(this ViewContext controller) {
-            ITurbineApplication turbineApplication = TurbineApplication(controller);
+        /// <param name="viewContext">Current ViewContext.</param>
+        /// <returns>Current <see cref="IServiceLocator"/> or null if not applicable</returns>
+        public static IServiceLocator ServiceLocator(this ViewContext viewContext) {
+            ITurbineApplication turbineApplication = TurbineApplication(viewContext);
             return turbineApplication == null ? null : turbineApplication.ServiceLocator;
         }
     }
