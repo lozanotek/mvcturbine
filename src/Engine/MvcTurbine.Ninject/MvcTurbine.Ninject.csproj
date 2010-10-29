@@ -69,6 +69,7 @@
     <Compile Include="..\CommonInfo.cs">
       <Link>CommonInfo.cs</Link>
     </Compile>
+    <Compile Include="NinjectRegistrator.cs" />
     <Compile Include="NinjectServiceLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TurbineModule.cs" />

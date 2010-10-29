@@ -34,7 +34,7 @@ namespace MvcTurbine.Windsor {
     /// </summary>
     public class TurbineRegistrationList : IServiceRegistrar {
         private readonly IList<IRegistration> registrationList;
-        
+
         /// <summary>
         /// Default constructor
         /// </summary>
@@ -137,8 +137,7 @@ namespace MvcTurbine.Windsor {
         /// See <seealso cref="IServiceLocator{Interface}.Register(Func factoryMethod)"/>.
         /// </summary>
         /// <param name="factoryMethod"></param>
-        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class
-        {
+        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class {
             Container.AddFacility<FactorySupportFacility>()
                 .Register(Component.For<Interface>()
                     .UsingFactoryMethod(factoryMethod.Invoke)

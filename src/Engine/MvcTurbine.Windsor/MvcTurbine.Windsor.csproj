@@ -78,6 +78,7 @@
       <Link>CommonInfo.cs</Link>
     </Compile>
     <Compile Include="TurbineRegistrationList.cs" />
+    <Compile Include="WindsorRegistrator.cs" />
     <Compile Include="WindsorServiceLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

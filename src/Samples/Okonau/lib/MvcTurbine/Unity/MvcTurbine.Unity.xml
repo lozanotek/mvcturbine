@@ -117,6 +117,13 @@
             <typeparam name="Interface">Type of the service to register.</typeparam>
             <param name="instance">Instance of the type to register.</param>
         </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.Register``1(System.Func{``0})">
+            <summary>
+            Resolves the service of the specified interface with the provided factory method.
+            </summary>
+            <param name="factoryMethod">The factory method which will be used to resolve this interface.</param>
+            <returns>An instance of the type, null otherwise</returns>
+        </member>
         <member name="M:MvcTurbine.Unity.UnityServiceLocator.Release(System.Object)">
             <summary>
             Releases (disposes) the service instance from within the locator.

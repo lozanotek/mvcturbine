@@ -19,9 +19,6 @@
 
 #endregion
 
-using Castle.Facilities.FactorySupport;
-using Castle.MicroKernel.Registration;
-
 namespace MvcTurbine.Windsor {
     using System;
     using System.Collections.Generic;

@@ -40,7 +40,7 @@ namespace MvcTurbine.StructureMap {
         /// Creates an instance with an empty <seealso cref="IContainer"/> instance.
         /// </summary>
         public StructureMapServiceLocator()
-            : this(new Container()) {
+            : this(ObjectFactory.Container) {
         }
 
         /// <summary>
@@ -107,14 +107,10 @@ namespace MvcTurbine.StructureMap {
         ///</summary>
         ///<param name="type">Type of service to resolve.</param>
         ///<returns>An instance of the type, null otherwise</returns>
-        public object Resolve(Type type)
-        {
-            try
-            {
+        public object Resolve(Type type) {
+            try {
                 return Container.GetInstance(type);
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 throw new ServiceResolutionException(type, ex);
             }
         }
@@ -196,8 +192,7 @@ namespace MvcTurbine.StructureMap {
         /// </summary>
         /// <param name="factoryMethod">The factory method which will be used to resolve this interface.</param>
         /// <returns>An instance of the type, null otherwise</returns>
-        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class
-        {
+        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class {
             currentRegistry.Register(factoryMethod);
         }
 
@@ -217,7 +212,8 @@ namespace MvcTurbine.StructureMap {
         }
 
         public TService Inject<TService>(TService instance) where TService : class {
-            if (instance == null) return null;
+            if (instance == null)
+                return null;
 
             // Honor SM's configuration, if any
             Container.BuildUp(instance);
@@ -240,11 +236,15 @@ namespace MvcTurbine.StructureMap {
         /// </summary>
         /// <filterpriority>2</filterpriority>
         public void Dispose() {
-            if (Container == null) return;
-            var disposable = Container as IDisposable;
+            try {
+                if (Container == null)
+                    return;
+                var disposable = Container as IDisposable;
 
-            if (disposable == null) return;
-            disposable.Dispose();
+                disposable.Dispose();
+            } catch {
+                // Don't crash the web server (or AppPool) if something happens
+            }
         }
     }
 }

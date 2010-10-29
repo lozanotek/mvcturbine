@@ -116,6 +116,13 @@
             <typeparam name="Interface"></typeparam>
             <param name="instance"></param>
         </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Register``1(System.Func{``0})">
+            <summary>
+            Resolves the service of the specified interface with the provided factory method.
+            </summary>
+            <typeparam name="Interface"></typeparam>
+            <param name="factoryMethod"></param>
+        </member>
         <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Release(System.Object)">
             <summary>
             Releases (disposes) the service instance from within the locator.
@@ -126,6 +133,13 @@
             <summary>
             Resets the locator to its initial state clearing all registrations.
             </summary>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Inject``1(``0)">
+            <summary>
+            Resolves the service of the specified interface with the provided factory method.
+            </summary>
+            <param name="factoryMethod">The factory method which will be used to resolve this interface.</param>
+            <returns>An instance of the type, null otherwise</returns>
         </member>
         <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Dispose">
             <summary>
@@ -204,6 +218,7 @@
             <param name="implType"></param>
         </member>
         <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Ninject.TurbineModule.Register``1(``0)" -->
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Ninject.TurbineModule.Register``1(System.Func{``0})" -->
         <member name="P:MvcTurbine.Ninject.TurbineModule.Container">
             <summary>
             Gets the associated <see cref="T:Ninject.IKernel"/> for the registration.

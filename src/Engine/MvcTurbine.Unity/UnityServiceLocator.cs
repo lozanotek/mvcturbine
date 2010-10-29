@@ -19,8 +19,6 @@
 
 #endregion
 
-using Microsoft.Practices.Unity.StaticFactory;
-
 namespace MvcTurbine.Unity {
     using System;
     using System.Collections.Generic;
@@ -49,8 +47,7 @@ namespace MvcTurbine.Unity {
         /// <param name="container">Instance of <seealso cref="IUnityContainer"/> to use.</param>
         public UnityServiceLocator(IUnityContainer container) {
             if (container == null) {
-                throw new ArgumentNullException("container",
-                    "The specified Unity container cannot be null.");
+                throw new ArgumentNullException("container", "The specified Unity container cannot be null.");
             }
 
             Container = container;
