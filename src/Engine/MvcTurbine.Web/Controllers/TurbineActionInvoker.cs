@@ -64,5 +64,10 @@ namespace MvcTurbine.Web.Controllers {
 
             return foundAction ?? new InferredActionDescriptor(actionName, controllerDescriptor);
         }
+
+        protected override FilterInfo GetFilters(ControllerContext controllerContext, ActionDescriptor actionDescriptor) {
+            var filters = base.GetFilters(controllerContext, actionDescriptor);
+            return filters;
+        }
     }
 }

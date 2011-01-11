@@ -30,12 +30,12 @@ namespace MvcTurbine.Web.Blades {
     /// Default <see cref="IBlade"/> that supports all ASP.NET Url routing components.    
     /// </summary>
     public class RoutingBlade : Blade, ISupportAutoRegistration {
-        
+
         /// <summary>
-        /// Provides the auto-registration of MVC related components (controllers, view engines, filters, etc).
+        /// Provides the auto-registration for <see cref="IRouteRegistrator"/> types.
         /// </summary>
         /// <param name="registrationList"></param>
-        public void AddRegistrations(AutoRegistrationList registrationList) {
+        public virtual void AddRegistrations(AutoRegistrationList registrationList) {
             registrationList.Add(Registration.Simple<IRouteRegistrator>());
         }
 
@@ -69,7 +69,8 @@ namespace MvcTurbine.Web.Blades {
         protected virtual IList<IRouteRegistrator> GetRouteRegistrations(IServiceLocator locator) {
             try {
                 return locator.ResolveServices<IRouteRegistrator>();
-            } catch {
+            }
+            catch {
                 return null;
             }
         }

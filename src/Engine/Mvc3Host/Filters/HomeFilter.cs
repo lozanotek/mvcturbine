@@ -3,7 +3,7 @@
 
     public class HomeFilter : IActionFilter {
         public void OnActionExecuting(ActionExecutingContext filterContext) {
-            filterContext.Controller.ViewModel.homeMessage = "I'm in the home controller";
+            filterContext.Controller.ViewBag.homeMessage = "I'm in the home controller";
 
         }
 

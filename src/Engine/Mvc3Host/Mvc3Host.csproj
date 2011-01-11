@@ -74,7 +74,7 @@
     <Compile Include="Filters\GlobalFilter.cs" />
     <Compile Include="Filters\HomeActionFilter.cs" />
     <Compile Include="Filters\HomeFilter.cs" />
-    <Compile Include="Filters\HomeFilters.cs" />
+    <Compile Include="Filters\HomeFilterRegistry.cs" />
     <Compile Include="Filters\MyGlobalFilters.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -82,9 +82,9 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Bar.cs" />
     <Compile Include="Models\BarBinder.cs" />
-    <Compile Include="Models\Foo.cs" />
-    <Compile Include="Models\FooBinder.cs" />
-    <Compile Include="Models\FooRegistry.cs" />
+    <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\PersonBinder.cs" />
+    <Compile Include="Models\AppBinderRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FooService.cs" />
     <Compile Include="Services\IFooService.cs" />
@@ -128,9 +128,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\MvcTurbine.Web\MvcTurbine.Web.csproj">
       <Project>{A2634ACF-E549-4861-A36D-A6BEA773BFDB}</Project>
@@ -160,7 +158,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>37831</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

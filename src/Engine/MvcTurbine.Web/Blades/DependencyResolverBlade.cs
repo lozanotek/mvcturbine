@@ -21,7 +21,6 @@
 
 namespace MvcTurbine.Web.Blades {
     using System.Web.Mvc;
-    using Controllers;
     using MvcTurbine.Blades;
 
     /// <summary>
@@ -29,11 +28,11 @@ namespace MvcTurbine.Web.Blades {
     /// </summary>
     public class DependencyResolverBlade : Blade {
         public override void Spin(IRotorContext context) {
-            var dependencyResolver = GetTheDependencyResolver(context);
+            var dependencyResolver = GetDependencyResolver(context);
             DependencyResolver.SetResolver(dependencyResolver);
         }
 
-        protected virtual IDependencyResolver GetTheDependencyResolver(IRotorContext context) {
+        protected virtual IDependencyResolver GetDependencyResolver(IRotorContext context) {
             var serviceLocator = context.ServiceLocator;
 
             try {

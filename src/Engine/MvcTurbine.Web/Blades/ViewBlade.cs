@@ -69,7 +69,11 @@ namespace MvcTurbine.Web.Blades {
             }
         }
 
-        public void AddRegistrations(AutoRegistrationList registrationList) {
+        /// <summary>
+        /// Provides the auto-registration for <see cref="IViewEngine"/> types.
+        /// </summary>
+        /// <param name="registrationList"></param>
+        public virtual void AddRegistrations(AutoRegistrationList registrationList) {
             registrationList.Add(MvcRegistration.RegisterViewEngine());
         }
     }

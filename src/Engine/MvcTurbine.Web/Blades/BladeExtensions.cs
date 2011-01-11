@@ -20,7 +20,6 @@
 #endregion
 
 namespace MvcTurbine.Web.Blades {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using MvcTurbine.Blades;
@@ -43,7 +42,7 @@ namespace MvcTurbine.Web.Blades {
         /// <param name="blade"></param>
         /// <returns></returns>
         public static bool IsCoreBlade(this IBlade blade) {
-            Type type = blade.GetType();
+            var type = blade.GetType();
             return bladeTypes.Any(bladeType => bladeType.IsAssignableFrom(type));
         }
     }

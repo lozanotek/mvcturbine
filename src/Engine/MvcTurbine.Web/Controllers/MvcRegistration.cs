@@ -3,7 +3,6 @@
     using System.Web.Mvc;
     using ComponentModel;
     using Models;
-    using MvcTurbine.Web.Filters;
 
     /// <summary>
     /// Helper class for registration of ASP.MVC components.

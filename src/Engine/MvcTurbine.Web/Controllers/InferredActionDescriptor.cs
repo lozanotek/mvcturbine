@@ -61,8 +61,7 @@ namespace MvcTurbine.Web.Controllers {
         /// <param name="controllerContext"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public override object Execute(ControllerContext controllerContext,
-                                       IDictionary<string, object> parameters) {
+        public override object Execute(ControllerContext controllerContext, IDictionary<string, object> parameters) {
             return new InferredViewResult { ViewName = ActionName };
         }
 

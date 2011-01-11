@@ -32,6 +32,10 @@ namespace MvcTurbine.Web.Controllers {
         private static IActionInvoker actionInvoker;
         private static readonly object _lock = new object();
 
+        /// <summary>
+        /// Default constructor for the type
+        /// </summary>
+        /// <param name="serviceLocator"></param>
         public TurbineControllerActivator(IServiceLocator serviceLocator) {
             if (serviceLocator == null) {
                 throw new ArgumentNullException("serviceLocator");
@@ -45,8 +49,15 @@ namespace MvcTurbine.Web.Controllers {
         /// </summary>
         public IServiceLocator ServiceLocator { get; private set; }
 
+        /// <summary>
+        /// Resolves the controller instance form <see cref="ServiceLocator"/> and assigns the
+        /// registered <see cref="IActionInvoker"/> with the system.
+        /// </summary>
+        /// <param name="requestContext">Current request context.</param>
+        /// <param name="controllerType">Current controlle type.</param>
+        /// <returns></returns>
         public IController Create(RequestContext requestContext, Type controllerType) {
-            var instance = ServiceLocator.Resolve<IController>(controllerType);
+            var instance = ServiceLocator.Resolve(controllerType);
             var controller = instance as Controller;
 
             // If you inherit from controller, implement this fine work around
@@ -67,7 +78,8 @@ namespace MvcTurbine.Web.Controllers {
                     if (actionInvoker == null) {
                         try {
                             actionInvoker = ServiceLocator.Resolve<IActionInvoker>();
-                        } catch (ServiceResolutionException) {
+                        }
+                        catch (ServiceResolutionException) {
                             actionInvoker = new TurbineActionInvoker(ServiceLocator);
                         }
                     }

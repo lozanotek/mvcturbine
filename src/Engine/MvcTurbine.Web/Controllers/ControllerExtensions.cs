@@ -62,7 +62,7 @@ namespace MvcTurbine.Web.Controllers {
         /// <summary>
         /// Gets the current <see cref="ITurbineApplication"/> associated with the MVC application.
         /// </summary>
-        /// <param name="controller">Current controller.</param>
+        /// <param name="controllerContext">Current controller.</param>
         /// <returns>Current <see cref="ITurbineApplication"/> or null if not applicable.</returns>
         internal static ITurbineApplication TurbineApplication(this ControllerContext controllerContext)
         {

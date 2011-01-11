@@ -39,6 +39,10 @@ namespace MvcTurbine.Web.Blades {
             SetupBinderRegistries(serviceLocator);
         }
 
+        /// <summary>
+        /// Queries the <see cref="IServiceLocator"/> instance for any instances of <see cref="ModelBinderRegistry"/> to process.
+        /// </summary>
+        /// <param name="serviceLocator">Current <see cref="IServiceLocator"/> instance for the application.</param>
         public virtual void SetupBinderRegistries(IServiceLocator serviceLocator) {
             var binderRegistries = GetBinderRegistries(serviceLocator);
             if (binderRegistries == null) return;
@@ -62,6 +66,11 @@ namespace MvcTurbine.Web.Blades {
             ModelBinderProviders.BinderProviders.Add(new ModelBinderRegistryProvider(serviceLocator, aggregateCache));
         }
 
+        ///<summary>
+        /// Links the Turbine specific model binder providers, model binder providers that been registered with the container
+        /// and the default ones from the MVC runtime.
+        ///</summary>
+        /// <param name="serviceLocator">Current <see cref="IServiceLocator"/> instance for the application.</param>
         public virtual void SetupBinderProviders(IServiceLocator serviceLocator) {
             var binderProviders = GetModelBinderProviders(serviceLocator);
 
@@ -74,25 +83,41 @@ namespace MvcTurbine.Web.Blades {
             ModelBinderProviders.BinderProviders.Add(new FilterableBinderProvider(serviceLocator));
         }
 
-        public void AddRegistrations(AutoRegistrationList registrationList) {
+        /// <summary>
+        /// Provides the auto-registration for <see cref="IModelBinderProvider"/> and <see cref="ModelBinderRegistry"/> types.
+        /// </summary>
+        /// <param name="registrationList"></param>
+        public virtual void AddRegistrations(AutoRegistrationList registrationList) {
             registrationList
                 .Add(MvcRegistration.RegisterBinder())
                 .Add(Registration.Simple<IModelBinderProvider>())
                 .Add(Registration.Simple<ModelBinderRegistry>());
         }
 
+        /// <summary>
+        /// Gets all registered <see cref="IModelBinderProvider"/> from the container.
+        /// </summary>
+        /// <param name="locator">Current <see cref="IServiceLocator"/> instance for the application.</param>
+        /// <returns>A list of <see cref="IModelBinderProvider"/>, null if instances could not be resolved.</returns>
         protected virtual IList<IModelBinderProvider> GetModelBinderProviders(IServiceLocator locator) {
             try {
                 return locator.ResolveServices<IModelBinderProvider>();
-            } catch {
+            }
+            catch {
                 return null;
             }
         }
 
+        /// <summary>
+        /// Gets all registered <see cref="ModelBinderRegistry"/> from the container.
+        /// </summary>
+        /// <param name="locator">Current <see cref="IServiceLocator"/> instance for the application.</param>
+        /// <returns>A list of <see cref="ModelBinderRegistry"/>, null if instances could not be resolved.</returns>
         protected virtual IList<ModelBinderRegistry> GetBinderRegistries(IServiceLocator locator) {
             try {
                 return locator.ResolveServices<ModelBinderRegistry>();
-            } catch {
+            }
+            catch {
                 return null;
             }
         }

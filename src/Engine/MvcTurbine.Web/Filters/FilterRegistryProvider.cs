@@ -1,4 +1,5 @@
 ﻿namespace MvcTurbine.Web.Filters {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
@@ -25,7 +26,7 @@
             var controller = actionDescriptor.ControllerDescriptor.ControllerType;
             return RegistryList.OfType<ActionFilterReg>()
                 .Where(reg => controller == reg.Controller)
-                .Where(reg => reg.Action == actionDescriptor.ActionName)
+                .Where(reg => string.Equals(reg.Action, actionDescriptor.ActionName, StringComparison.CurrentCultureIgnoreCase))
                 .Select(ToMvcFilter);
         }
 

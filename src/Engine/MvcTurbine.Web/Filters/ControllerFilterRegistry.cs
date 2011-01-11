@@ -16,6 +16,19 @@
 
         protected IList<FilterReg> FilterList { get; set; }
 
+        public virtual ControllerFilterRegistry<TController> ForAction<TFilter>(string actionName) {
+            return ForAction(actionName, typeof (TFilter));
+        }
+
+        public virtual ControllerFilterRegistry<TController> ForAction(string actionName, Type filterType) {
+            if (!filterType.IsMvcFilter()) {
+                throw new ArgumentException("Specified argument is not an MVC filter!", "filterType");
+            }
+
+            FilterList.Add(new ActionFilterReg { Filter = filterType, Controller = typeof(TController), Action = actionName });
+            return this;
+        }
+
         public virtual ControllerFilterRegistry<TController> ForAction<TFilter>(Expression<Action<TController>> action) {
             return ForAction(action, typeof(TFilter));
         }
@@ -33,14 +46,8 @@
         }
 
         public virtual ControllerFilterRegistry<TController> ForAction(Expression<Action<TController>> action, Type filterType) {
-            if (!filterType.IsMvcFilter()) {
-                throw new ArgumentException("Specified argument is not an MVC filter!", "filterType");
-            }
-
             var call = action.Body as MethodCallExpression;
-
-            FilterList.Add(new ActionFilterReg { Filter = filterType, Controller = typeof(TController), Action = call.Method.Name });
-            return this;
+            return ForAction(call.Method.Name, filterType);
         }
 
         /// <summary>

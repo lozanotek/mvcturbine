@@ -2,6 +2,9 @@
     using System;
     using System.Web.Mvc;
 
+    ///<summary>
+    /// Simple class for registering an action based filters.
+    ///</summary>
     [Serializable]
     public class ActionFilterReg : FilterReg {
         public Type Controller { get; set; }

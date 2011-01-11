@@ -31,9 +31,8 @@ namespace MvcTurbine.Web.Blades {
     /// Default <see cref="IBlade"/> that supports all ASP.NET MVC components.
     /// </summary>
     public class FilterBlade : Blade, ISupportAutoRegistration {
-
         /// <summary>
-        /// Provides the auto-registration of MVC related components (controllers, view engines, filters, etc).
+        /// Provides the auto-registration for <see cref="IFilterProvider"/> and <see cref="IFilterRegistry"/> types.
         /// </summary>
         /// <param name="registrationList"></param>
         public virtual void AddRegistrations(AutoRegistrationList registrationList) {
@@ -55,12 +54,17 @@ namespace MvcTurbine.Web.Blades {
             SetupFilterRegistries(serviceLocator);
         }
 
+        /// <summary>
+        /// Queries the <see cref="IServiceLocator"/> instance for any instances of <see cref="IFilterRegistry"/> to process.
+        /// </summary>
+        /// <param name="serviceLocator">Current <see cref="IServiceLocator"/> instance for the application.</param>
         public virtual void SetupFilterRegistries(IServiceLocator serviceLocator) {
             var filterRegistries = GetFilterRegistries(serviceLocator);
             if (filterRegistries == null) return;
 
             var filterList = new List<FilterReg>();
             var typeList = new List<Type>();
+
             foreach (var filterRegistry in filterRegistries) {
                 var registrations = filterRegistry.GetFilterRegistrations();
 
@@ -69,7 +73,7 @@ namespace MvcTurbine.Web.Blades {
                         var filterType = registration.Filter;
 
                         // Prevent double registration of the same filter
-                        if(typeList.Contains(filterType)) continue;
+                        if (typeList.Contains(filterType)) continue;
 
                         serviceLocator.Register(filterType, filterType);
                         typeList.Add(filterType);
@@ -83,35 +87,53 @@ namespace MvcTurbine.Web.Blades {
             FilterProviders.Providers.Add(new FilterRegistryProvider(serviceLocator, filterList));
         }
 
+        ///<summary>
+        /// Links the Turbine specific service providers, filter providers that been registered with the container
+        /// and the default ones from the MVC runtime.
+        ///</summary>
+        /// <param name="serviceLocator">Current <see cref="IServiceLocator"/> instance for the application.</param>
         public virtual void SetupFilterProviders(IServiceLocator serviceLocator) {
             // Clear out what's there by default
             FilterProviders.Providers.Clear();
 
+            // Wire the pieces up just like it comes out of the box
             FilterProviders.Providers.Add(GlobalFilters.Filters);
             FilterProviders.Providers.Add(new ControllerInstanceFilterProvider());
             FilterProviders.Providers.Add(new InjectableAttributeFilterProvider(serviceLocator));
 
+            // Get the providers that were registered with the service locator
             var filterProviders = GetFilterProviders(serviceLocator);
-            if (filterProviders == null || filterProviders.Count == 0)
-                return;
+            if (filterProviders == null || filterProviders.Count == 0) return;
 
             foreach (var filterProvider in filterProviders) {
                 FilterProviders.Providers.Add(filterProvider);
             }
         }
 
+        /// <summary>
+        /// Gets all registered <see cref="IFilterRegistry"/> from the container.
+        /// </summary>
+        /// <param name="locator">Current <see cref="IServiceLocator"/> instance for the application.</param>
+        /// <returns>A list of <see cref="IFilterRegistry"/>, null if instances could not be resolved.</returns>
         protected virtual IList<IFilterRegistry> GetFilterRegistries(IServiceLocator locator) {
             try {
                 return locator.ResolveServices<IFilterRegistry>();
-            } catch {
+            }
+            catch {
                 return null;
             }
         }
 
+        /// <summary>
+        /// Gets all registered <see cref="IFilterProvider"/> from the container.
+        /// </summary>
+        /// <param name="locator">Current <see cref="IServiceLocator"/> instance for the application.</param>
+        /// <returns>A list of <see cref="IFilterProvider"/>, null if instances could not be resolved.</returns>
         protected virtual IList<IFilterProvider> GetFilterProviders(IServiceLocator locator) {
             try {
                 return locator.ResolveServices<IFilterProvider>();
-            } catch {
+            }
+            catch {
                 return null;
             }
         }

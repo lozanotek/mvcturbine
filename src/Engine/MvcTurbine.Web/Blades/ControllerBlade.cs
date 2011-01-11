@@ -37,7 +37,7 @@ namespace MvcTurbine.Web.Blades {
             // Get the current IServiceLocator
             var locator = GetServiceLocatorFromContext(context);
 
-            // Get the registered controller factory
+            // Get the registered controller activator - if any, then skip registering our own.
             var controllerActivator = GetControllerActivator(locator);
             if (controllerActivator != null) return;
 
@@ -62,7 +62,11 @@ namespace MvcTurbine.Web.Blades {
             catch { return null; }
         }
 
-        public void AddRegistrations(AutoRegistrationList registrationList) {
+        /// <summary>
+        /// Provides the auto-registration for <see cref="IController"/> types.
+        /// </summary>
+        /// <param name="registrationList"></param>
+        public virtual void AddRegistrations(AutoRegistrationList registrationList) {
             registrationList.Add(MvcRegistration.RegisterController());
         }
     }

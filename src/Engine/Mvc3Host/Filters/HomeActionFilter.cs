@@ -6,7 +6,7 @@
         }
 
         public void OnActionExecuted(ActionExecutedContext filterContext) {
-            filterContext.Controller.ViewModel.homeActionMessage = "I'm in the home controller in action " + filterContext.ActionDescriptor.ActionName;
+            filterContext.Controller.ViewBag.homeActionMessage = "I'm in the home controller in action " + filterContext.ActionDescriptor.ActionName;
         }
     }
 }
