@@ -167,7 +167,7 @@
         </member>
         <member name="T:MvcTurbine.Web.Controllers.DefaultFilterFinder">
             <summary>
-            Default implementation to find <see cref="T:MvcTurbine.Web.Controllers.InjectableFilterAttribute"/> for a controller action.
+            Default implementation for <see cref="T:MvcTurbine.Web.Controllers.IFilterFinder"/> to get all filters through IoC.
             </summary>
         </member>
         <member name="T:MvcTurbine.Web.Controllers.IFilterFinder">
@@ -190,16 +190,9 @@
         </member>
         <member name="M:MvcTurbine.Web.Controllers.DefaultFilterFinder.FindFilters(System.Web.Mvc.ActionDescriptor)">
             <summary>
-            Finds all the <see cref="T:MvcTurbine.Web.Controllers.InjectableFilterAttribute"/> on the specified <see cref="T:System.Web.Mvc.ActionDescriptor"/>.
+            Finds all the GlobalFilters on the specified <see cref="T:System.Web.Mvc.ActionDescriptor"/>.
             </summary>
             <param name="actionDescriptor">Current action being executed.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MvcTurbine.Web.Controllers.DefaultFilterFinder.GetAttributes(System.Reflection.ICustomAttributeProvider)">
-            <summary>
-            Gets the applied <see cref="T:MvcTurbine.Web.Controllers.InjectableFilterAttribute"/> on the specified <see cref="T:System.Web.Mvc.ActionDescriptor"/>.
-            </summary>
-            <param name="actionDescriptor"></param>
             <returns></returns>
         </member>
         <member name="M:MvcTurbine.Web.Controllers.DefaultFilterFinder.CreateFilterInfo(System.Collections.Generic.IEnumerable{System.Web.Mvc.IAuthorizationFilter},System.Collections.Generic.IEnumerable{System.Web.Mvc.IActionFilter},System.Collections.Generic.IEnumerable{System.Web.Mvc.IResultFilter},System.Collections.Generic.IEnumerable{System.Web.Mvc.IExceptionFilter})">
@@ -210,14 +203,6 @@
             <param name="actionFilters"></param>
             <param name="resultFilters"></param>
             <param name="exceptionFilters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:MvcTurbine.Web.Controllers.DefaultFilterFinder.GetRegisteredFilters``1(MvcTurbine.Web.Controllers.InjectableFilterAttribute[])">
-            <summary>
-            Searches the <see cref="P:MvcTurbine.Web.Controllers.DefaultFilterFinder.ServiceLocator"/> for the registered filters that match <paramref name="filterAttributes"/>.
-            </summary>
-            <typeparam name="TFilter"></typeparam>
-            <param name="filterAttributes"></param>
             <returns></returns>
         </member>
         <member name="P:MvcTurbine.Web.Controllers.DefaultFilterFinder.ServiceLocator">

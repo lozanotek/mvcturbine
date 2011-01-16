@@ -199,6 +199,16 @@ namespace MvcTurbine.Windsor {
         }
 
         /// <summary>
+        /// Resolves the service of the specified interface with the provided factory method.
+        /// </summary>
+        /// <param name="factoryMethod">The factory method which will be used to resolve this interface.</param>
+        /// <returns>An instance of the type, null otherwise</returns>
+        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class
+        {
+            registrationList.Register(factoryMethod);
+        }
+
+        /// <summary>
         /// See <see cref="IServiceLocator.Release"/>.
         /// </summary>
         /// <param name="instance"></param>

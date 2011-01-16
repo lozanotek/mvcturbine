@@ -104,7 +104,8 @@ namespace MvcTurbine.Web {
 
             InitializeHttpModules();
 
-            if (CurrentContext == null) return;
+            if (CurrentContext == null)
+                return;
             CurrentContext.Initialize(this);
         }
 
@@ -139,7 +140,8 @@ namespace MvcTurbine.Web {
         /// Shuts down the <see cref="CurrentContext"/> and handles all pieces of cleanup.
         /// </summary>
         protected virtual void ShutdownContext() {
-            if(CurrentContext == null) return;
+            if (CurrentContext == null)
+                return;
             CurrentContext.Dispose();
 
             CurrentContext = null;
@@ -154,8 +156,7 @@ namespace MvcTurbine.Web {
         protected virtual IRotorContext GetContext() {
             try {
                 return ServiceLocator.Resolve<IRotorContext>();
-            }
-            catch {
+            } catch {
                 return new RotorContext(this);
             }
         }
@@ -173,7 +174,9 @@ namespace MvcTurbine.Web {
             using (locator.Batch()) {
                 // Add the IServiceLocator instance to itself so if any types later on need it,
                 // they can have it injected into them.
-                locator.Register(locator);
+                //
+                // Use the factory method approach to prevent the stackoverflow error
+                locator.Register(() => locator);
             }
 
             return locator;

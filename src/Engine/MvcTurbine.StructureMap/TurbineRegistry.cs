@@ -122,6 +122,16 @@ namespace MvcTurbine.StructureMap {
             For<Interface>().Use(instance);
         }
 
+        /// <summary>
+        /// See <see cref="IServiceRegistrar.Register{Interface}(Func{Interface})"/>.
+        /// </summary>
+        /// <typeparam name="Interface"></typeparam>
+        /// <param name="factoryMethod"></param>
+        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class
+        {
+            Container.Configure(cfg => cfg.For<Interface>().Use(factoryMethod.Invoke));
+        }
+
         public void Dispose() {
             // Process the current registration
             Container.Configure(x => x.AddRegistry(this));

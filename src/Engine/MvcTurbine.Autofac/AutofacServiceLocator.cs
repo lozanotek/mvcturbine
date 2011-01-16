@@ -163,6 +163,16 @@ namespace MvcTurbine.Autofac {
                 Builder.RegisterInstance(instance);
         }
 
+        /// <summary>
+        /// Resolves the service of the specified interface with the provided factory method.
+        /// </summary>
+        /// <param name="factoryMethod">The factory method which will be used to resolve this interface.</param>
+        /// <returns>An instance of the type, null otherwise</returns>
+        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class
+        {
+            Builder.Register(c => factoryMethod.Invoke());
+        }
+
         [Obsolete("Not used with this implementation of IServiceLocator.")]
         public void Release(object instance) {
         }

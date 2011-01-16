@@ -113,5 +113,34 @@ namespace MvcTurbine.ComponentModel.Tests {
             var logger = locator.Resolve<SimpleLogger>();
             Assert.AreEqual(typeof(SimpleLogger), logger.GetType());
         }
+
+        [Test]
+        public void Register_With_Factory_Method_Should_Return_Result_From_Factory()
+        {
+            var firstExpectedObject = new FactoryMethodTest();
+            var secondExpectedObject = new FactoryMethodTest();
+            var hasBeenCalled = false;
+            using (locator.Batch())
+                locator.Register<IFactoryMethodTest>(() =>
+                                     {
+                                        if (hasBeenCalled == false)
+                                        {
+                                            hasBeenCalled = true;
+                                            return firstExpectedObject;
+                                        }
+                                        return secondExpectedObject;
+                                     });
+
+            var first = locator.Resolve<IFactoryMethodTest>();
+            Assert.AreSame(firstExpectedObject, first);
+
+            var second = locator.Resolve<IFactoryMethodTest>();
+            Assert.AreSame(secondExpectedObject, second);
+        }
     }
+
+    public interface IFactoryMethodTest{}
+
+    public class FactoryMethodTest : IFactoryMethodTest {}
+
 }

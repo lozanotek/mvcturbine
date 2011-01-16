@@ -23,7 +23,6 @@ namespace MvcTurbine.Web.Controllers {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
     using System.Web.Mvc;
     using ComponentModel;
 
@@ -49,7 +48,7 @@ namespace MvcTurbine.Web.Controllers {
         public IServiceLocator ServiceLocator { get; private set; }
 
         /// <summary>
-        /// Finds all the <see cref="InjectableFilterAttribute"/> on the specified <see cref="ActionDescriptor"/>.
+        /// Finds all the GlobalFilters on the specified <see cref="ActionDescriptor"/>.
         /// </summary>
         /// <param name="actionDescriptor">Current action being executed.</param>
         /// <returns></returns>
@@ -66,29 +65,6 @@ namespace MvcTurbine.Web.Controllers {
             var authFilters = GetGlobalFilterFromContainer<IAuthorizationFilter>();
 
             return CreateFilterInfo(authFilters, actionFilters, resultFilters, exceptionFilters);
-        }
-
-        private FilterInfo GetInjectableFilters(ICustomAttributeProvider actionDescriptor) {
-            var attributes = GetAttributes(actionDescriptor);
-            if (attributes == null || attributes.Length == 0) return null;
-
-            var actionFilters = GetRegisteredFilters<IActionFilter>(attributes);
-            var resultFilters = GetRegisteredFilters<IResultFilter>(attributes);
-            var exceptionFilters = GetRegisteredFilters<IExceptionFilter>(attributes);
-            var authorizationFilters = GetRegisteredFilters<IAuthorizationFilter>(attributes);
-
-            return CreateFilterInfo(authorizationFilters,
-                                    actionFilters, resultFilters, exceptionFilters);
-        }
-
-        /// <summary>
-        /// Gets the applied <see cref="InjectableFilterAttribute"/> on the specified <see cref="ActionDescriptor"/>.
-        /// </summary>
-        /// <param name="actionDescriptor"></param>
-        /// <returns></returns>
-        private static InjectableFilterAttribute[] GetAttributes(ICustomAttributeProvider actionDescriptor) {
-            return actionDescriptor.GetCustomAttributes(typeof(InjectableFilterAttribute), true) 
-                as InjectableFilterAttribute[];
         }
 
         /// <summary>
@@ -111,22 +87,6 @@ namespace MvcTurbine.Web.Controllers {
             exceptionFilters.ForEach(registeredFilters.ExceptionFilters.Add);
 
             return registeredFilters;
-        }
-
-        /// <summary>
-        /// Searches the <see cref="ServiceLocator"/> for the registered filters that match <paramref name="filterAttributes"/>.
-        /// </summary>
-        /// <typeparam name="TFilter"></typeparam>
-        /// <param name="filterAttributes"></param>
-        /// <returns></returns>
-        protected virtual IList<TFilter> GetRegisteredFilters<TFilter>(InjectableFilterAttribute[] filterAttributes)
-            where TFilter : class {
-            var services = from svc in ServiceLocator.ResolveServices<TFilter>()
-                           from filter in filterAttributes
-                           where filter.FilterType.IsType<TFilter>()
-                           select svc;
-
-            return services.ToList();
         }
 
         protected virtual IList<TFilter> GetGlobalFilterFromContainer<TFilter>()

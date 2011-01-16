@@ -57,5 +57,10 @@ namespace MvcTurbine.Autofac {
         {
             AddRegistration(builder => builder.RegisterInstance(instance));
         }
+
+        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class
+        {
+            AddRegistration(builder => builder.Register(c => factoryMethod.Invoke()));
+        }
     }
 }

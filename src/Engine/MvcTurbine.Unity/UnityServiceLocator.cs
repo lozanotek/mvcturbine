@@ -47,8 +47,7 @@ namespace MvcTurbine.Unity {
         /// <param name="container">Instance of <seealso cref="IUnityContainer"/> to use.</param>
         public UnityServiceLocator(IUnityContainer container) {
             if (container == null) {
-                throw new ArgumentNullException("container",
-                    "The specified Unity container cannot be null.");
+                throw new ArgumentNullException("container", "The specified Unity container cannot be null.");
             }
 
             Container = container;
@@ -207,6 +206,18 @@ namespace MvcTurbine.Unity {
         }
 
         /// <summary>
+        /// Resolves the service of the specified interface with the provided factory method.
+        /// </summary>
+        /// <param name="factoryMethod">The factory method which will be used to resolve this interface.</param>
+        /// <returns>An instance of the type, null otherwise</returns>
+        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class
+        {
+            var container = this.Container;
+            Func<IUnityContainer, object> factoryFunc = c => factoryMethod.Invoke();
+            container.RegisterType<Interface>(new InjectionFactory(factoryFunc));
+        }
+
+        /// <summary>
         /// Releases (disposes) the service instance from within the locator.
         /// </summary>
         /// <param name="instance">Instance of a service to dipose from the locator.</param>
@@ -275,6 +286,11 @@ namespace MvcTurbine.Unity {
         }
 
         public void Register<Interface>(Interface instance) where Interface : class {
+            throw new NotImplementedException();
+        }
+
+        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class
+        {
             throw new NotImplementedException();
         }
     }

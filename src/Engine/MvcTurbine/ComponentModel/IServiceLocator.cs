@@ -127,6 +127,13 @@ namespace MvcTurbine.ComponentModel {
         void Register<Interface>(Interface instance) where Interface : class;
 
         /// <summary>
+        /// Resolves the service of the specified interface with the provided factory method.
+        /// </summary>
+        /// <param name="factoryMethod">The factory method which will be used to resolve this interface.</param>
+        /// <returns>An instance of the type, null otherwise</returns>
+        void Register<Interface>(Func<Interface> factoryMethod) where Interface : class;
+
+        /// <summary>
         /// Releases (disposes) the service instance from within the locator.
         /// </summary>
         /// <param name="instance">Instance of a service to dipose from the locator.</param>

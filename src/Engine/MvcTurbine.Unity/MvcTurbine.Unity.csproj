@@ -81,6 +81,7 @@
     <Compile Include="..\CommonInfo.cs">
       <Link>CommonInfo.cs</Link>
     </Compile>
+    <Compile Include="UnityRegistrator.cs" />
     <Compile Include="UnityServiceLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

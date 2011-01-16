@@ -19,6 +19,8 @@
 
 #endregion
 
+using Castle.Facilities.FactorySupport;
+
 namespace MvcTurbine.Windsor {
     using System;
     using System.Collections.Generic;
@@ -32,7 +34,7 @@ namespace MvcTurbine.Windsor {
     /// </summary>
     public class TurbineRegistrationList : IServiceRegistrar {
         private readonly IList<IRegistration> registrationList;
-        
+
         /// <summary>
         /// Default constructor
         /// </summary>
@@ -129,6 +131,17 @@ namespace MvcTurbine.Windsor {
         public void Register<Interface>(Interface instance) where Interface : class {
             var registration = Component.For<Interface>().Instance(instance);
             registrationList.Add(registration);
+        }
+
+        /// <summary>
+        /// See <seealso cref="IServiceLocator{Interface}.Register(Func factoryMethod)"/>.
+        /// </summary>
+        /// <param name="factoryMethod"></param>
+        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class {
+            Container.AddFacility<FactorySupportFacility>()
+                .Register(Component.For<Interface>()
+                    .UsingFactoryMethod(factoryMethod.Invoke)
+                    .LifeStyle.Transient);
         }
 
         /// <summary>
