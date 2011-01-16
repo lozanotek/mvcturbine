@@ -157,7 +157,7 @@ namespace MvcTurbine.Web {
             try {
                 return ServiceLocator.Resolve<IRotorContext>();
             } catch {
-                return new RotorContext(this);
+                return new RotorContext(ServiceLocator);
             }
         }
 
@@ -166,7 +166,8 @@ namespace MvcTurbine.Web {
         /// <see cref="ServiceLocatorManager.SetLocatorProvider"/>.
         /// </summary>
         protected virtual IServiceLocator GetServiceLocator() {
-            IServiceLocator locator = ServiceLocatorManager.Current;
+            var locator = ServiceLocatorManager.Current;
+            
             if (locator == null) {
                 throw new InvalidOperationException(Resources.ServiceLocatorExceptionMessage);
             }

@@ -39,21 +39,29 @@ namespace MvcTurbine.Web {
         /// <summary>
         /// Default constructor
         /// </summary>
-        public RotorContext(ITurbineApplication application) {
-            Application = application;
+        public RotorContext(IServiceLocator serviceLocator) {
+            ServiceLocator = serviceLocator;
         }
 
         /// <summary>
         /// Gets or sets the current implementation of <see cref="IServiceLocator"/>.
         /// </summary>
         public IServiceLocator ServiceLocator {
-            get { return Application.ServiceLocator; }
+            get;
+            private set;
         }
 
         /// <summary>
         /// Gets or sets the current instance of <see cref="TurbineApplication"/>.
         /// </summary>
-        public ITurbineApplication Application { get; private set; }
+        public ITurbineApplication Application {
+            get {
+                var context = HttpContext.Current;
+                if (context == null) return null;
+
+                return context.ApplicationInstance as ITurbineApplication;
+            }
+        }
 
         /// <summary>
         /// Cleans up the current <see cref="IServiceLocator"/> associated with the context.
@@ -66,7 +74,9 @@ namespace MvcTurbine.Web {
                     try {
                         //HACK: Yes, I know this is ugly but need to figure out how to best handle this
                         component.Dispose();
-                    } catch {
+                    }
+                    catch {
+                        //TODO: Add better handling for this exception
                     }
                 }
             }
@@ -76,7 +86,9 @@ namespace MvcTurbine.Web {
             try {
                 //HACK: Yes, I know this is ugly but need to figure out how to best handle this
                 ServiceLocator.Dispose();
-            } catch {
+            }
+            catch {
+                //TODO: Add better handling for this exception
             }
         }
 
@@ -176,8 +188,7 @@ namespace MvcTurbine.Web {
             var registrationList = new AutoRegistrationList();
 
             // For every blade, check if it needs to auto-register anything
-            Action<IBlade> autoRegAction = blade =>
-            {
+            Action<IBlade> autoRegAction = blade => {
                 var autoRegistration = blade as ISupportAutoRegistration;
                 if (autoRegistration == null) {
                     return;
@@ -243,7 +254,7 @@ namespace MvcTurbine.Web {
         /// </summary>
         /// <param name="registrationList">Registrations to process</param>
         protected virtual void ProcessAutomaticRegistration(AutoRegistrationList registrationList) {
-            IAutoRegistrator registrator = GetAutoRegistrator();
+            var registrator = GetAutoRegistrator();
 
             lock (_regLock) {
                 using (ServiceLocator.Batch()) {
@@ -265,7 +276,8 @@ namespace MvcTurbine.Web {
                     if (autoRegistrator == null) {
                         try {
                             autoRegistrator = ServiceLocator.Resolve<IAutoRegistrator>();
-                        } catch (ServiceResolutionException) {
+                        }
+                        catch (ServiceResolutionException) {
                             autoRegistrator = new DefaultAutoRegistrator(ServiceLocator);
                         }
                     }
@@ -283,7 +295,8 @@ namespace MvcTurbine.Web {
         protected virtual IBinAssemblyLoader GetBinLoader() {
             try {
                 return ServiceLocator.Resolve<IBinAssemblyLoader>();
-            } catch {
+            }
+            catch {
                 return new DefaultBinAssemblyLoader();
             }
         }
