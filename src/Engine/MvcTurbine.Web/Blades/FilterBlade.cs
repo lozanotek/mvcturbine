@@ -99,7 +99,10 @@ namespace MvcTurbine.Web.Blades {
             // Wire the pieces up just like it comes out of the box
             FilterProviders.Providers.Add(GlobalFilters.Filters);
             FilterProviders.Providers.Add(new ControllerInstanceFilterProvider());
-            FilterProviders.Providers.Add(new InjectableAttributeFilterProvider(serviceLocator));
+
+            if (serviceLocator is IServiceInjector) {
+                FilterProviders.Providers.Add(new InjectableAttributeFilterProvider(serviceLocator as IServiceInjector));
+            }
 
             // Get the providers that were registered with the service locator
             var filterProviders = GetFilterProviders(serviceLocator);

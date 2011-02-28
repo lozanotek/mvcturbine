@@ -20,56 +20,68 @@
 #endregion
 
 namespace MvcTurbine.Web.Blades {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using MvcTurbine.Blades;
 
     /// <summary>
     /// Static gateway for the core blades of MVC Turbine.
     /// </summary>
     public static class CoreBlades {
-        private static Blade viewBlade;
-        private static Blade routingBlade;
-        private static Blade controllerBlade;
-        private static Blade filterBlade;
-        private static Blade binderBlade;
+        private static FilterBlade filterBlade;
+        private static RoutingBlade routingBlade;
+        private static DependencyResolverBlade dependencyResolverBlade;
+        private static ControllerBlade controllerBlade;
+        private static ModelBinderBlade modelBlade;
+        private static ViewBlade viewBlade;
 
         /// <summary>
-        /// Gets or sets the blade that handles the model binder registration.
+        /// Gets or sets the <see cref="ControllerBlade"/> instance to use.
         /// </summary>
-        public static Blade Model {
-            get { return binderBlade ?? (binderBlade = new ModelBinderBlade()); }
-            set { binderBlade = value; }
-        }
-
-        /// <summary>
-        /// Gets or sets the blade that handles the filter registration.
-        /// </summary>
-        public static Blade Filter {
-            get { return filterBlade ?? (filterBlade = new FilterBlade()); }
-            set { filterBlade = value; }
-        }
-
-        /// <summary>
-        /// Gets or sets the blade that handles the controller registration.
-        /// </summary>
-        public static Blade Controller {
+        public static ControllerBlade Controllers {
             get { return controllerBlade ?? (controllerBlade = new ControllerBlade()); }
             set { controllerBlade = value; }
         }
 
         /// <summary>
-        /// Gets or sets the blade that handles the view engine registration.
+        /// Gets or sets the <see cref="ViewBlade"/> instance to use.
         /// </summary>
-        public static Blade View {
+        public static ViewBlade Views {
             get { return viewBlade ?? (viewBlade = new ViewBlade()); }
             set { viewBlade = value; }
         }
 
         /// <summary>
-        /// Gets or sets the blade that handles the routing registration.
+        /// Gets or sets the <see cref="ModelBinderBlade"/> instance to use.
         /// </summary>
-        public static Blade Routing {
+        public static ModelBinderBlade Models {
+            get { return modelBlade ?? (modelBlade = new ModelBinderBlade()); }
+            set { modelBlade = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the <see cref="FilterBlade"/> instance to use.
+        /// </summary>
+        public static FilterBlade Filters {
+            get { return filterBlade ?? (filterBlade = new FilterBlade()); }
+            set { filterBlade = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the <see cref="RoutingBlade"/> instance to use.
+        /// </summary>
+        public static RoutingBlade Routing {
             get { return routingBlade ?? (routingBlade = new RoutingBlade()); }
             set { routingBlade = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the <see cref="DependencyResolverBlade"/> instance to use.
+        /// </summary>
+        public static DependencyResolverBlade DependencyResolver {
+            get { return dependencyResolverBlade ?? (dependencyResolverBlade = new DependencyResolverBlade()); }
+            set { dependencyResolverBlade = value; }
         }
 
         /// <summary>
@@ -77,7 +89,16 @@ namespace MvcTurbine.Web.Blades {
         /// </summary>
         /// <returns></returns>
         public static BladeList GetBlades() {
-            return new BladeList { Routing, Controller, Model, View, Filter };
+            return new BladeList { DependencyResolver, Routing, Filters, Controllers, Models, Views };
+        }
+
+        internal static IList<Type> CoreBladeTypes {
+            get {
+                var coreType = typeof(CoreBlades);
+                var properties = coreType.GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public);
+
+                return properties.Select(prop => prop.PropertyType).ToList();
+            }
         }
     }
 }

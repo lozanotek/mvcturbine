@@ -20,6 +20,7 @@
 #endregion
 
 namespace MvcTurbine.Web.Blades {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using MvcTurbine.Blades;
@@ -32,7 +33,8 @@ namespace MvcTurbine.Web.Blades {
             typeof (ViewBlade),
             typeof (FilterBlade),
             typeof (ControllerBlade),
-            typeof (ModelBinderBlade)
+            typeof (ModelBinderBlade),
+            typeof (DependencyResolverBlade)
         };
 
         /// <summary>

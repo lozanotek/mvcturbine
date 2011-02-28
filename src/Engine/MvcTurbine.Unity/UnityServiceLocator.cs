@@ -1,25 +1,4 @@
-﻿#region License
-
-//
-// Author: Javier Lozano <javier@lozanotek.com>
-// Copyright (c) 2009-2010, lozanotek, inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-
-#endregion
-
-namespace MvcTurbine.Unity {
+﻿namespace MvcTurbine.Unity {
     using System;
     using System.Collections.Generic;
     using ComponentModel;
@@ -32,8 +11,9 @@ namespace MvcTurbine.Unity {
     /// To learn more about Unity, please visit its website: http://www.codeplex.com/unity
     /// </remarks>
     [Serializable]
-    public class UnityServiceLocator : IServiceLocator {
-        
+    public class UnityServiceLocator : IServiceLocator, IServiceReleaser, IServiceInjector {
+        private static bool isDisposing;
+
         /// <summary>
         /// Creates an instance of the locator with an empty <seealso cref="IUnityContainer"/> instance.
         /// </summary>
@@ -58,8 +38,7 @@ namespace MvcTurbine.Unity {
         /// </summary>
         public IUnityContainer Container { private set; get; }
 
-        public IList<object> ResolveServices(Type type)
-        {
+        public IList<object> ResolveServices(Type type) {
             return new List<object>(Container.ResolveAll(type));
         }
 
@@ -79,7 +58,8 @@ namespace MvcTurbine.Unity {
         public T Resolve<T>() where T : class {
             try {
                 return Container.Resolve<T>();
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
         }
@@ -93,7 +73,8 @@ namespace MvcTurbine.Unity {
         public T Resolve<T>(string key) where T : class {
             try {
                 return Container.Resolve<T>(key);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
         }
@@ -107,7 +88,8 @@ namespace MvcTurbine.Unity {
         public T Resolve<T>(Type type) where T : class {
             try {
                 return Container.Resolve(type) as T;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 throw new ServiceResolutionException(type, ex);
             }
         }
@@ -117,13 +99,11 @@ namespace MvcTurbine.Unity {
         ///</summary>
         ///<param name="type">Type of service to resolve.</param>
         ///<returns>An instance of the type, null otherwise</returns>
-        public object Resolve(Type type)
-        {
-            try
-            {
+        public object Resolve(Type type) {
+            try {
                 return Container.Resolve(type);
-            } catch (Exception ex)
-            {
+            }
+            catch (Exception ex) {
                 throw new ServiceResolutionException(type, ex);
             }
         }
@@ -163,7 +143,7 @@ namespace MvcTurbine.Unity {
         /// </typeparam>
         public void Register<Interface, Implementation>()
             where Implementation : class, Interface {
-            
+
             Container.RegisterType<Interface, Implementation>();
         }
 
@@ -215,8 +195,7 @@ namespace MvcTurbine.Unity {
         /// </summary>
         /// <param name="factoryMethod">The factory method which will be used to resolve this interface.</param>
         /// <returns>An instance of the type, null otherwise</returns>
-        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class
-        {
+        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class {
             var container = this.Container;
             Func<IUnityContainer, object> factoryFunc = c => factoryMethod.Invoke();
             container.RegisterType<Interface>(new InjectionFactory(factoryFunc));
@@ -232,19 +211,12 @@ namespace MvcTurbine.Unity {
             Container.Teardown(instance);
         }
 
-        /// <summary>
-        /// Resets the locator to its initial state clearing all registrations.
-        /// </summary>
-        public void Reset() {
-            Dispose();
-        }
-
         public TService Inject<TService>(TService instance) where TService : class {
             return instance == null ? instance : (TService)Container.BuildUp(instance.GetType(), instance);
         }
 
         public void TearDown<TService>(TService instance) where TService : class {
-            if(instance == null) return;
+            if (instance == null) return;
             Container.Teardown(instance);
         }
 
@@ -253,9 +225,13 @@ namespace MvcTurbine.Unity {
         /// </summary>
         /// <filterpriority>2</filterpriority>
         public void Dispose() {
-            // Cannot call Dispose on the Unity container. 
-            // If Unity is registered with itself (which includes registering an instance of the IServiceLocator),
-            // it will get caught in an endless loop trying to dispose of itself.
+            if (isDisposing) return;
+            if (Container == null) return;
+
+            isDisposing = true;
+
+            Container.Dispose();
+            Container = null;
         }
     }
 
@@ -294,8 +270,7 @@ namespace MvcTurbine.Unity {
             throw new NotImplementedException();
         }
 
-        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class
-        {
+        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class {
             throw new NotImplementedException();
         }
     }

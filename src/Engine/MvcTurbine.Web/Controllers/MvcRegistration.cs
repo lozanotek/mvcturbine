@@ -14,8 +14,7 @@
         /// </summary>
         /// <returns></returns>
         public static ServiceRegistration RegisterController() {
-            return RegisterController((locator, type) =>
-                                      locator.Register(type, type));
+            return RegisterController((locator, type) => locator.Register(type, type));
         }
 
         /// <summary>

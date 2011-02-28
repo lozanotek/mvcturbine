@@ -86,11 +86,13 @@
     <Compile Include="ComponentModel\DefaultBinAssemblyLoader.cs" />
     <Compile Include="ComponentModel\DependencyResolutionException.cs" />
     <Compile Include="ComponentModel\ExceptionExtensions.cs" />
+    <Compile Include="ComponentModel\IServiceInjector.cs" />
     <Compile Include="ComponentModel\IServiceRegistrar.cs" />
     <Compile Include="ComponentModel\IBinAssemblyLoader.cs" />
     <Compile Include="ComponentModel\IAutoRegistrator.cs" />
     <Compile Include="ComponentModel\IServiceRegistration.cs" />
     <Compile Include="ComponentModel\IServiceLocator.cs" />
+    <Compile Include="ComponentModel\IServiceReleaser.cs" />
     <Compile Include="ComponentModel\ISupportAutoRegistration.cs" />
     <Compile Include="ComponentModel\RegistrationFilters.cs" />
     <Compile Include="ComponentModel\ServiceLocatorExtensions.cs" />

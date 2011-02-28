@@ -1,24 +1,3 @@
-#region License
-
-//
-// Author: Javier Lozano <javier@lozanotek.com>
-// Copyright (c) 2009-2010, lozanotek, inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-
-#endregion
-
 namespace MvcTurbine.StructureMap {
     using System;
     using System.Collections.Generic;
@@ -33,8 +12,9 @@ namespace MvcTurbine.StructureMap {
     /// To learn more about StructureMap, please visit its website: http://structuremap.sourceforge.net
     /// </remarks>
     [Serializable]
-    public class StructureMapServiceLocator : IServiceLocator {
+    public class StructureMapServiceLocator : IServiceLocator, IServiceInjector {
         private TurbineRegistry currentRegistry;
+        private static bool isDisposing;
 
         /// <summary>
         /// Creates an instance with an empty <seealso cref="IContainer"/> instance.
@@ -74,7 +54,8 @@ namespace MvcTurbine.StructureMap {
         public T Resolve<T>() where T : class {
             try {
                 return Container.GetInstance<T>();
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
         }
@@ -88,7 +69,8 @@ namespace MvcTurbine.StructureMap {
         public T Resolve<T>(string key) where T : class {
             try {
                 return Container.GetInstance<T>(key);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
         }
@@ -102,7 +84,8 @@ namespace MvcTurbine.StructureMap {
         public T Resolve<T>(Type type) where T : class {
             try {
                 return Container.GetInstance(type) as T;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
         }
@@ -115,7 +98,8 @@ namespace MvcTurbine.StructureMap {
         public object Resolve(Type type) {
             try {
                 return Container.GetInstance(type);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 throw new ServiceResolutionException(type, ex);
             }
         }
@@ -201,20 +185,6 @@ namespace MvcTurbine.StructureMap {
             currentRegistry.Register(factoryMethod);
         }
 
-        /// <summary>
-        /// Releases (disposes) the service instance from within the locator.
-        /// </summary>
-        /// <param name="instance">Instance of a service to dipose from the locator.</param>
-        [Obsolete("Not used for any real purposes.")]
-        public void Release(object instance) {
-        }
-
-        /// <summary>
-        /// Resets the locator to its initial state clearing all registrations.
-        /// </summary>
-        [Obsolete("Not used for any real purposes.")]
-        public void Reset() {
-        }
 
         public TService Inject<TService>(TService instance) where TService : class {
             if (instance == null)
@@ -232,7 +202,6 @@ namespace MvcTurbine.StructureMap {
             return instance;
         }
 
-        [Obsolete("Not used for any real purposes.")]
         public void TearDown<TService>(TService instance) where TService : class {
         }
 
@@ -241,15 +210,12 @@ namespace MvcTurbine.StructureMap {
         /// </summary>
         /// <filterpriority>2</filterpriority>
         public void Dispose() {
-            try {
-                if (Container == null)
-                    return;
-                var disposable = Container as IDisposable;
+            if (isDisposing) return;
+            if (Container == null) return;
 
-                disposable.Dispose();
-            } catch {
-                // Don't crash the web server (or AppPool) if something happens
-            }
+            isDisposing = true;
+            Container.Dispose();
+            Container = null;
         }
     }
 }

@@ -7,14 +7,14 @@
     /// Performs the same operations as <see cref="FilterAttributeFilterProvider"/> however, it injects depedencies into the attribute.
     /// </summary>
     public class InjectableAttributeFilterProvider : FilterAttributeFilterProvider {
-        public IServiceLocator ServiceLocator { get; private set; }
+        public IServiceInjector Injector { get; private set; }
 
         ///<summary>
         /// Default constructor
         ///</summary>
         ///<param name="serviceLocator"></param>
-        public InjectableAttributeFilterProvider(IServiceLocator serviceLocator) {
-            ServiceLocator = serviceLocator;
+        public InjectableAttributeFilterProvider(IServiceInjector serviceLocator) {
+            Injector = serviceLocator;
         }
 
         /// <summary>
@@ -28,7 +28,7 @@
             var filters = base.GetFilters(controllerContext, actionDescriptor);
             
             foreach (var filter in filters) {
-                ServiceLocator.Inject(filter.Instance);
+                Injector.Inject(filter.Instance);
             }
 
             return filters;

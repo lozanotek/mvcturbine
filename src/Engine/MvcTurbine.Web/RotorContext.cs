@@ -21,6 +21,7 @@
 
 namespace MvcTurbine.Web {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web;
     using Blades;
@@ -34,6 +35,8 @@ namespace MvcTurbine.Web {
     public class RotorContext : IRotorContext {
         private static readonly object _lock = new object();
         private static readonly object _regLock = new object();
+        private static BladeList bladeList;
+
         private IAutoRegistrator autoRegistrator;
 
         /// <summary>
@@ -81,8 +84,7 @@ namespace MvcTurbine.Web {
                 }
             }
 
-            if (ServiceLocator == null)
-                return;
+            if (ServiceLocator == null) return;
 
             try {
                 //TODO: Remove this piece since you'll be using the Factory method for injection.
@@ -129,14 +131,19 @@ namespace MvcTurbine.Web {
         /// </summary>
         /// <returns>A list of the components registered with the application.</returns>
         public virtual BladeList GetAllBlades() {
-            var list = new BladeList(CoreBlades.GetBlades());
+            if (bladeList == null)
+                lock (_lock) {
+                    if (bladeList == null) {
+                        bladeList = new BladeList(CoreBlades.GetBlades());
 
-            BladeList commonBlades = GetCommonBlades();
-            if (commonBlades != null) {
-                list.AddRange(commonBlades);
-            }
+                        var commonBlades = GetCommonBlades();
+                        if (commonBlades != null) {
+                            bladeList.AddRange(commonBlades);
+                        }
+                    }
+                }
 
-            return list;
+            return bladeList;
         }
 
         /// <summary>

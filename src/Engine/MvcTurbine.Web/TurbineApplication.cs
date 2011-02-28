@@ -23,9 +23,7 @@ namespace MvcTurbine.Web {
     using System;
     using System.Collections.Generic;
     using System.Web;
-    using System.Web.Mvc;
     using ComponentModel;
-    using Controllers;
     using Properties;
 
     /// <summary>
@@ -106,8 +104,7 @@ namespace MvcTurbine.Web {
 
             InitializeHttpModules();
 
-            if (CurrentContext == null)
-                return;
+            if (CurrentContext == null) return;
             CurrentContext.Initialize(this);
         }
 
