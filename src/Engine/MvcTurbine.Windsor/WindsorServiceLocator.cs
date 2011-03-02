@@ -2,6 +2,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Castle.Facilities.FactorySupport;
     using Castle.MicroKernel.Resolvers.SpecializedResolvers;
     using Castle.Windsor;
     using ComponentModel;
@@ -29,6 +30,7 @@
             var kernel = container.Kernel;
             kernel.Resolver.AddSubResolver(new ArrayResolver(kernel));
             kernel.Resolver.AddSubResolver(new ListResolver(kernel));
+            kernel.AddFacility<FactorySupportFacility>();
 
             return container;
         }

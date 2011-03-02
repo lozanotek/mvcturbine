@@ -1,24 +1,3 @@
-#region License
-
-//
-// Author: Javier Lozano <javier@lozanotek.com>
-// Copyright (c) 2009-2010, lozanotek, inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-
-#endregion
-
 namespace MvcTurbine.Web.Blades {
     using System;
     using System.Collections.Generic;
@@ -35,6 +14,7 @@ namespace MvcTurbine.Web.Blades {
         private static ControllerBlade controllerBlade;
         private static ModelBinderBlade modelBlade;
         private static ViewBlade viewBlade;
+        private static InferredActionBlade actionBlade;
 
         /// <summary>
         /// Gets or sets the <see cref="ControllerBlade"/> instance to use.
@@ -85,11 +65,19 @@ namespace MvcTurbine.Web.Blades {
         }
 
         /// <summary>
+        /// Gets or sets the <see cref="InferredActionBlade"/> instance to use.
+        /// </summary>
+        public static InferredActionBlade InferredAction {
+            get { return actionBlade ?? (new InferredActionBlade()); }
+            set { actionBlade = value; }
+        }
+
+        /// <summary>
         /// Gets the registered core blades in a <see cref="BladeList"/>.
         /// </summary>
         /// <returns></returns>
         public static BladeList GetBlades() {
-            return new BladeList { DependencyResolver, Routing, Filters, Controllers, Models, Views };
+            return new BladeList { DependencyResolver, Routing, Filters, Controllers, Models, Views, InferredAction };
         }
 
         internal static IList<Type> CoreBladeTypes {

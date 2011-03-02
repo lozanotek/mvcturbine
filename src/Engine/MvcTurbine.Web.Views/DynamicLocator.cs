@@ -11,13 +11,16 @@
             private set;
         }
 
-        public DynamicLocator(WebViewPage viewPage) : this(viewPage.ViewContext.ServiceLocator()) {
+        public DynamicLocator(WebViewPage viewPage)
+            : this(viewPage.ViewContext.ServiceLocator()) {
         }
 
-        public DynamicLocator(ViewPage viewPage) : this(viewPage.ViewContext.ServiceLocator()) {
+        public DynamicLocator(ViewPage viewPage)
+            : this(viewPage.ViewContext.ServiceLocator()) {
         }
 
-        public DynamicLocator(HtmlHelper helper) : this(helper.ViewContext.ServiceLocator()) {
+        public DynamicLocator(HtmlHelper helper)
+            : this(helper.ViewContext.ServiceLocator()) {
         }
 
         public DynamicLocator(IServiceLocator locator) {
@@ -56,7 +59,8 @@
         public virtual object GetServiceByKey(string name) {
             try {
                 return Locator.Resolve<object>(name);
-            } catch {
+            }
+            catch {
                 // Not sure what to do here - I'm ok with this
                 // since we're throwing an exception further up the chain
                 return null;

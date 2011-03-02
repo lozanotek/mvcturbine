@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Ninject", "MvcTu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc3Host", "Mvc3Host\Mvc3Host.csproj", "{9CFD047F-C61A-4764-8A88-EB6FA39845C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Web.Views", "MvcTurbine.Web.Views\MvcTurbine.Web.Views.csproj", "{8C0778E1-626D-4518-8517-2F7E982A8594}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{9CFD047F-C61A-4764-8A88-EB6FA39845C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CFD047F-C61A-4764-8A88-EB6FA39845C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CFD047F-C61A-4764-8A88-EB6FA39845C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C0778E1-626D-4518-8517-2F7E982A8594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C0778E1-626D-4518-8517-2F7E982A8594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C0778E1-626D-4518-8517-2F7E982A8594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C0778E1-626D-4518-8517-2F7E982A8594}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

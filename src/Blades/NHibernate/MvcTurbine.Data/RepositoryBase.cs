@@ -49,7 +49,8 @@ namespace MvcTurbine.Data {
 
 		public abstract void Add(T entity);
 		public abstract void Remove(T entity);
+	    public abstract void Update(T entity);
 
-		public abstract IQueryable<T> LinqAdapter();
+	    public abstract IQueryable<T> LinqAdapter();
 	}
 }

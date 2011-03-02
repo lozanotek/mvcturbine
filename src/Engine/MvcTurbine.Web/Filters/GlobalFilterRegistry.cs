@@ -11,6 +11,9 @@
             FilterList = new List<FilterReg>();
         }
 
+        /// <summary>
+        /// Gets and sets the list of filter registries
+        /// </summary>
         protected IList<FilterReg> FilterList { get; set; }
 
         /// <summary>
@@ -18,9 +21,9 @@
         /// </summary>
         /// <typeparam name="TFilter"></typeparam>
         /// <returns></returns>
-        public virtual GlobalFilterRegistry AsGlobal<TFilter>()
+        public virtual GlobalFilterRegistry AsGlobal<TFilter>(Action<TFilter> initializer = null)
             where TFilter : class {
-                return AsGlobal(typeof(TFilter));
+            return AsGlobal(typeof(TFilter), FilterRegistryHelper.WrapInitializer(initializer));
         }
 
         /// <summary>
@@ -28,12 +31,12 @@
         /// </summary>
         /// <typeparam name="TFilter"></typeparam>
         /// <returns></returns>
-        public virtual GlobalFilterRegistry AsGlobal(Type filterType) {
+        public virtual GlobalFilterRegistry AsGlobal(Type filterType, Action<object> initializer = null) {
             if (!filterType.IsMvcFilter()) {
                 throw new ArgumentException("Specified argument is not an MVC filter!", "filterType");
             }
 
-            FilterList.Add(new GlobalFilterReg { Filter = filterType });
+            FilterList.Add(new GlobalFilterReg { Filter = filterType, ModelInitializer = initializer });
             return this;
         }
 

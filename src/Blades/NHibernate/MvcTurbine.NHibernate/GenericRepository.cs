@@ -20,6 +20,7 @@
 #endregion
 
 namespace MvcTurbine.NHibernate {
+	using System;
 	using System.Linq;
 	using global::NHibernate;
 	using global::NHibernate.Linq;
@@ -45,6 +46,11 @@ namespace MvcTurbine.NHibernate {
 		/// </summary>
 		public virtual ISessionProvider SessionProvider { get; private set; }
 
+		public override void Update(T entity) {
+			ISession session = GetSession();
+			session.Save(entity);
+		}
+
 		/// <summary>
 		/// Provides the IQueryable adapter for Linq to NH.
 		/// </summary>
@@ -60,7 +66,7 @@ namespace MvcTurbine.NHibernate {
 		/// <param name="entity">Entity to add/update.</param>
 		public override void Add(T entity) {
 			ISession session = GetSession();
-			session.SaveOrUpdate(entity);
+			session.Save(entity);
 		}
 
 		/// <summary>

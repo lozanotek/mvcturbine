@@ -5,17 +5,18 @@
     public class GlobalFilter : IActionFilter {
         public IFooService Service { get; private set; }
 
+        public int Value { get; set; }
+
         public GlobalFilter(IFooService service) {
             Service = service;
         }
 
         public void OnActionExecuting(ActionExecutingContext filterContext) {
-            filterContext.Controller.ViewBag.executingMessage = Service.GetFoo();
-
         }
 
         public void OnActionExecuted(ActionExecutedContext filterContext) {
-            filterContext.Controller.ViewBag.executedMessage = Service.GetFoo();
+            filterContext.Controller.ViewBag.globalMessage = 
+                string.Format("[global] Message: {0} -- Value: {1}", Service.GetFoo(), Value);
         }
     }
 }

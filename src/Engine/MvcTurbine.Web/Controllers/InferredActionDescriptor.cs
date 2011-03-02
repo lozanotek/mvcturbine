@@ -1,25 +1,4 @@
-﻿#region License
-
-//
-// Author: Javier Lozano <javier@lozanotek.com>
-// Copyright (c) 2009-2010, lozanotek, inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-
-#endregion
-
-namespace MvcTurbine.Web.Controllers {
+﻿namespace MvcTurbine.Web.Controllers {
     using System.Collections.Generic;
     using System.Web.Mvc;
 
@@ -35,7 +14,8 @@ namespace MvcTurbine.Web.Controllers {
         /// </summary>
         /// <param name="actionName"></param>
         /// <param name="controllerDescriptor"></param>
-        public InferredActionDescriptor(string actionName, ControllerDescriptor controllerDescriptor) {
+        public InferredActionDescriptor(string actionName, ControllerDescriptor controllerDescriptor, InferredAction inferredAction) {
+            InferredAction = inferredAction;
             this.actionName = actionName;
             this.controllerDescriptor = controllerDescriptor;
         }
@@ -55,6 +35,11 @@ namespace MvcTurbine.Web.Controllers {
         }
 
         /// <summary>
+        /// See <see cref="InferredAction"/>.
+        /// </summary>
+        public InferredAction InferredAction { get; private set; }
+
+        /// <summary>
         /// Always returns a <see cref="ViewResult"/> with the specified <see cref="ActionName"/> as the name of the view.
         /// For more information, see <see cref="ActionDescriptor.Execute"/>.
         /// </summary>
@@ -62,7 +47,14 @@ namespace MvcTurbine.Web.Controllers {
         /// <param name="parameters"></param>
         /// <returns></returns>
         public override object Execute(ControllerContext controllerContext, IDictionary<string, object> parameters) {
-            return new InferredViewResult { ViewName = ActionName };
+            if (InferredAction != null && InferredAction.ModelProvider != null) {
+                controllerContext.Controller.ViewData.Model = InferredAction.ModelProvider();
+            }
+
+            return new InferredViewResult {
+                ViewName = ActionName,
+                ViewData = controllerContext.Controller.ViewData
+            };
         }
 
         /// <summary>

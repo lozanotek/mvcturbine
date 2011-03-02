@@ -116,8 +116,7 @@ namespace MvcTurbine.Windsor {
         /// </summary>
         /// <param name="factoryMethod"></param>
         public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class {
-            Container.AddFacility<FactorySupportFacility>()
-                .Register(Component.For<Interface>()
+            Container.Register(Component.For<Interface>()
                     .UsingFactoryMethod(factoryMethod.Invoke)
                     .LifeStyle.Transient);
         }

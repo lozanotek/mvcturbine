@@ -88,16 +88,22 @@
     <Compile Include="Blades\ControllerBlade.cs" />
     <Compile Include="Blades\CoreBlades.cs" />
     <Compile Include="Blades\DependencyResolverBlade.cs" />
+    <Compile Include="Blades\InferredActionBlade.cs" />
+    <Compile Include="Blades\InferredActions.cs" />
     <Compile Include="Blades\ModelBinderBlade.cs" />
     <Compile Include="Blades\FilterBlade.cs" />
     <Compile Include="Blades\RoutingBlade.cs" />
     <Compile Include="Blades\ViewBlade.cs" />
     <Compile Include="Controllers\ControllerExtensions.cs" />
+    <Compile Include="Controllers\InferredAction.cs" />
+    <Compile Include="Controllers\InferredActionRegistry.cs" />
+    <Compile Include="Controllers\TurbineControllerFactory.cs" />
     <Compile Include="Filters\ActionFilterReg.cs" />
     <Compile Include="Filters\ControllerFilterReg.cs" />
     <Compile Include="Filters\ControllerFilterRegistry.cs" />
     <Compile Include="Filters\FilterReg.cs" />
-    <Compile Include="Filters\FilterRegistry.cs" />
+    <Compile Include="Filters\FilterRegistryHelper.cs" />
+    <Compile Include="Filters\IFilterRegistry.cs" />
     <Compile Include="Filters\GlobalFilterReg.cs" />
     <Compile Include="Filters\GlobalFilterRegistry.cs" />
     <Compile Include="Controllers\InferredActionDescriptor.cs" />
@@ -123,13 +129,6 @@
     <Compile Include="RotorContext.cs" />
     <Compile Include="TurbineApplication.cs" />
     <Compile Include="TypeExtensions.cs" />
-    <Compile Include="Views\DynamicLocator.cs" />
-    <Compile Include="Views\HtmlHelperExtensions.cs" />
-    <Compile Include="Views\TurbinePage.cs" />
-    <Compile Include="Views\TurbinePageView.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\ViewExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MvcTurbine\MvcTurbine.csproj">
