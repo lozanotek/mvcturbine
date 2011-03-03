@@ -1,32 +1,68 @@
 ﻿namespace MvcTurbine.Poco {
-	using System;
-	using System.Web;
-	using System.Web.Mvc;
-	using Newtonsoft.Json;
+    using System;
+    using System.Web;
+    using System.Web.Mvc;
+    using MvcTurbine.ComponentModel;
 
-	public class PocoActionResult : ActionResult {
-		public PocoActionResult() {
-		}
+    public class PocoActionResult : ActionResult {
+        private static object _lock = new object();
+        private static IRendererManager rendererManager;
+        public IServiceLocator ServiceLocator { get; private set; }
 
-		public PocoActionResult(object pocoModel) {
-			Model = pocoModel;
-		}
+        public PocoActionResult(IServiceLocator serviceLocator, object model) {
+            ServiceLocator = serviceLocator;
+            Model = model;
+        }
 
-		public object Model { get; set; }
+        public object Model { get; set; }
 
-		public override void ExecuteResult(ControllerContext context) {
-			if (context == null) {
-				throw new ArgumentNullException("context");
-			}
+        public override void ExecuteResult(ControllerContext context) {
+            if (context == null) {
+                throw new ArgumentNullException("context");
+            }
 
-			HttpResponseBase response = context.HttpContext.Response;
-			response.ContentType = "application/json";
+            HttpResponseBase response = context.HttpContext.Response;
+            var renderer = GetRenderer(context);
 
-			var writer = new JsonTextWriter(response.Output) { Formatting = Formatting.None };
-			JsonSerializer serializer = JsonSerializer.Create(new JsonSerializerSettings());
-			serializer.Serialize(writer, Model);
+            if (renderer == null) {
+                throw new Exception("Renderer was not registered");
+            }
 
-			writer.Flush();
-		}
-	}
+            response.ContentType = renderer.ContentType;
+            renderer.Render(context, Model);
+        }
+
+        private IRenderer GetRenderer(ControllerContext context) {
+            HttpRequestBase request = context.HttpContext.Request;
+            var rendererManager = GetRendererManager();
+
+            var acceptTypes = request.AcceptTypes;
+
+            foreach (var acceptType in acceptTypes) {
+                var renderer = rendererManager.GetRenderer(context, acceptType);
+                if (renderer == null) continue;
+
+                return renderer;
+            }
+
+            return null;
+        }
+
+        protected virtual IRendererManager GetRendererManager() {
+            if (rendererManager == null) {
+                lock (_lock) {
+                    if (rendererManager == null) {
+                        try {
+                            rendererManager = ServiceLocator.Resolve<IRendererManager>();
+                        }
+                        catch {
+                            rendererManager = new RendererManager(ServiceLocator, Renderers.Current);
+                        }
+                    }
+                }
+            }
+
+            return rendererManager;
+        }
+    }
 }

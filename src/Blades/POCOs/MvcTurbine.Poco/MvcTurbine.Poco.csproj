@@ -46,13 +46,25 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionResultRegistartion.cs" />
+    <Compile Include="DefaultRenderers.cs" />
+    <Compile Include="IRenderer.cs" />
+    <Compile Include="IRendererManager.cs" />
+    <Compile Include="IRendererRegistry.cs" />
+    <Compile Include="JsonRenderer.cs" />
     <Compile Include="PocoActionInvoker.cs" />
     <Compile Include="PocoActionResult.cs" />
     <Compile Include="PocoActionResultExt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RendererBlade.cs" />
+    <Compile Include="RendererManager.cs" />
+    <Compile Include="RendererReg.cs" />
+    <Compile Include="RendererRegistry.cs" />
+    <Compile Include="Renderers.cs" />
+    <Compile Include="XmlSerializerRenderer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,7 +4,7 @@
 
     public class ServiceRegistry : IServiceRegistration {
         public void Register(IServiceLocator locator) {
-            locator.Register<IFooService, FooService>("Foo");
+           locator.Register<IFooService, FooService>();
 
             locator.Register(() => new Person {Name = "Bob Smith"});
         }

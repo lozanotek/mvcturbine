@@ -1,4 +1,6 @@
 ﻿namespace Mvc3Host {
+    using Castle.Windsor;
+    using Castle.MicroKernel.Registration;
     using MvcTurbine.ComponentModel;
     using MvcTurbine.Web;
     using MvcTurbine.Windsor;
