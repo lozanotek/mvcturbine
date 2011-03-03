@@ -54,7 +54,7 @@
     <Compile Include="IRenderer.cs" />
     <Compile Include="IRendererManager.cs" />
     <Compile Include="IRendererRegistry.cs" />
-    <Compile Include="JsonRenderer.cs" />
+    <Compile Include="Renderer\JsonRenderer.cs" />
     <Compile Include="PocoActionInvoker.cs" />
     <Compile Include="PocoActionResult.cs" />
     <Compile Include="PocoActionResultExt.cs" />
@@ -64,8 +64,9 @@
     <Compile Include="RendererReg.cs" />
     <Compile Include="RendererRegistry.cs" />
     <Compile Include="Renderers.cs" />
-    <Compile Include="XmlSerializerRenderer.cs" />
+    <Compile Include="Renderer\XmlSerializerRenderer.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
