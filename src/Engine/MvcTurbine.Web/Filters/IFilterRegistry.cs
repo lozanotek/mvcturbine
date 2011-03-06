@@ -9,6 +9,6 @@
         /// Gets the registered filters (Action,Result,Exception,Authorization).
         /// </summary>
         /// <returns></returns>
-        IEnumerable<FilterReg> GetFilterRegistrations();
+        IEnumerable<Filter> GetFilterRegistrations();
     }
 }

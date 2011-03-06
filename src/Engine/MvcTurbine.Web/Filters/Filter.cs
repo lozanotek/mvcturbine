@@ -6,11 +6,11 @@
     /// Base class for registration of filters.
     /// </summary>
     [Serializable]
-    public abstract class FilterReg {
+    public abstract class Filter {
         /// <summary>
         /// Gets or sets the filter type
         /// </summary>
-        public Type Filter { get; set; }
+        public Type FilterType { get; set; }
 
         /// <summary>
         /// Gets or sets the order for the filter.

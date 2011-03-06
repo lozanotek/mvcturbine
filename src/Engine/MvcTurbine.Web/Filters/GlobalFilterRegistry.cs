@@ -8,13 +8,13 @@
     /// </summary>
     public abstract class GlobalFilterRegistry : IFilterRegistry {
         protected GlobalFilterRegistry() {
-            FilterList = new List<FilterReg>();
+            FilterList = new List<Filter>();
         }
 
         /// <summary>
         /// Gets and sets the list of filter registries
         /// </summary>
-        protected IList<FilterReg> FilterList { get; set; }
+        protected IList<Filter> FilterList { get; set; }
 
         /// <summary>
         /// Registers a Global Filter with the system.
@@ -36,11 +36,11 @@
                 throw new ArgumentException("Specified argument is not an MVC filter!", "filterType");
             }
 
-            FilterList.Add(new GlobalFilterReg { Filter = filterType, ModelInitializer = initializer });
+            FilterList.Add(new GlobalFilter { FilterType = filterType, ModelInitializer = initializer });
             return this;
         }
 
-        public IEnumerable<FilterReg> GetFilterRegistrations() {
+        public IEnumerable<Filter> GetFilterRegistrations() {
             return FilterList;
         }
     }

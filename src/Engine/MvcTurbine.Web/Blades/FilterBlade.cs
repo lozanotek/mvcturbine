@@ -5,6 +5,7 @@ namespace MvcTurbine.Web.Blades {
     using ComponentModel;
     using Filters;
     using MvcTurbine.Blades;
+    using Filter = MvcTurbine.Web.Filters.Filter;
 
     /// <summary>
     /// Default <see cref="IBlade"/> that supports all ASP.NET MVC components.
@@ -41,7 +42,7 @@ namespace MvcTurbine.Web.Blades {
             var filterRegistries = GetFilterRegistries(serviceLocator);
             if (filterRegistries == null) return;
 
-            var filterList = new List<FilterReg>();
+            var filterList = new List<Filter>();
             var typeList = new List<Type>();
 
             foreach (var filterRegistry in filterRegistries) {
@@ -49,7 +50,7 @@ namespace MvcTurbine.Web.Blades {
 
                 using (serviceLocator.Batch()) {
                     foreach (var registration in registrations) {
-                        var filterType = registration.Filter;
+                        var filterType = registration.FilterType;
 
                         // Prevent double registration of the same filter
                         if (typeList.Contains(filterType)) continue;

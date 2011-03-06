@@ -5,14 +5,14 @@
     public sealed class MyHomeFilters : ControllerFilterRegistry<HomeController> {
         public MyHomeFilters() {
             // Controller level filter
-            With<Home>(filter => filter.Value = 10);
-
+            Apply<Home>(filter => filter.Value = 10);
+                
             // Action level filter (with intellisense)
-            ForAction<HomeAction>(c => c.Index(null, null), 
-                filter => filter.Name = "First test");
-
-            // (Inferred) Action filter
-            ForAction<HomeAction>("about", filter => filter.Name = "Test");
+            Apply<HomeAction>(filter => filter.Name = "First test")
+                .ToAction(c => c.Index(null, null))
+         
+            // (Inferred) Action filter            
+                .ToAction("about");
         }
     }
 }

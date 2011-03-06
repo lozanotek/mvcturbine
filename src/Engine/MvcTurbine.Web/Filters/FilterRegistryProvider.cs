@@ -17,14 +17,14 @@
         /// <summary>
         /// Gets the list of registrations that were found within the system.
         /// </summary>
-        public IList<FilterReg> RegistryList { get; private set; }
+        public IList<Filter> RegistryList { get; private set; }
 
         /// <summary>
         /// Public default constructor
         /// </summary>
         /// <param name="serviceLocator"></param>
         /// <param name="registryList"></param>
-        public FilterRegistryProvider(IServiceLocator serviceLocator, IList<FilterReg> registryList) {
+        public FilterRegistryProvider(IServiceLocator serviceLocator, IList<Filter> registryList) {
             ServiceLocator = serviceLocator;
             RegistryList = registryList;
         }
@@ -35,7 +35,7 @@
         /// <param name="controllerContext"></param>
         /// <param name="actionDescriptor"></param>
         /// <returns></returns>
-        public IEnumerable<Filter> GetFilters(ControllerContext controllerContext, ActionDescriptor actionDescriptor) {
+        public IEnumerable<System.Web.Mvc.Filter> GetFilters(ControllerContext controllerContext, ActionDescriptor actionDescriptor) {
             var globalList = GetGlobalFilters();
             var controllerList = GetControllerFilters(controllerContext);
             var actionList = GetActionFilters(actionDescriptor);
@@ -48,10 +48,11 @@
         /// </summary>
         /// <param name="actionDescriptor"></param>
         /// <returns></returns>
-        private IEnumerable<Filter> GetActionFilters(ActionDescriptor actionDescriptor) {
+        private IEnumerable<System.Web.Mvc.Filter> GetActionFilters(ActionDescriptor actionDescriptor) {
             var controller = actionDescriptor.ControllerDescriptor.ControllerType;
-            return RegistryList.OfType<ActionFilterReg>()
-                .Where(reg => controller == reg.Controller)
+            return RegistryList.Where(reg => reg.Scope == FilterScope.Action)
+                .Cast<ActionFilter>()
+                .Where(reg => controller == reg.ControllerType)
                 .Where(reg => string.Equals(reg.Action, actionDescriptor.ActionName, StringComparison.CurrentCultureIgnoreCase))
                 .Select(ToMvcFilter);
         }
@@ -61,9 +62,10 @@
         /// </summary>
         /// <param name="controllerContext"></param>
         /// <returns></returns>
-        private IEnumerable<Filter> GetControllerFilters(ControllerContext controllerContext) {
-            return RegistryList.OfType<ControllerFilterReg>()
-                .Where(reg => controllerContext.Controller.IsType(reg.Controller))
+        private IEnumerable<System.Web.Mvc.Filter> GetControllerFilters(ControllerContext controllerContext) {
+            return RegistryList.Where(reg => reg.Scope == FilterScope.Controller)
+                .Cast<ActionFilter>()
+                .Where(reg => controllerContext.Controller.IsType(reg.ControllerType))
                 .Select(ToMvcFilter);
         }
 
@@ -71,8 +73,8 @@
         /// Gets all the global filters associated with the request.
         /// </summary>
         /// <returns></returns>
-        protected virtual IEnumerable<Filter> GetGlobalFilters() {
-            return RegistryList.OfType<GlobalFilterReg>().Select(ToMvcFilter);
+        protected virtual IEnumerable<System.Web.Mvc.Filter> GetGlobalFilters() {
+            return RegistryList.Where(reg => reg.Scope == FilterScope.Global).Select(ToMvcFilter);
         }
 
         /// <summary>
@@ -80,14 +82,14 @@
         /// </summary>
         /// <param name="filterReg"></param>
         /// <returns></returns>
-        public virtual Filter ToMvcFilter(FilterReg filterReg) {
-            var instance = ServiceLocator.Resolve(filterReg.Filter);
+        public virtual System.Web.Mvc.Filter ToMvcFilter(Filter filter) {
+            var instance = ServiceLocator.Resolve(filter.FilterType);
 
-            if (filterReg.ModelInitializer != null) {
-                filterReg.ModelInitializer(instance);
+            if (filter.ModelInitializer != null) {
+                filter.ModelInitializer(instance);
             }
 
-            return new Filter(instance, filterReg.Scope, filterReg.Order);
+            return new System.Web.Mvc.Filter(instance, filter.Scope, filter.Order);
         }
     }
 }

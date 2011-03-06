@@ -24,7 +24,7 @@
         /// <param name="controllerContext"></param>
         /// <param name="actionDescriptor"></param>
         /// <returns>A filter list of injected filters (if any require it).</returns>
-        public override IEnumerable<Filter> GetFilters(ControllerContext controllerContext, ActionDescriptor actionDescriptor) {
+        public override IEnumerable<System.Web.Mvc.Filter> GetFilters(ControllerContext controllerContext, ActionDescriptor actionDescriptor) {
             var filters = base.GetFilters(controllerContext, actionDescriptor);
             
             foreach (var filter in filters) {

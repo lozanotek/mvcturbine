@@ -98,13 +98,13 @@
     <Compile Include="Controllers\InferredAction.cs" />
     <Compile Include="Controllers\InferredActionRegistry.cs" />
     <Compile Include="Controllers\TurbineControllerFactory.cs" />
-    <Compile Include="Filters\ActionFilterReg.cs" />
-    <Compile Include="Filters\ControllerFilterReg.cs" />
+    <Compile Include="Filters\ActionFilter.cs" />
+    <Compile Include="Filters\ControllerActionExpression.cs" />
     <Compile Include="Filters\ControllerFilterRegistry.cs" />
-    <Compile Include="Filters\FilterReg.cs" />
+    <Compile Include="Filters\Filter.cs" />
     <Compile Include="Filters\FilterRegistryHelper.cs" />
     <Compile Include="Filters\IFilterRegistry.cs" />
-    <Compile Include="Filters\GlobalFilterReg.cs" />
+    <Compile Include="Filters\GlobalFilter.cs" />
     <Compile Include="Filters\GlobalFilterRegistry.cs" />
     <Compile Include="Controllers\InferredActionDescriptor.cs" />
     <Compile Include="Controllers\InferredParameterDescriptor.cs" />
