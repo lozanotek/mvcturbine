@@ -14,7 +14,7 @@
         [Test]
         public void Routing_Blade_Is_Not_Core_Blade() {
             bool result = new RoutingBlade().IsCoreBlade();
-            Assert.IsTrue(result);
+            Assert.IsFalse(result);
         }
     }
 
