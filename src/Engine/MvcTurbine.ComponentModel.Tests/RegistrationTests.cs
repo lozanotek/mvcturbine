@@ -19,17 +19,21 @@
 
 #endregion
 
-namespace MvcTurbine.ComponentModel.Tests {
+namespace MvcTurbine.ComponentModel.Tests
+{
     using System;
     using Components;
     using NUnit.Framework;
 
-    public abstract class RegistrationTests : ServiceLocatorTests {
+    public abstract class RegistrationTests : ServiceLocatorTests
+    {
         [Test]
-        public virtual void Register_With_Specified_Type_Should_Return_Same_Type() {
+        public virtual void Register_With_Specified_Type_Should_Return_Same_Type()
+        {
             Type loggerType = typeof(SimpleLogger);
 
-            using (locator.Batch()) {
+            using (locator.Batch())
+            {
                 locator.Register<ILogger>(loggerType);
             }
 
@@ -38,10 +42,12 @@ namespace MvcTurbine.ComponentModel.Tests {
         }
 
         [Test]
-        public void Register_With_Implementation_Type_Should_Return_Same_Type() {
+        public void Register_With_Implementation_Type_Should_Return_Same_Type()
+        {
             Type type = typeof(ComplexLogger);
 
-            using (locator.Batch()) {
+            using (locator.Batch())
+            {
                 locator.Register<ILogger, ComplexLogger>();
             }
 
@@ -50,10 +56,12 @@ namespace MvcTurbine.ComponentModel.Tests {
         }
 
         [Test]
-        public void Register_With_Keyed_Implementation_Should_Return_Same_Type() {
+        public void Register_With_Keyed_Implementation_Should_Return_Same_Type()
+        {
             Type loggerType = typeof(SimpleLogger);
 
-            using (locator.Batch()) {
+            using (locator.Batch())
+            {
                 locator.Register<ILogger, SimpleLogger>(loggerType.FullName);
             }
 
@@ -62,10 +70,12 @@ namespace MvcTurbine.ComponentModel.Tests {
         }
 
         [Test]
-        public void Register_With_Keyed_Type_Should_Return_Same_Type() {
+        public void Register_With_Keyed_Type_Should_Return_Same_Type()
+        {
             Type loggerType = typeof(SimpleLogger);
 
-            using (locator.Batch()) {
+            using (locator.Batch())
+            {
                 locator.Register(loggerType.FullName, loggerType);
             }
 
@@ -74,10 +84,12 @@ namespace MvcTurbine.ComponentModel.Tests {
         }
 
         [Test]
-        public void Register_With_Specified_Service_And_Type_Should_Return_Same_Type() {
+        public void Register_With_Specified_Service_And_Type_Should_Return_Same_Type()
+        {
             Type implType = typeof(SimpleLogger);
 
-            using (locator.Batch()) {
+            using (locator.Batch())
+            {
                 locator.Register(implType, implType);
             }
 
@@ -86,7 +98,8 @@ namespace MvcTurbine.ComponentModel.Tests {
         }
 
         [Test]
-        public void Register_With_Specified_Service_Should_Return_Same_Type() {
+        public void Register_With_Specified_Service_Should_Return_Same_Type()
+        {
             Type implType = typeof(SimpleLogger);
 
             using (locator.Batch())
@@ -97,7 +110,8 @@ namespace MvcTurbine.ComponentModel.Tests {
         }
 
         [Test]
-        public void Register_With_Instance_Should_Return_Same_Object() {
+        public void Register_With_Instance_Should_Return_Same_Object()
+        {
             using (locator.Batch())
                 locator.Register<ILogger>(new SimpleLogger());
 
@@ -106,7 +120,8 @@ namespace MvcTurbine.ComponentModel.Tests {
         }
 
         [Test]
-        public void Register_With_Instance_Should_Return_Same_Object_For_Same_Type() {
+        public void Register_With_Instance_Should_Return_Same_Object_For_Same_Type()
+        {
             using (locator.Batch())
                 locator.Register(new SimpleLogger());
 
@@ -122,14 +137,14 @@ namespace MvcTurbine.ComponentModel.Tests {
             var hasBeenCalled = false;
             using (locator.Batch())
                 locator.Register<IFactoryMethodTest>(() =>
-                                     {
-                                        if (hasBeenCalled == false)
-                                        {
-                                            hasBeenCalled = true;
-                                            return firstExpectedObject;
-                                        }
-                                        return secondExpectedObject;
-                                     });
+                {
+                    if (hasBeenCalled == false)
+                    {
+                        hasBeenCalled = true;
+                        return firstExpectedObject;
+                    }
+                    return secondExpectedObject;
+                });
 
             var first = locator.Resolve<IFactoryMethodTest>();
             Assert.AreSame(firstExpectedObject, first);
@@ -139,8 +154,8 @@ namespace MvcTurbine.ComponentModel.Tests {
         }
     }
 
-    public interface IFactoryMethodTest{}
+    public interface IFactoryMethodTest { }
 
-    public class FactoryMethodTest : IFactoryMethodTest {}
+    public class FactoryMethodTest : IFactoryMethodTest { }
 
 }

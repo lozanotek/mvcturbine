@@ -73,7 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MvcTurbine.ComponentModel.Tests\MvcTurbine.ComponentModel.Tests.csproj">
-      <Project>{2459CB8C-273C-47E1-87F3-493BC5E6C158}</Project>
+      <Project>{2412063D-1949-4708-B4E7-D833BBD5DA65}</Project>
       <Name>MvcTurbine.ComponentModel.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\MvcTurbine.StructureMap\MvcTurbine.StructureMap.csproj">
