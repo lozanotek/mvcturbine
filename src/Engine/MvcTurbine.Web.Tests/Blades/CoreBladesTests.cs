@@ -5,31 +5,6 @@ namespace MvcTurbine.Web.Tests.Blades {
 
     [TestFixture]
     public class CoreBladesTests {
-        [Test]
-        public void Mvc_Blade_Property_Return_Default_Mvc_Blade_Instance() {
-            MvcBlade result = CoreBlades.Mvc;
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual(CoreBlades.Mvc, result);
-        }
-
-        [Test]
-        public void When_Mvc_Blade_Property_Is_Set_To_Null_Return_Default_Mvc_Blade_Instance() {
-            CoreBlades.Mvc = null;
-
-            var result = CoreBlades.Mvc;
-            Assert.IsNotNull(result);
-            Assert.AreEqual(CoreBlades.Mvc, result);
-        }
-
-        [Test]
-        public void When_Mvc_Blade_Property_Is_Set_To_Valid_Hierarchy_Return_Same_Blade_Instance() {
-            var instance = new CustomMvcBlade();
-            CoreBlades.Mvc = instance;
-
-            Assert.IsNotNull(CoreBlades.Mvc);
-            Assert.AreEqual(CoreBlades.Mvc, instance);
-        }
 
         [Test]
         public void Routing_Blade_Property_Return_Default_Routing_Blade_Instance() {
@@ -97,7 +72,6 @@ namespace MvcTurbine.Web.Tests.Blades {
 
         [Test]
         public void GetBlades_Returns_Filled_List_When_Properties_Are_Null() {
-            CoreBlades.Mvc = null;
             CoreBlades.Routing = null;
             CoreBlades.DependencyResolver = null;
 
@@ -107,9 +81,6 @@ namespace MvcTurbine.Web.Tests.Blades {
             Assert.IsNotEmpty(result);
             Assert.AreEqual(result.Count, 3);
         }
-    }
-
-    internal class CustomMvcBlade : MvcBlade {
     }
 
     internal class CustomRoutingBlade : RoutingBlade {

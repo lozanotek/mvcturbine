@@ -1,3 +1,5 @@
+using Moq;
+
 namespace MvcTurbine.Web.Tests.Blades {
     using System;
     using System.Collections.Generic;
@@ -52,7 +54,7 @@ namespace MvcTurbine.Web.Tests.Blades {
                     return null;
                 }
 
-                return (IList<T>)new List<IRouteRegistrator> { new DefaultRegistrator() };
+                return (IList<T>)new List<IRouteRegistrator> { new Mock<IRouteRegistrator>().Object };
             }
 
             return null;
@@ -82,6 +84,11 @@ namespace MvcTurbine.Web.Tests.Blades {
             throw new NotImplementedException();
         }
 
+        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class
+        {
+            throw new NotImplementedException();
+        }
+
         public void Release(object instance) {
             throw new NotImplementedException();
         }
@@ -102,8 +109,11 @@ namespace MvcTurbine.Web.Tests.Blades {
         #endregion
     }
 
-    internal class DefaultRegistrator : IRouteRegistrator {
-        public void Register(RouteCollection routes) {
-        }
-    }
+    //public class DefaultRegistrator : IRouteRegistrator
+    //{
+    //    public void Register(RouteCollection routes)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
 }
