@@ -14,6 +14,7 @@ namespace MvcTurbine.Web.Blades {
         private static ControllerBlade controllerBlade;
         private static ModelBinderBlade modelBlade;
         private static ViewBlade viewBlade;
+        private static MetadataProviderBlade metadataProviderBlade;
         private static InferredActionBlade actionBlade;
 
         /// <summary>
@@ -65,6 +66,15 @@ namespace MvcTurbine.Web.Blades {
         }
 
         /// <summary>
+        /// Gets or sets the <see cref="MetadataProviderBlade"/> instance to use.
+        /// </summary>
+        public static MetadataProviderBlade MetadataProvider
+        {
+            get { return metadataProviderBlade ?? (metadataProviderBlade = new MetadataProviderBlade()); }
+            set { metadataProviderBlade = value; }
+        }
+
+        /// <summary>
         /// Gets or sets the <see cref="InferredActionBlade"/> instance to use.
         /// </summary>
         public static InferredActionBlade InferredAction {
@@ -77,7 +87,7 @@ namespace MvcTurbine.Web.Blades {
         /// </summary>
         /// <returns></returns>
         public static BladeList GetBlades() {
-            return new BladeList { DependencyResolver, Routing, Filters, Controllers, Models, Views, InferredAction };
+            return new BladeList { DependencyResolver, Routing, Filters, Controllers, Models, Views, MetadataProvider, InferredAction };
         }
 
         internal static IList<Type> CoreBladeTypes {

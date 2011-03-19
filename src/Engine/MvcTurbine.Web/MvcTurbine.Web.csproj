@@ -90,6 +90,7 @@
     <Compile Include="Blades\DependencyResolverBlade.cs" />
     <Compile Include="Blades\InferredActionBlade.cs" />
     <Compile Include="Blades\InferredActions.cs" />
+    <Compile Include="Blades\MetadataProviderBlade.cs" />
     <Compile Include="Blades\ModelBinderBlade.cs" />
     <Compile Include="Blades\FilterBlade.cs" />
     <Compile Include="Blades\RoutingBlade.cs" />
@@ -113,6 +114,12 @@
     <Compile Include="Controllers\MvcRegistration.cs" />
     <Compile Include="Controllers\TurbineActionInvoker.cs" />
     <Compile Include="Controllers\TurbineControllerActivator.cs" />
+    <Compile Include="Metadata\CreateMetadataArguments.cs" />
+    <Compile Include="Metadata\CustomMetadataProvider.cs" />
+    <Compile Include="Metadata\IMetadataAttributeHandler.cs" />
+    <Compile Include="Metadata\MetadataAttribute.cs" />
+    <Compile Include="Metadata\MetadataAttributeMapping.cs" />
+    <Compile Include="Metadata\MetadataAttributeRetriever.cs" />
     <Compile Include="TurbineDependencyResolver.cs" />
     <Compile Include="Filters\FilterRegistryProvider.cs" />
     <Compile Include="Models\BinderRegistratrionExpression.cs" />
