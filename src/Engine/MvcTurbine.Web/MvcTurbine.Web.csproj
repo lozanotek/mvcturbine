@@ -98,6 +98,13 @@
     <Compile Include="Controllers\InferredAction.cs" />
     <Compile Include="Controllers\InferredActionRegistry.cs" />
     <Compile Include="Controllers\TurbineControllerFactory.cs" />
+    <Compile Include="EmbeddedViews\AssemblyResourceFile.cs" />
+    <Compile Include="EmbeddedViews\EmbeddedView.cs" />
+    <Compile Include="EmbeddedViews\EmbeddedViewBlade.cs" />
+    <Compile Include="EmbeddedViews\EmbeddedViewResolver.cs" />
+    <Compile Include="EmbeddedViews\EmbeddedViewTable.cs" />
+    <Compile Include="EmbeddedViews\EmbeddedViewVirtualPathProvider.cs" />
+    <Compile Include="EmbeddedViews\IEmbeddedViewResolver.cs" />
     <Compile Include="Filters\ActionFilter.cs" />
     <Compile Include="Filters\ControllerActionExpression.cs" />
     <Compile Include="Filters\ControllerFilterRegistry.cs" />
