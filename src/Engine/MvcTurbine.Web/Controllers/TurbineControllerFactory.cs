@@ -3,7 +3,7 @@
     using System.Web.Mvc;
     using System.Web.Routing;
     using ComponentModel;
-    using MvcTurbine.Web.Blades;
+    using Blades;
 
     /// <summary>
     /// Controller Factory class for instantiating controllers using the Windsor IoC container.

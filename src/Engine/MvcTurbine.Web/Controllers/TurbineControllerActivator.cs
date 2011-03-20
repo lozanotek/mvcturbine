@@ -3,7 +3,7 @@
     using System.Web.Mvc;
     using System.Web.Routing;
     using ComponentModel;
-    using MvcTurbine.Web.Blades;
+    using Blades;
 
     /// <summary>
     /// Activator for the MVC3 runtime to spin up controllers and the registered <see cref="IActionInvoker"/>.

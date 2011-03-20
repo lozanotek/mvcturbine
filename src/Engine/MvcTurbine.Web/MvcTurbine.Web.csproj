@@ -129,6 +129,13 @@
     <Compile Include="RotorContext.cs" />
     <Compile Include="TurbineApplication.cs" />
     <Compile Include="TypeExtensions.cs" />
+    <Compile Include="Views\AssemblyResourceFile.cs" />
+    <Compile Include="Views\EmbeddedView.cs" />
+    <Compile Include="Blades\EmbeddedViewBlade.cs" />
+    <Compile Include="Views\EmbeddedViewResolver.cs" />
+    <Compile Include="Views\EmbeddedViewTable.cs" />
+    <Compile Include="Views\EmbeddedViewVirtualPathProvider.cs" />
+    <Compile Include="Views\IEmbeddedViewResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MvcTurbine\MvcTurbine.csproj">

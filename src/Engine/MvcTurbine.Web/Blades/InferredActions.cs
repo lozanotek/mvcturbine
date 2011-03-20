@@ -1,7 +1,7 @@
 ﻿namespace MvcTurbine.Web.Blades {
     using System.Collections;
     using System.Collections.Generic;
-    using MvcTurbine.Web.Controllers;
+    using Controllers;
 
     /// <summary>
     /// Simple container for inferred actions for the applications.

@@ -1,25 +1,4 @@
-﻿#region License
-
-//
-// Author: Javier Lozano <javier@lozanotek.com>
-// Copyright (c) 2009-2010, lozanotek, inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-
-#endregion
-
-namespace MvcTurbine.Web.Models {
+﻿namespace MvcTurbine.Web.Models {
     using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
@@ -31,16 +10,32 @@ namespace MvcTurbine.Web.Models {
     public class BinderRegistratrionExpression {
         protected TypeCache BinderTable { get; set; }
 
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        /// <param name="cache"></param>
         public BinderRegistratrionExpression(TypeCache cache) {
             BinderTable = cache ?? new TypeCache();
         }
 
+        /// <summary>
+        /// Registers the specified model with the specified binder.
+        /// </summary>
+        /// <typeparam name="TModel">Type of model to register.</typeparam>
+        /// <typeparam name="TBinder">Type of binder to register.</typeparam>
+        /// <returns></returns>
         public BinderRegistratrionExpression Bind<TModel, TBinder>()
-            where TModel : class
             where TBinder : IModelBinder {
+
             return Bind(typeof(TModel), typeof(TBinder));
         }
 
+        /// <summary>
+        /// Registers the specified model with the specified binder.
+        /// </summary>
+        /// <param name="modelType">Type of model to register.</param>
+        /// <param name="binderType">Type of binder to register.</param>
+        /// <returns></returns>
         public BinderRegistratrionExpression Bind(Type modelType, Type binderType) {
             BinderTable.Add(new KeyValuePair<Type, Type>(modelType, binderType));
             return this;

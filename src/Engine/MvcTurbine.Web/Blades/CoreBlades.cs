@@ -15,6 +15,7 @@ namespace MvcTurbine.Web.Blades {
         private static ModelBinderBlade modelBlade;
         private static ViewBlade viewBlade;
         private static InferredActionBlade actionBlade;
+        private static EmbeddedViewBlade embeddedBlade;
 
         /// <summary>
         /// Gets or sets the <see cref="ControllerBlade"/> instance to use.
@@ -30,6 +31,12 @@ namespace MvcTurbine.Web.Blades {
         public static ViewBlade Views {
             get { return viewBlade ?? (viewBlade = new ViewBlade()); }
             set { viewBlade = value; }
+        }
+
+        public static EmbeddedViewBlade EmbeddedViews
+        {
+            get { return embeddedBlade ?? (embeddedBlade = new EmbeddedViewBlade()); }
+            set { embeddedBlade = value; }
         }
 
         /// <summary>
@@ -77,7 +84,7 @@ namespace MvcTurbine.Web.Blades {
         /// </summary>
         /// <returns></returns>
         public static BladeList GetBlades() {
-            return new BladeList { DependencyResolver, Routing, Filters, Controllers, Models, Views, InferredAction };
+            return new BladeList { DependencyResolver, Routing, Filters, Controllers, Models, Views, InferredAction, EmbeddedViews };
         }
 
         internal static IList<Type> CoreBladeTypes {

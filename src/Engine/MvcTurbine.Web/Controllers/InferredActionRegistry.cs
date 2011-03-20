@@ -2,15 +2,7 @@
     using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
-    using MvcTurbine.ComponentModel;
-    using MvcTurbine.Web.Filters;
-
-    ///<summary>
-    /// Defines the simple interface for getting models for inferred actions.
-    ///</summary>
-    public interface IInferredActionRegistry {
-        IEnumerable<InferredAction> GetActionRegistrations();
-    }
+    using ComponentModel;
 
     /// <summary>
     /// Base class to provide Model (ViewModel) registration for <see cref="IModelBinder"/>.

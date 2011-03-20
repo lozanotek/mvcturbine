@@ -1,41 +1,35 @@
-﻿#region License
-
-//
-// Author: Javier Lozano <javier@lozanotek.com>
-// Copyright (c) 2009-2010, lozanotek, inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-
-#endregion
-
-namespace MvcTurbine.Web {
+﻿namespace MvcTurbine.Web {
     using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
-    using MvcTurbine.ComponentModel;
+    using ComponentModel;
 
+    /// <summary>
+    /// Provides the Dependency Resolver for the MVC3 runtime to use.
+    /// </summary>
     public class TurbineDependencyResolver : IDependencyResolver {
         private readonly IServiceLocator serviceLocator;
 
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        /// <param name="serviceLocator"></param>
         public TurbineDependencyResolver(IServiceLocator serviceLocator) {
             this.serviceLocator = serviceLocator;
         }
 
+        /// <summary>
+        /// Gets the associated <see cref="IServiceLocator"/> with the resolver.
+        /// </summary>
         public IServiceLocator ServiceLocator {
             get { return serviceLocator; }
         }
 
+        /// <summary>
+        /// Gets the service instance by the specified service type.
+        /// </summary>
+        /// <param name="serviceType">Service type to search.</param>
+        /// <returns></returns>
         public object GetService(Type serviceType) {
             try {
                 return serviceLocator.Resolve(serviceType);
@@ -45,6 +39,11 @@ namespace MvcTurbine.Web {
             }
         }
 
+        /// <summary>
+        /// Gets the services registered by the specified type.
+        /// </summary>
+        /// <param name="serviceType"></param>
+        /// <returns></returns>
         public IEnumerable<object> GetServices(Type serviceType) {
             return serviceLocator.ResolveServices(serviceType);
         }

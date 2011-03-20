@@ -1,8 +1,8 @@
 ﻿namespace MvcTurbine.Web.Blades {
     using System.Collections.Generic;
     using MvcTurbine.Blades;
-    using MvcTurbine.ComponentModel;
-    using MvcTurbine.Web.Controllers;
+    using ComponentModel;
+    using Controllers;
 
     /// <summary>
     /// Blade for alll inferred action components.
