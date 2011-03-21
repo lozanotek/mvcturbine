@@ -95,6 +95,7 @@
     <Compile Include="Blades\RoutingBlade.cs" />
     <Compile Include="Blades\ViewBlade.cs" />
     <Compile Include="Controllers\ControllerExtensions.cs" />
+    <Compile Include="Controllers\IInferredActionRegistry.cs" />
     <Compile Include="Controllers\InferredAction.cs" />
     <Compile Include="Controllers\InferredActionRegistry.cs" />
     <Compile Include="Controllers\TurbineControllerFactory.cs" />
@@ -181,6 +182,10 @@
   -->
   <PropertyGroup>
     <PostBuildEvent>xcopy $(TargetDir)*.dll $(SolutionDir)..\..\build\binaries\*.dll /Y /E
-xcopy $(TargetDir)*.xml $(SolutionDir)..\..\build\binaries\*.xml /Y /E</PostBuildEvent>
+
+xcopy $(TargetDir)*.xml $(SolutionDir)..\..\build\binaries\*.xml /Y /E
+xcopy $(TargetDir)*.dll $(SolutionDir)..\..\build\nuget\lib\*.dll /Y /E
+
+xcopy $(TargetDir)*.xml $(SolutionDir)..\..\build\nuget\lib\*.xml /Y /E</PostBuildEvent>
   </PropertyGroup>
 </Project>
