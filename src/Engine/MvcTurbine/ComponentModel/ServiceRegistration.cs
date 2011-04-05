@@ -21,6 +21,7 @@
 
 namespace MvcTurbine.ComponentModel {
     using System;
+    using System.Linq.Expressions;
 
     ///<summary>
     /// Defines a registration for a service within application.

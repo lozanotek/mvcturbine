@@ -42,7 +42,7 @@ namespace MvcTurbine.ComponentModel {
         private void AddDefaults() {
             AddFilter("System");
             AddFilter("mscorlib");
-            AddFilter("Microsoft");
+            //AddFilter("Microsoft");
 
             AddFilter("MvcTurbine.Web");
 

@@ -1,0 +1,805 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NHibernate.Caches.SysCache2</name>
+    </assembly>
+    <members>
+        <member name="T:NHibernate.Caches.SysCache2.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.Properties.Resources.ConnectionStringNotConfigured">
+            <summary>
+              Looks up a localized string similar to There are no configured connection strings..
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.Properties.Resources.NamedConnectionStringNotFound">
+            <summary>
+              Looks up a localized string similar to Named connection string, &apos;{0}&apos;, could not be found by configured connection string provider..
+            </summary>
+        </member>
+        <member name="T:NHibernate.Caches.SysCache2.CacheDependenciesElement">
+            <summary>
+            Defines the cache dependencies for an NHibernate cache region
+            </summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.CacheDependenciesElement._properties">
+            <summary>Holds the configuration property definitions</summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.CacheDependenciesElement.#cctor">
+            <summary>
+            Initializes the <see cref="T:NHibernate.Caches.SysCache2.CacheRegionElement"/> class.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CacheDependenciesElement.TableDependencies">
+            <summary>
+            Gets the collection of <see cref="T:NHibernate.Caches.SysCache2.TableCacheDependencyElement"/> objects stored within this section.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CacheDependenciesElement.CommandDependencies">
+            <summary>
+            Gets the collection of <see cref="T:NHibernate.Caches.SysCache2.CommandCacheDependencyElement"/> objects stored within this section.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CacheDependenciesElement.Properties">
+            <summary>
+            Gets the collection of properties.
+            </summary>
+            <returns>The <see cref="T:System.Configuration.ConfigurationPropertyCollection"></see> collection of properties for the element.</returns>
+        </member>
+        <member name="T:NHibernate.Caches.SysCache2.CacheRegionCollection">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.CacheRegionCollection.CreateNewElement">
+            <summary>
+            When overridden in a derived class, creates a new <see cref="T:System.Configuration.ConfigurationElement"></see>.
+            </summary>
+            <returns>
+            A new <see cref="T:System.Configuration.ConfigurationElement"></see>.
+            </returns>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.CacheRegionCollection.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Gets the element key for a specified configuration element when overridden in a derived class.
+            </summary>
+            <param name="element">The <see cref="T:System.Configuration.ConfigurationElement"></see> to return the key for.</param>
+            <returns>
+            An <see cref="T:System.Object"></see> that acts as the key for the specified <see cref="T:System.Configuration.ConfigurationElement"></see>.
+            </returns>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CacheRegionCollection.Item(System.Int32)">
+            <summary>
+            Gets or sets the <see cref="T:NHibernate.Caches.SysCache2.CacheRegionElement"/> at the specified index.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CacheRegionCollection.Item(System.String)">
+            <summary>
+            Gets the <see cref="T:NHibernate.Caches.SysCache2.CacheRegionElement"/> with the specified name.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CacheRegionCollection.CollectionType">
+            <summary>
+            Gets the type of the <see cref="T:System.Configuration.ConfigurationElementCollection"></see>.
+            </summary>
+            <value></value>
+            <returns>The <see cref="T:System.Configuration.ConfigurationElementCollectionType"></see> of this collection.</returns>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CacheRegionCollection.ElementName">
+            <summary>
+            Gets the name used to identify this collection of elements in the configuration file when overridden in a derived class.
+            </summary>
+            <value></value>
+            <returns>The name of the collection; otherwise, an empty string. The default is an empty string.</returns>
+        </member>
+        <member name="T:NHibernate.Caches.SysCache2.CacheRegionElement">
+            <summary>
+            Represents a cacheRegion configuration element
+            </summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.CacheRegionElement._properties">
+            <summary>Holds the configuration property definitions</summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.CacheRegionElement.#cctor">
+            <summary>
+            Initializes the <see cref="T:NHibernate.Caches.SysCache2.CacheRegionElement"/> class.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CacheRegionElement.Name">
+            <summary>
+            The name of the region that the objects to cache will be stored in
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CacheRegionElement.RelativeExpiration">
+            <summary>
+            The number of seconds from the time an object is added into the cache until it will 
+            expire from the cache.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CacheRegionElement.TimeOfDayExpiration">
+            <summary>
+            The time of day in 24 hour format that an object added into the cache will 
+            expire from the cache.
+            </summary>
+            <remarks>
+            	<para>Must be entered in TimeSpan format. Ex. 13:52:00 would be 1:52 pm</para>
+            </remarks>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CacheRegionElement.Priority">
+            <summary>
+            Specifies the relative priority of items stored in the Cache region 
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CacheRegionElement.Dependencies">
+            <summary>
+            Gets the depencies configured within this section.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CacheRegionElement.Properties">
+            <summary>
+            Gets the collection of properties.
+            </summary>
+            <returns>The <see cref="T:System.Configuration.ConfigurationPropertyCollection"></see> collection of properties for the element.</returns>
+        </member>
+        <member name="T:NHibernate.Caches.SysCache2.CommandCacheDependencyCollection">
+            <summary>
+            Represents a collection of <see cref="T:NHibernate.Caches.SysCache2.CommandCacheDependencyElement"/> objects.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.CommandCacheDependencyCollection.CreateNewElement">
+            <summary>
+            When overridden in a derived class, creates a new <see cref="T:System.Configuration.ConfigurationElement"></see>.
+            </summary>
+            <returns>
+            A new <see cref="T:System.Configuration.ConfigurationElement"></see>.
+            </returns>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.CommandCacheDependencyCollection.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Gets the element key for a specified configuration element when overridden in a derived class.
+            </summary>
+            <param name="element">The <see cref="T:System.Configuration.ConfigurationElement"></see> to return the key for.</param>
+            <returns>
+            An <see cref="T:System.Object"></see> that acts as the key for the specified <see cref="T:System.Configuration.ConfigurationElement"></see>.
+            </returns>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CommandCacheDependencyCollection.Item(System.Int32)">
+            <summary>
+            Gets or sets the <see cref="T:NHibernate.Caches.SysCache2.CommandCacheDependencyElement"/> at the specified index.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CommandCacheDependencyCollection.Item(System.String)">
+            <summary>
+            Gets the <see cref="T:NHibernate.Caches.SysCache2.CommandCacheDependencyElement"/> with the specified name.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CommandCacheDependencyCollection.CollectionType">
+            <summary>
+            Gets the type of the <see cref="T:System.Configuration.ConfigurationElementCollection"></see>.
+            </summary>
+            <value></value>
+            <returns>The <see cref="T:System.Configuration.ConfigurationElementCollectionType"></see> of this collection.</returns>
+        </member>
+        <member name="T:NHibernate.Caches.SysCache2.CommandCacheDependencyElement">
+            <summary>
+            Configures a sql command notification cache dependency for am NHibernate cache region 
+            </summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.CommandCacheDependencyElement._properties">
+            <summary>Holds the configuration property definitions</summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.CommandCacheDependencyElement.#cctor">
+            <summary>
+            Initializes the <see cref="T:NHibernate.Caches.SysCache2.CacheRegionElement"/> class.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CommandCacheDependencyElement.Name">
+            <summary>
+            The unique name of the dependency 
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CommandCacheDependencyElement.Command">
+            <summary>
+            Gets the sql command statement that will be used to monitor for data changes
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CommandCacheDependencyElement.ConnectionName">
+            <summary>
+            Gets the connection string name for the database
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CommandCacheDependencyElement.IsStoredProcedure">
+            <summary>
+            Gets whether the <see cref="P:NHibernate.Caches.SysCache2.CommandCacheDependencyElement.Command"/> is a stored procedure or not
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CommandCacheDependencyElement.ConnectionStringProviderType">
+            <summary>
+            Gets the type of <see cref="T:NHibernate.Caches.SysCache2.IConnectionStringProvider"/> to use when 
+            retreiving the connection string. 
+            </summary>
+            <remarks>
+            	<para>If no value is supplied, the <see cref="T:System.Configuration.ConfigurationManager"/>
+            	will be used to retrieve the connection string</para>
+            </remarks>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.CommandCacheDependencyElement.Properties">
+            <summary>
+            Gets the collection of properties.
+            </summary>
+            <returns>The <see cref="T:System.Configuration.ConfigurationPropertyCollection"></see> collection of properties for the element.</returns>
+        </member>
+        <member name="T:NHibernate.Caches.SysCache2.ConfigConnectionStringProvider">
+            <summary>
+            Connection string provider that uses the ConfigurationManager to retrieve conenction strings
+            </summary>
+        </member>
+        <member name="T:NHibernate.Caches.SysCache2.IConnectionStringProvider">
+            <summary>
+            Provides connection strings
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.IConnectionStringProvider.GetConnectionString">
+            <summary>
+            Gets the default connection string
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.IConnectionStringProvider.GetConnectionString(System.String)">
+            <summary>
+            Gets a connnection string by name
+            </summary>
+            <param name="name">The name of the connection string to get</param>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.IConnectionStringProvider.DefaultConnectionName">
+            <summary>
+            Gets the name of the default connection string
+            </summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.ConfigConnectionStringProvider._defaultConnectionSettings">
+            <summary>the default connection settings</summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.ConfigConnectionStringProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:NHibernate.Caches.SysCache2.ConfigConnectionStringProvider"/> class.
+            </summary>
+            <exception cref="T:System.Configuration.ConfigurationErrorsException">Thrown if there are no connection strings
+            in the application configuration file.</exception>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.ConfigConnectionStringProvider.GetConnectionString">
+            <summary>
+            Gets the default connection string
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.ConfigConnectionStringProvider.GetConnectionString(System.String)">
+            <summary>
+            Gets a connnection string by name
+            </summary>
+            <param name="name">The name of the connection string to get</param>
+            <exception cref="T:System.Configuration.ConfigurationErrorsException">thorwn if the connection specified by <paramref name="name"/>
+            	could not be found.</exception>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.ConfigConnectionStringProvider.DefaultConnectionName">
+            <summary>
+            Gets the name of the default connection string
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:NHibernate.Caches.SysCache2.ICacheDependencyEnlister">
+            <summary>
+            Enlists a <see cref="T:System.Web.Caching.CacheDependency"/> for change notifications
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.ICacheDependencyEnlister.Enlist">
+            <summary>
+            Enlists a cache dependency to recieve change notifciations with an underlying resource
+            </summary>
+            <returns>The cache dependency linked to the notification subscription</returns>
+        </member>
+        <member name="T:NHibernate.Caches.SysCache2.NullableTimeSpanValidator">
+            <summary>
+            Timespan validator that can accept a null value as valid input
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.NullableTimeSpanValidator.#ctor(System.TimeSpan,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NHibernate.Caches.SysCache2.NullableTimeSpanValidator"/> class.
+            </summary>
+            <param name="minValue">A <see cref="T:System.TimeSpan"></see> object specifying the minimum time allowed to pass validation.</param>
+            <param name="maxValue">A <see cref="T:System.TimeSpan"></see> object specifying the maximum time allowed to pass validation.</param>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.NullableTimeSpanValidator.#ctor(System.TimeSpan,System.TimeSpan,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NHibernate.Caches.SysCache2.NullableTimeSpanValidator"/> class.
+            </summary>
+            <param name="minValue">A <see cref="T:System.TimeSpan"></see> object specifying the minimum time allowed to pass validation.</param>
+            <param name="maxValue">A <see cref="T:System.TimeSpan"></see> object specifying the maximum time allowed to pass validation.</param>
+            <param name="rangeIsExclusive">A <see cref="T:System.Boolean"></see> value specifying whether the validation range is exclusive.</param>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.NullableTimeSpanValidator.#ctor(System.TimeSpan,System.TimeSpan,System.Boolean,System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NHibernate.Caches.SysCache2.NullableTimeSpanValidator"/> class.
+            </summary>
+            <param name="minValue">A <see cref="T:System.TimeSpan"></see> object specifying the minimum time allowed to pass validation.</param>
+            <param name="maxValue">A <see cref="T:System.TimeSpan"></see> object specifying the maximum time allowed to pass validation.</param>
+            <param name="rangeIsExclusive">A <see cref="T:System.Boolean"></see> value specifying whether the validation range is exclusive.</param>
+            <param name="resolutionInSeconds">An <see cref="T:System.Int64"></see> value that specifies a number of seconds.</param>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.NullableTimeSpanValidator.CanValidate(System.Type)">
+            <summary>
+            Determines whether the type of the object can be validated.
+            </summary>
+            <param name="type">The type of object.</param>
+            <returns>
+            true if the type parameter matches a nullable <see cref="T:System.TimeSpan"></see> value; otherwise, false.
+            </returns>
+        </member>
+        <member name="T:NHibernate.Caches.SysCache2.SqlCommandCacheDependencyEnlister">
+            <summary>
+            Creates SqlCacheDependency objects and hooks them up to a query notification based on the command
+            </summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SqlCommandCacheDependencyEnlister._command">
+            <summary>sql command to use for creating notifications</summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SqlCommandCacheDependencyEnlister._isStoredProcedure">
+            <summary>indicates if the command is a stored procedure or not</summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SqlCommandCacheDependencyEnlister._connectionName">
+            <summary>The name of the connection string</summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SqlCommandCacheDependencyEnlister._connectionString">
+            <summary>The connection string to use for connection to the date source</summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SqlCommandCacheDependencyEnlister.#ctor(System.String,System.Boolean,NHibernate.Caches.SysCache2.IConnectionStringProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NHibernate.Caches.SysCache2.SqlCommandCacheDependencyEnlister"/> class.
+            </summary>
+            <param name="command">The command.</param>
+            <param name="isStoredProcedure">if set to <c>true</c> [is stored procedure].</param>
+            <param name="connectionStringProvider">The <see cref="T:NHibernate.Caches.SysCache2.IConnectionStringProvider"/> to use 
+            	to retrieve the connection string to connect to the underlying data store and enlist in query notifications</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="command"/> or 
+            	<paramref name="connectionStringProvider"/> is null or empty.</exception>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SqlCommandCacheDependencyEnlister.#ctor(System.String,System.Boolean,System.String,NHibernate.Caches.SysCache2.IConnectionStringProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NHibernate.Caches.SysCache2.SqlCommandCacheDependencyEnlister"/> class.
+            </summary>
+            <param name="command">The command.</param>
+            <param name="isStoredProcedure">if set to <c>true</c> [is stored procedure].</param>
+            <param name="connectionName">Name of the connection.</param>
+            <param name="connectionStringProvider">The <see cref="T:NHibernate.Caches.SysCache2.IConnectionStringProvider"/> to use 
+            	to retrieve the connection string to connect to the underlying data store and enlist in query notifications</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="command"/> or 
+            	<paramref name="connectionStringProvider"/> is null or empty.</exception>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SqlCommandCacheDependencyEnlister.Enlist">
+            <summary>
+            Enlists a cache dependency to recieve change notifciations with an underlying resource
+            </summary>
+            <returns>
+            The cache dependency linked to the notification subscription
+            </returns>
+        </member>
+        <member name="T:NHibernate.Caches.SysCache2.SqlTableCacheDependencyEnlister">
+            <summary>
+            Creates SqlCacheDependency objects dependent on data changes in a table and registers the dependency for 
+            change notifications if necessary
+            </summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SqlTableCacheDependencyEnlister._tableName">
+            <summary>the name of the table to monitor</summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SqlTableCacheDependencyEnlister._databaseEntryName">
+            <summary>the name of the database entry to use for connection info</summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SqlTableCacheDependencyEnlister.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NHibernate.Caches.SysCache2.SqlTableCacheDependencyEnlister"/> class.
+            </summary>
+            <param name="tableName">Name of the table to monitor</param>
+            <param name="databaseEntryName">The name of the database entry to use for connection information</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="tableName"/> or 
+            	<paramref name="databaseEntryName"/> is null or empty.</exception>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SqlTableCacheDependencyEnlister.Enlist">
+            <summary>
+            Enlists a cache dependency to recieve change notifciations with an underlying resource
+            </summary>
+            <returns>
+            The cache dependency linked to the notification subscription
+            </returns>
+        </member>
+        <member name="T:NHibernate.Caches.SysCache2.StaticConnectionStringProvider">
+            <summary>
+            Connection string provider that returns a specified connection string
+            </summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.StaticConnectionStringProvider._connectionString">
+            <summary>specified connection string</summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.StaticConnectionStringProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NHibernate.Caches.SysCache2.StaticConnectionStringProvider"/> class.
+            </summary>
+            <param name="connectionString">The connection string that the provider will return</param>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.StaticConnectionStringProvider.GetConnectionString">
+            <summary>
+            Gets the default connection string
+            </summary>
+            <returns>Connection string</returns>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.StaticConnectionStringProvider.GetConnectionString(System.String)">
+            <summary>
+            Gets a connnection string by name
+            </summary>
+            <param name="name">The name of the connection string to get</param>
+            <remarks>
+            	<para>The same connection string will be returned whether a name is specified or not.</para>
+            </remarks>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.StaticConnectionStringProvider.DefaultConnectionName">
+            <summary>
+            Gets the name of the default connection string
+            </summary>
+        </member>
+        <member name="T:NHibernate.Caches.SysCache2.SysCacheProvider">
+            <summary>
+            Cache provider using the System.Web.Caching classes 
+            </summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SysCacheProvider._log">
+            <summary>log4net logger</summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SysCacheProvider._cacheRegionSettingsList">
+            <summary>list of pre configured already built cache regions</summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SysCacheProvider._cacheRegions">
+            <summary>pre configured cache region settings</summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SysCacheProvider._regionsSyncRoot">
+            <summary>synchronizing object for the cache regions dictionaly</summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheProvider.#cctor">
+            <summary>
+            Initializes the <see cref="T:NHibernate.Caches.SysCache2.SysCacheProvider"/> class.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheProvider.BuildCache(System.String,System.Collections.IDictionary)">
+            <summary>
+            Configure the cache
+            </summary>
+            <param name="regionName">the name of the cache region</param>
+            <param name="properties">configuration settings</param>
+            <returns></returns>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheProvider.NextTimestamp">
+            <summary>
+            Generate a timestamp
+            </summary>
+            <returns>A Timestamp</returns>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheProvider.Start(System.Collections.IDictionary)">
+            <summary>
+            Callback to perform any necessary initialization of the underlying cache implementation
+            during ISessionFactory construction.
+            </summary>
+            <param name="properties">current configuration settings</param>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheProvider.Stop">
+            <summary>
+            Callback to perform any necessary cleanup of the underlying cache implementation
+            during <see cref="M:NHibernate.ISessionFactory.Close"/>.
+            </summary>
+        </member>
+        <member name="T:NHibernate.Caches.SysCache2.SysCacheRegion">
+            <summary>
+            Pluggable cache implementation using the System.Web.Caching classes
+            </summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SysCacheRegion.CacheKeyPrefix">
+            <summary>The name of the cache prefix to differntaite the nhibernate cache elements from
+            other items in the cache</summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SysCacheRegion._log">
+            <summary>logger for the type</summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SysCacheRegion._defaultRelativeExpiration">
+            <summary>The default expiration to use if one is not specified</summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SysCacheRegion._webCache">
+            <summary>The cache for the web application</summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SysCacheRegion._name">
+            <summary>the name of the cache region</summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SysCacheRegion._priority">
+            <summary>The priority of the cache item</summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SysCacheRegion._relativeExpiration">
+            <summary>relative expiration for the cache items</summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SysCacheRegion._timeOfDayExpiration">
+            <summary>time of day expiration for the cache items</summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SysCacheRegion._rootCacheKey">
+            <summary>The name of the cache key for the region</summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SysCacheRegion._isRootItemCached">
+            <summary>Indicates if the root cache item has been stored or not</summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SysCacheRegion._dependencyEnlisters">
+            <summary>
+            List of dependencies that need to be enlisted before being hooked to a cache item
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheRegion.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:NHibernate.Caches.SysCache2.SysCacheRegion"/> class with
+            the default region name and configuration properties
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheRegion.#ctor(System.String,System.Collections.IDictionary)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NHibernate.Caches.SysCache2.SysCacheRegion"/> class with the default configuration
+            properties
+            </summary>
+            <param name="name">The name of the region</param>
+            <param name="additionalProperties">additional NHibernate configuration properties</param>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheRegion.#ctor(System.String,NHibernate.Caches.SysCache2.CacheRegionElement,System.Collections.IDictionary)">
+            <summary>
+            Initializes a new instance of the <see cref="T:NHibernate.Caches.SysCache2.SysCacheRegion"/> class.
+            </summary>
+            <param name="name">The name of the region</param>
+            <param name="settings">The configuration settings for the cache region</param>
+            <param name="additionalProperties">additional NHibernate configuration properties</param>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheRegion.Clear">
+            <summary>
+            Clear the Cache
+            </summary>
+            <exception cref="T:NHibernate.Cache.CacheException"></exception>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheRegion.Destroy">
+            <summary>
+            Clean up.
+            </summary>
+            <exception cref="T:NHibernate.Cache.CacheException"></exception>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheRegion.Get(System.Object)">
+            <summary>
+            Get the object from the Cache
+            </summary>
+            <param name="key">the id of the item to get from the cache</param>
+            <returns>the item stored in the cache with the id specified by <paramref name="key"/></returns>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheRegion.Lock(System.Object)">
+            <summary>
+            If this is a clustered cache, lock the item
+            </summary>
+            <param name="key">The Key of the Item in the Cache to lock.</param>
+            <exception cref="T:NHibernate.Cache.CacheException"></exception>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheRegion.NextTimestamp">
+            <summary>
+            Generate a timestamp
+            </summary>
+            <returns>a timestamp</returns>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheRegion.Put(System.Object,System.Object)">
+            <summary>Puts an item into the cache
+            </summary>
+            <param name="key">the key of the item to cache</param>
+            <param name="value">the actual value/object to cache</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="key"/> or
+            <paramref name="value"/> is null.</exception>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheRegion.Remove(System.Object)">
+            <summary>
+            Remove an item from the Cache.
+            </summary>
+            <param name="key">The Key of the Item in the Cache to remove.</param>
+            <exception cref="T:NHibernate.Cache.CacheException"></exception>
+            <exception cref="T:System.ArgumentNullException">thrown if <paramref name="key"/> is null.</exception>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheRegion.Unlock(System.Object)">
+            <summary>
+            If this is a clustered cache, unlock the item
+            </summary>
+            <param name="key">The Key of the Item in the Cache to unlock.</param>
+            <exception cref="T:NHibernate.Cache.CacheException"></exception>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheRegion.Configure(NHibernate.Caches.SysCache2.CacheRegionElement,System.Collections.IDictionary)">
+            <summary>
+            Configures the cache region from configuration values
+            </summary>
+            <param name="settings">Configuration settings for the region</param>
+            <param name="additionalProperties">The additional properties supplied by NHibernate engine</param>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheRegion.CreateDependencyEnlisters(NHibernate.Caches.SysCache2.CacheDependenciesElement,System.String,System.String)">
+            <summary>
+            Creates the dependency enlisters for any dependecies that require notification enlistment
+            </summary>
+            <param name="dependencyConfig">Settings for the dependencies</param>
+            <param name="defaultConnectionName">connection name to use when setting up data dependencies if no connection string provider is specified</param>
+            <param name="defaultConnectionString">default connection string to use for data dependencies if no connection string provider is specified </param>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheRegion.GetCacheKey(System.Object)">
+            <summary>
+            Gets a valid cache key for the element in the cache with <paramref name="identifier"/>.
+            </summary>
+            <param name="identifier">The identifier of a cache element</param>
+            <returns>Key to use for retrieving an element from the cache</returns>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheRegion.GenerateRootCacheKey">
+            <summary>
+            Generates the root cache key for the cache region
+            </summary>
+            <returns>Cache key that can be used for the root cache dependency</returns>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheRegion.CacheRootItem">
+            <summary>
+            Creates the cache item for the cache region which all other cache items in the region
+            will be dependent upon
+            </summary>
+            <remarks>
+            	<para>Specified Region dependencies will be associated to the cache item</para>
+            </remarks>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheRegion.RootCacheItemRemovedCallback(System.String,System.Object,System.Web.Caching.CacheItemRemovedReason)">
+            <summary>
+            Called when the root cache item has been removed from the cache
+            </summary>
+            <param name="key">the key of the cache item that wwas removed</param>
+            <param name="value">the value of the cache item that was removed</param>
+            <param name="reason">The <see cref="T:System.Web.Caching.CacheItemRemovedReason"/> for the removal of the 
+            	item from the cache</param>
+            <remarks>
+            	<para>Since all cache items are dependent on the root cache item, if this method is called, 
+            	all the cache items for this region have also been removed</para>
+            </remarks>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheRegion.GetCacheItemExpiration">
+            <summary>
+            Gets the expiration time for a new item added to the cache
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.SysCacheRegion.RegionName">
+            <summary>
+            Gets the name of the cache region
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.SysCacheRegion.Timeout">
+            <summary>
+            Get a reasonable "lock timeout"
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:NHibernate.Caches.SysCache2.SysCacheSection">
+            <summary>
+            Provides Configuration system support for the SysCache configuration section
+            </summary>
+            <remarks>
+            	<para>Section name must be 'sysCache'</para>
+            </remarks>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SysCacheSection.SectionName">
+            <summary>Confiuration section name</summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.SysCacheSection._properties">
+            <summary>Holds the configuration property definitions</summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheSection.#cctor">
+            <summary>
+            Initializes the <see cref="T:NHibernate.Caches.SysCache2.CacheRegionElement"/> class.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.SysCacheSection.GetSection">
+            <summary>
+            Gets the <see cref="T:NHibernate.Caches.SysCache2.SysCacheSection"/> from the configuration
+            </summary>
+            <returns>The configured <see cref="T:NHibernate.Caches.SysCache2.SysCacheSection"/></returns>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.SysCacheSection.CacheRegions">
+            <summary>
+            Gets the cache region elements
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.SysCacheSection.Properties">
+            <summary>
+            Gets the collection of properties.
+            </summary>
+            <returns>The <see cref="T:System.Configuration.ConfigurationPropertyCollection"></see> collection of properties for the element.</returns>
+        </member>
+        <member name="T:NHibernate.Caches.SysCache2.TableCacheDependencyCollection">
+            <summary>
+            Represents a collection of <see cref="T:NHibernate.Caches.SysCache2.TableCacheDependencyElement"/> objects.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.TableCacheDependencyCollection.CreateNewElement">
+            <summary>
+            When overridden in a derived class, creates a new <see cref="T:System.Configuration.ConfigurationElement"></see>.
+            </summary>
+            <returns>
+            A new <see cref="T:System.Configuration.ConfigurationElement"></see>.
+            </returns>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.TableCacheDependencyCollection.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Gets the element key for a specified configuration element when overridden in a derived class.
+            </summary>
+            <param name="element">The <see cref="T:System.Configuration.ConfigurationElement"></see> to return the key for.</param>
+            <returns>
+            An <see cref="T:System.Object"></see> that acts as the key for the specified <see cref="T:System.Configuration.ConfigurationElement"></see>.
+            </returns>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.TableCacheDependencyCollection.Item(System.Int32)">
+            <summary>
+            Gets or sets the <see cref="T:NHibernate.Caches.SysCache2.TableCacheDependencyElement"/> at the specified index.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.TableCacheDependencyCollection.Item(System.String)">
+            <summary>
+            Gets the <see cref="T:NHibernate.Caches.SysCache2.TableCacheDependencyElement"/> with the specified name.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.TableCacheDependencyCollection.CollectionType">
+            <summary>
+            Gets the type of the <see cref="T:System.Configuration.ConfigurationElementCollection"></see>.
+            </summary>
+            <value></value>
+            <returns>The <see cref="T:System.Configuration.ConfigurationElementCollectionType"></see> of this collection.</returns>
+        </member>
+        <member name="T:NHibernate.Caches.SysCache2.TableCacheDependencyElement">
+            <summary>
+            Configures a table monitor cache dependency for an Nhibernate cache region.
+            </summary>
+        </member>
+        <member name="F:NHibernate.Caches.SysCache2.TableCacheDependencyElement._properties">
+            <summary>Holds the configuration property definitions</summary>
+        </member>
+        <member name="M:NHibernate.Caches.SysCache2.TableCacheDependencyElement.#cctor">
+            <summary>
+            Initializes the <see cref="T:NHibernate.Caches.SysCache2.CacheRegionElement"/> class.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.TableCacheDependencyElement.Name">
+            <summary>
+            The unique name of the dependency 
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.TableCacheDependencyElement.DatabaseEntryName">
+            <summary>
+            The name of the <see cref="T:System.Web.Configuration.SqlCacheDependencyDatabase"/> that
+            contains the connection information for the table monitor
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.TableCacheDependencyElement.TableName">
+            <summary>
+            The table in the database to monitor
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.SysCache2.TableCacheDependencyElement.Properties">
+            <summary>
+            Gets the collection of properties.
+            </summary>
+            <returns>The <see cref="T:System.Configuration.ConfigurationPropertyCollection"></see> collection of properties for the element.</returns>
+        </member>
+    </members>
+</doc>

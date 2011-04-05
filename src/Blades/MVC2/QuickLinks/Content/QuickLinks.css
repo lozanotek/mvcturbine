@@ -1,0 +1,8 @@
+ul, li {margin: 0px; padding: 0px; list-style: none}
+
+ul.links li 
+{
+    background: url(/quicklinks/resource/images.navigation.png) left 4px no-repeat;
+    padding-left: 20px;
+    margin-bottom: 4px;
+}

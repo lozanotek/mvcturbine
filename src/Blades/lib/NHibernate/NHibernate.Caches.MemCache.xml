@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NHibernate.Caches.MemCache</name>
+    </assembly>
+    <members>
+        <member name="M:NHibernate.Caches.MemCache.MemCacheClient.KeyAsString(System.Object)">
+            <summary>
+            Turn the key obj into a string, preperably using human readable
+            string, and if the string is too long (>=250) it will be hashed
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.MemCache.MemCacheClient.FullKeyAsString(System.Object)">
+            <summary>
+            Turn the key object into a human readable string.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NHibernate.Caches.MemCache.MemCacheClient.ComputeHash(System.String,System.Security.Cryptography.HashAlgorithm)">
+            <summary>
+            Compute the hash of the full key string using the given hash algorithm
+            </summary>
+            <param name="fullKeyString">The full key return by call FullKeyAsString</param>
+            <param name="hashAlgorithm">The hash algorithm used to hash the key</param>
+            <returns>The hashed key as a string</returns>
+        </member>
+        <member name="M:NHibernate.Caches.MemCache.MemCacheClient.GetAlternateKeyHash(System.Object)">
+            <summary>
+            Compute an alternate key hash; used as a check that the looked-up value is 
+            in fact what has been put there in the first place.
+            </summary>
+            <param name="key"></param>
+            <returns>The alternate key hash (using the MD5 algorithm)</returns>
+        </member>
+        <member name="T:NHibernate.Caches.MemCache.MemCacheProvider">
+            <summary>
+            Cache provider using the .NET client (http://sourceforge.net/projects/memcacheddotnet)
+             for memcached, which is located at http://www.danga.com/memcached/
+            </summary>
+        </member>
+        <member name="T:NHibernate.Caches.MemCache.MemCacheSectionHandler">
+            <summary>
+            config file provider
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.MemCache.MemCacheSectionHandler.Create(System.Object,System.Object,System.Xml.XmlNode)">
+            <summary>
+            parse the config section
+            </summary>
+            <param name="parent"></param>
+            <param name="configContext"></param>
+            <param name="section"></param>
+            <returns>an array of <see cref="T:NHibernate.Caches.MemCache.MemCacheConfig"/> objects</returns>
+        </member>
+    </members>
+</doc>
