@@ -1,24 +1,3 @@
-#region License
-
-//
-// Author: Javier Lozano <javier@lozanotek.com>
-// Copyright (c) 2009-2010, lozanotek, inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-
-#endregion
-
 namespace MvcTurbine.Web {
     using System;
     using System.Linq;
@@ -34,26 +13,36 @@ namespace MvcTurbine.Web {
     public class RotorContext : IRotorContext {
         private static readonly object _lock = new object();
         private static readonly object _regLock = new object();
+        private static BladeList bladeList;
+
         private IAutoRegistrator autoRegistrator;
 
         /// <summary>
         /// Default constructor
         /// </summary>
-        public RotorContext(ITurbineApplication application) {
-            Application = application;
+        public RotorContext(IServiceLocator serviceLocator) {
+            ServiceLocator = serviceLocator;
         }
 
         /// <summary>
         /// Gets or sets the current implementation of <see cref="IServiceLocator"/>.
         /// </summary>
         public IServiceLocator ServiceLocator {
-            get { return Application.ServiceLocator; }
+            get;
+            private set;
         }
 
         /// <summary>
         /// Gets or sets the current instance of <see cref="TurbineApplication"/>.
         /// </summary>
-        public ITurbineApplication Application { get; private set; }
+        public ITurbineApplication Application {
+            get {
+                var context = HttpContext.Current;
+                if (context == null) return null;
+
+                return context.ApplicationInstance as ITurbineApplication;
+            }
+        }
 
         /// <summary>
         /// Cleans up the current <see cref="IServiceLocator"/> associated with the context.
@@ -66,7 +55,9 @@ namespace MvcTurbine.Web {
                     try {
                         //HACK: Yes, I know this is ugly but need to figure out how to best handle this
                         component.Dispose();
-                    } catch {
+                    }
+                    catch {
+                        //TODO: Add better handling for this exception
                     }
                 }
             }
@@ -74,9 +65,12 @@ namespace MvcTurbine.Web {
             if (ServiceLocator == null) return;
 
             try {
+                //TODO: Remove this piece since you'll be using the Factory method for injection.
                 //HACK: Yes, I know this is ugly but need to figure out how to best handle this
                 ServiceLocator.Dispose();
-            } catch {
+            }
+            catch {
+                //TODO: Add better handling for this exception
             }
         }
 
@@ -115,14 +109,20 @@ namespace MvcTurbine.Web {
         /// </summary>
         /// <returns>A list of the components registered with the application.</returns>
         public virtual BladeList GetAllBlades() {
-            var list = new BladeList(CoreBlades.GetBlades());
+            if (bladeList == null)
+                lock (_lock) {
+                    if (bladeList == null) {
+                        bladeList = new BladeList(CoreBlades.GetBlades());
 
-            BladeList commonBlades = GetCommonBlades();
-            if (commonBlades != null) {
-                list.AddRange(commonBlades);
-            }
+                        var commonBlades = GetCommonBlades();
+                        
+                        if (commonBlades != null) {
+                            bladeList.AddRange(commonBlades);
+                        }
+                    }
+                }
 
-            return list;
+            return bladeList;
         }
 
         /// <summary>
@@ -154,14 +154,10 @@ namespace MvcTurbine.Web {
         /// </summary>
         /// <param name="bladeAction">Action to perform for each <see cref="IBlade"/>.</param>
         private void PerformBladeAction(Action<IBlade> bladeAction) {
-            if (bladeAction == null) {
-                return;
-            }
+            if (bladeAction == null) return;
 
             BladeList components = GetAllBlades();
-            if (components == null || components.Count == 0) {
-                return;
-            }
+            if (components == null || components.Count == 0) return;
 
             foreach (IBlade component in components) {
                 bladeAction(component);
@@ -176,12 +172,9 @@ namespace MvcTurbine.Web {
             var registrationList = new AutoRegistrationList();
 
             // For every blade, check if it needs to auto-register anything
-            Action<IBlade> autoRegAction = blade =>
-            {
+            Action<IBlade> autoRegAction = blade => {
                 var autoRegistration = blade as ISupportAutoRegistration;
-                if (autoRegistration == null) {
-                    return;
-                }
+                if (autoRegistration == null) return;
 
                 autoRegistration.AddRegistrations(registrationList);
             };
@@ -189,7 +182,6 @@ namespace MvcTurbine.Web {
             PerformBladeAction(autoRegAction);
 
             if (registrationList.Count() == 0) return;
-
             ProcessAutomaticRegistration(registrationList);
         }
 
@@ -224,7 +216,8 @@ namespace MvcTurbine.Web {
         /// </summary>
         protected virtual void ProcessManualRegistrations() {
             var registrationList = ServiceLocator.ResolveServices<IServiceRegistration>();
-            if (registrationList == null || registrationList.Count == 0) return;
+            if (registrationList == null || registrationList.Count == 0)
+                return;
 
             lock (_regLock) {
                 using (ServiceLocator.Batch()) {
@@ -243,7 +236,7 @@ namespace MvcTurbine.Web {
         /// </summary>
         /// <param name="registrationList">Registrations to process</param>
         protected virtual void ProcessAutomaticRegistration(AutoRegistrationList registrationList) {
-            IAutoRegistrator registrator = GetAutoRegistrator();
+            var registrator = GetAutoRegistrator();
 
             lock (_regLock) {
                 using (ServiceLocator.Batch()) {
@@ -265,7 +258,8 @@ namespace MvcTurbine.Web {
                     if (autoRegistrator == null) {
                         try {
                             autoRegistrator = ServiceLocator.Resolve<IAutoRegistrator>();
-                        } catch (ServiceResolutionException) {
+                        }
+                        catch (ServiceResolutionException) {
                             autoRegistrator = new DefaultAutoRegistrator(ServiceLocator);
                         }
                     }
@@ -283,7 +277,8 @@ namespace MvcTurbine.Web {
         protected virtual IBinAssemblyLoader GetBinLoader() {
             try {
                 return ServiceLocator.Resolve<IBinAssemblyLoader>();
-            } catch {
+            }
+            catch {
                 return new DefaultBinAssemblyLoader();
             }
         }

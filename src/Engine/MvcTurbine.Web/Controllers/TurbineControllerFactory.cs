@@ -1,29 +1,9 @@
-﻿#region License
-
-//
-// Author: Javier Lozano <javier@lozanotek.com>
-// Copyright (c) 2009-2010, lozanotek, inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-
-#endregion
-
-namespace MvcTurbine.Web.Controllers {
+﻿namespace MvcTurbine.Web.Controllers {
     using System;
     using System.Web.Mvc;
     using System.Web.Routing;
     using ComponentModel;
+    using Blades;
 
     /// <summary>
     /// Controller Factory class for instantiating controllers using the Windsor IoC container.
@@ -37,18 +17,24 @@ namespace MvcTurbine.Web.Controllers {
         /// </summary>
         /// <param name="serviceLocator">The <see cref="IServiceLocator"/> to use when 
         /// creating controllers.</param>
-        public TurbineControllerFactory(IServiceLocator serviceLocator) {
+        public TurbineControllerFactory(IServiceLocator serviceLocator, IServiceReleaser serviceReleaser) {
             if (serviceLocator == null) {
                 throw new ArgumentNullException("serviceLocator");
             }
 
             ServiceLocator = serviceLocator;
+            ServiceReleaser = serviceReleaser;
         }
 
         /// <summary>
         /// Gets the current instance of <see cref="IServiceLocator"/> for the factory.
         /// </summary>
         public IServiceLocator ServiceLocator { get; private set; }
+
+        /// <summary>
+        /// Gets the current instance of <see cref="IServiceReleaser"/> for the factory.
+        /// </summary>
+        public IServiceReleaser ServiceReleaser { get; private set; }
 
         /// <summary>
         /// Provides the implementation of <see cref="IController"/> from the current
@@ -88,7 +74,7 @@ namespace MvcTurbine.Web.Controllers {
                 disposable.Dispose();
             }
 
-            ServiceLocator.Release(controller);
+            ServiceReleaser.Release(controller);
         }
 
         /// <summary>
@@ -101,8 +87,9 @@ namespace MvcTurbine.Web.Controllers {
                     if (actionInvoker == null) {
                         try {
                             actionInvoker = ServiceLocator.Resolve<IActionInvoker>();
-                        } catch (ServiceResolutionException) {
-                            actionInvoker = new TurbineActionInvoker(ServiceLocator);
+                        }
+                        catch (ServiceResolutionException) {
+                            actionInvoker = new TurbineActionInvoker(InferredActions.Current);
                         }
                     }
                 }

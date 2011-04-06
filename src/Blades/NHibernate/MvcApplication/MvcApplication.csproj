@@ -76,6 +76,7 @@
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Views\Foo\Index.aspx" />
     <Content Include="Views\Person\CreateNew.aspx" />
     <Content Include="Views\Person\Index.aspx" />
     <Content Include="Views\Task\CreateNew.aspx" />

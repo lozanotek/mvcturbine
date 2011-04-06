@@ -1,24 +1,3 @@
-#region License
-
-//
-// Author: Javier Lozano <javier@lozanotek.com>
-// Copyright (c) 2009-2010, lozanotek, inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-
-#endregion
-
 namespace MvcTurbine.Ninject {
     using System;
     using System.Collections.Generic;
@@ -33,14 +12,14 @@ namespace MvcTurbine.Ninject {
     /// To learn more about Ninject, please visit its website: http://ninject.org
     /// </remarks>
     [Serializable]
-    public class NinjectServiceLocator : IServiceLocator {
+    public class NinjectServiceLocator : IServiceLocator, IServiceInjector {
         private TurbineModule currentModule;
+        private static bool isDisposing;
 
         /// <summary>
         /// Default constructor. Locator is instantiated with a new <seealso cref="StandardKernel"/> instance.
         /// </summary>
-        public NinjectServiceLocator()
-            : this(new StandardKernel()) {
+        public NinjectServiceLocator() : this(new StandardKernel()) {
         }
 
         /// <summary>
@@ -60,6 +39,10 @@ namespace MvcTurbine.Ninject {
         /// </summary>
         public IKernel Container { get; private set; }
 
+        public IList<object> ResolveServices(Type type) {
+            return Container.GetAll(type).ToList();
+        }
+
         /// <summary>
         /// Gets the associated <see cref="IServiceRegistrar"/> to process.
         /// </summary>
@@ -77,9 +60,11 @@ namespace MvcTurbine.Ninject {
         public T Resolve<T>() where T : class {
             try {
                 return Container.Get<T>();
-            } catch (ActivationException activationException) {
+            }
+            catch (ActivationException activationException) {
                 return ResolveTheFirstBindingFromTheContainer(activationException, typeof(T)) as T;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
         }
@@ -99,7 +84,8 @@ namespace MvcTurbine.Ninject {
                 }
 
                 return value;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
         }
@@ -113,9 +99,11 @@ namespace MvcTurbine.Ninject {
         public T Resolve<T>(Type type) where T : class {
             try {
                 return Container.Get(type) as T;
-            } catch (ActivationException activationException) {
+            }
+            catch (ActivationException activationException) {
                 return ResolveTheFirstBindingFromTheContainer(activationException, typeof(T)) as T;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 throw new ServiceResolutionException(type, ex);
             }
         }
@@ -128,7 +116,8 @@ namespace MvcTurbine.Ninject {
         public object Resolve(Type type) {
             try {
                 return Container.Get(type);
-            } catch (ActivationException activationException) {
+            }
+            catch (ActivationException activationException) {
                 return ResolveTheFirstBindingFromTheContainer(activationException, type);
             }
         }
@@ -215,29 +204,6 @@ namespace MvcTurbine.Ninject {
             currentModule.Register(factoryMethod);
         }
 
-        /// <summary>
-        /// Releases (disposes) the service instance from within the locator.
-        /// </summary>
-        /// <param name="instance">Instance of a service to dipose from the locator.</param>
-        [Obsolete("Not used with this implementation of IServiceLocator.")]
-        public void Release(object instance) {
-        }
-
-        /// <summary>
-        /// Resets the locator to its initial state clearing all registrations.
-        /// </summary>
-        public void Reset() {
-            try {
-                if (Container == null)
-                    return;
-
-                Container.Dispose();
-                Container = null;
-                currentModule = null;
-            } catch {
-                // Prevent from crashing the web server (or AppPool) if recursion happens.
-            }
-        }
 
         /// <summary>
         /// Resolves the service of the specified interface with the provided factory method.
@@ -249,7 +215,6 @@ namespace MvcTurbine.Ninject {
             return instance;
         }
 
-        [Obsolete("Not used with this implementation of IServiceLocator.")]
         public void TearDown<TService>(TService instance) where TService : class {
         }
 
@@ -258,7 +223,19 @@ namespace MvcTurbine.Ninject {
         /// </summary>
         /// <filterpriority>2</filterpriority>
         public void Dispose() {
-            Reset();
+            // If we're in the process of disposing, return
+            if (isDisposing) return;
+            if (Container == null) return;
+
+            // Signal the fact that we're disposing the container
+            isDisposing = true;
+
+            // Perform actual dispose
+            Container.Dispose();
+            
+            // Clean up these pieces
+            Container = null;
+            currentModule = null;
         }
 
         #region Handle Activation Exception
@@ -285,5 +262,4 @@ namespace MvcTurbine.Ninject {
 
         #endregion
     }
-
 }

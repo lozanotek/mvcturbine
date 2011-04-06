@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MvcTurbine.Web</RootNamespace>
     <AssemblyName>MvcTurbine.Web</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\mvcturbine.snk</AssemblyOriginatorKeyFile>
@@ -33,6 +33,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -61,20 +62,12 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Abstractions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\system.web.mvc\System.Web.Abstractions.dll</HintPath>
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+      <HintPath>..\..\..\lib\mvc3beta\System.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\system.web.mvc\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Routing, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\system.web.mvc\System.Web.Routing.dll</HintPath>
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -94,28 +87,41 @@
     <Compile Include="Blades\BladeExtensions.cs" />
     <Compile Include="Blades\ControllerBlade.cs" />
     <Compile Include="Blades\CoreBlades.cs" />
-    <Compile Include="Blades\FilterBlade.cs" />
+    <Compile Include="Blades\DependencyResolverBlade.cs" />
+    <Compile Include="Blades\InferredActionBlade.cs" />
+    <Compile Include="Blades\InferredActions.cs" />
     <Compile Include="Blades\ModelBinderBlade.cs" />
-    <Compile Include="Blades\ViewBlade.cs" />
+    <Compile Include="Blades\FilterBlade.cs" />
     <Compile Include="Blades\RoutingBlade.cs" />
+    <Compile Include="Blades\ViewBlade.cs" />
+    <Compile Include="Config\Engine.cs" />
     <Compile Include="Controllers\ControllerExtensions.cs" />
-    <Compile Include="Controllers\DefaultFilterFinder.cs" />
-    <Compile Include="Controllers\IFilterFinder.cs" />
+    <Compile Include="Controllers\IInferredActionRegistry.cs" />
+    <Compile Include="Controllers\InferredAction.cs" />
+    <Compile Include="Controllers\InferredActionRegistry.cs" />
+    <Compile Include="Controllers\TurbineControllerFactory.cs" />
+    <Compile Include="Filters\ActionFilter.cs" />
+    <Compile Include="Filters\ControllerActionExpression.cs" />
+    <Compile Include="Filters\ControllerFilterRegistry.cs" />
+    <Compile Include="Filters\Filter.cs" />
+    <Compile Include="Filters\FilterRegistryHelper.cs" />
+    <Compile Include="Filters\IFilterRegistry.cs" />
+    <Compile Include="Filters\GlobalFilter.cs" />
+    <Compile Include="Filters\GlobalFilterRegistry.cs" />
     <Compile Include="Controllers\InferredActionDescriptor.cs" />
     <Compile Include="Controllers\InferredParameterDescriptor.cs" />
     <Compile Include="Controllers\InferredViewResult.cs" />
-    <Compile Include="Controllers\MergedFilters.cs" />
+    <Compile Include="Filters\InjectableAttributeFilterProvider.cs" />
     <Compile Include="Controllers\MvcRegistration.cs" />
-    <Compile Include="Controllers\MvcRegistrationFilters.cs" />
     <Compile Include="Controllers\TurbineActionInvoker.cs" />
-    <Compile Include="Controllers\TurbineControllerFactory.cs" />
-    <Compile Include="Controllers\InjectableFilterAttribute.cs" />
+    <Compile Include="Controllers\TurbineControllerActivator.cs" />
+    <Compile Include="TurbineDependencyResolver.cs" />
+    <Compile Include="Filters\FilterRegistryProvider.cs" />
     <Compile Include="Models\BinderRegistratrionExpression.cs" />
-    <Compile Include="Models\DefaultBinderRegistrationManager.cs" />
-    <Compile Include="Models\IBinderRegistrationManager.cs" />
     <Compile Include="Models\IFilterableModelBinder.cs" />
     <Compile Include="Models\ModelBinderRegistry.cs" />
-    <Compile Include="Models\TurbineModelBinder.cs" />
+    <Compile Include="Models\FilterableBinderProvider.cs" />
+    <Compile Include="Models\ModelBinderRegistryProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -125,7 +131,13 @@
     <Compile Include="RotorContext.cs" />
     <Compile Include="TurbineApplication.cs" />
     <Compile Include="TypeExtensions.cs" />
-    <Compile Include="Views\ViewExtensions.cs" />
+    <Compile Include="Views\AssemblyResourceFile.cs" />
+    <Compile Include="Views\EmbeddedView.cs" />
+    <Compile Include="Blades\EmbeddedViewBlade.cs" />
+    <Compile Include="Views\EmbeddedViewResolver.cs" />
+    <Compile Include="Views\EmbeddedViewTable.cs" />
+    <Compile Include="Views\EmbeddedViewVirtualPathProvider.cs" />
+    <Compile Include="Views\IEmbeddedViewResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MvcTurbine\MvcTurbine.csproj">
@@ -171,6 +183,10 @@
   -->
   <PropertyGroup>
     <PostBuildEvent>xcopy $(TargetDir)*.dll $(SolutionDir)..\..\build\binaries\*.dll /Y /E
-xcopy $(TargetDir)*.xml $(SolutionDir)..\..\build\binaries\*.xml /Y /E</PostBuildEvent>
+
+xcopy $(TargetDir)*.xml $(SolutionDir)..\..\build\binaries\*.xml /Y /E
+xcopy $(TargetDir)*.dll $(SolutionDir)..\..\build\nuget\lib\*.dll /Y /E
+
+xcopy $(TargetDir)*.xml $(SolutionDir)..\..\build\nuget\lib\*.xml /Y /E</PostBuildEvent>
   </PropertyGroup>
 </Project>

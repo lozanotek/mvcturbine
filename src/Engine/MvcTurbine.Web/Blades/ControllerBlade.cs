@@ -1,52 +1,49 @@
-﻿#region License
-
-//
-// Author: Javier Lozano <javier@lozanotek.com>
-// Copyright (c) 2009-2010, lozanotek, inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-
-#endregion
-
-namespace MvcTurbine.Web.Blades {
+﻿namespace MvcTurbine.Web.Blades {
     using System.Web.Mvc;
     using ComponentModel;
     using Controllers;
     using MvcTurbine.Blades;
 
     /// <summary>
-    /// Provides all the functionality to wire up the specified <see cref="IControllerFactory"/>
-    /// for the runtime to use.
+    /// Blade for all controller related components.
     /// </summary>
     public class ControllerBlade : Blade, ISupportAutoRegistration {
-        public override void Spin(IRotorContext context) {
-            SetupControllerFactory(context);
-        }
-
         /// <summary>
         /// Sets the instance of <see cref="IControllerFactory"/> to use.  If one is not registered,
-        /// <see cref="TurbineControllerFactory"/> is used.
+        /// <see cref="IControllerActivator"/> is used.
         /// </summary>
-        public virtual void SetupControllerFactory(IRotorContext context) {
+        public override void Spin(IRotorContext context) {
             // Get the current IServiceLocator
             var locator = GetServiceLocatorFromContext(context);
 
-            // Get the registered controller factory
-            var controllerFactory = GetControllerFactory(locator);
+            if (locator is IServiceReleaser) {
+                var factory = GetControllerFactory(locator);
+                ControllerBuilder.Current.SetControllerFactory(factory);
+            }
+            else {
+                // Get the registered controller activator - if any, then skip registering our own.
+                var controllerActivator = GetControllerActivator(locator);
+                if (controllerActivator != null) return;
 
-            // Set the default controller factory
-            ControllerBuilder.Current.SetControllerFactory(controllerFactory);
+                // Register with the runtime -- this is due to the fact that we're using the DefaultControllerFactory uses
+                // this new type for creation of the controllers -- we need to inject our own if one is not specified
+                using (locator.Batch()) {
+                    // Set the default controller factory
+                    locator.Register<IControllerActivator, TurbineControllerActivator>();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the registered <seealso cref="IControllerActivator"/>, if one is not found the default one is used.
+        /// </summary>
+        /// <param name="locator"></param>
+        /// <returns></returns>
+        protected virtual IControllerActivator GetControllerActivator(IServiceLocator locator) {
+            try {
+                return locator.Resolve<IControllerActivator>();
+            }
+            catch { return null; }
         }
 
         /// <summary>
@@ -59,16 +56,21 @@ namespace MvcTurbine.Web.Blades {
 
             try {
                 controllerFactory = locator.Resolve<IControllerFactory>() ??
-                                    new TurbineControllerFactory(locator);
-            } catch {
+                                    new TurbineControllerFactory(locator, locator as IServiceReleaser);
+            }
+            catch {
                 // Use default factory since one was not specified
-                return new TurbineControllerFactory(locator);
+                return new TurbineControllerFactory(locator, locator as IServiceReleaser);
             }
 
             return controllerFactory;
         }
 
-        public void AddRegistrations(AutoRegistrationList registrationList) {
+        /// <summary>
+        /// Provides the auto-registration for <see cref="IController"/> types.
+        /// </summary>
+        /// <param name="registrationList"></param>
+        public virtual void AddRegistrations(AutoRegistrationList registrationList) {
             registrationList.Add(MvcRegistration.RegisterController());
         }
     }

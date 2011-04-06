@@ -19,6 +19,8 @@
 
 #endregion
 
+using System.Linq;
+
 namespace MvcTurbine.ComponentModel.Tests {
     using System.Collections;
     using System.Collections.Generic;
@@ -60,6 +62,15 @@ namespace MvcTurbine.ComponentModel.Tests {
         public void Ask_For_All_Registered_Services() {
             IEnumerable<ILogger> instances = locator.ResolveServices<ILogger>();
             IList<ILogger> list = new List<ILogger>(instances);
+            Assert.AreEqual(2, list.Count);
+        }
+
+        [Test]
+        public void Ask_For_Registered_Services_With_Non_Generic_Method()
+        {
+            IEnumerable<object> instances = locator.ResolveServices(typeof(ILogger));
+            IList<ILogger> list = new List<ILogger>(instances.OfType<ILogger>());
+            Assert.AreEqual(2, instances.Count());
             Assert.AreEqual(2, list.Count);
         }
 

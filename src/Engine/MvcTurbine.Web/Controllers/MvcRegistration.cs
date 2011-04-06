@@ -14,8 +14,7 @@
         /// </summary>
         /// <returns></returns>
         public static ServiceRegistration RegisterController() {
-            return RegisterController((locator, type) =>
-                                      locator.Register(type, type));
+            return RegisterController((locator, type) => locator.Register(type, type));
         }
 
         /// <summary>
@@ -49,16 +48,6 @@
         /// 
         /// </summary>
         /// <typeparam name="TFilter"></typeparam>
-        /// <returns></returns>
-        public static ServiceRegistration RegisterFilter<TFilter>()
-            where TFilter : class {
-            return RegisterFilter<TFilter>((locator, type) => locator.Register<TFilter>(type));
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="TFilter"></typeparam>
         /// <param name="regAction"></param>
         /// <returns></returns>
         public static ServiceRegistration RegisterFilter<TFilter>(Action<IServiceLocator, Type> regAction)
@@ -71,16 +60,7 @@
         /// </summary>
         /// <returns></returns>
         public static ServiceRegistration RegisterBinder() {
-            return RegisterBinder((locator, type) => locator.Register<IFilterableModelBinder>(type));
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="regAction"></param>
-        /// <returns></returns>
-        public static ServiceRegistration RegisterBinder(Action<IServiceLocator, Type> regAction) {
-            return Registration.Custom<IFilterableModelBinder>(MvcRegistrationFilters.ModelBinderFilter, regAction);
+            return Registration.Simple<IFilterableModelBinder>();
         }
     }
 }

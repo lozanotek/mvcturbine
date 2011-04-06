@@ -1,30 +1,10 @@
-﻿#region License
-
-//
-// Author: Javier Lozano <javier@lozanotek.com>
-// Copyright (c) 2009-2010, lozanotek, inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-
-#endregion
-
-namespace MvcTurbine.Web {
+﻿namespace MvcTurbine.Web {
     using System;
     using System.Collections.Generic;
     using System.Web;
     using ComponentModel;
     using Properties;
+    using MvcTurbine.Web.Config;
 
     /// <summary>
     /// Class that provides the simple IoC support for ASP.NET MVC.
@@ -59,6 +39,13 @@ namespace MvcTurbine.Web {
         }
 
         /// <summary>
+        /// Sets up the engine with the specified pieces.
+        /// </summary>
+        public virtual void SetupEngine() {
+            Engine.Initialize.ConfigureWithServiceLocator(ServiceLocator);
+        }
+
+        /// <summary>
         /// Performs any startup processing.
         /// </summary>
         public virtual void Startup() {
@@ -79,6 +66,8 @@ namespace MvcTurbine.Web {
             ServiceLocator = GetServiceLocator();
 
             PostServiceLocatorAcquisition();
+
+            SetupEngine();
 
             TurnRotor();
         }
@@ -104,8 +93,7 @@ namespace MvcTurbine.Web {
 
             InitializeHttpModules();
 
-            if (CurrentContext == null)
-                return;
+            if (CurrentContext == null) return;
             CurrentContext.Initialize(this);
         }
 
@@ -118,9 +106,7 @@ namespace MvcTurbine.Web {
         /// </remarks>
         protected virtual void InitializeHttpModules() {
             IList<IHttpModule> modules = ServiceLocator.ResolveServices<IHttpModule>();
-            if (modules == null) {
-                return;
-            }
+            if (modules == null) return;
 
             foreach (IHttpModule module in modules) {
                 module.Init(this);
@@ -140,8 +126,8 @@ namespace MvcTurbine.Web {
         /// Shuts down the <see cref="CurrentContext"/> and handles all pieces of cleanup.
         /// </summary>
         protected virtual void ShutdownContext() {
-            if (CurrentContext == null)
-                return;
+            if (CurrentContext == null) return;
+            
             CurrentContext.Dispose();
 
             CurrentContext = null;
@@ -157,7 +143,7 @@ namespace MvcTurbine.Web {
             try {
                 return ServiceLocator.Resolve<IRotorContext>();
             } catch {
-                return new RotorContext(this);
+                return new RotorContext(ServiceLocator);
             }
         }
 
@@ -166,7 +152,8 @@ namespace MvcTurbine.Web {
         /// <see cref="ServiceLocatorManager.SetLocatorProvider"/>.
         /// </summary>
         protected virtual IServiceLocator GetServiceLocator() {
-            IServiceLocator locator = ServiceLocatorManager.Current;
+            var locator = ServiceLocatorManager.Current;
+            
             if (locator == null) {
                 throw new InvalidOperationException(Resources.ServiceLocatorExceptionMessage);
             }
