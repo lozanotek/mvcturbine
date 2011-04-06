@@ -36,7 +36,7 @@
         /// <param name="requestContext">Current request context.</param>
         /// <param name="controllerType">Current controlle type.</param>
         /// <returns></returns>
-        public IController Create(RequestContext requestContext, Type controllerType) {
+        public virtual IController Create(RequestContext requestContext, Type controllerType) {
             var instance = ServiceLocator.Resolve(controllerType);
             var controller = instance as Controller;
 

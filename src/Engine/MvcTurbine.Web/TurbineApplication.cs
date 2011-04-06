@@ -4,7 +4,7 @@
     using System.Web;
     using ComponentModel;
     using Properties;
-    using MvcTurbine.Web.Config;
+    using Config;
 
     /// <summary>
     /// Class that provides the simple IoC support for ASP.NET MVC.
@@ -42,7 +42,8 @@
         /// Sets up the engine with the specified pieces.
         /// </summary>
         public virtual void SetupEngine() {
-            Engine.Initialize.ConfigureWithServiceLocator(ServiceLocator);
+            Engine.Initialize
+                .ConfigureWithServiceLocator(ServiceLocator);
         }
 
         /// <summary>
@@ -156,14 +157,6 @@
             
             if (locator == null) {
                 throw new InvalidOperationException(Resources.ServiceLocatorExceptionMessage);
-            }
-
-            using (locator.Batch()) {
-                // Add the IServiceLocator instance to itself so if any types later on need it,
-                // they can have it injected into them.
-                //
-                // Use the factory method approach to prevent the stackoverflow error
-                locator.Register(() => locator);
             }
 
             return locator;

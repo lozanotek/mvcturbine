@@ -95,6 +95,7 @@
     <Compile Include="Blades\RoutingBlade.cs" />
     <Compile Include="Blades\ViewBlade.cs" />
     <Compile Include="Config\Engine.cs" />
+    <Compile Include="Config\EngineExt.cs" />
     <Compile Include="Controllers\ControllerExtensions.cs" />
     <Compile Include="Controllers\IInferredActionRegistry.cs" />
     <Compile Include="Controllers\InferredAction.cs" />
