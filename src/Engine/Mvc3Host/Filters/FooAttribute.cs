@@ -6,7 +6,8 @@
         public IFooService FooService { get; set; }
 
         public override void OnActionExecuted(ActionExecutedContext filterContext) {
-            filterContext.Controller.ViewBag.fooMessage = FooService.GetFoo();
+			var message = (FooService == null) ? "FooService was not injected!" : FooService.GetFoo();
+			filterContext.Controller.ViewBag.fooMessage = message;
         }
     }
 }

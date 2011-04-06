@@ -115,6 +115,7 @@ namespace MvcTurbine.Web {
                         bladeList = new BladeList(CoreBlades.GetBlades());
 
                         var commonBlades = GetCommonBlades();
+                        
                         if (commonBlades != null) {
                             bladeList.AddRange(commonBlades);
                         }
@@ -153,14 +154,10 @@ namespace MvcTurbine.Web {
         /// </summary>
         /// <param name="bladeAction">Action to perform for each <see cref="IBlade"/>.</param>
         private void PerformBladeAction(Action<IBlade> bladeAction) {
-            if (bladeAction == null) {
-                return;
-            }
+            if (bladeAction == null) return;
 
             BladeList components = GetAllBlades();
-            if (components == null || components.Count == 0) {
-                return;
-            }
+            if (components == null || components.Count == 0) return;
 
             foreach (IBlade component in components) {
                 bladeAction(component);
@@ -177,18 +174,14 @@ namespace MvcTurbine.Web {
             // For every blade, check if it needs to auto-register anything
             Action<IBlade> autoRegAction = blade => {
                 var autoRegistration = blade as ISupportAutoRegistration;
-                if (autoRegistration == null) {
-                    return;
-                }
+                if (autoRegistration == null) return;
 
                 autoRegistration.AddRegistrations(registrationList);
             };
 
             PerformBladeAction(autoRegAction);
 
-            if (registrationList.Count() == 0)
-                return;
-
+            if (registrationList.Count() == 0) return;
             ProcessAutomaticRegistration(registrationList);
         }
 

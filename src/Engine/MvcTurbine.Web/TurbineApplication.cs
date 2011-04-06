@@ -4,6 +4,7 @@
     using System.Web;
     using ComponentModel;
     using Properties;
+    using MvcTurbine.Web.Config;
 
     /// <summary>
     /// Class that provides the simple IoC support for ASP.NET MVC.
@@ -38,6 +39,13 @@
         }
 
         /// <summary>
+        /// Sets up the engine with the specified pieces.
+        /// </summary>
+        public virtual void SetupEngine() {
+            Engine.Initialize.ConfigureWithServiceLocator(ServiceLocator);
+        }
+
+        /// <summary>
         /// Performs any startup processing.
         /// </summary>
         public virtual void Startup() {
@@ -58,6 +66,8 @@
             ServiceLocator = GetServiceLocator();
 
             PostServiceLocatorAcquisition();
+
+            SetupEngine();
 
             TurnRotor();
         }
@@ -96,9 +106,7 @@
         /// </remarks>
         protected virtual void InitializeHttpModules() {
             IList<IHttpModule> modules = ServiceLocator.ResolveServices<IHttpModule>();
-            if (modules == null) {
-                return;
-            }
+            if (modules == null) return;
 
             foreach (IHttpModule module in modules) {
                 module.Init(this);
@@ -118,8 +126,8 @@
         /// Shuts down the <see cref="CurrentContext"/> and handles all pieces of cleanup.
         /// </summary>
         protected virtual void ShutdownContext() {
-            if (CurrentContext == null)
-                return;
+            if (CurrentContext == null) return;
+            
             CurrentContext.Dispose();
 
             CurrentContext = null;

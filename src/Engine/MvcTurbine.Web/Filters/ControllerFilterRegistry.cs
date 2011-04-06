@@ -25,21 +25,23 @@
         /// <summary>
         /// Applies the filter to either the controller or an action with the specified initializer.
         /// </summary>
-        /// <typeparam name="TFilter"></typeparam>
-        /// <param name="initializer"></param>
-        /// <returns></returns>
-        public virtual ControllerActionExpression<TController> Apply<TFilter>(Action<TFilter> initializer = null) {
-            return Apply(typeof(TFilter), FilterRegistryHelper.WrapInitializer(initializer));
+        /// <typeparam name="TFilter">Type of the filter to register.</typeparam>
+		/// <param name="initializer">Initializer code for the filter.</param>
+		/// <param name="order">Order for the filter.</param>
+		/// <returns></returns>
+        public virtual ControllerActionExpression<TController> Apply<TFilter>(Action<TFilter> initializer = null, int order = -1) {
+            return Apply(typeof(TFilter), FilterRegistryHelper.WrapInitializer(initializer), order);
         }
 
         /// <summary>
         /// Applies the filter to either the controller or an action with the specified initializer.
         /// </summary>
-        /// <param name="filterType"></param>
-        /// <param name="initializer"></param>
-        /// <returns></returns>
-        public virtual ControllerActionExpression<TController> Apply(Type filterType, Action<object> initializer = null) {
-            var expression = new ControllerActionExpression<TController>(FilterList, filterType, initializer);
+        /// <param name="filterType">Type of the filter to register.</param>
+		/// <param name="initializer">Initializer code for the filter.</param>
+		/// <param name="order">Order for the filter.</param>
+		/// <returns></returns>
+        public virtual ControllerActionExpression<TController> Apply(Type filterType, Action<object> initializer = null, int order = -1) {
+            var expression = new ControllerActionExpression<TController>(FilterList, filterType, initializer, order);
             expression.Register();
 
             return expression;

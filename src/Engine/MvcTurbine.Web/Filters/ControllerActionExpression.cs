@@ -12,15 +12,17 @@
         private Type FilterType { get; set; }
         private Action<object> Initializer { get; set; }
         private ActionFilter currentRegistration;
+		private int Order { get; set; }
 
         /// <summary>
         /// Creates the current action filter pieces for the registration.
         /// </summary>
         /// <param name="filters"></param>
-        public ControllerActionExpression(IList<Filter> filters, Type filterType, Action<object> initializer) {
+        public ControllerActionExpression(IList<Filter> filters, Type filterType, Action<object> initializer, int order) {
             Filters = filters;
             FilterType = filterType;
             Initializer = initializer;
+			Order = order;
         }
 
         /// <summary>
@@ -41,10 +43,11 @@
 
             // Create a new one for the
             Filters.Add(new ActionFilter {
-                FilterType = FilterType,
+                FilterType = this.FilterType,
                 ControllerType = typeof(TController),
                 Action = actionName,
-                ModelInitializer = Initializer
+                ModelInitializer = Initializer,
+				Order = this.Order
             });
 
             // Clear it
@@ -60,7 +63,8 @@
             currentRegistration = new ActionFilter {
                 FilterType = FilterType,
                 ControllerType = typeof(TController),
-                ModelInitializer = Initializer
+                ModelInitializer = Initializer,
+				Order = this.Order
             };
 
             Filters.Add(currentRegistration);

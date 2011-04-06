@@ -41,6 +41,9 @@
     </Reference>
     <Reference Include="Castle.Windsor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Ninject">
+      <HintPath>..\..\..\lib\ninject\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages" />
     <Reference Include="System.Web.Helpers" />
@@ -80,6 +83,7 @@
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\PersonBinder.cs" />
     <Compile Include="Models\AppBinderRegistry.cs" />
+    <Compile Include="Modules\MyModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\MvcRouting.cs" />
     <Compile Include="Services\FooService.cs" />
@@ -114,6 +118,18 @@
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MvcTurbine.Ninject\MvcTurbine.Ninject.csproj">
+      <Project>{05F39581-C732-473D-BC3B-75A534569EEF}</Project>
+      <Name>MvcTurbine.Ninject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcTurbine.StructureMap\MvcTurbine.StructureMap.csproj">
+      <Project>{24E085F7-5E64-4FF0-9769-6B8989EF1CD1}</Project>
+      <Name>MvcTurbine.StructureMap</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcTurbine.Unity\MvcTurbine.Unity.csproj">
+      <Project>{57CCBB78-5A1A-41D6-BBFF-8CE6F0F3B5EF}</Project>
+      <Name>MvcTurbine.Unity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MvcTurbine.Web.Views\MvcTurbine.Web.Views.csproj">
       <Project>{8C0778E1-626D-4518-8517-2F7E982A8594}</Project>
       <Name>MvcTurbine.Web.Views</Name>

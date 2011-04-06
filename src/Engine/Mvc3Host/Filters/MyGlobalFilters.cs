@@ -3,7 +3,7 @@
 
     public sealed class MyGlobalFilters : GlobalFilterRegistry {
         public MyGlobalFilters() {
-            AsGlobal<GlobalFilter>(filter => filter.Value = 10);
+            AsGlobal<GlobalFilter>(filter => filter.Value = 10, 10);
         }
     }
 }
