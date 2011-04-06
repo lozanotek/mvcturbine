@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>MvcTurbine.Windsor</id>
+    <version>3.0</version>
+    <authors>Javier Lozano</authors>
+    <owners>Javier Lozano</owners>
+    <projectUrl>http://mvcturbine.codeplex.com</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The Windsor service locator for MVC Turbine.</description>
+    <summary>Reference this if you want to use Windsor as your IoC container with MVC Turbine.</summary>
+    <language>en-US</language>
+    <dependencies>
+      <dependency id="MVCTurbine" version="3.0" />
+      <dependency id="Castle.Windsor" version="2.0" />
+    </dependencies>
+  </metadata>
+</package>
