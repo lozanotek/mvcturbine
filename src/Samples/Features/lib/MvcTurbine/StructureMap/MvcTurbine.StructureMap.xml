@@ -4,6 +4,23 @@
         <name>MvcTurbine.StructureMap</name>
     </assembly>
     <members>
+        <member name="T:MvcTurbine.StructureMap.StructureMapRegistrator">
+            <summary>
+            A <see cref="T:MvcTurbine.ComponentModel.IServiceRegistration"/> implementation that leverages the <see cref="T:StructureMap.IContainer"/> from StructureMap.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.StructureMapRegistrator.Register(MvcTurbine.ComponentModel.IServiceLocator)">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceRegistration.Register(MvcTurbine.ComponentModel.IServiceLocator)"/>        
+            </summary>
+            <param name="locator"></param>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.StructureMapRegistrator.Register(StructureMap.IContainer)">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceRegistration.Register(MvcTurbine.ComponentModel.IServiceLocator)"/>
+            </summary>
+            <param name="container"></param>
+        </member>
         <member name="T:MvcTurbine.StructureMap.StructureMapServiceLocator">
             <summary>
             Default implementation of the <seealso cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> contract with Ninject IoC.
@@ -111,16 +128,12 @@
             <typeparam name="Interface"></typeparam>
             <param name="instance"></param>
         </member>
-        <member name="M:MvcTurbine.StructureMap.StructureMapServiceLocator.Release(System.Object)">
+        <member name="M:MvcTurbine.StructureMap.StructureMapServiceLocator.Register``1(System.Func{``0})">
             <summary>
-            Releases (disposes) the service instance from within the locator.
+            Resolves the service of the specified interface with the provided factory method.
             </summary>
-            <param name="instance">Instance of a service to dipose from the locator.</param>
-        </member>
-        <member name="M:MvcTurbine.StructureMap.StructureMapServiceLocator.Reset">
-            <summary>
-            Resets the locator to its initial state clearing all registrations.
-            </summary>
+            <param name="factoryMethod">The factory method which will be used to resolve this interface.</param>
+            <returns>An instance of the type, null otherwise</returns>
         </member>
         <member name="M:MvcTurbine.StructureMap.StructureMapServiceLocator.Dispose">
             <summary>
@@ -198,6 +211,13 @@
             </summary>
             <typeparam name="Interface"></typeparam>
             <param name="instance"></param>
+        </member>
+        <member name="M:MvcTurbine.StructureMap.TurbineRegistry.Register``1(System.Func{``0})">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceRegistrar.Register``1(System.Func{``0})"/>.
+            </summary>
+            <typeparam name="Interface"></typeparam>
+            <param name="factoryMethod"></param>
         </member>
         <member name="P:MvcTurbine.StructureMap.TurbineRegistry.Container">
             <summary>

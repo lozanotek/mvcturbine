@@ -47,8 +47,7 @@
         ///</summary>
         public IWindsorContainer Container { get; private set; }
 
-        public IList<object> ResolveServices(Type type)
-        {
+        public IList<object> ResolveServices(Type type) {
             return Container.Kernel.ResolveAll(type).OfType<object>().ToList();
         }
 

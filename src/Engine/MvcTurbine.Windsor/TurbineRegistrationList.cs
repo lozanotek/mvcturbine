@@ -2,7 +2,6 @@ namespace MvcTurbine.Windsor {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Castle.Facilities.FactorySupport;
     using Castle.MicroKernel.Registration;
     using Castle.Windsor;
     using ComponentModel;
