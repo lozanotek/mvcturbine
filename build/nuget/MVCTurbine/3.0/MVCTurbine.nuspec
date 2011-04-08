@@ -6,6 +6,7 @@
     <authors>Javier Lozano</authors>
     <owners>Javier Lozano</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>http://mvcturbine.com</projectUrl>
     <description>MVC Turbine is a plugin for ASP.NET MVC that has IoC baked in and auto-wires controllers, binders, view engines, http modules, etc. that reside within your application. Thus you worry more about what your application should do, rather than how it should do it.</description>
     <summary>MVC Turbine is a plugin for ASP.NET MVC that has IoC baked in and auto-wires controllers, binders, view engines, http modules, etc. that reside within your application. Thus you worry more about what your application should do, rather than how it should do it.</summary>
     <language>en-US</language>

@@ -7,28 +7,25 @@ namespace MvcTurbine.Web.Views
     /// <summary>
     /// Gets the embedded views within any loaded assembly.
     /// </summary>
-    public class EmbeddedViewResolver : IEmbeddedViewResolver
-    {
-        private static string[] EmbeddedNamespaces = new[] { ".views." };
+    public class EmbeddedViewResolver : IEmbeddedViewResolver  {
+
+        private static readonly string[] EmbeddedNamespaces = new[] { ".views." };
 
         /// <summary>
         /// Creates a list of embedded views from currently assemblies in the AppDomain.
         /// </summary>
         /// <returns></returns>
-        public virtual EmbeddedViewTable GetEmbeddedViews()
-        {
+        public virtual EmbeddedViewTable GetEmbeddedViews() {
             Assembly[] assemblies = GetAssemblies();
             if (assemblies == null || assemblies.Length == 0) return null;
 
             var table = new EmbeddedViewTable();
 
-            foreach (var assembly in assemblies)
-            {
+            foreach (var assembly in assemblies) {
                 var names = GetNamesOfAssemblyResources(assembly);
                 if (names == null || names.Length == 0) continue;
 
-                foreach (var name in names)
-                {
+                foreach (var name in names) {
                     var key = name.ToLowerInvariant();
                     if (!EmbeddedNamespaces.Any(key.Contains)) continue;
 
@@ -43,14 +40,11 @@ namespace MvcTurbine.Web.Views
         /// Gets the current loaded assemblies in to AppDomain.
         /// </summary>
         /// <returns></returns>
-        protected virtual Assembly[] GetAssemblies()
-        {
-            try
-            {
+        protected virtual Assembly[] GetAssemblies() {
+            try {
                 return AppDomain.CurrentDomain.GetAssemblies();
             }
-            catch
-            {
+            catch {
                 return null;
             }
         }
@@ -60,15 +54,12 @@ namespace MvcTurbine.Web.Views
         /// </summary>
         /// <param name="assembly">Currently assembly to search.</param>
         /// <returns></returns>
-        protected virtual string[] GetNamesOfAssemblyResources(Assembly assembly)
-        {
-            try
-            {
+        protected virtual string[] GetNamesOfAssemblyResources(Assembly assembly) {
+            try {
                 // GetManifestResourceNames will throw a NotSupportedException when run on a dynamic assembly
                 return assembly.GetManifestResourceNames();
             }
-            catch
-            {
+            catch {
                 return new string[] { };
             }
         }

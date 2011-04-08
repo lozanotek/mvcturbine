@@ -28,20 +28,6 @@
             <see cref="T:System.Web.Mvc.IControllerActivator"/> is used.
             </summary>
         </member>
-        <member name="M:MvcTurbine.Web.Blades.ControllerBlade.GetControllerActivator(MvcTurbine.ComponentModel.IServiceLocator)">
-            <summary>
-            Gets the registered <seealso cref="T:System.Web.Mvc.IControllerActivator"/>, if one is not found the default one is used.
-            </summary>
-            <param name="locator"></param>
-            <returns></returns>
-        </member>
-        <member name="M:MvcTurbine.Web.Blades.ControllerBlade.GetControllerFactory(MvcTurbine.ComponentModel.IServiceLocator)">
-            <summary>
-            Gets the registered <seealso cref="T:System.Web.Mvc.IControllerFactory"/>, if one is not found the default one is used.
-            </summary>
-            <param name="locator"></param>
-            <returns></returns>
-        </member>
         <member name="M:MvcTurbine.Web.Blades.ControllerBlade.AddRegistrations(MvcTurbine.ComponentModel.AutoRegistrationList)">
             <summary>
             Provides the auto-registration for <see cref="T:System.Web.Mvc.IController"/> types.
@@ -274,6 +260,11 @@
             Private default constructor.
             </summary>
         </member>
+        <member name="M:MvcTurbine.Web.Config.Engine.InitliazeDefaults">
+            <summary>
+            Sets the defaults for the engine to use.
+            </summary>
+        </member>
         <member name="M:MvcTurbine.Web.Config.Engine.RotorContext``1">
             <summary>
             Registers the <see cref="T:MvcTurbine.IRotorContext"/> for the engine to use. If none is specified, <see cref="M:MvcTurbine.Web.Config.Engine.RotorContext``1"/> is used.
@@ -301,10 +292,62 @@
             </summary>
             <param name="locator">The <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> to use.</param>
         </member>
+        <member name="M:MvcTurbine.Web.Config.Engine.EngineRegistration``2">
+            <summary>
+            Adds registrations to the internal engine types.
+            </summary>
+            <typeparam name="TService"></typeparam>
+            <typeparam name="TImpl"></typeparam>
+        </member>
         <member name="P:MvcTurbine.Web.Config.Engine.Initialize">
             <summary>
             Accesses the initialization points for the engine components.
             </summary>
+        </member>
+        <member name="T:MvcTurbine.Web.Config.EngineExt">
+            <summary>
+            Extension class for <see cref="T:MvcTurbine.Web.Config.Engine"/>.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Web.Config.EngineExt.ControllerFactory``1(MvcTurbine.Web.Config.Engine)">
+            <summary>
+            Registers an <see cref="T:System.Web.Mvc.IControllerFactory"/> for the engine to use.
+            </summary>
+            <typeparam name="TFactory">Type that implements <see cref="T:System.Web.Mvc.IControllerFactory"/>.</typeparam>
+            <param name="engine"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Config.EngineExt.ControllerActivator``1(MvcTurbine.Web.Config.Engine)">
+            <summary>
+            Registers a <see cref="T:System.Web.Mvc.IControllerActivator"/> for the engine to use.
+            </summary>
+            <typeparam name="TActivator">Type that implements <see cref="T:System.Web.Mvc.IControllerActivator"/>.</typeparam>
+            <param name="engine"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Config.EngineExt.DependencyResolver``1(MvcTurbine.Web.Config.Engine)">
+            <summary>
+            Registers a <see cref="T:System.Web.Mvc.IDependencyResolver"/> for the engine to use.
+            </summary>
+            <typeparam name="TResolver">Type that implements <see cref="T:System.Web.Mvc.IDependencyResolver"/>.</typeparam>
+            <param name="engine"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Config.EngineExt.ActionInvoker``1(MvcTurbine.Web.Config.Engine)">
+            <summary>
+            Registers a <see cref="T:System.Web.Mvc.IActionInvoker"/> for the engine to use.
+            </summary>
+            <typeparam name="TInvoker">Type that implements <see cref="T:System.Web.Mvc.IActionInvoker"/>.</typeparam>
+            <param name="engine"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Config.EngineExt.EmbeddedViewResolve``1(MvcTurbine.Web.Config.Engine)">
+            <summary>
+            Registers a <see cref="T:MvcTurbine.Web.Views.IEmbeddedViewResolver"/> for the engine to use.
+            </summary>
+            <typeparam name="TResolver">Type that implements <see cref="T:MvcTurbine.Web.Views.IEmbeddedViewResolver"/>.</typeparam>
+            <param name="engine"></param>
+            <returns></returns>
         </member>
         <member name="T:MvcTurbine.Web.Controllers.ControllerExtensions">
             <summary>

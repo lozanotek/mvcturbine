@@ -4,6 +4,7 @@
 	using System.Collections.Generic;
 	using ComponentModel;
 	using Controllers;
+	using Views;
 
 	/// <summary>
 	/// Defines the configuration component for runtime elements of the engine.
@@ -16,13 +17,23 @@
 		/// Private default constructor.
 		/// </summary>
 		private Engine() {
+			InitliazeDefaults();
+		}
+
+		/// <summary>
+		/// Sets the defaults for the engine to use.
+		/// </summary>
+		private void InitliazeDefaults() {
 			// Register the default types for the system to use
 
 			RotorContext<RotorContext>()
 			.AutoRegistrator<DefaultAutoRegistrator>()
 			.AssemblyLoader<DefaultBinAssemblyLoader>()
 			.ControllerFactory<TurbineControllerFactory>()
-			.ControllerActivator<TurbineControllerActivator>();
+			.ControllerActivator<TurbineControllerActivator>()
+			.DependencyResolver<TurbineDependencyResolver>()
+			.ActionInvoker<TurbineActionInvoker>()
+			.EmbeddedViewResolve<EmbeddedViewResolver>();
 		}
 
 		/// <summary>
@@ -65,6 +76,8 @@
 		/// </summary>
 		/// <param name="locator">The <see cref="IServiceLocator"/> to use.</param>
 		internal void ConfigureWithServiceLocator(IServiceLocator locator) {
+			if (locator == null) return;
+
 			// Start the reg
 			using (locator.Batch()) {
 				// Add the IServiceLocator instance to itself so if any types later on need it,
