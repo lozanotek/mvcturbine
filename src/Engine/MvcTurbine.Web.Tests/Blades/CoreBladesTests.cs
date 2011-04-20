@@ -67,7 +67,7 @@ namespace MvcTurbine.Web.Tests.Blades {
 
             Assert.IsNotNull(result);
             Assert.IsNotEmpty(result);
-            Assert.AreEqual(result.Count, 8);
+            Assert.AreEqual(result.Count, 9);
         }
 
         [Test]
@@ -79,7 +79,7 @@ namespace MvcTurbine.Web.Tests.Blades {
 
             Assert.IsNotNull(result);
             Assert.IsNotEmpty(result);
-            Assert.AreEqual(result.Count, 8);
+            Assert.AreEqual(result.Count, 9);
         }
     }
 
