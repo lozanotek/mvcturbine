@@ -10,61 +10,6 @@
 
     [TestFixture]
     public class RoutingBlade_SpinTests : TestFixtureBase {
-        [Test]
-        public void Resolve_Route_Registrators_Returns_DefaultControllerFactory() {
-            var contextFake = new Mock<IRotorContext>();
-            var locator = new MockControllerFactoryServiceLocator();
-
-            contextFake.Setup(x => x.ServiceLocator)
-                .Returns(locator);
-
-            var blade = new MvcBlade();
-            blade.SetupControllerFactory(contextFake.Object);
-
-            var currentFactory = ControllerBuilder.Current.GetControllerFactory();
-            Assert.IsNotNull(currentFactory);
-        }
-
-        [Test]
-        public void Resolve_Controller_Factory_Returns_TurbineControllerFactory() {
-            
-            var locator = new MockControllerFactoryServiceLocator()
-            {
-                ShouldThrowExceptionForControllerFactory = true
-            };
-
-            var contextFake = new Mock<IRotorContext>();
-            contextFake.Setup(x => x.ServiceLocator)
-                .Returns(locator);
-
-            var blade = new MvcBlade();
-            blade.SetupControllerFactory(contextFake.Object);
-
-            IControllerFactory currentFactory = ControllerBuilder.Current.GetControllerFactory();
-
-            Assert.IsNotNull(currentFactory);
-            Assert.AreEqual(currentFactory.GetType(), typeof(TurbineControllerFactory));
-        }
-
-        [Test]
-        public void Resolve_Controller_Factory_Returns_Null_Which_Implies_TurbineControllerFactory() {
-            
-            var locator = new MockControllerFactoryServiceLocator()
-            {
-                ShouldReturnNullForControllerFactory = true
-            };
-
-            var contextFake = new Mock<IRotorContext>();
-            contextFake.Setup(x => x.ServiceLocator)
-                .Returns(locator);
-
-            var blade = new MvcBlade();
-            blade.SetupControllerFactory(contextFake.Object);
-
-            var currentFactory = ControllerBuilder.Current.GetControllerFactory();
-            Assert.IsNotNull(currentFactory);
-            Assert.AreEqual(currentFactory.GetType(), typeof(TurbineControllerFactory));
-        }
 
         [Test]
         [ExpectedException(typeof (ArgumentNullException))]
