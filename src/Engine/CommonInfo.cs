@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Security;
 
 [assembly: AssemblyCompany("lozanotek")]
 [assembly: AssemblyProduct("MvcTurbine")]
@@ -14,5 +13,5 @@ using System.Security;
 
 [assembly: ComVisible(false)]
 
-[assembly: AssemblyVersion("3.0.0.0")]
+[assembly: AssemblyVersion("3.1.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
