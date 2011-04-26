@@ -86,6 +86,8 @@
     <Compile Include="ComponentModel\DefaultAutoRegistrator.cs" />
     <Compile Include="ComponentModel\DefaultBinAssemblyLoader.cs" />
     <Compile Include="ComponentModel\DependencyResolutionException.cs" />
+    <Compile Include="ComponentModel\EmptyServiceInjector.cs" />
+    <Compile Include="ComponentModel\EmptyServiceReleaser.cs" />
     <Compile Include="ComponentModel\ExceptionExtensions.cs" />
     <Compile Include="ComponentModel\IServiceInjector.cs" />
     <Compile Include="ComponentModel\IServiceRegistrar.cs" />

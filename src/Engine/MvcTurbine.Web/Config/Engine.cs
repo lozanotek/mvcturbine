@@ -87,16 +87,18 @@
 				locator.Register(() => locator);
 
 				// To provide DI support for IServiceReleaser
-				if (locator is IServiceReleaser) {
-					locator.Register(() => locator as IServiceReleaser);
-				}
+			    if (locator is IServiceReleaser)
+			        locator.Register(() => locator as IServiceReleaser);
+			    else
+			        locator.Register<IServiceReleaser, EmptyServiceReleaser>();
 
-				// To provide DI support for IServiceInjector
-				if (locator is IServiceInjector) {
-					locator.Register(() => locator as IServiceInjector);
-				}
-				
-				foreach (var item in engineRegistrations) {
+			    // To provide DI support for IServiceInjector
+			    if (locator is IServiceInjector)
+			        locator.Register(() => locator as IServiceInjector);
+			    else
+			        locator.Register<IServiceInjector, EmptyServiceInjector>();
+
+			    foreach (var item in engineRegistrations) {
 					locator.Register(item.Key, item.Value);
 				}
 
