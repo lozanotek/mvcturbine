@@ -7,9 +7,6 @@
 
     public class ServiceBusBlade : Blade, ISupportAutoRegistration {
         public override void Spin(IRotorContext context) {
-            // Wire up log4net for logging
-            log4net.Config.XmlConfigurator.Configure();
-
             var busConfigure = Configure.WithWeb();
             var busConfigurator = GetConfigurator(context);
 
