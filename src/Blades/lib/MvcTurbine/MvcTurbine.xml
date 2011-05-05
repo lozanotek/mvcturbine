@@ -213,6 +213,30 @@
             Gets or sets the assembly name that couldn't load.
             </summary>
         </member>
+        <member name="T:MvcTurbine.ComponentModel.IServiceInjector">
+            <summary>
+            Provides the contract for injecting dependency into an object not created by the underlying container.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceInjector.Inject``1(``0)">
+            <summary>
+            Injects any types that are registered into the specified <paramref name="instance"/>.
+            </summary>
+            <typeparam name="TService"></typeparam>
+            <param name="instance"></param>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceInjector.TearDown``1(``0)">
+            <summary>
+            Releases any types that have been registered into the specified <paramref name="instance"/>.
+            </summary>
+            <typeparam name="TService"></typeparam>
+            <param name="instance"></param>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.IServiceReleaser">
+            <summary>
+            Provides the contract for releasing an object that's been created by the underlying container.
+            </summary>
+        </member>
         <member name="M:MvcTurbine.ComponentModel.ExceptionExtensions.GetDetailedMessage(System.Reflection.ReflectionTypeLoadException,System.String)">
             <summary>
             Provides formatting information for troubleshooting a missing reference issue.
@@ -394,30 +418,12 @@
             <typeparam name="Interface">Type of the service to register.</typeparam>
             <param name="instance">Instance of the type to register.</param>
         </member>
-        <member name="M:MvcTurbine.ComponentModel.IServiceLocator.Release(System.Object)">
+        <member name="M:MvcTurbine.ComponentModel.IServiceLocator.Register``1(System.Func{``0})">
             <summary>
-            Releases (disposes) the service instance from within the locator.
+            Resolves the service of the specified interface with the provided factory method.
             </summary>
-            <param name="instance">Instance of a service to dipose from the locator.</param>
-        </member>
-        <member name="M:MvcTurbine.ComponentModel.IServiceLocator.Reset">
-            <summary>
-            Resets the locator to its initial state clearing all registrations.
-            </summary>
-        </member>
-        <member name="M:MvcTurbine.ComponentModel.IServiceLocator.Inject``1(``0)">
-            <summary>
-            Injects any types that are registered into the specified <paramref name="instance"/>.
-            </summary>
-            <typeparam name="TService"></typeparam>
-            <param name="instance"></param>
-        </member>
-        <member name="M:MvcTurbine.ComponentModel.IServiceLocator.TearDown``1(``0)">
-            <summary>
-            Releases any types that have been registered into the specified <paramref name="instance"/>.
-            </summary>
-            <typeparam name="TService"></typeparam>
-            <param name="instance"></param>
+            <param name="factoryMethod">The factory method which will be used to resolve this interface.</param>
+            <returns>An instance of the type, null otherwise</returns>
         </member>
         <member name="T:MvcTurbine.ComponentModel.ISupportAutoRegistration">
             <summary>
@@ -476,6 +482,23 @@
             <summary>
             Gets or sets the type of the service to use.
             </summary>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.TypeCache">
+            <summary>
+            Simple type cache for the system to use.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.TypeCache.Merge(MvcTurbine.ComponentModel.TypeCache)">
+            <summary>
+            Merges the specified <see cref="T:MvcTurbine.ComponentModel.TypeCache"/> with the current instance.
+            </summary>
+            <param name="cache"></param>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.TypeCache.Add(System.Collections.Generic.KeyValuePair{System.Type,System.Type})">
+            <summary>
+            Adds the key value pair with the current instance.
+            </summary>
+            <param name="pair"></param>
         </member>
         <member name="T:MvcTurbine.IRotorContext">
             <summary>
@@ -779,6 +802,13 @@
             <returns></returns>
         </member>
         <member name="M:MvcTurbine.TypeExtensions.IsType``1(System.Object)">
+            <summary>
+            Checks to see if the specified type is assignable.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.TypeExtensions.IsType(System.Object,System.Type)">
             <summary>
             Checks to see if the specified type is assignable.
             </summary>

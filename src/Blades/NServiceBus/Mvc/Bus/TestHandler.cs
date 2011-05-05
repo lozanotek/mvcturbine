@@ -1,12 +1,18 @@
 ﻿namespace Mvc.Bus {
-    using log4net;
     using NServiceBus;
+    using Services;
 
     public class TestHandler : IHandleMessages<TestMessage> {
-        private readonly ILog log = LogManager.GetLogger(typeof (TestHandler));
+        private LogService Service { get; set; }
 
-        public void Handle(TestMessage message) {
-            log.InfoFormat("Received message with contents '{0}'", message.Value);
+        public TestHandler(LogService service)
+        {
+            Service = service;
+        }
+
+        public void Handle(TestMessage message)
+        {
+            Service.LogMessage(message.Value);
         }
     }
 }

@@ -1,12 +1,12 @@
 namespace Mvc {
     using Castle.MicroKernel.Registration;
+    using Castle.MicroKernel.Releasers;
     using Castle.MicroKernel.Resolvers.SpecializedResolvers;
     using Castle.Windsor;
     using MvcTurbine.ComponentModel;
     using MvcTurbine.NServiceBus;
     using MvcTurbine.Windsor;
     using MvcTurbine.Web;
-    using NServiceBus.ObjectBuilder.CastleWindsor;
     using Services;
 
     public class DefaultMvcApplication : TurbineApplication {
@@ -24,11 +24,13 @@ namespace Mvc {
             var kernel = container.Kernel;
             kernel.Resolver.AddSubResolver(new ArrayResolver(kernel));
             kernel.Resolver.AddSubResolver(new ListResolver(kernel));
+            kernel.ReleasePolicy = new NoTrackingReleasePolicy();
 
             // Register the components into the container
             container.Register(Component.For<IBroadcastService>().ImplementedBy<BroadcastService>());
-
+            container.Register(Component.For<LogService>().ImplementedBy<LogService>());
             ContainerManager.SetContainerProvider(() => new WindsorObjectBuilder(container));
+
             return container;
         }
     }

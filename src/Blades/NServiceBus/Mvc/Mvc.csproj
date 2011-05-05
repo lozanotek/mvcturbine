@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mvc</RootNamespace>
     <AssemblyName>Mvc</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -31,6 +31,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,37 +54,31 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core">
-      <HintPath>..\bin\MvcTurbine\Windsor\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.DynamicProxy2">
-      <HintPath>..\..\lib\MvcTurbine\Windsor\Castle.DynamicProxy2.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.MicroKernel">
-      <HintPath>..\bin\MvcTurbine\Windsor\Castle.MicroKernel.dll</HintPath>
+      <HintPath>..\..\lib\MvcTurbine\Windsor\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Windsor">
-      <HintPath>..\bin\MvcTurbine\Windsor\Castle.Windsor.dll</HintPath>
+      <HintPath>..\..\lib\MvcTurbine\Windsor\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
-      <HintPath>..\bin\NServiceBus\log4net.dll</HintPath>
+      <HintPath>..\..\lib\log4net\log4net.dll</HintPath>
     </Reference>
     <Reference Include="MvcTurbine">
-      <HintPath>..\bin\MvcTurbine\MvcTurbine.dll</HintPath>
+      <HintPath>..\..\lib\MvcTurbine\MvcTurbine.dll</HintPath>
     </Reference>
     <Reference Include="MvcTurbine.Web">
-      <HintPath>..\bin\MvcTurbine\MvcTurbine.Web.dll</HintPath>
+      <HintPath>..\..\lib\MvcTurbine\MvcTurbine.Web.dll</HintPath>
     </Reference>
     <Reference Include="MvcTurbine.Windsor">
-      <HintPath>..\bin\MvcTurbine\Windsor\MvcTurbine.Windsor.dll</HintPath>
+      <HintPath>..\..\lib\MvcTurbine\Windsor\MvcTurbine.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="NServiceBus">
-      <HintPath>..\bin\NServiceBus\NServiceBus.dll</HintPath>
+      <HintPath>..\..\lib\NServiceBus\NServiceBus.dll</HintPath>
     </Reference>
     <Reference Include="NServiceBus.Core">
-      <HintPath>..\bin\NServiceBus\NServiceBus.Core.dll</HintPath>
+      <HintPath>..\..\lib\NServiceBus\NServiceBus.Core.dll</HintPath>
     </Reference>
     <Reference Include="NServiceBus.ObjectBuilder.CastleWindsor">
-      <HintPath>..\bin\NServiceBus\NServiceBus.ObjectBuilder.CastleWindsor.dll</HintPath>
+      <HintPath>..\..\lib\NServiceBus\NServiceBus.ObjectBuilder.CastleWindsor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -91,7 +86,7 @@
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Routing">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -108,6 +103,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bus\AnotherHandler.cs" />
     <Compile Include="Bus\TestHandler.cs" />
     <Compile Include="Bus\TestMessage.cs" />
     <Compile Include="Controllers\ControllerExt.cs" />
@@ -118,6 +114,8 @@
     <Compile Include="Routing\DefaultRouteRegistrator.cs" />
     <Compile Include="Services\BroadcastService.cs" />
     <Compile Include="Services\IBroadcastService.cs" />
+    <Compile Include="Services\LogService.cs" />
+    <Compile Include="WindsorObjectBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -140,10 +138,6 @@
     <ProjectReference Include="..\MvcTurbine.NServiceBus\MvcTurbine.NServiceBus.csproj">
       <Project>{44157924-EF60-4DA4-A386-0AE9C932912F}</Project>
       <Name>MvcTurbine.NServiceBus</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Workflows\Workflows.csproj">
-      <Project>{237E7F6B-55C1-4FCB-B70D-DCB7196C7276}</Project>
-      <Name>Workflows</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

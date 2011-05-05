@@ -21,8 +21,7 @@
 
                 busConfigure
                        .BuilderFromInternalContainer(container)
-                       .Log4Net()
-                       .XmlSerializer()
+                       .BinarySerializer()
                        .MsmqTransport()
                        .UnicastBus()
                        .LoadMessageHandlers();

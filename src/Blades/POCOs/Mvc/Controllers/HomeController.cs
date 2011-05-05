@@ -2,7 +2,6 @@ namespace PocoSample.Mvc.Controllers {
 	using System.Collections.Generic;
 	using System.Web.Mvc;
 	using Models;
-	using MvcTurbine.Poco;
 
 	[HandleError]
 	public class HomeController : Controller {
