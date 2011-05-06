@@ -12,7 +12,7 @@ namespace MvcTurbine.Web.Metadata
             var list = new List<Type>();
 
             GetAllAssemblies()
-                .ForEach(assembly => list.AddRange(GetAllMetadataAttributeHandlers(assembly)));
+                .ForEach(assembly => list.AddRange(GetAllMetadataAttributeHandlersOrBust(assembly)));
 
             return list;
         }
@@ -20,7 +20,7 @@ namespace MvcTurbine.Web.Metadata
         private static IEnumerable<Type> GetAllMetadataAttributeHandlers(Assembly assembly)
         {
             return assembly.GetTypes()
-                .Where(ThisTypeIsAMetadataAttributeHandler);
+                .Where(ThisTypeIsAMetadataAttributeHandlerOrBust);
         }
 
         private static bool ThisTypeIsAMetadataAttributeHandler(Type x)
@@ -35,6 +35,30 @@ namespace MvcTurbine.Web.Metadata
             return AppDomain.CurrentDomain.GetAssemblies()
                 .Where(x => x.FullName.StartsWith("MvcTurbine.Web.Metadata.,") == false)
                 .ToList();
+        }
+
+        private static IEnumerable<Type> GetAllMetadataAttributeHandlersOrBust(Assembly assembly)
+        {
+            try
+            {
+                return GetAllMetadataAttributeHandlers(assembly);
+            }
+            catch
+            {
+                return new Type[] {};
+            }
+        }
+
+        private static bool ThisTypeIsAMetadataAttributeHandlerOrBust(Type x)
+        {
+            try
+            {
+                return ThisTypeIsAMetadataAttributeHandler(x);
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
