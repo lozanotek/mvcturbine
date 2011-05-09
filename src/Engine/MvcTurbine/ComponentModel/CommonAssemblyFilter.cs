@@ -23,6 +23,7 @@
             AddFilter("mscorlib");
             AddFilter("Microsoft");
 
+            AddFilter("MvcTurbine");
             AddFilter("MvcTurbine.Web");
 
             // Ignore the Visual Studio extra assemblies!

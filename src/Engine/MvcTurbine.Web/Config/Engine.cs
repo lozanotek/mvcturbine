@@ -115,5 +115,16 @@
 		internal void EngineRegistration<TService,TImpl>() {
 			engineRegistrations[typeof(TService)] = typeof(TImpl);
 		}
+
+        /// <summary>
+        /// Removes the specified registration from the internal engine types.
+        /// </summary>
+        /// <typeparam name="TService"></typeparam>
+        internal void RemoveRegistration<TService>() {
+            var key = typeof (TService);
+
+            if (!engineRegistrations.ContainsKey(key)) return;
+            engineRegistrations.Remove(key);
+        }
 	}
 }

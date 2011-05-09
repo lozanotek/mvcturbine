@@ -48,13 +48,15 @@ namespace MvcTurbine.Web {
         /// Cleans up the current <see cref="IServiceLocator"/> associated with the context.
         /// </summary>
         public virtual void Dispose() {
-            BladeList components = GetAllBlades();
+            BladeList allBlades = GetAllBlades();
 
-            if (components != null) {
-                foreach (IBlade component in components) {
+            if (allBlades != null) {
+                foreach (IBlade blade in allBlades) {
+                    if (blade == null) continue;
+
                     try {
                         //HACK: Yes, I know this is ugly but need to figure out how to best handle this
-                        component.Dispose();
+                        blade.Dispose();
                     }
                     catch {
                         //TODO: Add better handling for this exception
@@ -156,11 +158,13 @@ namespace MvcTurbine.Web {
         private void PerformBladeAction(Action<IBlade> bladeAction) {
             if (bladeAction == null) return;
 
-            BladeList components = GetAllBlades();
-            if (components == null || components.Count == 0) return;
+            BladeList allBlades = GetAllBlades();
+            if (allBlades == null || allBlades.Count == 0) return;
 
-            foreach (IBlade component in components) {
-                bladeAction(component);
+            foreach (IBlade blade in allBlades) {
+                if (blade == null) continue;
+
+                bladeAction(blade);
             }
         }
 
