@@ -4,8 +4,6 @@
     using Services.Impl;
 
     public class ServiceRegistration : IServiceRegistration {
-        #region IComponentRegistration Members
-
         public void Register(IServiceLocator locator) {
 
             // Specify the implementation for each of the services that will
@@ -13,7 +11,5 @@
 
             locator.Register<IMessageService, MessageService>();
         }
-
-        #endregion
     }
 }

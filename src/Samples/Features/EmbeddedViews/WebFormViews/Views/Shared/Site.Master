@@ -22,8 +22,6 @@
                     <li>
                         <%= Html.ActionLink("WebForm", "Index", "WebForm")%></li>
                     <li>
-                        <%= Html.ActionLink("Spark", "Index", "Spark")%></li>
-                    <li>
                         <%= Html.ActionLink("About", "About", "Home")%></li>
                 </ul>
             </div>
@@ -32,7 +30,7 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
             <div id="footer">
                 <p>
-                    powered by <a href="http://turbineproject.com">MVC Turbine</a></p>
+                    powered by <a href="http://mvcturbine.com">MVC Turbine</a></p>
             </div>
         </div>
     </div>

@@ -12,8 +12,7 @@
             return View();
         }
 
-        public ActionResult About()
-        {
+        public ActionResult About() {
             var messageService = this.ServiceLocator().Resolve<IMessageService>();
             ViewData["AboutMessage"] = messageService.GetAboutMessage();
 

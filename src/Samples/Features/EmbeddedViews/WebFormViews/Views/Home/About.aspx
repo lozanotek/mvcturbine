@@ -5,5 +5,5 @@
 </asp:Content>
 
 <asp:Content ID="aboutContent" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>This view is brought to you by the Spark ViewEngine!</h2>
+    <h2>This view is brought to you by the WebForm ViewEngine!</h2>
 </asp:Content>

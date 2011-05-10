@@ -9,8 +9,7 @@ namespace MvcTurbine.Samples.ControllerInjection {
 			// Everything else is wired automatically
 
 			// For now, let's use the Unity IoC
-			ServiceLocatorManager.SetLocatorProvider(
-				() => new UnityServiceLocator());
+			ServiceLocatorManager.SetLocatorProvider(() => new UnityServiceLocator());
 		}
 	}
 }

@@ -8,7 +8,6 @@
     public class ServiceRegistration : IServiceRegistration {
         public void Register(IServiceLocator locator) {
             locator.Register<IMessageService, MessageService>();
-            locator.Register<IActionFilter, GlobalFilter>();
         }
     }
 }

@@ -55,6 +55,11 @@
             Gets or sets the <see cref="T:MvcTurbine.Web.Blades.ViewBlade"/> instance to use.
             </summary>
         </member>
+        <member name="P:MvcTurbine.Web.Blades.CoreBlades.MetadataProvider">
+            <summary>
+            Gets or sets the <see cref="T:MvcTurbine.Web.Blades.MetadataProviderBlade"/> instance to use.
+            </summary>
+        </member>
         <member name="P:MvcTurbine.Web.Blades.CoreBlades.Models">
             <summary>
             Gets or sets the <see cref="T:MvcTurbine.Web.Blades.ModelBinderBlade"/> instance to use.
@@ -260,6 +265,11 @@
             Private default constructor.
             </summary>
         </member>
+        <member name="M:MvcTurbine.Web.Config.Engine.InitliazeDefaults">
+            <summary>
+            Sets the defaults for the engine to use.
+            </summary>
+        </member>
         <member name="M:MvcTurbine.Web.Config.Engine.RotorContext``1">
             <summary>
             Registers the <see cref="T:MvcTurbine.IRotorContext"/> for the engine to use. If none is specified, <see cref="M:MvcTurbine.Web.Config.Engine.RotorContext``1"/> is used.
@@ -316,7 +326,31 @@
             <summary>
             Registers a <see cref="T:System.Web.Mvc.IControllerActivator"/> for the engine to use.
             </summary>
-            <typeparam name="TActivator"></typeparam>
+            <typeparam name="TActivator">Type that implements <see cref="T:System.Web.Mvc.IControllerActivator"/>.</typeparam>
+            <param name="engine"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Config.EngineExt.DependencyResolver``1(MvcTurbine.Web.Config.Engine)">
+            <summary>
+            Registers a <see cref="T:System.Web.Mvc.IDependencyResolver"/> for the engine to use.
+            </summary>
+            <typeparam name="TResolver">Type that implements <see cref="T:System.Web.Mvc.IDependencyResolver"/>.</typeparam>
+            <param name="engine"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Config.EngineExt.ActionInvoker``1(MvcTurbine.Web.Config.Engine)">
+            <summary>
+            Registers a <see cref="T:System.Web.Mvc.IActionInvoker"/> for the engine to use.
+            </summary>
+            <typeparam name="TInvoker">Type that implements <see cref="T:System.Web.Mvc.IActionInvoker"/>.</typeparam>
+            <param name="engine"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Web.Config.EngineExt.EmbeddedViewResolve``1(MvcTurbine.Web.Config.Engine)">
+            <summary>
+            Registers a <see cref="T:MvcTurbine.Web.Views.IEmbeddedViewResolver"/> for the engine to use.
+            </summary>
+            <typeparam name="TResolver">Type that implements <see cref="T:MvcTurbine.Web.Views.IEmbeddedViewResolver"/>.</typeparam>
             <param name="engine"></param>
             <returns></returns>
         </member>
@@ -850,6 +884,12 @@
         <member name="P:MvcTurbine.Web.Controllers.TurbineControllerActivator.ServiceLocator">
             <summary>
             Gets the current instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> for the factory.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.Web.Metadata.CreateMetadataArguments">
+            <summary>
+              The arguments that are normally passed to the CreateMetadata 
+              method of the DataAnnotationsModelMetadataProvider.
             </summary>
         </member>
         <member name="T:MvcTurbine.Web.TurbineDependencyResolver">

@@ -12,7 +12,6 @@ namespace MvcTurbine.Samples.LoggingBlade.Web {
 
             // For now, let's use the Unity IoC
             ServiceLocatorManager.SetLocatorProvider(() => new UnityServiceLocator());
-        
         }
     }
 }

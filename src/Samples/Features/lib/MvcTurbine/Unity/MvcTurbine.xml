@@ -213,14 +213,6 @@
             Gets or sets the assembly name that couldn't load.
             </summary>
         </member>
-        <member name="M:MvcTurbine.ComponentModel.ExceptionExtensions.GetDetailedMessage(System.Reflection.ReflectionTypeLoadException,System.String)">
-            <summary>
-            Provides formatting information for troubleshooting a missing reference issue.
-            </summary>
-            <param name="assemblyName"></param>
-            <param name="exception"></param>
-            <returns></returns>
-        </member>
         <member name="T:MvcTurbine.ComponentModel.IServiceInjector">
             <summary>
             Provides the contract for injecting dependency into an object not created by the underlying container.
@@ -239,6 +231,19 @@
             </summary>
             <typeparam name="TService"></typeparam>
             <param name="instance"></param>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.IServiceReleaser">
+            <summary>
+            Provides the contract for releasing an object that's been created by the underlying container.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.ExceptionExtensions.GetDetailedMessage(System.Reflection.ReflectionTypeLoadException,System.String)">
+            <summary>
+            Provides formatting information for troubleshooting a missing reference issue.
+            </summary>
+            <param name="assemblyName"></param>
+            <param name="exception"></param>
+            <returns></returns>
         </member>
         <member name="T:MvcTurbine.ComponentModel.IServiceRegistrar">
             <summary>
@@ -419,11 +424,6 @@
             </summary>
             <param name="factoryMethod">The factory method which will be used to resolve this interface.</param>
             <returns>An instance of the type, null otherwise</returns>
-        </member>
-        <member name="T:MvcTurbine.ComponentModel.IServiceReleaser">
-            <summary>
-            Provides the contract for releasing an object that's been created by the underlying container.
-            </summary>
         </member>
         <member name="T:MvcTurbine.ComponentModel.ISupportAutoRegistration">
             <summary>

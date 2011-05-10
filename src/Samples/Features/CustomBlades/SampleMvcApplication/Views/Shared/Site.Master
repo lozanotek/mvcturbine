@@ -27,7 +27,7 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
             <div id="footer">
                 <p>
-                    Powered by <strong><a href="http://mvcturbine.codeplex.com" target="_blank">MVC Turbine</a></p>
+                    Powered by <strong><a href="http://mvcturbine.com" target="_blank">MVC Turbine</a></p>
                 </strong>
             </div>
         </div>

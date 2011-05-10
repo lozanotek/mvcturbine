@@ -4,8 +4,6 @@
     using MvcTurbine.Routing;
 
     public class RouteConfigurator : IRouteRegistrator {
-        #region IRouteConfigurator Members
-
         public void Register(RouteCollection routes) {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
@@ -13,7 +11,5 @@
                             "{controller}/{action}/{id}",
                             new { controller = "Home", action = "Index", id = "" });
         }
-
-        #endregion
     }
 }
