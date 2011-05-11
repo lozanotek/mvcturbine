@@ -1,25 +1,7 @@
-﻿namespace MvcTurbine.Web.Config
-{
+﻿namespace MvcTurbine.Web.Config {
     using System.Web.Mvc;
     using Blades;
     using Views;
-
-    public static class EngineBladeExt 
-    {
-        public static Engine WithCoreBlade<TBlade>(this Engine engine)
-            where TBlade : CoreBlade
-        {            
-            engine.EngineRegistration<TBlade, TBlade>();
-            return engine;
-        }
-
-        public static Engine RemoveCoreBlade<TBlade>(this Engine engine)
-            where TBlade : CoreBlade {
-         
-            engine.RemoveRegistration<TBlade>();
-            return engine;
-        }
-    }
 
     /// <summary>
     /// Extension class for <see cref="Engine"/>.

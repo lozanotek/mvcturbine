@@ -114,7 +114,9 @@ namespace MvcTurbine.Web {
             if (bladeList == null)
                 lock (_lock) {
                     if (bladeList == null) {
-                        bladeList = new BladeList(CoreBlades.GetBlades());
+						// Get the CoreBlade from the container
+						var coreBlades = ServiceLocator.ResolveServices<CoreBlade>();
+						bladeList = new BladeList(coreBlades);
 
                         var commonBlades = GetCommonBlades();
                         
@@ -210,7 +212,7 @@ namespace MvcTurbine.Web {
         public virtual BladeList GetCommonBlades() {
             var blades = ServiceLocator
                 .ResolveServices<IBlade>()
-                .Where(blade => !blade.IsCoreBlade());
+                .Where(blade => !blade.IsType<CoreBlade>());
 
             return new BladeList(blades);
         }

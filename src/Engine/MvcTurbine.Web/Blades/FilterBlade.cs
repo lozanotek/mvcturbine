@@ -10,7 +10,7 @@ namespace MvcTurbine.Web.Blades {
     /// <summary>
     /// Default <see cref="IBlade"/> that supports all ASP.NET MVC components.
     /// </summary>
-    public class FilterBlade : Blade, ISupportAutoRegistration {
+	public class FilterBlade : CoreBlade, ISupportAutoRegistration {
         /// <summary>
         /// Provides the auto-registration for <see cref="IFilterProvider"/> and <see cref="IFilterRegistry"/> types.
         /// </summary>

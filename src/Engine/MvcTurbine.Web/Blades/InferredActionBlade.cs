@@ -7,7 +7,7 @@
     /// <summary>
     /// Blade for alll inferred action components.
     /// </summary>
-    public class InferredActionBlade : Blade, ISupportAutoRegistration {
+    public class InferredActionBlade : CoreBlade, ISupportAutoRegistration {
         public override void Spin(IRotorContext context) {
             // Get the current IServiceLocator
             var serviceLocator = GetServiceLocatorFromContext(context);
@@ -21,6 +21,11 @@
             }
         }
 
+		/// <summary>
+		/// Gets all the <see cref="IInferredActionRegistry"/> types that have been registered with the system.
+		/// </summary>
+		/// <param name="serviceLocator"></param>
+		/// <returns></returns>
         protected virtual IList<IInferredActionRegistry> GetActionRegistries(IServiceLocator serviceLocator) {
             try {
                 return serviceLocator.ResolveServices<IInferredActionRegistry>();
@@ -30,6 +35,10 @@
             }
         }
 
+		/// <summary>
+		/// Adds auto-registration to the <see cref="IInferredActionRegistry"/>.
+		/// </summary>
+		/// <param name="registrationList"></param>
         public void AddRegistrations(AutoRegistrationList registrationList) {
             registrationList.Add(Registration.Simple<IInferredActionRegistry>());
         }

@@ -8,8 +8,7 @@
     /// <summary>
     /// Default <see cref="IBlade"/> that supports all ASP.NET Url routing components.    
     /// </summary>
-    public class RoutingBlade : Blade, ISupportAutoRegistration {
-
+    public class RoutingBlade : CoreBlade, ISupportAutoRegistration {
         /// <summary>
         /// Provides the auto-registration for <see cref="IRouteRegistrator"/> types.
         /// </summary>

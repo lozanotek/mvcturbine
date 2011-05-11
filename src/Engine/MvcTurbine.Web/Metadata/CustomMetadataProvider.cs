@@ -1,29 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
-using MvcTurbine.ComponentModel;
+﻿namespace MvcTurbine.Web.Metadata {
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Web.Mvc;
+	using MvcTurbine.ComponentModel;
 
-namespace MvcTurbine.Web.Metadata
-{
-    public class CustomMetadataProvider : DataAnnotationsModelMetadataProvider
-    {
+    public class CustomMetadataProvider : DataAnnotationsModelMetadataProvider {
         private readonly IServiceLocator serviceLocator;
-        private readonly List<MetadataAttributeMapping> mappingList;
+        private readonly IList<MetadataAttributeMapping> mappingList;
 
-        public CustomMetadataProvider(IServiceLocator serviceLocator, List<MetadataAttributeMapping> mappingList)
-        {
+        public CustomMetadataProvider(IServiceLocator serviceLocator, IList<MetadataAttributeMapping> mappingList) {
             this.serviceLocator = serviceLocator;
             this.mappingList = mappingList;
         }
 
         protected override ModelMetadata CreateMetadata(IEnumerable<Attribute> attributes, Type containerType,
-                                                        Func<object> modelAccessor, Type modelType, string propertyName)
-        {
+                                                        Func<object> modelAccessor, Type modelType, string propertyName) {
+
             var metadata = base.CreateMetadata(attributes, containerType, modelAccessor, modelType, propertyName);
 
-            AlterMetadata(metadata, new CreateMetadataArguments
-            {
+            AlterMetadata(metadata, new CreateMetadataArguments {
                 Attributes = attributes,
                 ContainerType = containerType,
                 ModelAccessor = modelAccessor,
@@ -34,26 +30,23 @@ namespace MvcTurbine.Web.Metadata
             return metadata;
         }
 
-        public virtual void AlterMetadata(ModelMetadata metadata, CreateMetadataArguments args)
-        {
-            foreach (var handler in GetEveryHandlerForThisType(args))
-                handler.AlterMetadata(metadata, args);
+        public virtual void AlterMetadata(ModelMetadata metadata, CreateMetadataArguments args) {
+			foreach (var handler in GetEveryHandlerForThisType(args)) {
+				handler.AlterMetadata(metadata, args);
+			}
         }
 
-        private IEnumerable<IMetadataAttributeHandlerBase> GetEveryHandlerForThisType(CreateMetadataArguments args)
-        {
+        protected virtual IEnumerable<IMetadataAttributeHandlerBase> GetEveryHandlerForThisType(CreateMetadataArguments args) {
             return mappingList
                 .Where(map => ThisIsAHandlerforThisType(args, map))
                 .Select(CreateTheHandler);
         }
 
-        private IMetadataAttributeHandlerBase CreateTheHandler(MetadataAttributeMapping map)
-        {
+        protected virtual IMetadataAttributeHandlerBase CreateTheHandler(MetadataAttributeMapping map) {
             return serviceLocator.Resolve(map.HandlerType) as IMetadataAttributeHandlerBase;
         }
 
-        private static bool ThisIsAHandlerforThisType(CreateMetadataArguments args, MetadataAttributeMapping map)
-        {
+        protected virtual bool ThisIsAHandlerforThisType(CreateMetadataArguments args, MetadataAttributeMapping map) {
             return args.Attributes.Any(x => x.GetType() == map.AttributeType);
         }
     }

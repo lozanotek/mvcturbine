@@ -8,7 +8,7 @@
     /// <summary>
     /// Blade for all controller related components.
     /// </summary>
-    public class ControllerBlade : Blade, ISupportAutoRegistration {
+    public class ControllerBlade : CoreBlade, ISupportAutoRegistration {
         /// <summary>
         /// Sets the instance of <see cref="IControllerFactory"/> to use.  If one is not registered,
         /// <see cref="IControllerActivator"/> is used.

@@ -76,7 +76,6 @@
     <Compile Include="..\CommonInfo.cs">
       <Link>CommonInfo.cs</Link>
     </Compile>
-    <Compile Include="Blades\NullBlade.cs" />
     <Compile Include="CollectionExtensions.cs">
       <SubType>Code</SubType>
     </Compile>

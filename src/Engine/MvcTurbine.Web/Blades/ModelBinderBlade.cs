@@ -9,7 +9,7 @@
     /// <summary>
     /// Blade for all the <see cref="IModelBinder"/> components.
     /// </summary>
-    public class ModelBinderBlade : Blade, ISupportAutoRegistration {
+    public class ModelBinderBlade : CoreBlade, ISupportAutoRegistration {
         public override void Spin(IRotorContext context) {
             // Get the current IServiceLocator
             var serviceLocator = GetServiceLocatorFromContext(context);

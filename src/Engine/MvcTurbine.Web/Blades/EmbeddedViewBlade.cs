@@ -7,19 +7,19 @@
     /// <summary>
     /// Defines the blade that deals with all the embedded views the system exposes.
     /// </summary>
-    public class EmbeddedViewBlade : Blade {
+	public class EmbeddedViewBlade : CoreBlade {
         public override void Spin(IRotorContext context) {
-            IServiceLocator serviceLocator = GetServiceLocatorFromContext(context);
-            IEmbeddedViewResolver resolver = GetEmbeddedViewResolver(serviceLocator);
+            var serviceLocator = GetServiceLocatorFromContext(context);
+            var resolver = GetEmbeddedViewResolver(serviceLocator);
 
-            EmbeddedViewTable table = resolver.GetEmbeddedViews();
+            var table = resolver.GetEmbeddedViews();
 
             var embeddedProvider = new EmbeddedViewVirtualPathProvider(table);
             HostingEnvironment.RegisterVirtualPathProvider(embeddedProvider);
         }
 
         /// <summary>
-        /// Gets the embedded view resolver for the system.
+        /// Gets the <see cref="IEmbeddedViewResolver"/> resolver for the system.
         /// </summary>
         /// <param name="serviceLocator"></param>
         /// <returns></returns>

@@ -33,7 +33,8 @@
 			.ControllerActivator<TurbineControllerActivator>()
 			.DependencyResolver<TurbineDependencyResolver>()
 			.ActionInvoker<TurbineActionInvoker>()
-			.EmbeddedViewResolve<EmbeddedViewResolver>();
+			.EmbeddedViewResolve<EmbeddedViewResolver>()
+			.RegisterBuiltInCoreBlades();
 		}
 
 		/// <summary>

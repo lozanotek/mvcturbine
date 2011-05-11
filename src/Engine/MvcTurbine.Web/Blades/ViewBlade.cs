@@ -8,7 +8,7 @@
     ///<summary>
     /// Blade for all View related components
     ///</summary>
-    public class ViewBlade : Blade, ISupportAutoRegistration {
+    public class ViewBlade : CoreBlade, ISupportAutoRegistration {
         /// <summary>
         /// Initializes the <see cref="ViewEngines.Engines"/> by pulling all associated <seealso cref="IViewEngine"/> instances
         /// in the current application.

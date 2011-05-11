@@ -7,12 +7,11 @@
 	/// <summary>
 	/// Blade for all http modules with auto-registration
 	/// </summary>
-	public class HttpModuleBlade : Blade, ISupportAutoRegistration {
+	public class HttpModuleBlade : CoreBlade, ISupportAutoRegistration {
 		public void AddRegistrations(AutoRegistrationList registrationList) {
 			registrationList.Add(Registration.Simple<IHttpModule>());
 		}
 
 		public override void Spin(IRotorContext context) { }
-		
 	}
 }

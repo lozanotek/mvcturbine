@@ -107,7 +107,7 @@
         /// </remarks>
         protected virtual void InitializeHttpModules() {
             var modules = ServiceLocator.ResolveServices<IHttpModule>();
-            if (modules == null) return;
+            if (modules == null || modules.Count == 0) return;
 
             foreach (var module in modules) {
                 module.Init(this);
