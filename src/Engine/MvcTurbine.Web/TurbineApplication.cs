@@ -106,10 +106,10 @@
         /// the ASP.NET runtime on IIS6/7.
         /// </remarks>
         protected virtual void InitializeHttpModules() {
-            IList<IHttpModule> modules = ServiceLocator.ResolveServices<IHttpModule>();
+            var modules = ServiceLocator.ResolveServices<IHttpModule>();
             if (modules == null) return;
 
-            foreach (IHttpModule module in modules) {
+            foreach (var module in modules) {
                 module.Init(this);
             }
         }

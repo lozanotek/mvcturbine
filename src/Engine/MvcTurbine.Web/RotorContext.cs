@@ -191,10 +191,10 @@ namespace MvcTurbine.Web {
         private void AutoRegistrationForContext() {
             var registrationList = new AutoRegistrationList();
 
-            registrationList
-                .Add(Registration.Simple<IServiceRegistration>())
-                .Add(Registration.Simple<IBlade>())
-                .Add(Registration.Simple<IHttpModule>());
+			registrationList
+				.Add(Registration.Simple<IServiceRegistration>())
+				.Add(Registration.Simple<IBlade>());
+                //.Add(Registration.Simple<IHttpModule>());
 
             ProcessAutomaticRegistration(registrationList);
         }
