@@ -71,5 +71,18 @@
             engine.EngineRegistration<IEmbeddedViewResolver, TResolver>();
             return engine;
         }
+
+		/// <summary>
+		/// Registers a <see cref="IViewPageActivator"/> for the engine to use.
+		/// </summary>
+		/// <typeparam name="TViewPage">Type that implements <see cref="IViewPageActivator"/>.</typeparam>
+		/// <param name="engine"></param>
+		/// <returns></returns>
+		public static Engine ViewPageActivator<TViewPage>(this Engine engine)
+			where TViewPage : IViewPageActivator {
+
+			engine.EngineRegistration<IViewPageActivator, TViewPage>();
+			return engine;
+		}
     }
 }

@@ -147,6 +147,7 @@
     <Compile Include="Views\EmbeddedViewTable.cs" />
     <Compile Include="Views\EmbeddedViewVirtualPathProvider.cs" />
     <Compile Include="Views\IEmbeddedViewResolver.cs" />
+    <Compile Include="Views\TurbineViewPageActivator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MvcTurbine\MvcTurbine.csproj">

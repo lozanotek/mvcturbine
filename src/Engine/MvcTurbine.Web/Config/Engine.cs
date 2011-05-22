@@ -26,8 +26,8 @@
 		/// </summary>
 		private void InitliazeDefaults() {
 			// Register the default types for the system to use
-
-			RotorContext<RotorContext>()
+			this
+			.RotorContext<RotorContext>()
 			.AutoRegistrator<DefaultAutoRegistrator>()
 			.AssemblyLoader<DefaultBinAssemblyLoader>()
 			.ControllerFactory<TurbineControllerFactory>()
@@ -35,6 +35,7 @@
 			.DependencyResolver<TurbineDependencyResolver>()
 			.ActionInvoker<TurbineActionInvoker>()
 			.EmbeddedViewResolve<EmbeddedViewResolver>()
+			.ViewPageActivator<TurbineViewPageActivator>()
 			.RegisterBuiltInCoreBlades();
 		}
 
