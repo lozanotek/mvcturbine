@@ -42,7 +42,8 @@
         /// Sets up the engine with the specified pieces.
         /// </summary>
         public virtual void SetupEngine() {
-            Engine.Initialize
+            Engine
+				.Initialize
                 .ConfigureWithServiceLocator(ServiceLocator);
         }
 

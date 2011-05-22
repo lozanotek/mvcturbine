@@ -115,7 +115,7 @@ namespace MvcTurbine.Web {
                 lock (_lock) {
                     if (bladeList == null) {
 						// Get the CoreBlade from the container
-						var coreBlades = ServiceLocator.ResolveServices<CoreBlade>();
+						var coreBlades = ServiceLocator.GetCoreBlades();
 						bladeList = new BladeList(coreBlades);
 
                         var commonBlades = GetCommonBlades();
@@ -200,7 +200,6 @@ namespace MvcTurbine.Web {
 			registrationList
 				.Add(Registration.Simple<IServiceRegistration>())
 				.Add(Registration.Simple<IBlade>());
-                //.Add(Registration.Simple<IHttpModule>());
 
             ProcessAutomaticRegistration(registrationList);
         }

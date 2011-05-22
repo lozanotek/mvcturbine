@@ -22,7 +22,8 @@
 		/// <param name="engine"></param>
 		/// <returns></returns>
 		internal static Engine RegisterBuiltInCoreBlades(this Engine engine) {
-			engine.WithCoreBlade<DependencyResolverBlade>()
+			engine
+				.WithCoreBlade<DependencyResolverBlade>()
 				.WithCoreBlade<RoutingBlade>()
 				.WithCoreBlade<FilterBlade>()
 				.WithCoreBlade<ControllerBlade>()
@@ -44,7 +45,8 @@
 		/// <returns></returns>
 		public static Engine WithCoreBlade<TBlade>(this Engine engine)
 			where TBlade : CoreBlade {
-			engine.EngineRegistration<TBlade, TBlade>();
+
+			CoreBlades.Track<TBlade>();
 			return engine;
 		}
 
@@ -56,7 +58,8 @@
 		/// <returns></returns>
 		public static Engine RemoveCoreBlade<TBlade>(this Engine engine)
 			where TBlade : CoreBlade {
-			engine.RemoveRegistration<TBlade>();
+
+			CoreBlades.UnTrack<TBlade>();
 			return engine;
 		}
 	}

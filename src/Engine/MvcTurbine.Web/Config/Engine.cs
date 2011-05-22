@@ -5,6 +5,7 @@
 	using ComponentModel;
 	using Controllers;
 	using Views;
+	using MvcTurbine.Web.Blades;
 
 	/// <summary>
 	/// Defines the configuration component for runtime elements of the engine.
@@ -88,20 +89,27 @@
 				locator.Register(() => locator);
 
 				// To provide DI support for IServiceReleaser
-			    if (locator is IServiceReleaser)
-			        locator.Register(() => locator as IServiceReleaser);
-			    else
-			        locator.Register<IServiceReleaser, EmptyServiceReleaser>();
+				if (locator is IServiceReleaser) {
+					locator.Register(() => locator as IServiceReleaser);
+				}
+				else {
+					locator.Register<IServiceReleaser, EmptyServiceReleaser>();
+				}
 
 			    // To provide DI support for IServiceInjector
-			    if (locator is IServiceInjector)
-			        locator.Register(() => locator as IServiceInjector);
-			    else
-			        locator.Register<IServiceInjector, EmptyServiceInjector>();
+				if (locator is IServiceInjector) {
+					locator.Register(() => locator as IServiceInjector);
+				}
+				else {
+					locator.Register<IServiceInjector, EmptyServiceInjector>();
+				}
 
 			    foreach (var item in engineRegistrations) {
 					locator.Register(item.Key, item.Value);
 				}
+
+				// Register these pieces with the engine
+				CoreBlades.RegisterWithServiceLocator(locator);
 
 				// No longer needed
 				engineRegistrations.Clear();
