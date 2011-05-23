@@ -86,6 +86,7 @@
     </Compile>
     <Compile Include="Blades\ControllerBlade.cs" />
     <Compile Include="Blades\CoreBlade.cs" />
+    <Compile Include="Blades\CoreBlades.cs" />
     <Compile Include="Blades\DependencyResolverBlade.cs" />
     <Compile Include="Blades\HttpModuleBlade.cs" />
     <Compile Include="Blades\InferredActionBlade.cs" />
