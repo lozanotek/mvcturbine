@@ -4,6 +4,23 @@
         <name>MvcTurbine.Unity</name>
     </assembly>
     <members>
+        <member name="T:MvcTurbine.Unity.UnityRegistrator">
+            <summary>
+            A <see cref="T:MvcTurbine.ComponentModel.IServiceRegistration"/> implementation that leverages the <see cref="T:Microsoft.Practices.Unity.IUnityContainer"/> from Unity.    
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityRegistrator.Register(MvcTurbine.ComponentModel.IServiceLocator)">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceRegistration.Register(MvcTurbine.ComponentModel.IServiceLocator)"/>        
+            </summary>
+            <param name="locator"></param>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityRegistrator.Register(Microsoft.Practices.Unity.IUnityContainer)">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceRegistration.Register(MvcTurbine.ComponentModel.IServiceLocator)"/>
+            </summary>
+            <param name="container"></param>
+        </member>
         <member name="T:MvcTurbine.Unity.UnityServiceLocator">
             <summary>
             Default implementation of the <seealso cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> contract with Unity IoC.
@@ -129,11 +146,6 @@
             Releases (disposes) the service instance from within the locator.
             </summary>
             <param name="instance">Instance of a service to dipose from the locator.</param>
-        </member>
-        <member name="M:MvcTurbine.Unity.UnityServiceLocator.Reset">
-            <summary>
-            Resets the locator to its initial state clearing all registrations.
-            </summary>
         </member>
         <member name="M:MvcTurbine.Unity.UnityServiceLocator.Dispose">
             <summary>

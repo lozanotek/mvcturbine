@@ -4,6 +4,23 @@
         <name>MvcTurbine.Ninject</name>
     </assembly>
     <members>
+        <member name="T:MvcTurbine.Ninject.NinjectRegistrator">
+            <summary>
+            A <see cref="T:MvcTurbine.ComponentModel.IServiceRegistration"/> implementation that leverages the <see cref="T:Ninject.IKernel"/> from Ninject.    
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectRegistrator.Register(MvcTurbine.ComponentModel.IServiceLocator)">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceRegistration.Register(MvcTurbine.ComponentModel.IServiceLocator)"/>        
+            </summary>
+            <param name="locator"></param>
+        </member>
+        <member name="M:MvcTurbine.Ninject.NinjectRegistrator.Register(Ninject.IKernel)">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceRegistration.Register(MvcTurbine.ComponentModel.IServiceLocator)"/>
+            </summary>
+            <param name="kernel"></param>
+        </member>
         <member name="T:MvcTurbine.Ninject.NinjectServiceLocator">
             <summary>
             Default implementation of the <seealso cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> contract with Ninject IoC.
@@ -122,17 +139,6 @@
             </summary>
             <typeparam name="Interface"></typeparam>
             <param name="factoryMethod"></param>
-        </member>
-        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Release(System.Object)">
-            <summary>
-            Releases (disposes) the service instance from within the locator.
-            </summary>
-            <param name="instance">Instance of a service to dipose from the locator.</param>
-        </member>
-        <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Reset">
-            <summary>
-            Resets the locator to its initial state clearing all registrations.
-            </summary>
         </member>
         <member name="M:MvcTurbine.Ninject.NinjectServiceLocator.Inject``1(``0)">
             <summary>
