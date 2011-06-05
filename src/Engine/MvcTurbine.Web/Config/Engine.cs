@@ -4,6 +4,7 @@
 	using System.Collections.Generic;
 	using ComponentModel;
 	using Controllers;
+	using MvcTurbine.Web.Modules;
 	using Views;
 	using MvcTurbine.Web.Blades;
 
@@ -36,6 +37,7 @@
 			.ActionInvoker<TurbineActionInvoker>()
 			.EmbeddedViewResolve<EmbeddedViewResolver>()
 			.ViewPageActivator<TurbineViewPageActivator>()
+			.HttpModuleManager<HttpModuleManager>()
 			.RegisterBuiltInCoreBlades();
 		}
 
@@ -65,12 +67,22 @@
 		}
 
 		/// <summary>
-		/// Registers the <see cref="IAutoRegistrator"/> for the engine to use.  If none is specified, <see cref="DefaultAutoRegistrator"/> is sued.
+		/// Registers the <see cref="IAutoRegistrator"/> for the engine to use.  If none is specified, <see cref="DefaultAutoRegistrator"/> is used.
 		/// </summary>
 		/// <typeparam name="TRegistrator">A type that implements</typeparam>
 		/// <returns></returns>
 		public Engine AutoRegistrator<TRegistrator>() where TRegistrator : IAutoRegistrator {
 			EngineRegistration<IAutoRegistrator, TRegistrator>();
+			return this;
+		}
+
+		/// <summary>
+		/// Registers the <see cref="IHttpModuleManager"/> for the engine to use.  If none is specifed, <see cref="HttpModuleManager" /> is used.
+		/// </summary>
+		/// <typeparam name="TModuleManager"></typeparam>
+		/// <returns></returns>
+		public Engine HttpModuleManager<TModuleManager>() where TModuleManager : IHttpModuleManager {
+			EngineRegistration<IHttpModuleManager, TModuleManager>();
 			return this;
 		}
 

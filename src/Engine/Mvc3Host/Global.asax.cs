@@ -1,9 +1,6 @@
 ﻿namespace Mvc3Host {
-    using MvcTurbine.Blades;
     using MvcTurbine.ComponentModel;
 	using MvcTurbine.Web;
-	using MvcTurbine.Web.Blades;
-	using MvcTurbine.Web.Config;
 
     public class MvcApplication : TurbineApplication {
 		static MvcApplication() {

@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Web;
     using ComponentModel;
+    using MvcTurbine.Web.Modules;
     using Properties;
     using Config;
 
@@ -93,28 +94,11 @@
         public override void Init() {
             base.Init();
 
-            InitializeHttpModules();
-
             if (CurrentContext == null) return;
             CurrentContext.Initialize(this);
         }
 
-        /// <summary>
-        /// Initializes all the registered <see cref="IHttpModule"/> instances.
-        /// </summary>
-        /// <remarks>
-        /// This code has to live here in order for the pieces to work correctly with
-        /// the ASP.NET runtime on IIS6/7.
-        /// </remarks>
-        protected virtual void InitializeHttpModules() {
-            var modules = ServiceLocator.ResolveServices<IHttpModule>();
-            if (modules == null || modules.Count == 0) return;
-
-            foreach (var module in modules) {
-                module.Init(this);
-            }
-        }
-
+       
         /// <summary>
         /// Tears down, one-time only, the application.
         /// </summary>
@@ -148,6 +132,8 @@
                 return new RotorContext(ServiceLocator);
             }
         }
+
+		
 
         /// <summary>
         /// Gets the instance of <see cref="IServiceLocator"/> that is registered with

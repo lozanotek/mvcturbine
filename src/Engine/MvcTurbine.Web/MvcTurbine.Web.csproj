@@ -57,6 +57,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -125,6 +126,11 @@
     <Compile Include="Metadata\MetadataAttribute.cs" />
     <Compile Include="Metadata\MetadataAttributeMapping.cs" />
     <Compile Include="Metadata\MetadataAttributeReader.cs" />
+    <Compile Include="Modules\HttpApplicationExtensions.cs" />
+    <Compile Include="Modules\HttpModuleManager.cs" />
+    <Compile Include="Modules\HttpModuleRuntimeRegistrar.cs" />
+    <Compile Include="Modules\IHttpModuleManager.cs" />
+    <Compile Include="Modules\TurbineHttpModule.cs" />
     <Compile Include="TurbineDependencyResolver.cs" />
     <Compile Include="Filters\FilterRegistryProvider.cs" />
     <Compile Include="Models\BinderRegistratrionExpression.cs" />
@@ -184,6 +190,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
