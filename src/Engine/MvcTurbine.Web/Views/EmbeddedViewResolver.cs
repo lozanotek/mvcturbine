@@ -57,7 +57,8 @@ namespace MvcTurbine.Web.Views
         protected virtual string[] GetNamesOfAssemblyResources(Assembly assembly) {
             try {
                 // GetManifestResourceNames will throw a NotSupportedException when run on a dynamic assembly
-                return assembly.GetManifestResourceNames();
+                return assembly.IsDynamic ? new string[] { } : 
+                    assembly.GetManifestResourceNames();
             }
             catch {
                 return new string[] { };
