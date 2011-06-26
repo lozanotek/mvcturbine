@@ -1,8 +1,8 @@
 ﻿namespace MvcTurbine.Web.Modules {
-	using System.Collections.Generic;
+    using System.Collections.Generic;
 	using System.Collections.ObjectModel;
 	using System.Web;
-	using MvcTurbine.ComponentModel;
+	using ComponentModel;
 
 	public class HttpModuleManager : IHttpModuleManager {
 		private static IList<IHttpModule> appModules;
@@ -25,5 +25,11 @@
 				module.Init(application);
 			}
 		}
+
+	    public void DisposeModules(HttpApplication application) {
+            foreach (var httpModule in Modules) {
+                httpModule.Dispose();
+            }
+	    }
 	}
 }

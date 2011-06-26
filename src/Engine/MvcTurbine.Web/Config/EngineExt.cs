@@ -1,6 +1,5 @@
 ﻿namespace MvcTurbine.Web.Config {
     using System.Web.Mvc;
-    using Blades;
     using Views;
 
     /// <summary>

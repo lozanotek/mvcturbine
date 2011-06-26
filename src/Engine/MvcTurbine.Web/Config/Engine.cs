@@ -2,11 +2,12 @@
 {
 	using System;
 	using System.Collections.Generic;
+	using System.Web;
 	using ComponentModel;
 	using Controllers;
-	using MvcTurbine.Web.Modules;
+	using Modules;
 	using Views;
-	using MvcTurbine.Web.Blades;
+	using Blades;
 
 	/// <summary>
 	/// Defines the configuration component for runtime elements of the engine.
@@ -38,6 +39,8 @@
 			.EmbeddedViewResolve<EmbeddedViewResolver>()
 			.ViewPageActivator<TurbineViewPageActivator>()
 			.HttpModuleManager<HttpModuleManager>()
+            .AssemblyFilter<CommonAssemblyFilter>()
+            .HttpModuleRegistry<AllHttpModulesRegistry>()
 			.RegisterBuiltInCoreBlades();
 		}
 
@@ -85,6 +88,36 @@
 			EngineRegistration<IHttpModuleManager, TModuleManager>();
 			return this;
 		}
+
+        /// <summary>
+        /// Registers the <see cref="AssemblyFilter"/> for the engine to use.  If none is specified, <see cref="CommonAssemblyFilter"/> is used.
+        /// </summary>
+        /// <typeparam name="TAssemblyFilter"></typeparam>
+        /// <returns></returns>
+        public Engine AssemblyFilter<TAssemblyFilter>() where TAssemblyFilter : AssemblyFilter {
+            EngineRegistration<AssemblyFilter, TAssemblyFilter>();
+            return this;
+        }
+
+        /// <summary>
+        /// Registers the <see cref="IHttpModuleRegistry"/> for the engine to use.  If none is specified, <see cref="AllHttpModulesRegistry"/> is used.
+        /// </summary>
+        /// <typeparam name="TModuleRegistry"></typeparam>
+        /// <returns></returns>
+        public Engine HttpModuleRegistry<TModuleRegistry>() where TModuleRegistry : IHttpModuleRegistry {
+            EngineRegistration<IHttpModuleRegistry, TModuleRegistry>();
+            return this;
+        }
+
+        /// <summary>
+        /// Disables the auto-registration of <see cref="IHttpModule"/> types.
+        /// </summary>
+        /// <param name="engine"></param>
+        /// <returns></returns>
+        public Engine DisableHttpModuleRegistration() {
+            RemoveRegistration<IHttpModuleRegistry>();
+            return this;
+        }
 
 		/// <summary>
 		/// Configures the specified types for the engine with the <see cref="IServiceLocator"/>.        

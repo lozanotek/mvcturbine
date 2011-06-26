@@ -1,21 +1,10 @@
 ﻿namespace MvcTurbine.Web.Config {
-	using System;
-	using MvcTurbine.Web.Blades;
+    using Blades;
 
 	/// <summary>
 	/// Extension class for <see cref="Engine"/>.
 	/// </summary>
 	public static class EngineBladeExt {
-		/// <summary>
-		/// Disables the auto-registration of <see cref="IHttpModule"/> types.
-		/// </summary>
-		/// <param name="engine"></param>
-		/// <returns></returns>
-		public static Engine DisableHttpModuleRegistration(this Engine engine) {
-			engine.RemoveCoreBlade<HttpModuleBlade>();
-			return engine;
-		}
-
 		/// <summary>
 		/// Registers all built-in <see cref="CoreBlade"/> types that the engine currently supports.
 		/// </summary>
@@ -63,5 +52,4 @@
 			return engine;
 		}
 	}
-
 }

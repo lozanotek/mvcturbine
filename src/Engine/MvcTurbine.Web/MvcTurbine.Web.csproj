@@ -126,10 +126,14 @@
     <Compile Include="Metadata\MetadataAttribute.cs" />
     <Compile Include="Metadata\MetadataAttributeMapping.cs" />
     <Compile Include="Metadata\MetadataAttributeReader.cs" />
+    <Compile Include="Modules\AllHttpModulesRegistry.cs" />
     <Compile Include="Modules\HttpApplicationExtensions.cs" />
+    <Compile Include="Modules\HttpModule.cs" />
     <Compile Include="Modules\HttpModuleManager.cs" />
     <Compile Include="Modules\HttpModuleRuntimeRegistrar.cs" />
     <Compile Include="Modules\IHttpModuleManager.cs" />
+    <Compile Include="Modules\IHttpModuleRegistry.cs" />
+    <Compile Include="Modules\HttpModuleRegistry.cs" />
     <Compile Include="Modules\TurbineHttpModule.cs" />
     <Compile Include="TurbineDependencyResolver.cs" />
     <Compile Include="Filters\FilterRegistryProvider.cs" />

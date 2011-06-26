@@ -14,9 +14,10 @@
         /// Creates an instance with the specified <seealso cref="IServiceLocator"/> implementation.
         /// </summary>
         /// <param name="locator"></param>
-        public DefaultAutoRegistrator(IServiceLocator locator) {
+        /// <param name="filter"></param>
+        public DefaultAutoRegistrator(IServiceLocator locator, AssemblyFilter filter) {
             ServiceLocator = locator;
-            Filter = new CommonAssemblyFilter();
+            Filter = filter;
         }
 
         /// <summary>

@@ -278,7 +278,8 @@ namespace MvcTurbine.Web {
 							autoRegistrator = ServiceLocator.Resolve<IAutoRegistrator>();
 						}
 						catch (ServiceResolutionException) {
-							autoRegistrator = new DefaultAutoRegistrator(ServiceLocator);
+						    autoRegistrator = new DefaultAutoRegistrator(ServiceLocator, 
+                                new CommonAssemblyFilter());
 						}
 					}
 				}

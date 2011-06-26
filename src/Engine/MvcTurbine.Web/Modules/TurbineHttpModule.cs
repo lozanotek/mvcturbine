@@ -34,13 +34,7 @@
 			// We should already have it
 			if (moduleManager == null || moduleManager.Modules == null) return;
 
-			foreach (var httpModule in moduleManager.Modules) {
-				var disposableModule = httpModule as IDisposable;
-
-				if (disposableModule == null) continue;
-				disposableModule.Dispose();
-			}
-
+		    moduleManager.DisposeModules(HttpContext.Current.ApplicationInstance);
 			moduleManager = null;
 		}
 
