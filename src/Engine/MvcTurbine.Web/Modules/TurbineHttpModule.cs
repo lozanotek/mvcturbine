@@ -1,7 +1,6 @@
 ﻿namespace MvcTurbine.Web.Modules {
-	using System;
-	using System.Web;
-	using MvcTurbine.ComponentModel;
+    using System.Web;
+	using ComponentModel;
 
 	/// <summary>
 	/// Module used to initialize all modules auto-registered with the engine.

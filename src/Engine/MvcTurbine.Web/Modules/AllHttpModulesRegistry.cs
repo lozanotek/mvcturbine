@@ -6,13 +6,27 @@
     using System.Web;
     using ComponentModel;
 
+    /// <summary>
+    /// Defines the way to register all <see cref="IHttpModule"/> for the runtime.
+    /// </summary>
     public class AllHttpModulesRegistry : HttpModuleRegistry {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="filter"></param>
         public AllHttpModulesRegistry(AssemblyFilter filter) {
             Filter = filter;
         }
 
+        /// <summary>
+        /// Gets the <see cref="AssemblyFilter"/> to use for parsing the <see cref="IHttpModule"/>.
+        /// </summary>
         public AssemblyFilter Filter { get; private set; }
 
+        /// <summary>
+        /// Gets the registered <see cref="HttpModule"/> types for the  runtime to use.
+        /// </summary>
+        /// <returns></returns>
         public override IEnumerable<HttpModule> GetModuleRegistrations() {
             var assemblies = GetAssemblies();
             if (assemblies == null) return null;
@@ -22,8 +36,7 @@
                     .Where(type => type.IsType<IHttpModule>())
                     .Where(type => !type.IsAbstract);
 
-                var typeList = moduleQuery.Select(type => new HttpModule {Type = type}).ToList();
-                typeList.ForEach(Modules.Add);
+                moduleQuery.ForEach(type => Add(type));
             }
 
             return Modules;

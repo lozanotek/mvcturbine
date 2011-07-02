@@ -176,6 +176,16 @@
         }
 
         /// <summary>
+        /// See <seealso cref="IServiceLocator.Register(System.Type,System.Type, System.String)"/>.
+        /// </summary>
+        /// <param name="serviceType"></param>
+        /// <param name="implType"></param>
+        /// <param name="key"></param>
+        public void Register(Type serviceType, Type implType, string key) {
+            registrationList.Register(serviceType, implType, key);
+        }
+
+        /// <summary>
         /// See <see cref="IServiceLocator.Register{Interface}(Interface)"/>.
         /// </summary>
         /// <typeparam name="Interface"></typeparam>

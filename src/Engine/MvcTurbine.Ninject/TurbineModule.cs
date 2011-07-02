@@ -108,6 +108,16 @@ namespace MvcTurbine.Ninject {
         }
 
         /// <summary>
+        /// See <see cref="IServiceLocator.Register(System.Type,System.Type,System.String)"/>.
+        /// </summary>
+        /// <param name="serviceType"></param>
+        /// <param name="implType"></param>
+        /// <param name="key"></param>
+        public void Register(Type serviceType, Type implType, string key) {
+            Bind(serviceType).To(implType).Named(key);
+        }
+
+        /// <summary>
         /// See <see cref="IServiceLocator.Register{Interface}<>"/>
         /// </summary>
         /// <typeparam name="Interface"></typeparam>
@@ -121,8 +131,7 @@ namespace MvcTurbine.Ninject {
         /// </summary>
         /// <typeparam name="Interface"></typeparam>
         /// <param name="factoryMethod"></param>
-        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class
-        {
+        public void Register<Interface>(Func<Interface> factoryMethod) where Interface : class {
             Bind<Interface>().ToMethod(c => factoryMethod.Invoke());
         }
     }

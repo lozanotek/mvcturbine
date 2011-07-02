@@ -105,6 +105,26 @@ namespace MvcTurbine.Windsor {
             registrationList.Add(registration);
         }
 
+        /// <summary>
+        /// See <seealso cref="IServiceLocator.Register(System.Type,System.Type,System.String)"/>.
+        /// </summary>
+        /// <param name="serviceType"></param>
+        /// <param name="implType"></param>
+        /// <param name="key"></param>
+        public void Register(Type serviceType, Type implType, string key) {
+            var registration = Component.For(serviceType)
+                .ImplementedBy(implType)
+                .Named(key)
+                .LifeStyle.Transient;
+
+            registrationList.Add(registration);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="Interface"></typeparam>
+        /// <param name="instance"></param>
         public void Register<Interface>(Interface instance) where Interface : class {
             var registration = Component.For<Interface>().Instance(instance);
             registrationList.Add(registration);
@@ -130,6 +150,9 @@ namespace MvcTurbine.Windsor {
             return string.Format("{0}-{1}", service.Name, impl.FullName);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Dispose() {
             var registrations = registrationList.ToArray();
             Container.Register(registrations);

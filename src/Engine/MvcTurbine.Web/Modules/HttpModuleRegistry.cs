@@ -19,30 +19,84 @@
         /// </summary>
         /// <returns></returns>
         public virtual IEnumerable<HttpModule> GetModuleRegistrations() {
-            return Modules == null ? null : Modules.Distinct();
+            return Modules;
         }
 
+        /// <summary>
+        /// Adds the specified module to the runtime pipeline.
+        /// </summary>
+        /// <typeparam name="TModule"></typeparam>
+        /// <returns></returns>
         public virtual HttpModuleRegistry Add<TModule>() where TModule : IHttpModule {
-            return Add(typeof (TModule));
+            return Add<TModule>(typeof(TModule).Name);
         }
 
+        /// <summary>
+        /// Adds the specified module with the specified name to the runtime pipeline.
+        /// </summary>
+        /// <typeparam name="TModule"></typeparam>
+        /// <param name="moduleName"></param>
+        /// <returns></returns>
+        public virtual HttpModuleRegistry Add<TModule>(string moduleName) where TModule : IHttpModule {
+            var moduleType = typeof (TModule);
+            return Add(moduleType, moduleName);
+        }
+        
+        /// <summary>
+        /// Adds the specified module to the runtime pipeline.
+        /// </summary>
+        /// <param name="moduleType"></param>
+        /// <returns></returns>
         public virtual HttpModuleRegistry Add(Type moduleType) {
             if (moduleType == null) return this;
             if (!moduleType.IsType<IHttpModule>()) return this;
 
-            Modules.Add(new HttpModule {Type = moduleType});
+            return Add(moduleType, moduleType.Name);
+        }
+
+        /// <summary>
+        /// Adds the specified module with the specified name to the runtime pipeline.        
+        /// </summary>
+        /// <param name="moduleType"></param>
+        /// <param name="moduleName"></param>
+        /// <returns></returns>
+        public virtual HttpModuleRegistry Add(Type moduleType, string moduleName) {
+            if (moduleType == null) return this;
+            if (!moduleType.IsType<IHttpModule>()) return this;
+
+            Modules.Add(new HttpModule { Type = moduleType, Name = moduleName });
             return this;
         }
 
-        public virtual HttpModuleRegistry Remove<TModule>() where TModule : IHttpModule {
-            return Remove(typeof(TModule));
+        /// <summary>
+        /// Removes the specified module name from the runtime pipeline.
+        /// </summary>
+        /// <param name="moduleName"></param>
+        /// <returns></returns>
+        public virtual HttpModuleRegistry Remove(string moduleName) {
+            Modules.Add(new HttpModule { IsRemoved = true, Name = moduleName });
+            return this;
         }
 
+        /// <summary>
+        /// Removes the specified module from the runtime pipeline.        
+        /// </summary>
+        /// <typeparam name="TModule"></typeparam>
+        /// <returns></returns>
+        public virtual HttpModuleRegistry Remove<TModule>() where TModule : IHttpModule {
+            return Remove(typeof(TModule).Name);
+        }
+
+        /// <summary>
+        /// Removes the specified module from the runtime pipeline.        
+        /// </summary>
+        /// <param name="moduleType"></param>
+        /// <returns></returns>
         public virtual HttpModuleRegistry Remove(Type moduleType)  {
             if (moduleType == null) return this;
             if (!moduleType.IsType<IHttpModule>()) return this;
 
-            Modules.Add(new HttpModule { Type = moduleType, IsRemoved = true });
+            Modules.Add(new HttpModule { IsRemoved = true, Name = moduleType.Name });
             return this;
         }
     }

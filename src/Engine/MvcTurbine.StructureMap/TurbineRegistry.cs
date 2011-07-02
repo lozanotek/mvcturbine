@@ -93,6 +93,19 @@ namespace MvcTurbine.StructureMap {
         }
 
         /// <summary>
+        /// Registers the implementation type, <paramref name="implType"/>, with the locator
+        /// by the given service type, <paramref name="serviceType"/>
+        /// </summary>
+        /// <param name="serviceType">Type of the service to register.</param>
+        /// <param name="implType">Implementation to associate with the service.</param>
+        /// <param name="key">Unique key for the system.</param>
+        public void Register(Type serviceType, Type implType, string key) {
+            ForRequestedType(serviceType)
+                .AddType(implType)
+                .Named(key);
+        }
+
+        /// <summary>
         /// See <see cref="IServiceRegistrar.Register{Interface}(Interface)"/>.
         /// </summary>
         /// <typeparam name="Interface"></typeparam>
