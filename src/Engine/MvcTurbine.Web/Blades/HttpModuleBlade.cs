@@ -49,9 +49,9 @@
 	        foreach (var registry in moduleRegistries) {
 	            var moduleRegistration = registry.GetModuleRegistrations();
 
-                if (moduleRegistration == null) continue;
-
-	            var includeList = moduleRegistration
+                if (moduleRegistration == null || moduleRegistration.Count() == 0) continue;
+	            
+                var includeList = moduleRegistration
 	                .Where(reg => !reg.IsRemoved)
 	                .ToList();
 
@@ -62,6 +62,10 @@
 	            allInclude.AddRange(includeList);
 	            allExclude.AddRange(excludeList);
 	        }
+
+            // Get the distinct modules based on the name
+            allExclude = allExclude.Distinct().ToList();
+            allInclude = allInclude.Distinct().ToList();
 
 	        return allInclude.Except(allExclude).ToList();
 	    }

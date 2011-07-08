@@ -35,9 +35,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Ninject">
-      <HintPath>..\..\..\lib\ninject\Ninject.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages" />
     <Reference Include="System.Web.Helpers" />
@@ -78,6 +75,7 @@
     <Compile Include="Models\PersonBinder.cs" />
     <Compile Include="Models\AppBinderRegistry.cs" />
     <Compile Include="Modules\MyModule.cs" />
+    <Compile Include="Modules\MyModuleRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\MvcRouting.cs" />
     <Compile Include="Services\FooService.cs" />
@@ -112,10 +110,6 @@
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MvcTurbine.Ninject\MvcTurbine.Ninject.csproj">
-      <Project>{05F39581-C732-473D-BC3B-75A534569EEF}</Project>
-      <Name>MvcTurbine.Ninject</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MvcTurbine.Web.Views\MvcTurbine.Web.Views.csproj">
       <Project>{8C0778E1-626D-4518-8517-2F7E982A8594}</Project>
       <Name>MvcTurbine.Web.Views</Name>
@@ -123,6 +117,10 @@
     <ProjectReference Include="..\MvcTurbine.Web\MvcTurbine.Web.csproj">
       <Project>{A2634ACF-E549-4861-A36D-A6BEA773BFDB}</Project>
       <Name>MvcTurbine.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcTurbine.Windsor\MvcTurbine.Windsor.csproj">
+      <Project>{B253145D-A629-4A11-9F24-7FE91FBD05AE}</Project>
+      <Name>MvcTurbine.Windsor</Name>
     </ProjectReference>
     <ProjectReference Include="..\MvcTurbine\MvcTurbine.csproj">
       <Project>{794C0A9F-60EB-4E25-93F2-5D4D59122529}</Project>

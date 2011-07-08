@@ -13,7 +13,7 @@
 	/// Defines the configuration component for runtime elements of the engine.
 	/// </summary>
 	public sealed class Engine {
-		private static readonly IDictionary<Type, Type> engineRegistrations = new Dictionary<Type, Type>();
+		private static readonly IDictionary<Type, dynamic> engineRegistrations = new Dictionary<Type, dynamic>();
 		private static readonly Engine instance = new Engine();
 
 		/// <summary>
@@ -28,8 +28,7 @@
 		/// </summary>
 		private void InitliazeDefaults() {
 			// Register the default types for the system to use
-			this
-			.RotorContext<RotorContext>()
+			RotorContext<RotorContext>()
 			.AutoRegistrator<DefaultAutoRegistrator>()
 			.AssemblyLoader<DefaultBinAssemblyLoader>()
 			.ControllerFactory<TurbineControllerFactory>()
@@ -105,7 +104,7 @@
         /// <typeparam name="TModuleRegistry"></typeparam>
         /// <returns></returns>
         public Engine HttpModuleRegistry<TModuleRegistry>() where TModuleRegistry : IHttpModuleRegistry {
-            EngineRegistration<IHttpModuleRegistry, TModuleRegistry>();
+            EngineRegistration<IHttpModuleRegistry, TModuleRegistry>("defaultRegistry");
             return this;
         }
 
@@ -151,8 +150,15 @@
 				}
 
 			    foreach (var item in engineRegistrations) {
-					locator.Register(item.Key, item.Value);
-				}
+			        var value = item.Value;
+
+                    if(string.IsNullOrEmpty(value.Key)) {
+                        locator.Register(value.Service, value.Impl);                        
+                    }
+                    else {
+                        locator.Register(value.Service, value.Impl, value.Key);  
+                    }
+			    }
 
 				// Register these pieces with the engine
 				CoreBlades.RegisterWithServiceLocator(locator);
@@ -168,8 +174,22 @@
 		/// <typeparam name="TService"></typeparam>
 		/// <typeparam name="TImpl"></typeparam>
 		internal void EngineRegistration<TService,TImpl>() {
-			engineRegistrations[typeof(TService)] = typeof(TImpl);
+		    EngineRegistration<TService, TImpl>(null);
 		}
+
+        /// <summary>
+        /// Adds registrations to the internal engine types.
+        /// </summary>
+        /// <typeparam name="TService"></typeparam>
+        /// <typeparam name="TImpl"></typeparam>
+        internal void EngineRegistration<TService, TImpl>(string key) {
+            engineRegistrations[typeof(TService)] = new 
+            {
+                Service = typeof(TService), 
+                Impl = typeof(TImpl), 
+                Key = key
+            };
+        }
 
         /// <summary>
         /// Removes the specified registration from the internal engine types.

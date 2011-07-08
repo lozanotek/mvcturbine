@@ -20,11 +20,13 @@
         /// </summary>
         private void AddDefaults() {
             AddFilter("System");
+            AddFilter("System.Web");
             AddFilter("mscorlib");
             AddFilter("Microsoft");
 
+            // Exclude all of the MvcTurbine core assemblies
             AddFilter("MvcTurbine,");
-            AddFilter("MvcTurbine.Web");
+            AddFilter("MvcTurbine.Web,");
 
             // Ignore the Visual Studio extra assemblies!
             AddFilter("WebDev");

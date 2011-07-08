@@ -15,7 +15,7 @@
         /// </summary>
         /// <param name="locator"></param>
         /// <param name="filter"></param>
-        public DefaultAutoRegistrator(IServiceLocator locator, AssemblyFilter filter) {
+        public DefaultAutoRegistrator(IServiceLocator locator, CommonAssemblyFilter filter) {
             ServiceLocator = locator;
             Filter = filter;
         }
@@ -68,8 +68,24 @@
         /// <returns></returns>
         protected virtual IEnumerable<Assembly> GetAssemblies() {
             if (Filter != null) {
-                return AppDomain.CurrentDomain.GetAssemblies()
-                    .Where(assembly => !Filter.Match(assembly.FullName));
+                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+                var assemblyNames = AppDomain.CurrentDomain
+                    .GetAssemblies()
+                    .Select(asm => asm.FullName)
+                    .ToList();
+
+                var excludedNames = assemblyNames
+                    .Where(assembly => Filter.Match(assembly))
+                    .ToList();
+
+                var filteredNames = assemblyNames.Except(excludedNames).ToList();
+
+                return (from asm in assemblies
+                        join asmName in filteredNames
+                        on asm.FullName equals asmName
+                        select asm)
+                    .ToList();
             }
 
             return AppDomain.CurrentDomain.GetAssemblies();

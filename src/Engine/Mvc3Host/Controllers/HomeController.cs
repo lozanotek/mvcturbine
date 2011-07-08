@@ -13,7 +13,7 @@
 		[Foo]
 		public ActionResult Index(Person person, Bar bar)
 		{
-		    var moduleCount = this.HttpContext.ApplicationInstance.DynamicModules();
+		    var modules = this.HttpContext.ApplicationInstance.DynamicModules();
 			ViewBag.Message = "Welcome to ASP.NET MVC!";
 
 			return View();

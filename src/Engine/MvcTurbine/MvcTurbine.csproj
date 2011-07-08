@@ -83,6 +83,7 @@
     <Compile Include="ComponentModel\AssemblyFilter.cs" />
     <Compile Include="ComponentModel\AutoRegistrationList.cs" />
     <Compile Include="ComponentModel\CommonAssemblyFilter.cs" />
+    <Compile Include="ComponentModel\ComponentReg.cs" />
     <Compile Include="ComponentModel\DefaultAutoRegistrator.cs" />
     <Compile Include="ComponentModel\DefaultBinAssemblyLoader.cs" />
     <Compile Include="ComponentModel\DependencyResolutionException.cs" />

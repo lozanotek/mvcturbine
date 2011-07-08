@@ -14,7 +14,7 @@
         /// Default constructor
         /// </summary>
         /// <param name="filter"></param>
-        public AllHttpModulesRegistry(AssemblyFilter filter) {
+        public AllHttpModulesRegistry(CommonAssemblyFilter filter) {
             Filter = filter;
         }
 
@@ -48,9 +48,23 @@
         /// <returns></returns>
         protected virtual IEnumerable<Assembly> GetAssemblies() {
             if (Filter != null) {
-                return AppDomain.CurrentDomain
+                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+                var assemblyNames = AppDomain.CurrentDomain
                     .GetAssemblies()
-                    .Where(assembly => !Filter.Match(assembly.FullName));
+                    .Select(asm => asm.FullName)
+                    .ToList();
+
+                var excludedNames = assemblyNames
+                    .Where(assembly => Filter.Match(assembly))
+                    .ToList();
+
+                var filteredNames = assemblyNames.Except(excludedNames).ToList();
+
+                return (from asm in assemblies
+                        join asmName in filteredNames
+                        on asm.FullName equals asmName
+                        select asm)
+                    .ToList();
             }
 
             return AppDomain.CurrentDomain.GetAssemblies();

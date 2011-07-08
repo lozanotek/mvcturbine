@@ -2,7 +2,6 @@
 	using System;
 	using System.Web;
 	using Mvc3Host.Services;
-	using MvcTurbine.Web.Modules;
 
     public class MyModule : IHttpModule {
 		public IFooService Service { get; set; }
@@ -21,19 +20,4 @@
 
 		public void Dispose() { }
 	}
-
-    public sealed class MyModuleRegistry : HttpModuleRegistry {
-        public MyModuleRegistry() {
-            // This will add this module
-            Add<MyModule>()
-
-            // Will add same module with this specified
-            .Add<MyModule>("anotherModule")
-            // Will add yet again with different name
-            .Add<MyModule>("yetAnotherModule")
-
-            // Will remove the origin module.
-            .Remove<MyModule>();
-        }
-    }
 }
