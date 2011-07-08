@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C1F2D82E-3E36-4B91-9D21-18067873BF29}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MvcTurbine.Hiro.Tests</RootNamespace>
+    <AssemblyName>MvcTurbine.Hiro.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Hiro">
+      <HintPath>..\..\..\lib\hiro\Hiro.dll</HintPath>
+    </Reference>
+    <Reference Include="Hiro.Containers">
+      <HintPath>..\..\..\lib\hiro\Hiro.Containers.dll</HintPath>
+    </Reference>
+    <Reference Include="LinFu.Finders">
+      <HintPath>..\..\..\lib\hiro\LinFu.Finders.dll</HintPath>
+    </Reference>
+    <Reference Include="Machine.Specifications">
+      <HintPath>..\..\..\lib\Machine.Specifications\Machine.Specifications.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>..\..\..\lib\hiro\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="NGenerics">
+      <HintPath>..\..\..\lib\hiro\NGenerics.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.5.8.10295, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\nunit\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HiroServiceLocatorTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="HiroRegistrationTests.cs" />
+    <Compile Include="HiroResolutionTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MvcTurbine.ComponentModel.Tests\MvcTurbine.ComponentModel.Tests.csproj">
+      <Project>{2412063D-1949-4708-B4E7-D833BBD5DA65}</Project>
+      <Name>MvcTurbine.ComponentModel.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcTurbine.Hiro\MvcTurbine.Hiro.csproj">
+      <Project>{88A7A221-EFF3-45B4-BBB3-7DF1FE97BB8C}</Project>
+      <Name>MvcTurbine.Hiro</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcTurbine\MvcTurbine.csproj">
+      <Project>{794C0A9F-60EB-4E25-93F2-5D4D59122529}</Project>
+      <Name>MvcTurbine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
