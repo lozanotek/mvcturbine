@@ -56,7 +56,7 @@ namespace MvcTurbine.Hiro.Tests {
         }
 
         [Test]
-        public void Ask_For_Registered_Services_With_Non_Generic_Method()
+        public override void Ask_For_Registered_Services_With_Non_Generic_Method()
         {
             IEnumerable<object> instances = locator.ResolveServices(typeof(ILogger));
             IList<ILogger> list = new List<ILogger>(instances.OfType<ILogger>());

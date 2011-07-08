@@ -59,14 +59,14 @@ namespace MvcTurbine.ComponentModel.Tests {
         }
 
         [Test]
-        public void Ask_For_All_Registered_Services() {
+        public virtual void Ask_For_All_Registered_Services() {
             IEnumerable<ILogger> instances = locator.ResolveServices<ILogger>();
             IList<ILogger> list = new List<ILogger>(instances);
             Assert.AreEqual(2, list.Count);
         }
 
         [Test]
-        public void Ask_For_Registered_Services_With_Non_Generic_Method()
+        public virtual void Ask_For_Registered_Services_With_Non_Generic_Method()
         {
             IEnumerable<object> instances = locator.ResolveServices(typeof(ILogger));
             IList<ILogger> list = new List<ILogger>(instances.OfType<ILogger>());
