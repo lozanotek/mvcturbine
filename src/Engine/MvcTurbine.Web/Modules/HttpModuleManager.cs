@@ -48,8 +48,9 @@
         /// </summary>
         /// <param name="application"></param>
 		public void DisposeModules(HttpApplication application) {
-            if (Modules == null || Modules.Count == 0) return;
-			foreach (var httpModule in Modules) {
+            if (appModules == null || appModules.Count == 0) return;
+
+            foreach (var httpModule in appModules) {
                 if (httpModule == null) continue;
 				httpModule.Dispose();
 			}

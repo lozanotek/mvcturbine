@@ -6,10 +6,10 @@
 	public class MvcApplication : TurbineApplication {
 		static MvcApplication() {
 			// Now tell the engine to use the Windsor locator
-			ServiceLocatorManager.SetLocatorProvider(() => new MvcTurbine.Windsor.WindsorServiceLocator());
+			//ServiceLocatorManager.SetLocatorProvider(() => new MvcTurbine.Windsor.WindsorServiceLocator());
             //ServiceLocatorManager.SetLocatorProvider(() => new MvcTurbine.Ninject.NinjectServiceLocator());
             //ServiceLocatorManager.SetLocatorProvider(() => new MvcTurbine.StructureMap.StructureMapServiceLocator());
-            //ServiceLocatorManager.SetLocatorProvider(() => new MvcTurbine.Unity.UnityServiceLocator());
+            ServiceLocatorManager.SetLocatorProvider(() => new MvcTurbine.Unity.UnityServiceLocator());
 
 
 			//Engine.Initialize

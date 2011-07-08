@@ -104,7 +104,7 @@
         /// <typeparam name="TModuleRegistry"></typeparam>
         /// <returns></returns>
         public Engine HttpModuleRegistry<TModuleRegistry>() where TModuleRegistry : IHttpModuleRegistry {
-            EngineRegistration<IHttpModuleRegistry, TModuleRegistry>("defaultRegistry");
+            EngineRegistration<IHttpModuleRegistry, TModuleRegistry>();
             return this;
         }
 
@@ -151,13 +151,10 @@
 
 			    foreach (var item in engineRegistrations) {
 			        var value = item.Value;
-
-                    if(string.IsNullOrEmpty(value.Key)) {
-                        locator.Register(value.Service, value.Impl);                        
-                    }
-                    else {
-                        locator.Register(value.Service, value.Impl, value.Key);  
-                    }
+			        var svcReg = value.ServiceReg;
+                    
+                    if(svcReg == null) continue;
+			        svcReg(locator, value.Impl);
 			    }
 
 				// Register these pieces with the engine
@@ -173,8 +170,10 @@
 		/// </summary>
 		/// <typeparam name="TService"></typeparam>
 		/// <typeparam name="TImpl"></typeparam>
-		internal void EngineRegistration<TService,TImpl>() {
-		    EngineRegistration<TService, TImpl>(null);
+		internal void EngineRegistration<TService,TImpl>() where TService : class {
+            EngineRegistration<TService, TImpl>(
+                (locator, type) => locator.Register<TService>(typeof(TImpl))
+            );
 		}
 
         /// <summary>
@@ -182,12 +181,13 @@
         /// </summary>
         /// <typeparam name="TService"></typeparam>
         /// <typeparam name="TImpl"></typeparam>
-        internal void EngineRegistration<TService, TImpl>(string key) {
+        internal void EngineRegistration<TService, TImpl>(Action<IServiceLocator, Type> svcReg)
+            where TService : class 
+        {
             engineRegistrations[typeof(TService)] = new 
             {
-                Service = typeof(TService), 
-                Impl = typeof(TImpl), 
-                Key = key
+                Impl = typeof(TImpl),
+                ServiceReg = svcReg
             };
         }
 

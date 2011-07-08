@@ -110,6 +110,10 @@
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MvcTurbine.Unity\MvcTurbine.Unity.csproj">
+      <Project>{57CCBB78-5A1A-41D6-BBFF-8CE6F0F3B5EF}</Project>
+      <Name>MvcTurbine.Unity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MvcTurbine.Web.Views\MvcTurbine.Web.Views.csproj">
       <Project>{8C0778E1-626D-4518-8517-2F7E982A8594}</Project>
       <Name>MvcTurbine.Web.Views</Name>
@@ -117,10 +121,6 @@
     <ProjectReference Include="..\MvcTurbine.Web\MvcTurbine.Web.csproj">
       <Project>{A2634ACF-E549-4861-A36D-A6BEA773BFDB}</Project>
       <Name>MvcTurbine.Web</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MvcTurbine.Windsor\MvcTurbine.Windsor.csproj">
-      <Project>{B253145D-A629-4A11-9F24-7FE91FBD05AE}</Project>
-      <Name>MvcTurbine.Windsor</Name>
     </ProjectReference>
     <ProjectReference Include="..\MvcTurbine\MvcTurbine.csproj">
       <Project>{794C0A9F-60EB-4E25-93F2-5D4D59122529}</Project>

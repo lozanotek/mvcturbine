@@ -14,7 +14,7 @@
         /// Default constructor
         /// </summary>
         /// <param name="filter"></param>
-        public AllHttpModulesRegistry(CommonAssemblyFilter filter) {
+        public AllHttpModulesRegistry(AssemblyFilter filter) {
             Filter = filter;
         }
 
