@@ -285,6 +285,11 @@ namespace MvcTurbine.Hiro {
             MarkTheContainerAsNeedingToBeReset();
         }
 
+        public void Register(Type serviceType, Type implType, string key)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Registers the instance of type, <typeparamref name="Interface"/>, with the locator.
         /// </summary>
@@ -374,6 +379,11 @@ namespace MvcTurbine.Hiro {
         }
 
         public void Register(Type serviceType, Type implType) {
+            throw new NotImplementedException();
+        }
+
+        public void Register(Type serviceType, Type implType, string key)
+        {
             throw new NotImplementedException();
         }
 

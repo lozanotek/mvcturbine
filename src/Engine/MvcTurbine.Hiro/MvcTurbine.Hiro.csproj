@@ -37,14 +37,8 @@
     <Reference Include="Hiro.Containers">
       <HintPath>..\..\..\lib\hiro\Hiro.Containers.dll</HintPath>
     </Reference>
-    <Reference Include="LinFu.Finders">
-      <HintPath>..\..\..\lib\hiro\LinFu.Finders.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>..\..\..\lib\hiro\Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="NGenerics">
-      <HintPath>..\..\..\lib\hiro\NGenerics.dll</HintPath>
+    <Reference Include="Hiro.Web">
+      <HintPath>..\..\..\lib\hiro\Hiro.Web.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

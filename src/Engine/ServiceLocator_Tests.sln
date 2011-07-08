@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Autofac.Tests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Web", "MvcTurbine.Web\MvcTurbine.Web.csproj", "{A2634ACF-E549-4861-A36D-A6BEA773BFDB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Hiro", "MvcTurbine.Hiro\MvcTurbine.Hiro.csproj", "{88A7A221-EFF3-45B4-BBB3-7DF1FE97BB8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{A2634ACF-E549-4861-A36D-A6BEA773BFDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2634ACF-E549-4861-A36D-A6BEA773BFDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2634ACF-E549-4861-A36D-A6BEA773BFDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88A7A221-EFF3-45B4-BBB3-7DF1FE97BB8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88A7A221-EFF3-45B4-BBB3-7DF1FE97BB8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88A7A221-EFF3-45B4-BBB3-7DF1FE97BB8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88A7A221-EFF3-45B4-BBB3-7DF1FE97BB8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,5 +105,6 @@ Global
 		{05F39581-C732-473D-BC3B-75A534569EEF} = {7C04E093-A092-4110-A146-3047FF8BFD83}
 		{5898FB54-4474-42DE-B605-6E68B06C0DFE} = {7C04E093-A092-4110-A146-3047FF8BFD83}
 		{A2634ACF-E549-4861-A36D-A6BEA773BFDB} = {7C04E093-A092-4110-A146-3047FF8BFD83}
+		{88A7A221-EFF3-45B4-BBB3-7DF1FE97BB8C} = {7C04E093-A092-4110-A146-3047FF8BFD83}
 	EndGlobalSection
 EndGlobal
