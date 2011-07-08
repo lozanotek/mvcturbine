@@ -25,7 +25,6 @@ syntax: glob
 *.docstates
 *.[Rr]e[Ss]harper
 [Uu]pgrade[Ll]og*.xml
-[Bb]uild/
 [Bb]in
 [Db]ebug*/
 _[Uu]pgrade[Rr]eport_*/
@@ -39,4 +38,3 @@ _[Rr]e[Ss]harper*/
 *[Ll]ogs*
 *.orig
 *.*~
-

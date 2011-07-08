@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>MvcTurbine.Ninject</id>
+    <version>3.3</version>
+    <authors>Javier Lozano</authors>
+    <owners>Javier Lozano, Darren Cauthon</owners>
+    <projectUrl>http://mvcturbine.com</projectUrl>
+        <iconUrl>https://github.com/lozanotek/mvcturbine/raw/master/build/nuget/images/avatar-large.png</iconUrl>
+    <licenseUrl>https://github.com/lozanotek/mvcturbine/blob/master/LICENSE.txt</licenseUrl>
+    <tags>ASP.NET MVC MvcTurbine</tags>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The Ninject service locator for MVC Turbine.</description>
+    <summary>Reference this if you want to use Ninject as your IoC container with MVC Turbine.</summary>
+    <language>en-US</language>
+    <dependencies>
+      <dependency id="MVCTurbine" version="3.3" />
+      <dependency id="Ninject" version="2.2" />
+    </dependencies>
+  </metadata>
+</package>
