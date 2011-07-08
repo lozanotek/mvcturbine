@@ -40,20 +40,7 @@ namespace MvcTurbine.Unity.Tests {
 
             return new Unity.UnityServiceLocator(container);
         }
-
-        [Test]
-        public void Inject_Should_Set_Dependencies_On_Instance_When_Dependencies_Are_Not_Defined_On_The_Interface_And_Resolved_As_The_Interface_Type()
-        {
-            locator.Register(typeof(ITestDependency), typeof(TestDependency));
-
-            ISample instanceAsInterface = new Sample();
-            locator.Inject(instanceAsInterface);
-
-            var instance = (Sample)instanceAsInterface;
-            Assert.IsNotNull(instance.DependencyThatDoesNotExistOnInterface);
-        }
     }
-
 
     public interface ISample {
     }
