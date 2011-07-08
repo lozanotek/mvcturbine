@@ -160,6 +160,11 @@ namespace MvcTurbine.Autofac {
                 Builder.RegisterType(implType).As(serviceType);
         }
 
+        public void Register(Type serviceType, Type implType, string key)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Register<Interface>(Interface instance) where Interface : class
         {
             if (container != null)
