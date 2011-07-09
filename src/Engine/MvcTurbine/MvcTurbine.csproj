@@ -154,7 +154,8 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(TargetDir)*.dll $(SolutionDir)..\..\build\binaries\*.dll /Y /E
-xcopy $(TargetDir)*.xml $(SolutionDir)..\..\build\binaries\*.xml /Y /E</PostBuildEvent>
+    <PostBuildEvent>xcopy $(TargetDir)*.* $(SolutionDir)..\..\build\binaries\ /Y /E
+
+</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -116,7 +116,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(TargetDir)*.dll $(SolutionDir)..\..\build\binaries\Windsor\*.dll /Y /E
-xcopy $(TargetDir)*.xml $(SolutionDir)..\..\build\binaries\Windsor\*.xml /Y /E</PostBuildEvent>
+    <PostBuildEvent>xcopy $(TargetDir)*.* $(SolutionDir)..\..\build\binaries\Windsor\ /Y /E</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -1,0 +1,176 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MvcTurbine.Unity</name>
+    </assembly>
+    <members>
+        <member name="T:MvcTurbine.Unity.UnityRegistrator">
+            <summary>
+            A <see cref="T:MvcTurbine.ComponentModel.IServiceRegistration"/> implementation that leverages the <see cref="T:Microsoft.Practices.Unity.IUnityContainer"/> from Unity.    
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityRegistrator.Register(MvcTurbine.ComponentModel.IServiceLocator)">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceRegistration.Register(MvcTurbine.ComponentModel.IServiceLocator)"/>        
+            </summary>
+            <param name="locator"></param>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityRegistrator.Register(Microsoft.Practices.Unity.IUnityContainer)">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceRegistration.Register(MvcTurbine.ComponentModel.IServiceLocator)"/>
+            </summary>
+            <param name="container"></param>
+        </member>
+        <member name="T:MvcTurbine.Unity.UnityServiceLocator">
+            <summary>
+            Default implementation of the <seealso cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> contract with Unity IoC.
+            </summary>
+            <remarks>
+            To learn more about Unity, please visit its website: http://www.codeplex.com/unity
+            </remarks>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.#ctor">
+            <summary>
+            Creates an instance of the locator with an empty <seealso cref="T:Microsoft.Practices.Unity.IUnityContainer"/> instance.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.#ctor(Microsoft.Practices.Unity.IUnityContainer)">
+            <summary>
+            Creates an instance of the locator with the specified <seealso cref="T:Microsoft.Practices.Unity.IUnityContainer"/> instance.
+            </summary>
+            <param name="container">Instance of <seealso cref="T:Microsoft.Practices.Unity.IUnityContainer"/> to use.</param>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.Batch">
+            <summary>
+            Gets the associated <see cref="T:MvcTurbine.ComponentModel.IServiceRegistrar"/> to process.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.Resolve``1">
+            <summary>
+            Resolves the service of the specified type.
+            </summary>
+            <typeparam name="T">Type of service to resolve.</typeparam>
+            <returns>An instance of the type, null otherwise.</returns>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.Resolve``1(System.String)">
+            <summary>
+            Resolves the service of the specified type by the given string key.
+            </summary>
+            <typeparam name="T">Type of service to resolve.</typeparam>
+            <param name="key">Unique key to distinguish the service.</param>
+            <returns>An instance of the type, null otherwise.</returns>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.Resolve``1(System.Type)">
+            <summary>
+            Resolves the service of the specified type by the given type key.
+            </summary>
+            <typeparam name="T">Type of service to resolve.</typeparam>
+            <param name="type">Key type of the service.</param>
+            <returns>An instance of the type, null otherwise.</returns>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.Resolve(System.Type)">
+            <summary>
+             Resolves the service of the specified type by the given type key.
+            </summary>
+            <param name="type">Type of service to resolve.</param>
+            <returns>An instance of the type, null otherwise</returns>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.ResolveServices``1">
+            <summary>
+            Resolves the list of services of type <see cref="!:T"/> that are registered 
+            within the locator.
+            </summary>
+            <typeparam name="T">Type of the service to resolve.</typeparam>
+            <returns>A list of service of type <see cref="!:T"/>, null otherwise.</returns>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.Register``1(System.Type)">
+            <summary>
+            Registers the implemation type, <paramref name="implType"/>, with the locator under
+            the <see cref="!:Interface"/> service type.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <param name="implType">Implementation type to use for registration.</param>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.Register``2">
+            <summary>
+            Registers the implemation type, <see cref="!:Implementation"/>, with the locator under
+            the <see cref="!:Interface"/> service type.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <typeparam name="Implementation">Implementation type to use for registration.
+            </typeparam>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.Register``2(System.String)">
+            <summary>
+            Registers the implemation type, <see cref="!:Implementation"/>, with the locator under
+            the <see cref="!:Interface"/> service type.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <typeparam name="Implementation">Implementation type to use for registration.
+            </typeparam>
+            <param name="key">Unique key to distinguish the service.</param>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.Register(System.String,System.Type)">
+            <summary>
+            Registers the implementation type, <paramref name="type"/>, with the locator
+            by the given string key.
+            </summary>
+            <param name="key">Unique key to distinguish the service.</param>
+            <param name="type">Implementation type to use.</param>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.Register(System.Type,System.Type)">
+            <summary>
+            Registers the implementation type, <paramref name="implType"/>, with the locator
+            by the given service type, <paramref name="serviceType"/>
+            </summary>
+            <param name="serviceType">Type of the service to register.</param>
+            <param name="implType">Implementation to associate with the service.</param>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.Register(System.Type,System.Type,System.String)">
+            <summary>
+            Registers the implementation type, <paramref name="implType"/>, with the locator
+            by the given service type, <paramref name="serviceType"/>
+            </summary>
+            <param name="serviceType">Type of the service to register.</param>
+            <param name="implType">Implementation to associate with the service.</param>
+            <param name="key"></param>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.Register``1(``0)">
+            <summary>
+            Registers the instance of type, <typeparamref name="Interface"/>, with the locator.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <param name="instance">Instance of the type to register.</param>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.Register``1(System.Func{``0})">
+            <summary>
+            Resolves the service of the specified interface with the provided factory method.
+            </summary>
+            <param name="factoryMethod">The factory method which will be used to resolve this interface.</param>
+            <returns>An instance of the type, null otherwise</returns>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.Release(System.Object)">
+            <summary>
+            Releases (disposes) the service instance from within the locator.
+            </summary>
+            <param name="instance">Instance of a service to dipose from the locator.</param>
+        </member>
+        <member name="M:MvcTurbine.Unity.UnityServiceLocator.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="P:MvcTurbine.Unity.UnityServiceLocator.Container">
+            <summary>
+            Gets the current <seealso cref="T:Microsoft.Practices.Unity.IUnityContainer"/> associated with this instance.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.Unity.RegistrationStub">
+            <summary>
+            This class is for stubbing purposes only.
+            </summary>
+        </member>
+    </members>
+</doc>

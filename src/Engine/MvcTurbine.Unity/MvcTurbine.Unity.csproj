@@ -123,7 +123,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(TargetDir)*.dll $(SolutionDir)..\..\build\binaries\Unity\*.dll /Y /E
-xcopy $(TargetDir)*.xml $(SolutionDir)..\..\build\binaries\Unity\*.xml /Y /E</PostBuildEvent>
+    <PostBuildEvent>xcopy $(TargetDir)*.* $(SolutionDir)..\..\build\binaries\Unity\ /Y /E</PostBuildEvent>
   </PropertyGroup>
 </Project>

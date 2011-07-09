@@ -118,7 +118,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(TargetDir)*.dll $(SolutionDir)..\..\build\binaries\Ninject\*.dll /Y /E
-xcopy $(TargetDir)*.xml $(SolutionDir)..\..\build\binaries\Ninject\*.xml /Y /E</PostBuildEvent>
+    <PostBuildEvent>xcopy $(TargetDir)*.* $(SolutionDir)..\..\build\binaries\Ninject\ /Y /E</PostBuildEvent>
   </PropertyGroup>
 </Project>
