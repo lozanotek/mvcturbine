@@ -20,8 +20,9 @@
 			if (context == null) return;
 
 			var locator = context.ServiceLocator();
-			var manager = GetModuleManager(locator);
-
+            if (locator == null) return;
+			
+            var manager = GetModuleManager(locator);
 			if (manager == null) return;
 			manager.InitializeModules(context);
 		}
