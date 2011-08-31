@@ -11,15 +11,15 @@
 	public class HttpModuleBlade : CoreBlade, ISupportAutoRegistration {
 
         /// <summary>
-        /// Defines auto-registration for <see cref="IHttpModuleRegistry"/> types.
+        /// Defines auto-registration for <see cref="IHttpModuleProvider"/> types.
         /// </summary>
         /// <param name="registrationList"></param>
 		public void AddRegistrations(AutoRegistrationList registrationList) {
-			registrationList.Add(Registration.Simple<IHttpModuleRegistry>());
+			registrationList.Add(Registration.Simple<IHttpModuleProvider>());
 		}
 
         /// <summary>
-        /// Registers all <see cref="IHttpModule"/> defined through <see cref="IHttpModuleRegistry"/> with the runtime.
+        /// Registers all <see cref="IHttpModule"/> defined through <see cref="IHttpModuleProvider"/> with the runtime.
         /// </summary>
         /// <param name="context"></param>
 		public override void Spin(IRotorContext context) {
@@ -38,11 +38,11 @@
 
         /// <summary>
         /// Filters the list of <see cref="HttpModule"/> from those that have been added/removed from the system 
-        /// across all <see cref="IHttpModuleRegistry"/> with the system.
+        /// across all <see cref="IHttpModuleProvider"/> with the system.
         /// </summary>
         /// <param name="moduleRegistries"></param>
         /// <returns></returns>
-	    protected virtual IList<HttpModule> GetFilteredList(IList<IHttpModuleRegistry> moduleRegistries) {
+	    protected virtual IList<HttpModule> GetFilteredList(IList<IHttpModuleProvider> moduleRegistries) {
             var allInclude = new List<HttpModule>();
             var allExclude = new List<HttpModule>();
 
@@ -71,13 +71,13 @@
 	    }
 
         /// <summary>
-        /// Gets all <see cref="IHttpModuleRegistry"/> types registered with the system.
+        /// Gets all <see cref="IHttpModuleProvider"/> types registered with the system.
         /// </summary>
         /// <param name="locator"></param>
         /// <returns></returns>
-	    protected IList<IHttpModuleRegistry> GetModuleRegistries(IServiceLocator locator) {
+	    protected IList<IHttpModuleProvider> GetModuleRegistries(IServiceLocator locator) {
 			try {
-				return locator.ResolveServices<IHttpModuleRegistry>();
+				return locator.ResolveServices<IHttpModuleProvider>();
 			}
 			catch {
 				return null;

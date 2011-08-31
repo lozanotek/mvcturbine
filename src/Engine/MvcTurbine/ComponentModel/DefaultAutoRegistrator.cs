@@ -15,7 +15,7 @@
         /// </summary>
         /// <param name="locator"></param>
         /// <param name="filter"></param>
-        public DefaultAutoRegistrator(IServiceLocator locator, CommonAssemblyFilter filter) {
+        public DefaultAutoRegistrator(IServiceLocator locator, AssemblyFilter filter) {
             ServiceLocator = locator;
             Filter = filter;
         }

@@ -1,15 +1,15 @@
-﻿namespace MvcTurbine.Web.Config
-{
+﻿namespace MvcTurbine.Web.Config {
 	using System;
 	using System.Collections.Generic;
 	using System.Web;
+	using System.Web.Mvc;
 	using ComponentModel;
 	using Controllers;
 	using Modules;
 	using Views;
 	using Blades;
 
-	/// <summary>
+    /// <summary>
 	/// Defines the configuration component for runtime elements of the engine.
 	/// </summary>
 	public sealed class Engine {
@@ -38,8 +38,10 @@
 			.EmbeddedViewResolve<EmbeddedViewResolver>()
 			.ViewPageActivator<TurbineViewPageActivator>()
 			.HttpModuleManager<HttpModuleManager>()
-            .AssemblyFilter<CommonAssemblyFilter>()
-            .HttpModuleRegistry<AllHttpModulesRegistry>()
+            .ViewEngineManager<ViewEngineManager>()
+			.AssemblyFilter<CommonAssemblyFilter>()
+			.HttpModuleProvider<AllHttpModulesRegistry>()
+            .ViewEngineProvider<AllViewEngineRegistry>()
 			.RegisterBuiltInCoreBlades();
 		}
 
@@ -89,32 +91,61 @@
 		}
 
         /// <summary>
-        /// Registers the <see cref="AssemblyFilter"/> for the engine to use.  If none is specified, <see cref="CommonAssemblyFilter"/> is used.
+        /// Registers the <see cref="IViewEngineManager"/> for the engine to use.  If none is specifed, <see cref="ViewEngineManager" /> is used.
         /// </summary>
-        /// <typeparam name="TAssemblyFilter"></typeparam>
+        /// <typeparam name="TEngineManager"></typeparam>
         /// <returns></returns>
-        public Engine AssemblyFilter<TAssemblyFilter>() where TAssemblyFilter : AssemblyFilter {
-            EngineRegistration<AssemblyFilter, TAssemblyFilter>();
+        public Engine ViewEngineManager<TEngineManager>() where TEngineManager : IViewEngineManager {
+            EngineRegistration<IViewEngineManager, TEngineManager>();
+            return this;
+        }
+
+		/// <summary>
+		/// Registers the <see cref="AssemblyFilter"/> for the engine to use.  If none is specified, <see cref="CommonAssemblyFilter"/> is used.
+		/// </summary>
+		/// <typeparam name="TAssemblyFilter"></typeparam>
+		/// <returns></returns>
+		public Engine AssemblyFilter<TAssemblyFilter>() where TAssemblyFilter : AssemblyFilter {
+			EngineRegistration<AssemblyFilter, TAssemblyFilter>();
+			return this;
+		}
+
+		/// <summary>
+		/// Registers the <see cref="IHttpModuleProvider"/> for the engine to use.  If none is specified, <see cref="AllHttpModulesRegistry"/> is used.
+		/// </summary>
+		/// <typeparam name="TModuleProvider"></typeparam>
+		/// <returns></returns>
+		public Engine HttpModuleProvider<TModuleProvider>() where TModuleProvider : IHttpModuleProvider {
+			EngineRegistration<IHttpModuleProvider, TModuleProvider>();
+			return this;
+		}
+
+		/// <summary>
+		/// Disables the auto-registration of <see cref="IHttpModule"/> types.
+		/// </summary>
+		/// <returns></returns>
+		public Engine DisableHttpModuleRegistration() {
+			RemoveRegistration<IHttpModuleProvider>();
+			return this;
+		}
+
+        /// <summary>
+        /// Registers the <see cref="IViewEngineProvider"/> for the engine to use.  If none is specified, <see cref="AllViewEngineRegistry"/> is used.
+        /// </summary>
+        /// <typeparam name="TEngineProvider"></typeparam>
+        /// <returns></returns>
+        public Engine ViewEngineProvider<TEngineProvider>() where TEngineProvider : IViewEngineProvider {
+            EngineRegistration<IViewEngineProvider, TEngineProvider>();
             return this;
         }
 
         /// <summary>
-        /// Registers the <see cref="IHttpModuleRegistry"/> for the engine to use.  If none is specified, <see cref="AllHttpModulesRegistry"/> is used.
-        /// </summary>
-        /// <typeparam name="TModuleRegistry"></typeparam>
-        /// <returns></returns>
-        public Engine HttpModuleRegistry<TModuleRegistry>() where TModuleRegistry : IHttpModuleRegistry {
-            EngineRegistration<IHttpModuleRegistry, TModuleRegistry>();
-            return this;
-        }
-
-        /// <summary>
-        /// Disables the auto-registration of <see cref="IHttpModule"/> types.
+        /// Disables the auto-registration of <see cref="IViewEngine"/> types.
         /// </summary>
         /// <param name="engine"></param>
         /// <returns></returns>
-        public Engine DisableHttpModuleRegistration() {
-            RemoveRegistration<IHttpModuleRegistry>();
+        public Engine DisableViewEngineRegistration() {
+            RemoveRegistration<IViewEngineProvider>();
             return this;
         }
 
@@ -141,7 +172,7 @@
 					locator.Register<IServiceReleaser, EmptyServiceReleaser>();
 				}
 
-			    // To provide DI support for IServiceInjector
+				// To provide DI support for IServiceInjector
 				if (locator is IServiceInjector) {
 					locator.Register(() => locator as IServiceInjector);
 				}
@@ -149,13 +180,13 @@
 					locator.Register<IServiceInjector, EmptyServiceInjector>();
 				}
 
-			    foreach (var item in engineRegistrations) {
-			        var value = item.Value;
-			        var svcReg = value.ServiceReg;
-                    
-                    if(svcReg == null) continue;
-			        svcReg(locator, value.Impl);
-			    }
+				foreach (var item in engineRegistrations) {
+					var value = item.Value;
+					var svcReg = value.ServiceReg;
+					
+					if(svcReg == null) continue;
+					svcReg(locator, value.Impl);
+				}
 
 				// Register these pieces with the engine
 				CoreBlades.RegisterWithServiceLocator(locator);
@@ -171,35 +202,35 @@
 		/// <typeparam name="TService"></typeparam>
 		/// <typeparam name="TImpl"></typeparam>
 		internal void EngineRegistration<TService,TImpl>() where TService : class {
-            EngineRegistration<TService, TImpl>(
-                (locator, type) => locator.Register<TService>(typeof(TImpl))
-            );
+			EngineRegistration<TService, TImpl>(
+				(locator, type) => locator.Register<TService>(typeof(TImpl))
+			);
 		}
 
-        /// <summary>
-        /// Adds registrations to the internal engine types.
-        /// </summary>
-        /// <typeparam name="TService"></typeparam>
-        /// <typeparam name="TImpl"></typeparam>
-        internal void EngineRegistration<TService, TImpl>(Action<IServiceLocator, Type> svcReg)
-            where TService : class 
-        {
-            engineRegistrations[typeof(TService)] = new 
-            {
-                Impl = typeof(TImpl),
-                ServiceReg = svcReg
-            };
-        }
+		/// <summary>
+		/// Adds registrations to the internal engine types.
+		/// </summary>
+		/// <typeparam name="TService"></typeparam>
+		/// <typeparam name="TImpl"></typeparam>
+		internal void EngineRegistration<TService, TImpl>(Action<IServiceLocator, Type> svcReg)
+			where TService : class 
+		{
+			engineRegistrations[typeof(TService)] = new 
+			{
+				Impl = typeof(TImpl),
+				ServiceReg = svcReg
+			};
+		}
 
-        /// <summary>
-        /// Removes the specified registration from the internal engine types.
-        /// </summary>
-        /// <typeparam name="TService"></typeparam>
-        internal void RemoveRegistration<TService>() {
-            var key = typeof (TService);
+		/// <summary>
+		/// Removes the specified registration from the internal engine types.
+		/// </summary>
+		/// <typeparam name="TService"></typeparam>
+		internal void RemoveRegistration<TService>() {
+			var key = typeof (TService);
 
-            if (!engineRegistrations.ContainsKey(key)) return;
-            engineRegistrations.Remove(key);
-        }
+			if (!engineRegistrations.ContainsKey(key)) return;
+			engineRegistrations.Remove(key);
+		}
 	}
 }

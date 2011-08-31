@@ -3,6 +3,7 @@
     using System.Web.Mvc;
     using ComponentModel;
     using Models;
+    using MvcTurbine.Web.Views;
 
     /// <summary>
     /// Helper class for registration of ASP.MVC components.
@@ -31,8 +32,8 @@
         /// Gets the default registration for <see cref="IViewEngine"/>.
         /// </summary>
         /// <returns></returns>
-        public static ServiceRegistration RegisterViewEngine() {
-            return RegisterViewEngine((locator, type) => locator.Register<IViewEngine>(type));
+        public static ServiceRegistration RegisterViewEngineProviders() {
+            return RegisterViewEngineProviders((locator, type) => locator.Register<IViewEngineProvider>(type));
         }
 
         /// <summary>
@@ -40,8 +41,8 @@
         /// </summary>
         /// <param name="regAction"></param>
         /// <returns></returns>
-        public static ServiceRegistration RegisterViewEngine(Action<IServiceLocator, Type> regAction) {
-            return Registration.Custom<IViewEngine>(RegistrationFilters.DefaultFilter, regAction);
+        public static ServiceRegistration RegisterViewEngineProviders(Action<IServiceLocator, Type> regAction) {
+            return Registration.Custom<IViewEngineProvider>(RegistrationFilters.DefaultFilter, regAction);
         }
 
         /// <summary>

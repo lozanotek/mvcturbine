@@ -12,8 +12,8 @@
             ServiceLocatorManager.SetLocatorProvider(() => new MvcTurbine.Unity.UnityServiceLocator());
 
 
-			//Engine.Initialize
-			//	.DisableHttpModuleRegistration();
+            Engine.Initialize
+                .DisableViewEngineRegistration();
 		}
 	}
 }

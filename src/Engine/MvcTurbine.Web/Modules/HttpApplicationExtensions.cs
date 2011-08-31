@@ -18,7 +18,7 @@
 		}
 
 		/// <summary>
-		/// Gets the <see cref="IHttpModule"/> objects that were loaded via <see cref="IHttpModuleRegistry"/> types.
+		/// Gets the <see cref="IHttpModule"/> objects that were loaded via <see cref="IHttpModuleProvider"/> types.
 		/// </summary>
 		/// <param name="application"></param>
 		/// <returns></returns>

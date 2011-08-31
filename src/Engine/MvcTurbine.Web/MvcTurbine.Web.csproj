@@ -133,7 +133,7 @@
     <Compile Include="Modules\HttpModuleManager.cs" />
     <Compile Include="Modules\HttpModuleRuntimeRegistrar.cs" />
     <Compile Include="Modules\IHttpModuleManager.cs" />
-    <Compile Include="Modules\IHttpModuleRegistry.cs" />
+    <Compile Include="Modules\IHttpModuleProvider.cs" />
     <Compile Include="Modules\HttpModuleRegistry.cs" />
     <Compile Include="Modules\TurbineHttpModule.cs" />
     <Compile Include="TurbineDependencyResolver.cs" />
@@ -152,6 +152,7 @@
     <Compile Include="RotorContext.cs" />
     <Compile Include="TurbineApplication.cs" />
     <Compile Include="TypeExtensions.cs" />
+    <Compile Include="Views\AllViewEngineRegistry.cs" />
     <Compile Include="Views\AssemblyResourceFile.cs" />
     <Compile Include="Views\EmbeddedView.cs" />
     <Compile Include="Blades\EmbeddedViewBlade.cs" />
@@ -159,7 +160,12 @@
     <Compile Include="Views\EmbeddedViewTable.cs" />
     <Compile Include="Views\EmbeddedViewVirtualPathProvider.cs" />
     <Compile Include="Views\IEmbeddedViewResolver.cs" />
+    <Compile Include="Views\IViewEngineManager.cs" />
+    <Compile Include="Views\IViewEngineProvider.cs" />
     <Compile Include="Views\TurbineViewPageActivator.cs" />
+    <Compile Include="Views\ViewEngine.cs" />
+    <Compile Include="Views\ViewEngineManager.cs" />
+    <Compile Include="Views\ViewEngineRegistry.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MvcTurbine\MvcTurbine.csproj">

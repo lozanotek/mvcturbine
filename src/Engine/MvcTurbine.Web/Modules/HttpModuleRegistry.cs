@@ -1,13 +1,12 @@
 ﻿namespace MvcTurbine.Web.Modules {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Web;
 
     ///<summary>
     /// Base class for all <see cref="IHttpModule"/> registrations.
     ///</summary>
-    public abstract class HttpModuleRegistry : IHttpModuleRegistry {
+    public abstract class HttpModuleRegistry : IHttpModuleProvider {
         protected HttpModuleRegistry() {
             Modules = new List<HttpModule>();
         }
