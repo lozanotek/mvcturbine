@@ -3,11 +3,20 @@ namespace MvcTurbine.Web.Views {
     using System.Collections.Generic;
     using System.Web.Mvc;
 
+    /// <summary>
+    /// Base implementation of <see cref="IViewEngineProvider"/> that provides a fluent interface for registration.
+    /// </summary>
     public abstract class ViewEngineRegistry : IViewEngineProvider {
+        /// <summary>
+        /// Default protected constructor
+        /// </summary>
         protected ViewEngineRegistry() {
             Engines = new List<ViewEngine>();
         }
 
+        /// <summary>
+        /// Gets the internal list of <see cref="ViewEngine"/> that's being processed.
+        /// </summary>
         protected IList<ViewEngine> Engines { get; set; }
 
         /// <summary>
@@ -56,6 +65,10 @@ namespace MvcTurbine.Web.Views {
             return this;
         }
 
+        /// <summary>
+        /// See <see cref="IViewEngineProvider.GetViewEngineRegistrations"/>
+        /// </summary>
+        /// <returns></returns>
         public virtual IList<ViewEngine> GetViewEngineRegistrations() {
             return Engines;
         }

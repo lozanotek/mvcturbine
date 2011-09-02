@@ -1,13 +1,24 @@
-﻿using System;
-using System.Linq;
-using System.Text;
+﻿namespace MvcTurbine.Web.Views {
+    using System;
 
-namespace MvcTurbine.Web.Views
-{
+    /// <summary>
+    /// Simple component that defines the registration of a view engine.
+    /// </summary>
     [Serializable]
     public class ViewEngine {
+        /// <summary>
+        /// Gets or sets the type of the view engine.
+        /// </summary>
         public Type Type { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the view engine.
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the bit flag for a removed engine.
+        /// </summary>
         public bool IsRemoved { get; set; }
 
         public override bool Equals(object obj) {
