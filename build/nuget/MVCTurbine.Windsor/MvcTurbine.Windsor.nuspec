@@ -2,7 +2,7 @@
 <package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <id>MvcTurbine.Windsor</id>
-    <version>3.3</version>
+    <version>3.4</version>
     <authors>Javier Lozano</authors>
     <owners>Javier Lozano, Darren Cauthon</owners>
     <projectUrl>http://mvcturbine.com</projectUrl>
@@ -14,7 +14,7 @@
     <summary>Reference this if you want to use Windsor as your IoC container with MVC Turbine.</summary>
     <language>en-US</language>
     <dependencies>
-      <dependency id="MVCTurbine" version="3.3" />
+      <dependency id="MVCTurbine" version="3.4" />
       <dependency id="Castle.Windsor" version="2.5.2" />
     </dependencies>
   </metadata>
