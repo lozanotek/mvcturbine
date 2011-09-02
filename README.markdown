@@ -1,6 +1,6 @@
 MVC Turbine - Converting Flow into Useful Work
 ===========
-![MVC Turbine](https://github.com/lozanotek/mvcturbine/blob/master/res/img/full-logo-large.png "MVC Turbine")
+![MVC Turbine](https://github.com/lozanotek/mvcturbine/raw/master/res/img/full-logo-large.png "MVC Turbine")
 
 # LICENSE
 Apache 2.0 - see LICENSE
