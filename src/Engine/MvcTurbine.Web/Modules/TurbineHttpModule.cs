@@ -33,6 +33,8 @@
 		public void Dispose() {
 			// We should already have it
 			if (moduleManager == null || moduleManager.Modules == null) return;
+			if(HttpContext.Current != null)
+		        	moduleManager.DisposeModules(HttpContext.Current.ApplicationInstance);
 
 		    moduleManager.DisposeModules(HttpContext.Current.ApplicationInstance);
 			moduleManager = null;
