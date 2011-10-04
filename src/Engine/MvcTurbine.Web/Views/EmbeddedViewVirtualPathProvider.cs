@@ -52,8 +52,9 @@
         /// <returns></returns>
         public override VirtualFile GetFile(string virtualPath) {
             if (IsEmbeddedView(virtualPath)) {
-                EmbeddedView embeddedView = embeddedViews.FindEmbeddedView(virtualPath);
-                return new AssemblyResourceFile(embeddedView, virtualPath);
+                string relativePath = VirtualPathUtility.ToAppRelative(virtualPath);
+                EmbeddedView embeddedView = embeddedViews.FindEmbeddedView(relativePath);
+                return new AssemblyResourceFile(embeddedView, relativePath);
             }
 
             return base.GetFile(virtualPath);
