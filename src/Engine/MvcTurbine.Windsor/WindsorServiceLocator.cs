@@ -6,6 +6,8 @@
     using Castle.MicroKernel.Resolvers.SpecializedResolvers;
     using Castle.Windsor;
     using ComponentModel;
+    using Castle.Windsor.Installer;
+    using Castle.MicroKernel.Registration;
 
     /// <summary>
     /// Implemenation of <see cref="IServiceLocator"/> using <see cref="IWindsorContainer"/> as the default container.
@@ -31,6 +33,7 @@
             kernel.Resolver.AddSubResolver(new ArrayResolver(kernel));
             kernel.Resolver.AddSubResolver(new ListResolver(kernel));
             kernel.AddFacility<FactorySupportFacility>();
+            container.Install(FromAssembly.Containing<IWindsorInstaller>());
 
             return container;
         }
