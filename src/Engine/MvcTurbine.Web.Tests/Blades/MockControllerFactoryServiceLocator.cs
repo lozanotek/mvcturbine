@@ -77,6 +77,10 @@ namespace MvcTurbine.Web.Tests.Blades {
             throw new NotImplementedException();
         }
 
+        public void Register(Type serviceType, Type implType, string key) {
+            throw new NotImplementedException();
+        }
+
         public void Register<Interface>(Interface instance) where Interface : class {
             throw new NotImplementedException();
         }

@@ -100,11 +100,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Blades\BladeExtensionsTests.cs" />
     <Compile Include="Blades\DependencyResolverBladeTests.cs" />
     <Compile Include="Blades\MockRouteServiceLocator.cs" />
     <Compile Include="Blades\MockViewEngineServiceLocator.cs" />
-    <Compile Include="Blades\CoreBladesTests.cs" />
     <Compile Include="Blades\MockControllerFactoryServiceLocator.cs" />
     <Compile Include="Blades\RoutingBlade_AutoRegistrationTests.cs" />
     <Compile Include="Blades\RoutingBlade_SpinTests.cs" />

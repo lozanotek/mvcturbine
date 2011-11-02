@@ -8,46 +8,48 @@
     public class DefaultAutoRegistratorTest {
         [Test]
         public void Can_Create_Valid_Instance_With_Null_Service() {
-            var registrator = new DefaultAutoRegistrator(null);
+            var registrator = new DefaultAutoRegistrator(null, null);
             Assert.IsNotNull(registrator);
         }
 
         [Test]
         public void Can_Create_Valid_Instance_With_Valid_Service() {
             var serviceLocator = new MockServiceLocator();
-            var registrator = new DefaultAutoRegistrator(serviceLocator);
+            var filter = new AssemblyFilter();
+            var registrator = new DefaultAutoRegistrator(serviceLocator, filter);
 
             Assert.IsNotNull(registrator);
         }
 
         [Test]
         public void Create_With_Null_Service_And_Maintain_It() {
-            var registrator = new DefaultAutoRegistrator(null);
+            var registrator = new DefaultAutoRegistrator(null, null);
             Assert.IsNull(registrator.ServiceLocator);
         }
 
         [Test]
         public void Create_With_Null_Service_And_Check_Filter() {
-            var registrator = new DefaultAutoRegistrator(null);
+            var registrator = new DefaultAutoRegistrator(null, null);
             Assert.AreEqual(typeof(CommonAssemblyFilter), registrator.Filter.GetType());
             Assert.IsNotNull(registrator.Filter);
         }
 
         [Test]
         public void AutoRegister_With_Null_Registration_Returns_Automatically() {
-            var registrator = new DefaultAutoRegistrator(null);
+            var registrator = new DefaultAutoRegistrator(null, null);
             registrator.AutoRegister(null);
         }
 
         [Test]
         public void AutoRegister_With_Invalid_Registration_Returns_Automatically() {
-            var registrator = new DefaultAutoRegistrator(null);
+            var registrator = new DefaultAutoRegistrator(null, null);
             registrator.AutoRegister(new ServiceRegistration());
         }
 
         [Test]
         public void AutoRegister_With_Valid_Registration_And_Properties_Returns_Automatically() {
-            var registrator = new DefaultAutoRegistrator(null);
+            var registrator = new DefaultAutoRegistrator(null, null);
+
             var count = 0;
             registrator.AutoRegister(new ServiceRegistration
             {
@@ -61,7 +63,7 @@
 
         [Test]
         public void AutoRegister_With_Valid_False_Registration_And_Properties_Returns_Automatically_() {
-            var registrator = new DefaultAutoRegistrator(null);
+            var registrator = new DefaultAutoRegistrator(null, null);
             var count = 0;
             registrator.AutoRegister(new ServiceRegistration
             {
@@ -129,6 +131,10 @@
         }
 
         public void Register(Type serviceType, Type implType) {
+            throw new NotImplementedException();
+        }
+
+        public void Register(Type serviceType, Type implType, string key) {
             throw new NotImplementedException();
         }
 
