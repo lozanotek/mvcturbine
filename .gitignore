@@ -39,3 +39,6 @@ _[Rr]e[Ss]harper*/
 *.orig
 *.*~
 [Bb]uild/[Bb]inaries
+[Bb]uild/[Nn]uget/*/src/*
+[Bb]uild/[Nn]uget/*/lib/*
+[Bb]uild/[Nn]uget/*.nupkg
