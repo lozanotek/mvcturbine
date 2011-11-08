@@ -62,5 +62,11 @@ namespace MvcTurbine.Autofac {
         {
             AddRegistration(builder => builder.Register(c => factoryMethod.Invoke()));
         }
+
+
+        public void Register(Type serviceType, Type implType, string key)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

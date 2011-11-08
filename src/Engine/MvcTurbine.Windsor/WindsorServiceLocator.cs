@@ -33,9 +33,19 @@
             kernel.Resolver.AddSubResolver(new ArrayResolver(kernel));
             kernel.Resolver.AddSubResolver(new ListResolver(kernel));
             kernel.AddFacility<FactorySupportFacility>();
-            container.Install(FromAssembly.Containing<IWindsorInstaller>());
+            container.Install(FindAllWindsorInstallers());
 
             return container;
+        }
+
+        private static IWindsorInstaller[] FindAllWindsorInstallers()
+        {
+            var type = typeof(IWindsorInstaller);
+            var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+            var windsorInstallers = loadedAssemblies.SelectMany(T => T.GetTypes())
+                .Where(B => type.IsAssignableFrom(B) && B.GetConstructor(Type.EmptyTypes) != null)
+                .Select<IWindsorInstaller>(B => Activator.CreateInstance(B) as IWindsorInstaller);
+            return windsorInstallers;
         }
 
         /// <summary>

@@ -198,5 +198,11 @@ namespace MvcTurbine.Autofac {
         [Obsolete("Not used with this implementation of IServiceLocator.")]
         public void TearDown<TService>(TService instance) where TService : class {
         }
+
+
+        public void Register(Type serviceType, Type implType, string key)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
