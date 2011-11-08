@@ -44,8 +44,8 @@
             var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
             var windsorInstallers = loadedAssemblies.SelectMany(T => T.GetTypes())
                 .Where(B => type.IsAssignableFrom(B) && B.GetConstructor(Type.EmptyTypes) != null)
-                .Select<IWindsorInstaller>(B => Activator.CreateInstance(B) as IWindsorInstaller);
-            return windsorInstallers;
+                .Select(B => Activator.CreateInstance(B) as IWindsorInstaller);
+            return windsorInstallers.ToArray(); ;
         }
 
         /// <summary>
