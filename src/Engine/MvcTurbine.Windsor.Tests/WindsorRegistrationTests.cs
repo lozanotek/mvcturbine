@@ -33,24 +33,18 @@ namespace MvcTurbine.Windsor.Tests
     [TestFixture]
     public class WindsorRegistrationTests : RegistrationTests
     {
-        private IServiceLocator windsorServiceLocator;
+
         protected override IServiceLocator CreateServiceLocator()
         {
             return new WindsorServiceLocator();
         }
 
-        [SetUp]
-        public void SetUp()
-        {
-            windsorServiceLocator = CreateServiceLocator();
-        }
-
         [Test]
         public void it_should_run_the_WindsorInstallers_that_it_finds_in_the_assembly()
         {
-            var tc = windsorServiceLocator.Resolve<ITestInstallerInterface>();
+            var tc = locator.Resolve<ITestInstallerInterface>();
             Assert.IsNotNull(tc);
-            Assert.IsInstanceOfType(typeof(TestInstallerInterface),tc);
+            Assert.IsInstanceOfType(typeof(TestInstallerInterface), tc);
         }
     }
 
@@ -62,7 +56,7 @@ namespace MvcTurbine.Windsor.Tests
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<ITestInstallerInterface>());
+            container.Register(Component.For<ITestInstallerInterface>().ImplementedBy<TestInstallerInterface>());
         }
     }
 }

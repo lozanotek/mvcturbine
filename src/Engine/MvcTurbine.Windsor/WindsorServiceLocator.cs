@@ -1,4 +1,6 @@
-﻿namespace MvcTurbine.Windsor {
+﻿using CastleAlias = Castle.MicroKernel.Registration;
+namespace MvcTurbine.Windsor
+{
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -13,45 +15,42 @@
     /// Implemenation of <see cref="IServiceLocator"/> using <see cref="IWindsorContainer"/> as the default container.
     /// </summary>
     [Serializable]
-    public class WindsorServiceLocator : IServiceLocator, IServiceInjector, IServiceReleaser {
+    public class WindsorServiceLocator : IServiceLocator, IServiceInjector, IServiceReleaser
+    {
         private TurbineRegistrationList registrationList;
         private static bool isDisposing;
 
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public WindsorServiceLocator() : this(CreateContainer()) {
+        public WindsorServiceLocator()
+            : this(CreateContainer())
+        {
         }
 
         /// <summary>
         /// Creates an <see cref="IWindsorContainer"/> instance with the right resolvers associated to it.
         /// </summary>
         /// <returns></returns>
-        private static IWindsorContainer CreateContainer() {
+        private static IWindsorContainer CreateContainer()
+        {
             IWindsorContainer container = new WindsorContainer();
             var kernel = container.Kernel;
             kernel.Resolver.AddSubResolver(new ArrayResolver(kernel));
             kernel.Resolver.AddSubResolver(new ListResolver(kernel));
             kernel.AddFacility<FactorySupportFacility>();
-            container.Install(FindAllWindsorInstallers());
-
+            string path = AppDomain.CurrentDomain.BaseDirectory;
+            var assemblyFilter = new CastleAlias.AssemblyFilter(path);
+            assemblyFilter.FilterByName(B => !B.Name.Contains("Castle")).IsType<IWindsorInstaller>();
+            container.Install(FromAssembly.InDirectory(assemblyFilter));
             return container;
-        }
-
-        private static IWindsorInstaller[] FindAllWindsorInstallers()
-        {
-            var type = typeof(IWindsorInstaller);
-            var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
-            var windsorInstallers = loadedAssemblies.SelectMany(T => T.GetTypes())
-                .Where(B => type.IsAssignableFrom(B) && B.GetConstructor(Type.EmptyTypes) != null)
-                .Select(B => Activator.CreateInstance(B) as IWindsorInstaller);
-            return windsorInstallers.ToArray(); ;
         }
 
         /// <summary>
         /// Create an instance of the type an use the specified <see cref="IWindsorContainer"/>.
         /// </summary>
-        public WindsorServiceLocator(IWindsorContainer container) {
+        public WindsorServiceLocator(IWindsorContainer container)
+        {
             Container = container;
         }
 
@@ -60,7 +59,8 @@
         ///</summary>
         public IWindsorContainer Container { get; private set; }
 
-        public IList<object> ResolveServices(Type type) {
+        public IList<object> ResolveServices(Type type)
+        {
             return Container.Kernel.ResolveAll(type).OfType<object>().ToList();
         }
 
@@ -68,7 +68,8 @@
         /// Gets the associated <see cref="IServiceRegistrar"/> to process.
         /// </summary>
         /// <returns></returns>
-        public IServiceRegistrar Batch() {
+        public IServiceRegistrar Batch()
+        {
             registrationList = new TurbineRegistrationList(Container);
             return registrationList;
         }
@@ -78,10 +79,14 @@
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public virtual T Resolve<T>() where T : class {
-            try {
+        public virtual T Resolve<T>() where T : class
+        {
+            try
+            {
                 return Container.Resolve<T>();
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
         }
@@ -92,10 +97,14 @@
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <returns></returns>
-        public T Resolve<T>(string key) where T : class {
-            try {
+        public T Resolve<T>(string key) where T : class
+        {
+            try
+            {
                 return Container.Resolve<T>(key);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
         }
@@ -106,10 +115,14 @@
         /// <typeparam name="T"></typeparam>
         /// <param name="type"></param>
         /// <returns></returns>
-        public T Resolve<T>(Type type) where T : class {
-            try {
+        public T Resolve<T>(Type type) where T : class
+        {
+            try
+            {
                 return (T)Container.Resolve(type);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
         }
@@ -121,9 +134,12 @@
         ///<returns>An instance of the type, null otherwise</returns>
         public object Resolve(Type type)
         {
-            try{
+            try
+            {
                 return Container.Resolve(type);
-            } catch (Exception ex){
+            }
+            catch (Exception ex)
+            {
                 throw new ServiceResolutionException(type, ex);
             }
         }
@@ -133,7 +149,8 @@
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public IList<T> ResolveServices<T>() where T : class {
+        public IList<T> ResolveServices<T>() where T : class
+        {
             var services = Container.Kernel.ResolveAll<T>();
             return new List<T>(services);
         }
@@ -143,7 +160,8 @@
         /// </summary>
         /// <typeparam name="Interface"></typeparam>
         /// <param name="implType"></param>
-        public void Register<Interface>(Type implType) where Interface : class {
+        public void Register<Interface>(Type implType) where Interface : class
+        {
             registrationList.Register<Interface>(implType);
         }
 
@@ -153,7 +171,8 @@
         /// <typeparam name="Interface"></typeparam>
         /// <typeparam name="Implementation"></typeparam>
         public void Register<Interface, Implementation>()
-            where Implementation : class, Interface {
+            where Implementation : class, Interface
+        {
 
             registrationList.Register<Interface, Implementation>();
         }
@@ -165,7 +184,8 @@
         /// <typeparam name="Implementation"></typeparam>
         /// <param name="key"></param>
         public void Register<Interface, Implementation>(string key)
-            where Implementation : class, Interface {
+            where Implementation : class, Interface
+        {
 
             registrationList.Register<Interface, Implementation>(key);
         }
@@ -175,7 +195,8 @@
         /// </summary>
         /// <param name="key"></param>
         /// <param name="type"></param>
-        public void Register(string key, Type type) {
+        public void Register(string key, Type type)
+        {
             registrationList.Register(key, type);
         }
 
@@ -184,7 +205,8 @@
         /// </summary>
         /// <param name="serviceType"></param>
         /// <param name="implType"></param>
-        public void Register(Type serviceType, Type implType) {
+        public void Register(Type serviceType, Type implType)
+        {
             registrationList.Register(serviceType, implType);
         }
 
@@ -194,7 +216,8 @@
         /// <param name="serviceType"></param>
         /// <param name="implType"></param>
         /// <param name="key"></param>
-        public void Register(Type serviceType, Type implType, string key) {
+        public void Register(Type serviceType, Type implType, string key)
+        {
             registrationList.Register(serviceType, implType, key);
         }
 
@@ -203,7 +226,8 @@
         /// </summary>
         /// <typeparam name="Interface"></typeparam>
         /// <param name="instance"></param>
-        public void Register<Interface>(Interface instance) where Interface : class {
+        public void Register<Interface>(Interface instance) where Interface : class
+        {
             registrationList.Register(instance);
         }
 
@@ -221,11 +245,13 @@
         /// See <see cref="IServiceLocator.Release"/>.
         /// </summary>
         /// <param name="instance"></param>
-        public void Release(object instance) {
+        public void Release(object instance)
+        {
             Container.Release(instance);
         }
 
-        public TService Inject<TService>(TService instance) where TService : class {
+        public TService Inject<TService>(TService instance) where TService : class
+        {
             if (instance == null) return null;
 
             // Go through all properties and resolve them if any
@@ -237,7 +263,8 @@
             return instance;
         }
 
-        public void TearDown<TService>(TService instance) where TService : class {
+        public void TearDown<TService>(TService instance) where TService : class
+        {
             if (instance == null) return;
 
             Type instanceType = instance.GetType();
@@ -250,7 +277,8 @@
         /// <summary>
         /// Disposes (resets) the current service locator.
         /// </summary>
-        public void Dispose() {
+        public void Dispose()
+        {
             if (isDisposing) return;
             if (Container == null) return;
 
