@@ -144,7 +144,7 @@ namespace MvcTurbine.Autofac
                 if (container == null)
                     container = Builder.Build();
 
-                var enumerable = container.Resolve(type);
+                var enumerable = container.Resolve(typeof(IEnumerable<>).MakeGenericType(type)) as IEnumerable<object>;
                 return new List<object>(enumerable);
             }
             catch (Exception ex)

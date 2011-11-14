@@ -54,6 +54,20 @@ namespace MvcTurbine.Windsor
             Container = container;
         }
 
+        public IWindsorInstaller[] GetWindsorInstallers()
+        {
+            var installers = new List<IWindsorInstaller>();
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            var types = assemblies.SelectMany(t => t.GetTypes())
+                .Where(B => typeof(IWindsorInstaller).IsAssignableFrom(B) 
+                    && (B.GetConstructor(Type.EmptyTypes) != null)).ToList();
+
+            types.ForEach(type => installers.Add(Activator.CreateInstance(type) as IWindsorInstaller));
+
+            return installers.ToArray();    
+        }
+
+
         ///<summary>
         /// Gets or sets the current <see cref="IWindsorContainer"/> for the locator.
         ///</summary>
