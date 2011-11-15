@@ -21,7 +21,8 @@
 
 using Autofac.Builder;
 
-namespace MvcTurbine.Autofac {
+namespace MvcTurbine.Autofac
+{
     using System;
     using System.Collections.Generic;
     using ComponentModel;
@@ -33,7 +34,8 @@ namespace MvcTurbine.Autofac {
     /// <remarks>
     /// To learn more about Autofac, please visit its website: http://code.google.com/p/autofac
     /// </remarks>
-    public class AutofacServiceLocator : IServiceLocator {
+    public class AutofacServiceLocator : IServiceLocator
+    {
         private TurbineAutofacModule currentModule;
         private IContainer container;
 
@@ -41,11 +43,14 @@ namespace MvcTurbine.Autofac {
         /// Default constructor. Locator is instantiated with a new <see cref="ContainerBuilder"/> instance.
         /// </summary>
         public AutofacServiceLocator()
-            : this(new ContainerBuilder()) {
+            : this(new ContainerBuilder())
+        {
         }
 
-        public AutofacServiceLocator(ContainerBuilder builder) {
-            if (builder == null) {
+        public AutofacServiceLocator(ContainerBuilder builder)
+        {
+            if (builder == null)
+            {
                 throw new ArgumentNullException("builder",
                     "The specified Autofac ContainerBuilder cannot be null.");
             }
@@ -54,76 +59,110 @@ namespace MvcTurbine.Autofac {
 
         public ContainerBuilder Builder { get; private set; }
 
-        public void Dispose() {
+        public void Dispose()
+        {
             if (container != null)
                 container.Dispose();
         }
 
-        public T Resolve<T>() where T : class {
-            try {
+        public T Resolve<T>() where T : class
+        {
+            try
+            {
                 if (container == null)
                     container = Builder.Build();
                 return container.Resolve<T>();
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
         }
 
-        public T Resolve<T>(string key) where T : class {
-            try {
+        public T Resolve<T>(string key) where T : class
+        {
+            try
+            {
                 if (container == null)
                     container = Builder.Build();
                 return container.Resolve<T>(key);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
         }
 
-        public T Resolve<T>(Type type) where T : class {
-            try {
+        public T Resolve<T>(Type type) where T : class
+        {
+            try
+            {
                 if (container == null)
                     container = Builder.Build();
 
                 return container.Resolve(type) as T;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
         }
 
-        public object Resolve(Type type) {
-            try {
+        public object Resolve(Type type)
+        {
+            try
+            {
                 if (container == null)
                     container = Builder.Build();
                 return container.Resolve(type);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 throw new ServiceResolutionException(type, ex);
             }
         }
 
-        public IList<T> ResolveServices<T>() where T : class {
-            try {
+        public IList<T> ResolveServices<T>() where T : class
+        {
+            try
+            {
                 if (container == null)
                     container = Builder.Build();
                 var enumerable = container.Resolve<IEnumerable<T>>();
                 return new List<T>(enumerable);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 throw new ServiceResolutionException(typeof(T), ex);
             }
         }
 
         public IList<object> ResolveServices(Type type)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (container == null)
+                    container = Builder.Build();
+
+                var enumerable = container.Resolve(typeof(IEnumerable<>).MakeGenericType(type)) as IEnumerable<object>;
+                return new List<object>(enumerable);
+            }
+            catch (Exception ex)
+            {
+                throw new ServiceResolutionException(type, ex);
+            }
         }
 
-        public IServiceRegistrar Batch() {
+        public IServiceRegistrar Batch()
+        {
             currentModule = new TurbineAutofacModule();
             Builder.RegisterModule(currentModule);
 
             return currentModule;
         }
 
-        public void Register<Interface>(Type implType) where Interface : class {
+        public void Register<Interface>(Type implType) where Interface : class
+        {
             if (container != null)
                 container.ComponentRegistry.Register(
                     RegistrationBuilder.ForType(implType).As<Interface>().CreateRegistration());
@@ -131,7 +170,8 @@ namespace MvcTurbine.Autofac {
                 Builder.RegisterType(implType).As<Interface>();
         }
 
-        public void Register<Interface, Implementation>() where Implementation : class, Interface {
+        public void Register<Interface, Implementation>() where Implementation : class, Interface
+        {
             if (container != null)
                 container.ComponentRegistry.Register(
                     RegistrationBuilder.ForType<Implementation>().As<Interface>().CreateRegistration());
@@ -140,7 +180,8 @@ namespace MvcTurbine.Autofac {
         }
 
         public void Register<Interface, Implementation>(string key) where Implementation :
-            class, Interface {
+            class, Interface
+        {
             if (container != null)
                 container.ComponentRegistry.Register(
                     RegistrationBuilder.ForType<Implementation>().Named<Interface>(key).CreateRegistration());
@@ -148,11 +189,13 @@ namespace MvcTurbine.Autofac {
                 Builder.RegisterType<Implementation>().Named<Interface>(key);
         }
 
-        public void Register(string key, Type type) {
+        public void Register(string key, Type type)
+        {
             Builder.RegisterType(type).Named(key, type);
         }
 
-        public void Register(Type serviceType, Type implType) {
+        public void Register(Type serviceType, Type implType)
+        {
             if (container != null)
                 container.ComponentRegistry.Register(
                     RegistrationBuilder.ForType(implType).As(serviceType).CreateRegistration());
@@ -179,24 +222,34 @@ namespace MvcTurbine.Autofac {
         }
 
         [Obsolete("Not used with this implementation of IServiceLocator.")]
-        public void Release(object instance) {
+        public void Release(object instance)
+        {
         }
 
-        public void Reset() {
+        public void Reset()
+        {
             Dispose();
 
             Builder = null;
             currentModule = null;
         }
 
-        public TService Inject<TService>(TService instance) where TService : class {
+        public TService Inject<TService>(TService instance) where TService : class
+        {
             if (container == null)
                 container = Builder.Build();
             return container.InjectProperties(instance);
         }
 
         [Obsolete("Not used with this implementation of IServiceLocator.")]
-        public void TearDown<TService>(TService instance) where TService : class {
+        public void TearDown<TService>(TService instance) where TService : class
+        {
+        }
+
+
+        public void Register(Type serviceType, Type implType, string key)
+        {
+            throw new NotImplementedException();
         }
     }
 }

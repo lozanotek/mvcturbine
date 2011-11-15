@@ -5,6 +5,7 @@ namespace MvcTurbine.Windsor {
     using Castle.MicroKernel.Registration;
     using Castle.Windsor;
     using ComponentModel;
+    using System.Reflection;
 
     /// <summary>
     /// Defines the list of registrations to process
@@ -31,7 +32,7 @@ namespace MvcTurbine.Windsor {
         /// <typeparam name="Interface"></typeparam>
         public void RegisterAll<Interface>() {
             //TODO: see if this works
-            AllTypes.Of<Interface>();
+            AllTypes.FromAssembly(Assembly.GetAssembly(typeof(Interface))).BasedOn<Interface>();
         }
 
         /// <summary>
