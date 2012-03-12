@@ -19,7 +19,6 @@
             if (table == null) {
                 throw new ArgumentNullException("table", "EmbeddedViewTable cannot be null.");
             }
-
             embeddedViews = table;
         }
 
@@ -30,7 +29,6 @@
         /// <returns></returns>
         protected virtual bool IsEmbeddedView(string virtualPath) {
             string checkPath = VirtualPathUtility.ToAppRelative(virtualPath);
-
             return checkPath.StartsWith("~/Views/", StringComparison.InvariantCultureIgnoreCase) 
                    && embeddedViews.ContainsEmbeddedView(checkPath);
         }
@@ -42,7 +40,7 @@
         /// <returns></returns>
         public override bool FileExists(string virtualPath) {
             return (IsEmbeddedView(virtualPath) ||
-                    base.FileExists(virtualPath));
+                    Previous.FileExists(virtualPath));
         }
 
         /// <summary>
@@ -56,8 +54,7 @@
                 EmbeddedView embeddedView = embeddedViews.FindEmbeddedView(relativePath);
                 return new AssemblyResourceFile(embeddedView, relativePath);
             }
-
-            return base.GetFile(virtualPath);
+            return Previous.GetFile(virtualPath);
         }
 
         /// <summary>
@@ -69,7 +66,7 @@
         /// <returns>If the view is embedded, always return null. Otherwise return what the base specifies.</returns>
         public override CacheDependency GetCacheDependency(string virtualPath, IEnumerable virtualPathDependencies, DateTime utcStart) {
             return IsEmbeddedView(virtualPath) ? null : 
-                base.GetCacheDependency(virtualPath, virtualPathDependencies, utcStart);
+                Previous.GetCacheDependency(virtualPath, virtualPathDependencies, utcStart);
         }
     }
 }
