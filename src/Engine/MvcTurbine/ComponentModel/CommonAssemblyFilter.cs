@@ -19,7 +19,7 @@
         /// Sets the following filters as default, (System, mscorlib, Microsoft, WebDev, CppCodeProvider).
         /// </summary>
         private void AddDefaults() {
-            AddFilter("System");
+            AddFilter("^System");
             AddFilter("System.Web");
             AddFilter("mscorlib");
             AddFilter("Microsoft");

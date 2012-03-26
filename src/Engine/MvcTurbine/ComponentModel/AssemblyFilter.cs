@@ -1,4 +1,6 @@
-﻿namespace MvcTurbine.ComponentModel {
+﻿using System.Text.RegularExpressions;
+
+namespace MvcTurbine.ComponentModel {
     using System;
     using System.Collections.Generic;
 
@@ -46,7 +48,7 @@
             if (string.IsNullOrEmpty(assemblyName)) return false;
 
             foreach (var filter in Filters) {
-                if (assemblyName.Contains(filter)) {
+                if (Regex.IsMatch(assemblyName, filter)) {
                     return true;
                 }
             }
