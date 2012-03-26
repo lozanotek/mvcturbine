@@ -80,5 +80,13 @@
             bool result = filter.Match(null);
             Assert.IsFalse(result);
         }
+
+        [Test]
+        public void No_Match_When_Name_Contains_System_But_Doesnt_Start_With_It () {
+           var filter = new CommonAssemblyFilter();
+           
+           bool result = filter.Match("Company.SystemCheck.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089");
+           Assert.IsFalse(result);
+        }
     }
 }
