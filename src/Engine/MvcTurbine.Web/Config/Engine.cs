@@ -38,10 +38,10 @@
 			.EmbeddedViewResolve<EmbeddedViewResolver>()
 			.ViewPageActivator<TurbineViewPageActivator>()
 			.HttpModuleManager<HttpModuleManager>()
-            .ViewEngineManager<ViewEngineManager>()
+			.ViewEngineManager<ViewEngineManager>()
 			.AssemblyFilter<CommonAssemblyFilter>()
 			.HttpModuleProvider<AllHttpModulesRegistry>()
-            .ViewEngineProvider<AllViewEngineRegistry>()
+			.ViewEngineProvider<AllViewEngineRegistry>()
 			.RegisterBuiltInCoreBlades();
 		}
 
