@@ -1,0 +1,843 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MvcTurbine</name>
+    </assembly>
+    <members>
+        <member name="T:MvcTurbine.CollectionExtensions">
+            <summary>
+            Extension methods for collections.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.CollectionExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection"></param>
+            <param name="action"></param>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.AssemblyDependencyException">
+            <summary>
+             Defines an error when an <see cref="T:System.Reflection.Assembly"/> cannot be loaded.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.AssemblyDependencyException.#ctor(System.String,System.Exception)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="assemblyFile"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="P:MvcTurbine.ComponentModel.AssemblyDependencyException.AssemblyFile">
+            <summary>
+            Gets or sets the assembly name that couldn't load.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.AssemblyFilter">
+            <summary>
+            Defines a list of filters to apply to an assembly name.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.AssemblyFilter.#ctor">
+            <summary>
+            Public default constructor.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.AssemblyFilter.AddFilter(System.String)">
+            <summary>
+            Adds the specified filter to the list if not previously added.
+            </summary>
+            <param name="filter">TypeFilter to add into the list.</param>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.AssemblyFilter.Clear">
+            <summary>
+            Clears the list of registered filters.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.AssemblyFilter.Match(System.String)">
+            <summary>
+            Checks whether <paramref name="assemblyName"/> matches the filter list.
+            </summary>
+            <param name="assemblyName">Name of the assembly to check.</param>
+            <returns>True if match, false otherise.</returns>
+        </member>
+        <member name="P:MvcTurbine.ComponentModel.AssemblyFilter.Filters">
+            <summary>
+            Gets or sets the list for the filters.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.AutoRegistrationList">
+            <summary>
+             Defines a list of auto-registrations for the system process.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.AutoRegistrationList.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.AutoRegistrationList.Add(MvcTurbine.ComponentModel.ServiceRegistration)">
+            <summary>
+            Adds the specified <see cref="T:MvcTurbine.ComponentModel.ServiceRegistration"/>
+            </summary>
+            <param name="registration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.AutoRegistrationList.Clear">
+            <summary>
+            Clears the current list.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.AutoRegistrationList.GetEnumerator">
+            <summary>
+            Gets the enumerator of <seealso cref="T:MvcTurbine.ComponentModel.ServiceRegistration"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.CommonAssemblyFilter">
+            <summary>
+            Defines common assemblies to filter. These assemblies are:
+                System, mscorlib, Microsoft, WebDev, CppCodeProvider).
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.CommonAssemblyFilter.#ctor">
+            <summary>
+            Creates an instance and applies the default filters.
+            Sets the following filters as default, (System, mscorlib, Microsoft, WebDev, CppCodeProvider).
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.CommonAssemblyFilter.AddDefaults">
+            <summary>
+            Sets the following filters as default, (System, mscorlib, Microsoft, WebDev, CppCodeProvider).
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.ComponentReg">
+            <summary>
+            Defines the basic registration for a component.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.DefaultAutoRegistrator">
+            <summary>
+            Default implementation of <seealso cref="T:MvcTurbine.ComponentModel.IAutoRegistrator"/>.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.IAutoRegistrator">
+            <summary>
+             Defines the process of doing auto registration of a specified service type.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IAutoRegistrator.AutoRegister(MvcTurbine.ComponentModel.ServiceRegistration)">
+            <summary>
+            Process the specified <seealso cref="T:MvcTurbine.ComponentModel.ServiceRegistration"/> for the types in all assemblies.
+            </summary>
+            <param name="serviceRegistration">Instance of <see cref="T:MvcTurbine.ComponentModel.ServiceRegistration"/> to use.</param>
+        </member>
+        <member name="P:MvcTurbine.ComponentModel.IAutoRegistrator.Filter">
+            <summary>
+            Gets or sets the <seealso cref="T:MvcTurbine.ComponentModel.AssemblyFilter"/> to use.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.DefaultAutoRegistrator.#ctor(MvcTurbine.ComponentModel.IServiceLocator,MvcTurbine.ComponentModel.AssemblyFilter)">
+            <summary>
+            Creates an instance with the specified <seealso cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> implementation.
+            </summary>
+            <param name="locator"></param>
+            <param name="filter"></param>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.DefaultAutoRegistrator.AutoRegister(MvcTurbine.ComponentModel.ServiceRegistration)">
+            <summary>
+            Process the specified <seealso cref="T:MvcTurbine.ComponentModel.ServiceRegistration"/> for the types in all assemblies.
+            </summary>
+            <param name="serviceRegistration">Instance of <see cref="T:MvcTurbine.ComponentModel.ServiceRegistration"/> to use.</param>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.DefaultAutoRegistrator.GetAssemblies">
+            <summary>
+            Gets all the assemblies after the <see cref="P:MvcTurbine.ComponentModel.DefaultAutoRegistrator.Filter"/> property is applied.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:MvcTurbine.ComponentModel.DefaultAutoRegistrator.ServiceLocator">
+            <summary>
+            Gets the <seealso cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> associated with this instance.
+            </summary>
+        </member>
+        <member name="P:MvcTurbine.ComponentModel.DefaultAutoRegistrator.Filter">
+            <summary>
+            Gets or sets the <seealso cref="T:MvcTurbine.ComponentModel.AssemblyFilter"/> to use.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.DefaultBinAssemblyLoader">
+            <summary>
+            Default implementation of the <see cref="T:MvcTurbine.ComponentModel.IBinAssemblyLoader"/>.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.IBinAssemblyLoader">
+            <summary>
+            Defines the interface for loading any <see cref="T:System.Reflection.Assembly"/> in the applicaiton bin folder
+            into <see cref="!:AppDomain.Current"/>
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IBinAssemblyLoader.LoadAssembliesFromBinFolder">
+            <summary>
+            Loads the assemblies in the bin folder that are not currently in the <see cref="P:System.AppDomain.CurrentDomain"/>.
+            </summary>
+            <returns>A list of assemblies that were loaded into the <see cref="P:System.AppDomain.CurrentDomain"/>.</returns>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.DefaultBinAssemblyLoader.LoadAssembliesFromBinFolder">
+            <summary>
+            Loads the assemblies in the bin folder that are not currently in the <see cref="P:System.AppDomain.CurrentDomain"/>.
+            </summary>
+            <returns>A list of assemblies that were loaded into the <see cref="P:System.AppDomain.CurrentDomain"/>.</returns>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.DefaultBinAssemblyLoader.GetCurrentAppDomainAssemblies">
+            <summary>
+            Gets the assemblies that are currently in the <see cref="P:System.AppDomain.CurrentDomain"/>
+            </summary>
+            <returns>List of the simple name for the assemblies in the <see cref="P:System.AppDomain.CurrentDomain"/>.</returns>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.DefaultBinAssemblyLoader.GetAssembliesInBinFolder">
+            <summary>
+            Gets the assembly files (*.dll) in the <see cref="P:System.Web.HttpRuntime.BinDirectory"/> for the application.
+            </summary>
+            <returns>List of paths for the assemblies in the bin folder.</returns>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.DependencyResolutionException">
+            <summary>
+            Provides information when an assembly can't load as a dependency.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.DependencyResolutionException.#ctor(System.String,System.String)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="assemblyName"></param>
+            <param name="message"></param>
+        </member>
+        <member name="P:MvcTurbine.ComponentModel.DependencyResolutionException.AssemblyName">
+            <summary>
+            Gets or sets the assembly name that couldn't load.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.IServiceInjector">
+            <summary>
+            Provides the contract for injecting dependency into an object not created by the underlying container.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceInjector.Inject``1(``0)">
+            <summary>
+            Injects any types that are registered into the specified <paramref name="instance"/>.
+            </summary>
+            <typeparam name="TService"></typeparam>
+            <param name="instance"></param>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceInjector.TearDown``1(``0)">
+            <summary>
+            Releases any types that have been registered into the specified <paramref name="instance"/>.
+            </summary>
+            <typeparam name="TService"></typeparam>
+            <param name="instance"></param>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.IServiceReleaser">
+            <summary>
+            Provides the contract for releasing an object that's been created by the underlying container.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.ExceptionExtensions.GetDetailedMessage(System.Reflection.ReflectionTypeLoadException,System.String)">
+            <summary>
+            Provides formatting information for troubleshooting a missing reference issue.
+            </summary>
+            <param name="assemblyName"></param>
+            <param name="exception"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.IServiceRegistrar">
+            <summary>
+            Process registration as a queued batch.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceRegistrar.RegisterAll``1">
+            <summary>
+            Registers all the services of type <typeparamref name="Interface"/> into the container.
+            </summary>
+            <typeparam name="Interface"></typeparam>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceRegistrar.Register``1(System.Type)">
+            <summary>
+            Registers the implemation type, <paramref name="implType"/>, with the locator under
+            the <see cref="!:Interface"/> service type.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <param name="implType">Implementation type to use for registration.</param>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceRegistrar.Register``2">
+            <summary>
+            Registers the implemation type, <see cref="!:Implementation"/>, with the locator under
+            the <see cref="!:Interface"/> service type.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <typeparam name="Implementation">Implementation type to use for registration.
+            </typeparam>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceRegistrar.Register``2(System.String)">
+            <summary>
+            Registers the implemation type, <see cref="!:Implementation"/>, with the locator under
+            the <see cref="!:Interface"/> service type.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <typeparam name="Implementation">Implementation type to use for registration.
+            </typeparam>
+            <param name="key">Unique key to distinguish the service.</param>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceRegistrar.Register(System.String,System.Type)">
+            <summary>
+            Registers the implementation type, <paramref name="type"/>, with the locator
+            by the given string key.
+            </summary>
+            <param name="key">Unique key to distinguish the service.</param>
+            <param name="type">Implementation type to use.</param>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceRegistrar.Register(System.Type,System.Type)">
+            <summary>
+            Registers the implementation type, <paramref name="implType"/>, with the locator
+            by the given service type, <paramref name="serviceType"/>
+            </summary>
+            <param name="serviceType">Type of the service to register.</param>
+            <param name="implType">Implementation to associate with the service.</param>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceRegistrar.Register(System.Type,System.Type,System.String)">
+            <summary>
+            Registers the implementation type, <paramref name="implType"/>, with the locator
+            by the given service type, <paramref name="serviceType"/>
+            </summary>
+            <param name="serviceType">Type of the service to register.</param>
+            <param name="implType">Implementation to associate with the service.</param>
+            <param name="key">Unique key to distinguish the service.</param>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceRegistrar.Register``1(``0)">
+            <summary>
+            Registers the instance of type, <typeparamref name="Interface"/>, with the locator.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <param name="instance">Instance of the type to register.</param>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.IServiceRegistration">
+            <summary>
+            Provides a simple way register components within your application.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceRegistration.Register(MvcTurbine.ComponentModel.IServiceLocator)">
+            <summary>
+            Registers the components with the specified <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> instance.
+            </summary>
+            <param name="locator">Instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> to use.</param>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.IServiceLocator">
+            <summary>
+            Provides a simple interface for resolving and registering components within
+            the application.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceLocator.Resolve``1">
+            <summary>
+            Resolves the service of the specified type.
+            </summary>
+            <typeparam name="T">Type of service to resolve.</typeparam>
+            <returns>An instance of the type, null otherwise.</returns>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceLocator.Resolve``1(System.String)">
+            <summary>
+            Resolves the service of the specified type by the given string key.
+            </summary>
+            <typeparam name="T">Type of service to resolve.</typeparam>
+            <param name="key">Unique key to distinguish the service.</param>
+            <returns>An instance of the type, null otherwise.</returns>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceLocator.Resolve``1(System.Type)">
+            <summary>
+            Resolves the service of the specified type by the given type key.
+            </summary>
+            <typeparam name="T">Type of service to resolve.</typeparam>
+            <param name="type">Key type of the service.</param>
+            <returns>An instance of the type, null otherwise.</returns>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceLocator.Resolve(System.Type)">
+            <summary>
+             Resolves the service of the specified type by the given type key.
+            </summary>
+            <param name="type">Type of service to resolve.</param>
+            <returns>An instance of the type, null otherwise</returns>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceLocator.ResolveServices``1">
+            <summary>
+            Resolves the list of services of type <see cref="!:T"/> that are registered 
+            within the locator.
+            </summary>
+            <typeparam name="T">Type of the service to resolve.</typeparam>
+            <returns>A list of service of type <see cref="!:T"/>, null otherwise.</returns>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceLocator.Batch">
+            <summary>
+            Creates a <see cref="T:MvcTurbine.ComponentModel.IServiceRegistrar"/> to process queued
+            registration of types.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceLocator.Register``1(System.Type)">
+            <summary>
+            Registers the implemation type, <paramref name="implType"/>, with the locator under
+            the <see cref="!:Interface"/> service type.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <param name="implType">Implementation type to use for registration.</param>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceLocator.Register``2">
+            <summary>
+            Registers the implemation type, <see cref="!:Implementation"/>, with the locator under
+            the <see cref="!:Interface"/> service type.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <typeparam name="Implementation">Implementation type to use for registration.
+            </typeparam>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceLocator.Register``2(System.String)">
+            <summary>
+            Registers the implemation type, <see cref="!:Implementation"/>, with the locator under
+            the <see cref="!:Interface"/> service type.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <typeparam name="Implementation">Implementation type to use for registration.
+            </typeparam>
+            <param name="key">Unique key to distinguish the service.</param>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceLocator.Register(System.String,System.Type)">
+            <summary>
+            Registers the implementation type, <paramref name="type"/>, with the locator
+            by the given string key.
+            </summary>
+            <param name="key">Unique key to distinguish the service.</param>
+            <param name="type">Implementation type to use.</param>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceLocator.Register(System.Type,System.Type)">
+            <summary>
+            Registers the implementation type, <paramref name="implType"/>, with the locator
+            by the given service type, <paramref name="serviceType"/>
+            </summary>
+            <param name="serviceType">Type of the service to register.</param>
+            <param name="implType">Implementation to associate with the service.</param>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceLocator.Register(System.Type,System.Type,System.String)">
+            <summary>
+            Registers the implementation type, <paramref name="implType"/>, with the locator
+            by the given service type, <paramref name="serviceType"/>
+            </summary>
+            <param name="serviceType">Type of the service to register.</param>
+            <param name="implType">Implementation to associate with the service.</param>
+            <param name="key">Unique key to distinguish the service.</param>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceLocator.Register``1(``0)">
+            <summary>
+            Registers the instance of type, <typeparamref name="Interface"/>, with the locator.
+            </summary>
+            <typeparam name="Interface">Type of the service to register.</typeparam>
+            <param name="instance">Instance of the type to register.</param>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.IServiceLocator.Register``1(System.Func{``0})">
+            <summary>
+            Resolves the service of the specified interface with the provided factory method.
+            </summary>
+            <param name="factoryMethod">The factory method which will be used to resolve this interface.</param>
+            <returns>An instance of the type, null otherwise</returns>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.ISupportAutoRegistration">
+            <summary>
+            Defines the contract for processing auto-registration within the system.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.ISupportAutoRegistration.AddRegistrations(MvcTurbine.ComponentModel.AutoRegistrationList)">
+            <summary>
+            Passes the current <see cref="T:MvcTurbine.ComponentModel.AutoRegistrationList"/> that contains all <see cref="T:MvcTurbine.ComponentModel.ServiceRegistration"/>
+            to process.
+            </summary>
+            <param name="registrationList"></param>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.RegistrationFilters">
+            <summary>
+            Helper methods for filtering types within the framework.
+            </summary>
+        </member>
+        <member name="P:MvcTurbine.ComponentModel.RegistrationFilters.DefaultFilter">
+            <summary>
+            Gets the default filter for the system to use.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.ServiceLocatorExtensions">
+            <summary>
+            Extension methods for <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.ServiceLocatorExtensions.GetUnderlyingContainer``1(MvcTurbine.ComponentModel.IServiceLocator)">
+            <summary>
+            Gets the associated container with the current <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> instance.
+            </summary>
+            <typeparam name="TContainer"></typeparam>
+            <param name="locator"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.ServiceResolutionException">
+            <summary>
+            Defines the missing resolution of services within the <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.ServiceResolutionException.#ctor(System.Type)">
+            <summary>
+             Creates an exception with the specified type.
+            </summary>
+            <param name="service"></param>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.ServiceResolutionException.#ctor(System.Type,System.Exception)">
+            <summary>
+            Creates an exception with the specified type and inner exception. 
+            </summary>
+            <param name="service"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="P:MvcTurbine.ComponentModel.ServiceResolutionException.ServiceType">
+            <summary>
+            Gets or sets the type of the service to use.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.TypeCache">
+            <summary>
+            Simple type cache for the system to use.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.TypeCache.Merge(MvcTurbine.ComponentModel.TypeCache)">
+            <summary>
+            Merges the specified <see cref="T:MvcTurbine.ComponentModel.TypeCache"/> with the current instance.
+            </summary>
+            <param name="cache"></param>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.TypeCache.Add(System.Collections.Generic.KeyValuePair{System.Type,System.Type})">
+            <summary>
+            Adds the key value pair with the current instance.
+            </summary>
+            <param name="pair"></param>
+        </member>
+        <member name="T:MvcTurbine.IRotorContext">
+            <summary>
+            Defines the default flow of a <see cref="T:MvcTurbine.ITurbineApplication"/> instance.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.IRotorContext.Initialize(MvcTurbine.ITurbineApplication)">
+            <summary>
+            Initializes the current context by auto-registering the default components.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.IRotorContext.Turn">
+            <summary>
+            Executes the current context.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.IRotorContext.GetAllBlades">
+            <summary>
+            Gets the list of components that are to be used for the application.
+            </summary>
+            <returns>A list of the components registered with the application.</returns>
+        </member>
+        <member name="P:MvcTurbine.IRotorContext.ServiceLocator">
+            <summary>
+            Gets or sets the current implementation of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>.
+            </summary>
+        </member>
+        <member name="P:MvcTurbine.IRotorContext.Application">
+            <summary>
+            Gets or sets the current instance of <see cref="T:MvcTurbine.ITurbineApplication"/>.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.ITurbineApplication">
+            <summary>
+            Provides the infrastructure for Turbine flow.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ITurbineApplication.Startup">
+            <summary>
+            Performs any startup processing.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ITurbineApplication.TurnRotor">
+            <summary>
+            Turns the current <see cref="P:MvcTurbine.ITurbineApplication.CurrentContext"/>
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ITurbineApplication.Shutdown">
+            <summary>
+            Shuts down the current application.
+            </summary>
+        </member>
+        <member name="P:MvcTurbine.ITurbineApplication.ServiceLocator">
+            <summary>
+            Gets or sets the current implementation of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>
+            the application instance will use.
+            </summary>
+        </member>
+        <member name="P:MvcTurbine.ITurbineApplication.CurrentContext">
+            <summary>
+            Gets or sets the current <see cref="T:MvcTurbine.IRotorContext"/> for the application instance to use.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:MvcTurbine.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:MvcTurbine.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:MvcTurbine.Properties.Resources.ServiceLocatorExceptionMessage">
+             <summary>
+               Looks up a localized string similar to MVC Turbine cannot start!
+            You need to specify a valid IServiceLocator for the system to use!
+            
+            Check the result of your registered ServiceLocatorProvider to see if it&apos;s valid..
+             </summary>
+        </member>
+        <member name="P:MvcTurbine.Properties.Resources.ServiceLocatorProviderExceptionMessage">
+             <summary>
+               Looks up a localized string similar to MVC Turbine cannot start!
+            You must specify a ServiceLocatorProvider to resolve a IServiceLocator for the system to use.  To specify a ServiceLocatorProvider, make sure you call
+            
+                ServiceLocatorManager.SetLocatorProvider(() =&gt; YOUR PROVIDER)
+                
+            Within the static constructor of your Global.asax.
+             </summary>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.Registration">
+            <summary>
+            Helper methods for registration of services with the runtime.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.Registration.Simple``1">
+            <summary>
+            Creates a registration for <see cref="!:TService"/> with <see cref="P:MvcTurbine.ComponentModel.RegistrationFilters.DefaultFilter"/>.
+            </summary>
+            <typeparam name="TService"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.Registration.Simple``1(System.Func{System.Type,System.Type,System.Boolean})">
+            <summary>
+            Creates a registration for <see cref="!:TService"/> with the specified filter. 
+            </summary>
+            <typeparam name="TService"></typeparam>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.Registration.Keyed``1">
+            <summary>
+            Creates a keyed registration for <see cref="!:TService"/> with <see cref="P:MvcTurbine.ComponentModel.RegistrationFilters.DefaultFilter"/>.
+            </summary>
+            <typeparam name="TService"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.Registration.Keyed``1(System.Func{System.Type,System.Type,System.Boolean})">
+            <summary>
+            Creates a keyed registration for <see cref="!:TService"/> with the specified filter.        
+            </summary>
+            <typeparam name="TService"></typeparam>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.Registration.Custom``1(System.Func{System.Type,System.Type,System.Boolean},System.Action{MvcTurbine.ComponentModel.IServiceLocator,System.Type})">
+            <summary>
+            Creates a custom registration for <see cref="!:TService"/> with the specified filter. 
+            </summary>
+            <typeparam name="TService"></typeparam>
+            <param name="filter"></param>
+            <param name="regAction"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.ServiceLocatorProvider">
+            <summary>
+            Defines the resolutioon delegate to obtain an instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>.
+            </summary>
+            <remarks>
+            This class is modelled after the ServiceLocator class of the Common ServiceLocator hosted
+            on CodePlex at http://commonservicelocator.codeplex.com
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.ServiceLocatorManager">
+            <summary>
+            Utility class for accessing the default registered instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.ServiceLocatorManager.SetLocatorProvider(MvcTurbine.ComponentModel.ServiceLocatorProvider)">
+            <summary>
+            Sets the current instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> by using the specified
+            resolution delegate.
+            </summary>
+            <param name="newProvider">Resolution delegate that will obtain the instance of 
+            <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>.</param>
+        </member>
+        <member name="P:MvcTurbine.ComponentModel.ServiceLocatorManager.Current">
+            <summary>
+            Gets the current registered instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>.
+            </summary>
+            <remarks>To register an instance use the <see cref="M:MvcTurbine.ComponentModel.ServiceLocatorManager.SetLocatorProvider(MvcTurbine.ComponentModel.ServiceLocatorProvider)"/> method.</remarks>
+        </member>
+        <member name="T:MvcTurbine.ComponentModel.ServiceRegistration">
+            <summary>
+             Defines a registration for a service within application.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.ComponentModel.ServiceRegistration.IsValid">
+            <summary>
+            Checks wether the instance is valid for processing
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:MvcTurbine.ComponentModel.ServiceRegistration.ServiceType">
+            <summary>
+            Gets or sets the type of the service to use.
+            </summary>
+        </member>
+        <member name="P:MvcTurbine.ComponentModel.ServiceRegistration.RegistrationHandler">
+            <summary>
+            Gets or sets the actual registration handler for the service
+            </summary>
+        </member>
+        <member name="P:MvcTurbine.ComponentModel.ServiceRegistration.TypeFilter">
+            <summary>
+            Gets or sets the filter, if any, to use for the types.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.Blades.Blade">
+            <summary>
+            Defines the base implementation of a component within a <see cref="T:MvcTurbine.IRotorContext"/>.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.Blades.IBlade">
+            <summary>
+            Defines the contract for all blades (components) to use.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Blades.IBlade.Initialize(MvcTurbine.IRotorContext)">
+            <summary>
+            Initializes the blade.
+            </summary>
+            <param name="context">Current context for the <see cref="T:MvcTurbine.Blades.Blade"/> instance.</param>
+        </member>
+        <member name="M:MvcTurbine.Blades.IBlade.Spin(MvcTurbine.IRotorContext)">
+            <summary>
+            Executes the current component.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Blades.Blade.Dispose">
+            <summary>
+            Cleans up the current component.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Blades.Blade.InvokeInitialized(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:MvcTurbine.Blades.Blade.Initialized"/> event.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:MvcTurbine.Blades.Blade.InvokeDisposed(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:MvcTurbine.Blades.Blade.Disposed"/> event.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:MvcTurbine.Blades.Blade.Initialize(MvcTurbine.IRotorContext)">
+            <summary>
+            Initializes the blade
+            </summary>
+            <param name="context">Current context for the <see cref="T:MvcTurbine.Blades.Blade"/> instance.</param>
+        </member>
+        <member name="M:MvcTurbine.Blades.Blade.Spin(MvcTurbine.IRotorContext)">
+            <summary>
+            Executes the current blade.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Blades.Blade.GetServiceLocatorFromContext(MvcTurbine.IRotorContext)">
+            <summary>
+            Gets the current <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> from the current <see cref="T:MvcTurbine.IRotorContext"/>
+            to use within this blade.
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="E:MvcTurbine.Blades.Blade.Initialized">
+            <summary>
+            Informs registrants of the initialization of the component.
+            </summary>
+        </member>
+        <member name="E:MvcTurbine.Blades.Blade.Disposed">
+            <summary>
+            Informs the registrants of the disposing of the component.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.Blades.BladeList">
+            <summary>
+            Defines a list of <see cref="T:MvcTurbine.Blades.IBlade"/> types to use or process.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Blades.BladeList.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Blades.BladeList.#ctor(System.Collections.Generic.IEnumerable{MvcTurbine.Blades.IBlade})">
+            <summary>
+            Creates a new lis with the specified <see cref="T:System.Collections.Generic.IEnumerable`1"/> collection.
+            </summary>
+            <param name="blades">Enumerable type that contains <see cref="T:MvcTurbine.Blades.IBlade"/> instances.</param>
+        </member>
+        <member name="T:MvcTurbine.Routing.IRouteRegistrator">
+            <summary>
+            Provides a simple way to register routes within your application.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Routing.IRouteRegistrator.Register(System.Web.Routing.RouteCollection)">
+            <summary>
+            Registers routes within <see cref="T:System.Web.Routing.RouteCollection"/> for the application.
+            </summary>
+            <param name="routes">The <see cref="T:System.Web.Routing.RouteCollection"/> from the <see cref="P:System.Web.Routing.RouteTable.Routes"/>.</param>
+        </member>
+        <member name="T:MvcTurbine.TypeExtensions">
+            <summary>
+            Extension method classes
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.TypeExtensions.IsType``1(System.Type)">
+            <summary>
+            Checks to see if the specified type is assignable.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.TypeExtensions.IsType``1(System.Object)">
+            <summary>
+            Checks to see if the specified type is assignable.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.TypeExtensions.IsType(System.Object,System.Type)">
+            <summary>
+            Checks to see if the specified type is assignable.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

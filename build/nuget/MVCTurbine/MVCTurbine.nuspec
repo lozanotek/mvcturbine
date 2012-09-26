@@ -2,7 +2,7 @@
 <package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <id>MVCTurbine</id>
-    <version>3.4</version>
+    <version>4.0</version>
     <authors>Javier Lozano</authors>
     <owners>Javier Lozano, Darren Cauthon</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>

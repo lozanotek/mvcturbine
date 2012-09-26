@@ -2,7 +2,7 @@
 <package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <id>MvcTurbine.StructureMap</id>
-    <version>3.4</version>
+    <version>4.0</version>
     <authors>Javier Lozano</authors>
     <owners>Javier Lozano, Darren Cauthon</owners>
     <projectUrl>http://mvcturbine.com</projectUrl>
@@ -14,7 +14,7 @@
     <summary>Reference this if you want to use StructureMap as your IoC container with MVC Turbine.</summary>
     <language>en-US</language>
     <dependencies>
-      <dependency id="MVCTurbine" version="3.4" />
+      <dependency id="MVCTurbine" version="4.0" />
       <dependency id="StructureMap" version="2.0" />
     </dependencies>
   </metadata>

@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service Locators", "Service Locators", "{904F0231-2A6C-4824-ABF3-80F592718DC7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{73043F17-D60C-4BCE-BE20-6F19F7B2AB54}"
@@ -21,6 +21,22 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Ninject", "MvcTurbine.Ninject\MvcTurbine.Ninject.csproj", "{05F39581-C732-473D-BC3B-75A534569EEF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Web.Views", "MvcTurbine.Web.Views\MvcTurbine.Web.Views.csproj", "{8C0778E1-626D-4518-8517-2F7E982A8594}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{8C9B3D5E-A7C8-45AF-8F4E-E47FAD1FC946}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\build\nuget\MVCTurbine.Ninject\MvcTurbine.Ninject.nuspec = ..\..\build\nuget\MVCTurbine.Ninject\MvcTurbine.Ninject.nuspec
+		..\..\build\nuget\MVCTurbine\MVCTurbine.nuspec = ..\..\build\nuget\MVCTurbine\MVCTurbine.nuspec
+		..\..\build\nuget\MVCTurbine.StructureMap\MvcTurbine.StructureMap.nuspec = ..\..\build\nuget\MVCTurbine.StructureMap\MvcTurbine.StructureMap.nuspec
+		..\..\build\nuget\MVCTurbine.Unity\MvcTurbine.Unity.nuspec = ..\..\build\nuget\MVCTurbine.Unity\MvcTurbine.Unity.nuspec
+		..\..\build\nuget\MVCTurbine.Windsor\MvcTurbine.Windsor.nuspec = ..\..\build\nuget\MVCTurbine.Windsor\MvcTurbine.Windsor.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6CDFE68F-4AF2-4FD0-BBA1-0976DEB3752B}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

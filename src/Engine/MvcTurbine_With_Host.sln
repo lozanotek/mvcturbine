@@ -1,12 +1,14 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service Locators", "Service Locators", "{904F0231-2A6C-4824-ABF3-80F592718DC7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{73043F17-D60C-4BCE-BE20-6F19F7B2AB54}"
 	ProjectSection(SolutionItems) = preProject
 		CommonInfo.cs = CommonInfo.cs
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Host", "Host", "{908BF506-EC82-4A3F-B483-60882007319F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine", "MvcTurbine\MvcTurbine.csproj", "{794C0A9F-60EB-4E25-93F2-5D4D59122529}"
 EndProject
@@ -22,11 +24,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Ninject", "MvcTu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTurbine.Web.Views", "MvcTurbine.Web.Views\MvcTurbine.Web.Views.csproj", "{8C0778E1-626D-4518-8517-2F7E982A8594}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc3Host", "Mvc3Host\Mvc3Host.csproj", "{9CFD047F-C61A-4764-8A88-EB6FA39845C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcHost", "MvcHost\MvcHost.csproj", "{6D5149F7-52EC-410D-94A8-C67E1FB04A7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleRazorViews", "SampleRazorViews\SampleRazorViews.csproj", "{C7BEEC23-A926-4179-9CA5-06DF941A140D}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Host", "Host", "{908BF506-EC82-4A3F-B483-60882007319F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{8C9B3D5E-A7C8-45AF-8F4E-E47FAD1FC946}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\build\nuget\MVCTurbine.Ninject\MvcTurbine.Ninject.nuspec = ..\..\build\nuget\MVCTurbine.Ninject\MvcTurbine.Ninject.nuspec
+		..\..\build\nuget\MVCTurbine\MVCTurbine.nuspec = ..\..\build\nuget\MVCTurbine\MVCTurbine.nuspec
+		..\..\build\nuget\MVCTurbine.StructureMap\MvcTurbine.StructureMap.nuspec = ..\..\build\nuget\MVCTurbine.StructureMap\MvcTurbine.StructureMap.nuspec
+		..\..\build\nuget\MVCTurbine.Unity\MvcTurbine.Unity.nuspec = ..\..\build\nuget\MVCTurbine.Unity\MvcTurbine.Unity.nuspec
+		..\..\build\nuget\MVCTurbine.Windsor\MvcTurbine.Windsor.nuspec = ..\..\build\nuget\MVCTurbine.Windsor\MvcTurbine.Windsor.nuspec
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,14 +69,10 @@ Global
 		{8C0778E1-626D-4518-8517-2F7E982A8594}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C0778E1-626D-4518-8517-2F7E982A8594}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C0778E1-626D-4518-8517-2F7E982A8594}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9CFD047F-C61A-4764-8A88-EB6FA39845C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9CFD047F-C61A-4764-8A88-EB6FA39845C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9CFD047F-C61A-4764-8A88-EB6FA39845C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9CFD047F-C61A-4764-8A88-EB6FA39845C6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C7BEEC23-A926-4179-9CA5-06DF941A140D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C7BEEC23-A926-4179-9CA5-06DF941A140D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C7BEEC23-A926-4179-9CA5-06DF941A140D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C7BEEC23-A926-4179-9CA5-06DF941A140D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D5149F7-52EC-410D-94A8-C67E1FB04A7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D5149F7-52EC-410D-94A8-C67E1FB04A7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D5149F7-52EC-410D-94A8-C67E1FB04A7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D5149F7-52EC-410D-94A8-C67E1FB04A7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,7 +82,6 @@ Global
 		{57CCBB78-5A1A-41D6-BBFF-8CE6F0F3B5EF} = {904F0231-2A6C-4824-ABF3-80F592718DC7}
 		{24E085F7-5E64-4FF0-9769-6B8989EF1CD1} = {904F0231-2A6C-4824-ABF3-80F592718DC7}
 		{05F39581-C732-473D-BC3B-75A534569EEF} = {904F0231-2A6C-4824-ABF3-80F592718DC7}
-		{9CFD047F-C61A-4764-8A88-EB6FA39845C6} = {908BF506-EC82-4A3F-B483-60882007319F}
-		{C7BEEC23-A926-4179-9CA5-06DF941A140D} = {908BF506-EC82-4A3F-B483-60882007319F}
+		{6D5149F7-52EC-410D-94A8-C67E1FB04A7D} = {908BF506-EC82-4A3F-B483-60882007319F}
 	EndGlobalSection
 EndGlobal

@@ -43,9 +43,13 @@
         /// Sets up the engine with the specified pieces.
         /// </summary>
         public virtual void SetupEngine() {
-            Engine
-				.Initialize
-                .ConfigureWithServiceLocator(ServiceLocator);
+            var engine = Engine
+				.Initialize;
+
+			engine.ConfigureWithServiceLocator(ServiceLocator);
+
+			if (engine.StartUpAction == null) return;
+			engine.StartUpAction();
         }
 
         /// <summary>

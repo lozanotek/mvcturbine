@@ -50,6 +50,13 @@
 		/// </summary>
 		public static Engine Initialize { get { return instance; } }
 
+		public Action StartUpAction { get; private set; }
+
+		public Engine OnStartUp(Action onStartUp) {
+			StartUpAction = onStartUp;
+			return this;
+		}
+
 		/// <summary>
 		/// Registers the <see cref="IRotorContext"/> for the engine to use. If none is specified, <see cref="RotorContext"/> is used.
 		/// </summary>
